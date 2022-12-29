@@ -1,5 +1,7 @@
 from random import randint
 from typing import Optional
+from contextlib import suppress
+from asyncio import sleep
 
 from pyrogram import Client, enums, filters
 from pyrogram.raw.functions.channels import GetFullChannel
@@ -10,15 +12,9 @@ from pyrogram.types import Message
 from geez import SUDO_USER
 from pyrogram.types import Message
 from geez.modules.help import add_command_help
+from geez.helper.basic import edit_or_reply
+from geez.helper.tools import get_arg
 
-
-def get_arg(message: Message):
-    msg = message.text
-    msg = msg.replace(" ", "", 1) if msg[1] == " " else msg
-    split = msg[1:].replace("\n", " \n").split(" ")
-    if " ".join(split[1:]).strip() == "":
-        return ""
-    return " ".join(split[1:])
 
 async def get_group_call(
     client: Client, message: Message, err_msg: str = ""
@@ -87,11 +83,52 @@ async def end_vc_(client: Client, message: Message):
     await client.invoke(DiscardGroupCall(call=group_call))
     await message.reply_text(f"Ended group call in **Chat ID** : `{chat_id}`")
 
+@Client.on_message(
+    filters.command(["joinvc"], ".") & (filters.me | filters.user(SUDO_USER))
+)
+async def joinvc(client: Client, message: Message):
+    chat_id = message.command[1] if len(message.command) > 1 else message.chat.id
+    if message.from_user.id != client.me.id:
+        Man = await message.reply("`Otw Naik...`")
+    else:
+        Man = await message.edit("`Otw Naik....`")
+    with suppress(ValueError):
+        chat_id = int(chat_id)
+    try:
+        await client.group_call.start(chat_id)
+    except Exception as e:
+        return await Man.edit(f"**ERROR:** `{e}`")
+    await Man.edit(f"🤖 **Berhasil Join Ke Obrolan Group**\n└ **Chat ID:** `{chat_id}`")
+    await sleep(5)
+    await client.group_call.set_is_mute(True)
+
+@Client.on_message(
+    filters.command(["leavevc"], ".") & (filters.me | filters.user(SUDO_USER))
+)
+async def leavevc(client: Client, message: Message):
+    chat_id = message.command[1] if len(message.command) > 1 else message.chat.id
+    if message.from_user.id != client.me.id:
+        Man = await message.reply("`Turun Dulu...`")
+    else:
+        Man = await message.edit("`Turun Dulu....`")
+    with suppress(ValueError):
+        chat_id = int(chat_id)
+    try:
+        await client.group_call.stop()
+    except Exception as e:
+        return await edit_or_reply(message, f"**ERROR:** `{e}`")
+    msg = "🤖 **Berhasil Turun dari Obrolan Suara**"
+    if chat_id:
+        msg += f"\n└ **Chat ID:** `{chat_id}`"
+    await Man.edit(msg)
+
 
 add_command_help(
     "vctools",
     [
         ["startvc", "Start voice chat of group."],
         ["stopvc", "End voice chat of group."],
+        ["joinvcvc", "Join voice chat of group."],
+        ["leavevc", "leavevoice chat of group."],
     ],
 )
