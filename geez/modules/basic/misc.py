@@ -22,9 +22,9 @@ else:
         f"├• **Uptime**: `{str(datetime.now() - START_TIME).split('.')[0]}`\n"
         f"├• **Phython**: `{python_version()}`\n"
         f"├• **Pyrogram**: `{__version__}`\n"
-        f"├• **Geez Support**: [Click](t.me/GeezSupport)\n"
-        f"├• **Ram Support**: [Click](t.me/ramsupportt)\n"
-        f"└• **яєρσ**: [Click](https://GitHub.com/hitokizzy/Geez-pyro)"        
+        f"├• **Geez Support**: [Click Me](t.me/GeezSupport)\n"
+        f"├• **Ram Support**: [Click Me](t.me/ramsupportt)\n"
+        f"└• **rep**: [Click](https://GitHub.com/hitokizzy/Geez-pyro)"        
     )
 
 @Client.on_message(
