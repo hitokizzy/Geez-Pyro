@@ -2,11 +2,12 @@ import asyncio
 from datetime import datetime
 from platform import python_version
 
-from pyrogram import __version__, filters, Client
+from pyrogram import __version__, filters, Client, raw
 from pyrogram.types import Message
 from config import ALIVE_PIC, ALIVE_TEXT
 from geez import START_TIME
 from geez import SUDO_USER
+from geez.helper.basic import edit_or_reply
 from geez.helper.PyroHelpers import ReplyCheck
 from geez.modules.help import add_command_help
 from geez.modules.bot.inline import get_readable_time
@@ -161,7 +162,22 @@ async def get_id(bot: Client, message: Message):
     else:
         await message.edit(f"**Chat ID**: `{message.chat.id}`")
 
-
+@Client.on_message(filters.command("limit") & filters.me)
+async def spamban(client: Client, m: Message):
+    await client.unblock_user("SpamBot")
+    response = await client.send(
+        raw.functions.messages.StartBot(
+            bot=await client.resolve_peer("SpamBot"),
+            peer=await client.resolve_peer("SpamBot"),
+            random_id=client.rnd_id(),
+            start_param="start",
+        )
+    )
+    wait_msg = await edit_or_reply(m, "`Processing . . .`")
+    await asyncio.sleep(1)
+    spambot_msg = response.updates[1].message.id + 1
+    status = await client.get_messages(chat_id="SpamBot", message_ids=spambot_msg)
+    await wait_msg.edit_text(f"~ {status.text}")
 
 
 add_command_help(
