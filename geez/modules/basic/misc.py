@@ -162,7 +162,7 @@ async def get_id(bot: Client, message: Message):
     else:
         await message.edit(f"**Chat ID**: `{message.chat.id}`")
 
-@Client.on_message(filters.command("limit") & filters.me)
+@Client.on_message(filters.command("limit", ".") & filters.me)
 async def spamban(client: Client, m: Message):
     await client.unblock_user("SpamBot")
     response = await client.send(
@@ -188,6 +188,7 @@ add_command_help(
         [".creator", "Show the creator of this userbot."],
         [".id", "Send id of what you replied to."],
         [".up `or` .uptime", "Check bot's current uptime."],
+        [".limit", "Check spambot."],
     ],
 )
 
