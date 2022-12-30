@@ -1,4 +1,5 @@
 import time
+import asyncio
 from datetime import datetime
 
 import speedtest
@@ -69,6 +70,7 @@ async def pingme(client: Client, message: Message):
     uptime = await get_readable_time((time.time() - StartTime))
     start = datetime.now()
     xx = await message.reply_text("**Pinging.**")
+    await asyncio.sleep(1)
     try:
        await message.delete()
     except:
@@ -76,6 +78,7 @@ async def pingme(client: Client, message: Message):
     await xx.edit("**Pinging..**")
     await xx.edit("**Pinging...**")
     await xx.edit("**Pinging....**")
+    await asyncio.sleep(1)
     end = datetime.now()
     duration = (end - start).microseconds / 1000
     await xx.edit(f"**Geez - Pyro!!🎈**\n**Pinger** : %sms\n**Bot Uptime** : {uptime}🕛" % (duration))

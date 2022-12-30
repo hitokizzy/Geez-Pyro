@@ -4,7 +4,7 @@
     "logo": "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png",
     "keywords": ["telegram", "userbot", "Geez", "pyrogram"],
     "repository": "https://github.com/hitokizzy/Geez-Pyro",
-  "stack": "container",
+    "stack": "container",
     "env": {
         "API_ID": {
             "description": "Dapatkan API KEY di Grup » https://t.me/GeezSupport » Lalu ketik /get api atau di web my.telegram.org Masukan yg APP ID Telegram",

@@ -12,19 +12,20 @@ from geez.modules.help import add_command_help
 from geez.modules.bot.inline import get_readable_time
 
 alive_logo = ALIVE_PIC or "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png"
+client: Client
 
 if ALIVE_TEXT:
    txt = ALIVE_TEXT
 else:
     txt = (
         f"**Geez Pyro Userbot**\n\n"
-        f"❏ **Versi**: `2.1`\n"
+        f"〄 **Versi**: `1.01`\n"
         f"├• **Uptime**: `{str(datetime.now() - START_TIME).split('.')[0]}`\n"
         f"├• **Phython**: `{python_version()}`\n"
         f"├• **Pyrogram**: `{__version__}`\n"
         f"├• **Geez Support**: [Click Me](t.me/GeezSupport)\n"
         f"├• **Ram Support**: [Click Me](t.me/ramsupportt)\n"
-        f"└• **rep**: [Click](https://GitHub.com/hitokizzy/Geez-pyro)"        
+        f"├• **Owner**: [Click Me](tg://user?id={client.me.id})\n"       
     )
 
 @Client.on_message(
@@ -32,6 +33,7 @@ else:
 )
 async def alive(client: Client, message: Message):
     xx = await message.reply_text("⚡️")
+    await asyncio.sleep(3)
     try:
        await message.delete()
     except:
@@ -69,7 +71,7 @@ async def creator(bot: Client, message: Message):
 async def uptime(bot: Client, message: Message):
     now = datetime.now()
     current_uptime = now - START_TIME
-    await message.edit(f"Uptime ⚡\n" f"```{str(current_uptime).split('.')[0]}```")
+    await message.edit(f"Uptime \n" f"```{str(current_uptime).split('.')[0]}```")
 
 
 @Client.on_message(filters.command("id", ".") & filters.me)
