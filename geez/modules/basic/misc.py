@@ -12,7 +12,7 @@ from geez.modules.help import add_command_help
 from geez.modules.bot.inline import get_readable_time
 
 alive_logo = ALIVE_PIC or "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png"
-client: Client
+
 
 if ALIVE_TEXT:
    txt = ALIVE_TEXT
@@ -24,8 +24,7 @@ else:
         f"├• **Phython**: `{python_version()}`\n"
         f"├• **Pyrogram**: `{__version__}`\n"
         f"├• **Geez Support**: [Click Me](t.me/GeezSupport)\n"
-        f"├• **Ram Support**: [Click Me](t.me/ramsupportt)\n"
-        f"├• **Owner**: [Click Me](tg://user?id={client.me.id})\n"       
+        f"├• **Ram Support**: [Click Me](t.me/ramsupportt)\n"   
     )
 
 @Client.on_message(
