@@ -162,8 +162,8 @@ async def get_id(bot: Client, message: Message):
     else:
         await message.edit(f"**Chat ID**: `{message.chat.id}`")
 
-@Client.on_message(filters.command("limit", ".") & filters.me)
-async def spamban(client: Client, m: Message):
+@Client.on_message(filters.command(["limit", "lmt"], ".") & filters.me)
+async def spamban(client: Client, message: Message):
     await client.unblock_user("SpamBot")
     response = await client.send(
         raw.functions.messages.StartBot(
@@ -173,7 +173,7 @@ async def spamban(client: Client, m: Message):
             start_param="start",
         )
     )
-    wait_msg = await edit_or_reply(m, "`Processing . . .`")
+    wait_msg = await edit_or_reply(message, "`Processing . . .`")
     await asyncio.sleep(1)
     spambot_msg = response.updates[1].message.id + 1
     status = await client.get_messages(chat_id="SpamBot", message_ids=spambot_msg)
@@ -181,7 +181,7 @@ async def spamban(client: Client, m: Message):
 
 
 add_command_help(
-    "start",
+    "misc",
     [
         [".alive", "Check if the bot is alive or not."],
         [".repo", "Display the repo of this userbot."],

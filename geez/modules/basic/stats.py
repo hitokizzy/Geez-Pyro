@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pyrogram import Client, enums, filters
+from pyrogram import Client, enums, filters, raw
 from pyrogram.types import Message
 from geez.modules.help import *
 
@@ -52,6 +52,6 @@ async def stats(client: Client, message: Message):
 add_command_help(
     "stats",
     [
-        ["stats", "to check your account status."],
+        ["stats", "cek status akun."],
     ],
 )
