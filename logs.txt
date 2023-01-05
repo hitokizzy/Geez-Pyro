@@ -57,3 +57,5 @@ Traceback (most recent call last):
   File "/home/codespace/.python/current/lib/python3.10/asyncio/tasks.py", line 458, in wait_for
     raise exceptions.TimeoutError() from exc
 asyncio.exceptions.TimeoutError
+[INFO] - root - Stop signal received (SIGINT). Exiting...
+[WARNING] - pyrogram.storage.memory_storage - You are using an old session string format. Use export_session_string to update

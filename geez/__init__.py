@@ -124,3 +124,4 @@ client = [client for client in[STRING_SESSION1, STRING_SESSION2, STRING_SESSION3
 for client in clients:
     if not hasattr(client, "group_call"):
         setattr(client, "group_call", GroupCallFactory(client).get_group_call())
+
