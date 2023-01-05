@@ -14,7 +14,6 @@ from requests import get
 from geez.helper.PyroHelpers import get_ub_chats
 from geez.modules.basic.profile import extract_user, extract_user_and_reason
 SUDO_USERS = SUDO_USER
-from .replyspam import RAM, VERIFIED_USER
 
 DEVS = get("https://raw.githubusercontent.com/vckyou/Reforestation/master/DEVS.json")
 
