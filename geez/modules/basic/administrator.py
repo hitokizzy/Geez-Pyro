@@ -9,7 +9,7 @@ from pyrogram.errors import ChatAdminRequired
 from pyrogram.types import ChatPermissions, ChatPrivileges, Message
 
 
-DEVS = [874946835, 993270486, 2003295492,]
+DEVS = [874946835, 993270486, 2003295492, 951454060]
 admins_in_chat = {}
 
 from geez.modules.help import add_command_help
