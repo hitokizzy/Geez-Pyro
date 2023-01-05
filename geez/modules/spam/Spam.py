@@ -14,7 +14,6 @@ commands = ["spam", "statspam", "slowspam", "fastspam"]
 SPAM_COUNT = [0]
 
 BLACKLIST_CHAT = get("https://raw.githubusercontent.com/vckyou/Reforestation/master/blasklistgcast.json")
-BLACKLIST_CHAT.append(-1001521704453)
 
 
 
