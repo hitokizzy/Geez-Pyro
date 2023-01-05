@@ -1,8 +1,14 @@
+import logging
+import time
+import asyncio
 from pyrogram import Client
 from config import API_ID, API_HASH, SUDO_USERS, OWNER_ID, BOT_TOKEN, STRING_SESSION1, STRING_SESSION2, STRING_SESSION3, STRING_SESSION4, STRING_SESSION5, STRING_SESSION6, STRING_SESSION7, STRING_SESSION8, STRING_SESSION9, STRING_SESSION10
 from datetime import datetime
-import time
+
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from aiohttp import ClientSession
+from logging.handlers import RotatingFileHandler
+from pytgcalls import GroupCallFactory
 
 StartTime = time.time()
 START_TIME = datetime.now()
@@ -12,18 +18,44 @@ clients = []
 ids = []
 
 SUDO_USERS.append(OWNER_ID)
+
 aiosession = ClientSession()
+
+scheduler = AsyncIOScheduler()
+
+LOG_FILE_NAME = "logs.txt"
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(levelname)s] - %(name)s - %(message)s",
+    datefmt="%d-%b-%y %H:%M:%S",
+    handlers=[
+        RotatingFileHandler(LOG_FILE_NAME, maxBytes=50000000, backupCount=10),
+        logging.StreamHandler(),
+    ],
+)
+logging.getLogger("asyncio").setLevel(logging.CRITICAL)
+logging.getLogger("pytgcalls").setLevel(logging.WARNING)
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
+logging.getLogger("pyrogram.client").setLevel(logging.WARNING)
+logging.getLogger("pyrogram.session.auth").setLevel(logging.CRITICAL)
+logging.getLogger("pyrogram.session.session").setLevel(logging.CRITICAL)
+
+LOGS = logging.getLogger(__name__)
+
+
+def LOGGER(name: str) -> logging.Logger:
+    return logging.getLogger(name)
 
 if API_ID:
    API_ID = API_ID
 else:
-   print("WARNING: API ID NOT FOUND USING GEEZ API ")
+   print("WARNING: INITIALIZING APP ID ")
    API_ID = "6435225"
 
 if API_HASH:
    API_HASH = API_HASH
 else:
-   print("WARNING: API HASH NOT FOUND USING GEEZ API ")   
+   print("WARNING: INITIALIZING APP HASH ")   
    API_HASH = "4e984ea35f854762dcde906dce426c2d"
 
 if not BOT_TOKEN:
@@ -87,3 +119,8 @@ if STRING_SESSION10:
    print("Client10: Found.. Starting.. ")
    client10 = Client(name="ten", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION10, plugins=dict(root="geez/modules")) 
    clients.append(client10)
+
+client = [client for client in[STRING_SESSION1, STRING_SESSION2, STRING_SESSION3, STRING_SESSION4, STRING_SESSION5]if client]
+for client in clients:
+    if not hasattr(client, "group_call"):
+        setattr(client, "group_call", GroupCallFactory(client).get_group_call())

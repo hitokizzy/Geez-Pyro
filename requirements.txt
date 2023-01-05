@@ -2,6 +2,7 @@ flask
 gunicorn
 aiohttp
 aiofiles
+APScheduler==3.7.0
 bs4
 googlesearch-python== 1.0.1
 gitpython
@@ -12,6 +13,7 @@ requests
 motor==3.0.0
 opencv-python-headless
 pyrogram
+pytgcalls==3.0.0.dev22
 pymongo
 python-dotenv
 pymediainfo
