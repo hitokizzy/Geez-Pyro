@@ -1,17 +1,11 @@
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+<img src="https://telegra.ph/file/c78bb1efdeed38ee16eb2.png">
 
-<p align="center">𝐙𝐚𝐢𝐝 𝐔𝐬𝐞𝐫𝐛𝐨𝐭 🔥 </p>
+<p align="center"> 🔥 𝗚𝗲𝗲𝘇 𝗣𝘆𝗿𝗼 🔥 </p>
 
 - A First Telegram Userbot Project With Multi Clients Based On PyroGram
 
-<p align="center"><a href="https://t.me/TheUpdatesChannel"><img src="https://telegra.ph/file/723d8ef9fb7e721135221.jpg" width="300"></a></p>
 <p align="center">
     <a href="https://www.python.org/" alt="made-with-python"> <img src="https://img.shields.io/badge/Made%20with-Python-black.svg?style=flat-square&logo=python&logoColor=blue&color=red" /></a>
-
-## Repo Stats
-
-![github card](https://github-readme-stats.vercel.app/api/pin/?username=ITZ-ZAID&repo=ZAID-USERBOT&theme=dark)
-
 
 ## Requirements 
 
@@ -19,11 +13,6 @@
 - Dummy account
 - Python 3.8+ or 3.7
 - [Mongo Db](https://youtu.be/mnvjt_a5JYA)
-
-## String Session
-
-<p align="center"><a href="https://replit.com/@Itz-zaid/pyrogram"> <img src="https://img.shields.io/badge/String%20Session-black?style=for-the-badge&logo=replit" width="220" height="38.45"/></a></p>
-
 
 
 ## Features 
@@ -34,21 +23,14 @@
 - **Id Safety Specially For Fake accounts**
 
 
-## Hosting With Mogenius 
-
-I will suggest to host on mogenius if uh don't know what is this then 
-Checkout Tutorial!
-<p align="center"><a href="https://youtu.be/qXT1jl60okk"> <img src="https://img.shields.io/badge/ZaidUserBot%20Deploy-black?style=for-the-badge&logo=youtube" width="220" height="38.45"/></a></p>
-
-
 ## VPS/Locally deploy!
 ```console
-Zaid@Debian~ $ apt-get -y update
-Zaid@Debian~ $ apt-get -y install git gcc python3-dev
-Zaid@Debian~ $ git clone https://github.com/ITZ-ZAID/ZAID-USERBOT
-Zaid@Debian~ $ cd ZAID-USERBOT
-Zaid@Debian~ $ pip3 install -U-r requirements.txt
-Zaid@Debian~ $ cp sample.env .env
+ $ sudo apt-get update -y
+ $ sudo apt-get upgrade
+ $ git clone https://github.com/hitokizzy/Geez-Pyro
+ $ cd Geez-Pyro
+ $ pip3 install -U-r requirements.txt
+ $ cp sample.env .env
 ```
 
 <h3 align="center">
@@ -56,8 +38,8 @@ Zaid@Debian~ $ cp sample.env .env
 </h3>
 
 ```console
-Zaid@Debian~ $ screen
-Zaid@Debian~ $ python3 -m Zaid
+ $ screen -S Geez
+ $ bash startgeez
 ```
 
 ## Disclaimer 
@@ -87,5 +69,5 @@ and you ended up in a Finale Battle with Telegram and at the end
 
 <p align="center">𝐒𝐮𝐩𝐩𝐨𝐫𝐭 / 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ----> </p>
 
-<p align="center"><a href="https://t.me/TheSupportChat"><img src="https://img.shields.io/badge/ᴛᴇʟᴇɢʀᴀᴍ-𝐒𝐮𝐩𝐩𝐨𝐫𝐭-black?&style=for-the-badge&logo=telegram" width="220" height="38.45"></a></p>
-<p align="center"><a href="https://t.me/TheUpdatesChannel"><img src="https://img.shields.io/badge/ᴛᴇʟᴇɢʀᴀᴍ-𝐔𝐩𝐝𝐚𝐭𝐞𝐬-black?&style=for-the-badge&logo=telegram" width="220" height="38.45"></a></p>
+<p align="center"><a href="https://t.me/ramsupportt"><img src="https://img.shields.io/badge/ᴛᴇʟᴇɢʀᴀᴍ-𝐒𝐮𝐩𝐩𝐨𝐫𝐭-black?&style=for-the-badge&logo=telegram" width="220" height="38.45"></a></p>
+<p align="center"><a href="https://t.me/userbotch"><img src="https://img.shields.io/badge/ᴛᴇʟᴇɢʀᴀᴍ-𝐔𝐩𝐝𝐚𝐭𝐞𝐬-black?&style=for-the-badge&logo=telegram" width="220" height="38.45"></a></p>
