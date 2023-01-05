@@ -26,6 +26,16 @@
             "description": "fill with your bot token get from @BotFather on telegram",
             "required": true,
             "value": ""
+        },
+        "HEROU_APP_NAME": {
+            "description": "Heroku app name",
+            "required": true,
+            "value": ""
+        },
+        "HEROU_API_KEY": {
+            "description": "Heroku app key",
+            "required": true,
+            "value": ""
         }
 
     }

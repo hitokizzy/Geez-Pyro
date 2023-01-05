@@ -59,3 +59,4 @@ Traceback (most recent call last):
 asyncio.exceptions.TimeoutError
 [INFO] - root - Stop signal received (SIGINT). Exiting...
 [WARNING] - pyrogram.storage.memory_storage - You are using an old session string format. Use export_session_string to update
+[WARNING] - pyrogram.storage.memory_storage - You are using an old session string format. Use export_session_string to update
