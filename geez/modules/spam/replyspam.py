@@ -16,14 +16,13 @@ from geez.database.rraid import *
 from geez import SUDO_USER
 from pyrogram import Client, errors, filters
 from pyrogram.types import ChatPermissions, Message
-DEVS = int(1669178360)
 from geez.helper.PyroHelpers import get_ub_chats
 from geez.modules.basic.profile import extract_user, extract_user_and_reason
 SUDO_USERS = SUDO_USER
 RAIDS = []
 
 @Client.on_message(
-    filters.command(["pornspam"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["bokep"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def pornspam(xspam: Client, e: Message): 
     counts = e.command[0]
@@ -59,7 +58,7 @@ async def pornspam(xspam: Client, e: Message):
 
 
 @Client.on_message(
-    filters.command(["raid"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["ram"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def raid(xspam: Client, e: Message):  
       zzy = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
@@ -78,13 +77,13 @@ async def raid(xspam: Client, e: Message):
                 text = f"wah gila siii"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"tidak bida raid devs."
+                text = f"tidak bisa raid devs."
                 await e.reply_text(text)
           else:
               fname = ok.first_name
               mention = f"[{fname}](tg://user?id={id})"
               for _ in range(counts):
-                    reply = choice(RAID)
+                    reply = choice(RAM)
                     msg = f"{mention} {reply}"
                     await xspam.send_message(e.chat.id, msg)
                     await asyncio.sleep(0.10)
@@ -105,13 +104,13 @@ async def raid(xspam: Client, e: Message):
                 text = f"wah gila siii"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"tidak bida raid devs."
+                text = f"tidak bisa raid devs."
                 await e.reply_text(text)
           else:
               fname = ok.first_name
               mention = f"[{fname}](tg://user?id={id})"
               for _ in range(counts):
-                    reply = choice(RAID)
+                    reply = choice(RAM)
                     msg = f"{mention} {reply}"
                     await xspam.send_message(e.chat.id, msg)
                     await asyncio.sleep(0.10)
@@ -120,16 +119,16 @@ async def raid(xspam: Client, e: Message):
 
 
 add_command_help(
-    "raid",
+    "ram",
     [
-        [".raid", "<user id and count>`."],
-        [".pornspam", "<count>`."],
+        [".ram", "<user id and count>`."],
+        [".bokep", "<count>`."],
         [".hang", "Make telegram hang."],
     ],
 )
 
 @Client.on_message(
-    filters.command(["dreplyraid"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["dreplyspam"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def gmute_user(client: Client, message: Message):
     args = await extract_user(message)
@@ -160,9 +159,9 @@ async def gmute_user(client: Client, message: Message):
 
 
 add_command_help(
-    "replyraid",
+    "replyspam",
     [
-        [".replyraid", "Reply To User\n To Raid on Someone."],
-        [".dreplyraid", "To Disable ReplyRaid."],
+        [".replyspam", "Reply To User\n To Roast on Someone."],
+        [".dreplyspam", "To Disable Replyspam."],
     ],
 )

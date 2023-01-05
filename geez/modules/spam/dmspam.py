@@ -5,7 +5,6 @@ import os
 import sys
 import asyncio
 from random import choice
-OWNER_ID = 1669178360
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from cache.data import *
@@ -15,10 +14,10 @@ Usage = f"**❌ Wrong Usage ❌** \n Type: `.help dmspam`"
 
 
 @Client.on_message(
-    filters.command(["dmraid"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["dmspam"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def dmraid(xspam: Client, e: Message):
-      """ Module: Dm Raid """
+      """ Module: Dm Spam """
       zzy = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
       if len(zzy) == 2:
           ok = await xspam.get_users(zzy[1])
@@ -27,7 +26,7 @@ async def dmraid(xspam: Client, e: Message):
                 text = f"wah gila siii"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"tidak bida raid devs."
+                text = f"tidak bisa raid devs."
                 await e.reply_text(text)
           else:
               counts = int(zzy[0])
@@ -45,19 +44,19 @@ async def dmraid(xspam: Client, e: Message):
                 text = f"wah  gila sii"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"tidak bida raid devs."
+                text = f"tidak bisa raid devs."
                 await e.reply_text(text)
           else:
               counts = int(zzy[0])
-              await e.reply_text("Dm Raid Strated Successfully")
+              await e.reply_text("Dm Spam Strated Successfully")
               for _ in range(counts):
-                    reply = choice(RAID)
+                    reply = choice(RAM)
                     msg = f"{reply}"
                     await xspam.send_message(id, msg)
                     await asyncio.sleep(0.10)
 
 @Client.on_message(
-    filters.command(["dmspam"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["dmsp"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def dmspam(spam: Client, e: Message):
       text = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
@@ -70,7 +69,7 @@ async def dmspam(spam: Client, e: Message):
                 text = f"lah au yaa"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"tidak bida raid devss."
+                text = f"tidak bisa spam devss."
                 await e.reply_text(text)
           else:
               counts = int(zzy[0])
@@ -86,7 +85,7 @@ async def dmspam(spam: Client, e: Message):
                 text = f"lah au yaaaa"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"tidak bida raid devs."
+                text = f"tidak bisa spam devs."
                 await e.reply_text(text)
           else:
               counts = int(text[0])
@@ -106,6 +105,6 @@ add_command_help(
     "dmspam",
     [
         [".dmspam", "<username and count>`."],
-        [".dmraid", "<username and count>`."],
+        [".dmsp", "<username and count>`."],
     ],
 )

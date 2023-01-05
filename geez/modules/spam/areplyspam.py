@@ -10,16 +10,16 @@ from geez.database.rraid import *
 from geez import SUDO_USER
 from pyrogram import Client, errors, filters
 from pyrogram.types import ChatPermissions, Message
-DEVS = int(1669178360)
+from request import get
 from geez.helper.PyroHelpers import get_ub_chats
 from geez.modules.basic.profile import extract_user, extract_user_and_reason
 SUDO_USERS = SUDO_USER
-from .replyraid import RAIDS
+from .replyspam import RAM, VERIFIED_USER
 
-
+DEVS = get("https://raw.githubusercontent.com/vckyou/Reforestation/master/DEVS.json")
 
 @Client.on_message(
-    filters.command(["replyraid"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["replyspam"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def gmute_user(client: Client, message: Message):
     args = await extract_user(message)
@@ -45,11 +45,11 @@ async def gmute_user(client: Client, message: Message):
         return await ex.edit("**wah gila siiii**")
     try:
         if user.id in (await get_rraid_users()):
-           await ex.edit("Replyraid is activated on this user")
+           await ex.edit("Reply spam is activated on this user")
            return
         await rraid_user(user.id)
-        RAIDS.append(user.id)
-        await ex.edit(f"[{user.first_name}](tg://user?id={user.id}) Activated ReplyRaid!")
+        RAM.append(user.id)
+        await ex.edit(f"[{user.first_name}](tg://user?id={user.id}) Activated Replygeez!")
     except Exception as e:
         await ex.edit(f"**ERROR:** `{e}`")
         return

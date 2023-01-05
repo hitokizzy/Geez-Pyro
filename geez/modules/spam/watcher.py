@@ -21,7 +21,7 @@ DEVS = int(1669178360)
 from geez.helper.PyroHelpers import get_ub_chats
 from geez.modules.basic.profile import extract_user, extract_user_and_reason
 SUDO_USERS = SUDO_USER
-from .replyraid import RAIDS
+from .replyspam import RAIDS
 
 
 

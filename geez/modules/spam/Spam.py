@@ -1,7 +1,7 @@
 import asyncio
 from re import sub
 from threading import Event
-
+from requests import get
 from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 
@@ -13,7 +13,7 @@ from geez.modules.help import add_command_help
 commands = ["spam", "statspam", "slowspam", "fastspam"]
 SPAM_COUNT = [0]
 
-BLACKLIST_CHAT = []
+BLACKLIST_CHAT = get("https://raw.githubusercontent.com/vckyou/Reforestation/master/blasklistgcast.json")
 BLACKLIST_CHAT.append(-1001521704453)
 
 

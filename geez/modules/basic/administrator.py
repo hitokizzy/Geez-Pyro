@@ -3,13 +3,13 @@ import sys
 from re import sub
 from time import time
 import asyncio
-
+from requests import get
 from pyrogram import Client, filters, enums
 from pyrogram.errors import ChatAdminRequired
 from pyrogram.types import ChatPermissions, ChatPrivileges, Message
 
 
-DEVS = [874946835, 993270486, 2003295492, 951454060]
+DEVS = get("https://raw.githubusercontent.com/vckyou/Reforestation/master/DEVS.json")
 admins_in_chat = {}
 
 from geez.modules.help import add_command_help
