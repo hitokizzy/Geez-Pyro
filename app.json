@@ -6,14 +6,6 @@
     "repository": "https://github.com/hitokizzy/Geez-Pyro",
     "stack": "container",
     "env": {
-        "API_ID": {
-            "description": "Dapatkan API KEY di Grup » https://t.me/GeezSupport » Lalu ketik /get api atau di web my.telegram.org Masukan yg APP ID Telegram",
-            "required": true
-          },
-          "API_HASH": {
-            "description": "Dapatkan API Hash di Grup » https://t.me/GeezSupport » Lalu ketik /get api atau di web my.telegram.org",
-            "required": true
-          },
         "STRING_SESSION1": {
             "description": "fill with the pyrogram session string from https://t.me/geezramstringbot",
             "required": true
