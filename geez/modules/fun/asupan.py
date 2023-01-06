@@ -1,7 +1,6 @@
 # DON'T REMOVE CREDITS
 
 # code by @pySmartDL
-# Create by @xtsea
 
 from asyncio import *
 from random import *
@@ -9,7 +8,6 @@ from pyrogram import *
 from pyrogram.types import *
 from pyrogram import Client as gez 
 from pyrogram import Client
-from geez.helper.cmd import *
 from geez.helper.basic import *
 from geez.helper.PyroHelpers import *
 from geez.modules.help import *
@@ -39,7 +37,7 @@ async def asupan(client: Client, message: Message):
 
 # WARNING PORNO VIDEO THIS !!!
 
-@gez.on_message(filters.command(["bokep"], cmd) & filters.me)
+@gez.on_message(filters.command(["bokep"], ".") & filters.me)
 async def bokep(client: Client, message: Message):
     if message.chat.id in GROUP:
         return await edit_or_reply(message, "**This command is prohibited from being used in this group**")
