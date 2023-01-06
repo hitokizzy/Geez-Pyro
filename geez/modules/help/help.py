@@ -2,6 +2,7 @@ import asyncio
 
 from prettytable import PrettyTable
 from pyrogram import enums, filters
+from pyrogram import Client as gez
 from pyrogram import Client
 from pyrogram.types import Message
 
@@ -18,7 +19,7 @@ async def edit_or_reply(message: Message, *args, **kwargs) -> Message:
     )
     return await xyz(*args, **kwargs)
 
-@Client.on_message(filters.command(["help", "helpme"], ".") & filters.me)
+@gez.on_message(filters.command(["help", "helpme"], ".") & filters.me)
 async def module_help(client: Client, message: Message):
     cmd = message.command
     help_arg = ""
@@ -70,7 +71,7 @@ async def module_help(client: Client, message: Message):
             )
 
 
-@Client.on_message(filters.command(["plugins", "modules"], ".") & filters.me)
+@gez.on_message(filters.command(["plugins", "modules"], ".") & filters.me)
 async def module_helper(client: Client, message: Message):
     cmd = message.command
     help_arg = ""
