@@ -1,7 +1,3 @@
-# DON'T REMOVE CREDITS
-
-# code by @pySmartDL
-# Create by @xtsea
 
 from asyncio import *
 from random import *
@@ -39,7 +35,7 @@ async def asupan(client: Client, message: Message):
 
 @gez.on_message(filters.command(["bokep"], ".") & filters.me)
 async def bokep(client: Client, message: Message):
-    if message.chat.id in GROUP:
+    if message.chat.id in CHANNEL:
         return await edit_or_reply(message, "**This command is prohibited from being used in this group**")
     await client.join_chat("https://t.me/LonteGabut")
     await asyncio.sleep(2)
