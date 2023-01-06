@@ -16,7 +16,7 @@
         },
         "SUDO_USERS": {
             "description": "Sudo list (user id)",
-            "required": true
+            "required": false
         },
         "OWNER_ID": {
             "description": "fill your I'd (can access all things)",
