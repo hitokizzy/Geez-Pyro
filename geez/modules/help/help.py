@@ -1,7 +1,8 @@
 import asyncio
 
 from prettytable import PrettyTable
-from pyrogram import Client, enums, filters
+from pyrogram import enums, filters
+from pyrogram import Client
 from pyrogram.types import Message
 
 from geez import app, CMD_HELP
@@ -25,6 +26,7 @@ async def module_help(client: Client, message: Message):
     if len(cmd) > 1:
         help_arg = " ".join(cmd[1:])
     elif not message.reply_to_message and len(cmd) == 1:
+    	await message.edit("⚡️")
         try:
             nice = await client.get_inline_bot_results(bot=bot_username, query="helper")
             await asyncio.gather(
