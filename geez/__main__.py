@@ -28,7 +28,7 @@ async def start_bot():
             ex = await cli.get_me()
             await join(cli)
             print(f"Started {ex.first_name} ✔ ")
-            await cli.send_message(LOG_GROUP, MSG_ON.format(BOT_VER, CMD_HANDLER))
+            #await cli.send_message(LOG_GROUP, MSG_ON.format(BOT_VER, CMD_HANDLER))
             ids.append(ex.id)
         except Exception as e:
             print(f"{e}")
