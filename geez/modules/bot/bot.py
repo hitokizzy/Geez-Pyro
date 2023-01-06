@@ -1,6 +1,7 @@
 import traceback
 
-from pyrogram import Client, filters
+from pyrogram import filters
+from pyrogram import Client as gez
 from pyrogram.errors import MessageDeleteForbidden
 from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
 
@@ -9,7 +10,7 @@ from geez.helper.data import Data
 from geez.helper.inline import cb_wrapper, paginate_help
 from geez import ids as users
 
-@Client.on_callback_query()
+@gez.on_callback_query()
 async def _callbacks(_, callback_query: CallbackQuery):
     query = callback_query.data.lower()
     bot_me = await app.get_me()
