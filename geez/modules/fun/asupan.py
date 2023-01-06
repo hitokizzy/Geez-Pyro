@@ -11,7 +11,6 @@ from pyrogram import Client
 from geez.helper.basic import *
 from geez.helper.PyroHelpers import *
 from geez.modules.help import *
-from geez.helper.dev import *
 
 
 @gez.on_message(filters.command(["asupan"], ".") & filters.me)
