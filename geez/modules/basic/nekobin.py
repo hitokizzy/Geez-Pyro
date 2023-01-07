@@ -107,7 +107,7 @@ async def paste_dis_text(_, message: Message):
     await paste_msg.edit(f"**Pasted to {pstbin_serv.capitalize()}!** \n\n**Url:** {pasted}", disable_web_page_preview=True)
 
 add_command_help(
-    "paste",
+    "Nekobin",
     [
         [
             ".paste `or` .nekobin `or` .hastebin `or` .spacebin",
