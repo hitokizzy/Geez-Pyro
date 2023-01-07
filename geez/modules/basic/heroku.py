@@ -116,7 +116,7 @@ async def vardel_(client: Client, message: Message):
 async def usage(client: Client, message: Message):
     """Get your account Dyno Usage"""
     if not HEROKU_APP_NAME:
-        await message.err("Heroku App Not Found !")
+        await message.edit("Heroku App Not Found !")
         return
     await message.edit("`Processing...`")
     useragent = ('Mozilla/5.0 (Linux; Android 10; SM-G975F) '
