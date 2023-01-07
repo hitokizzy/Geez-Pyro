@@ -5,14 +5,14 @@ from pyrogram.types import ChatPermissions, Message
 from geez.helper.dev import DEVS
 from geez.helper.PyroHelpers import get_ub_chats
 from geez.modules.basic.profile import extract_user, extract_user_and_reason
-from geez.database import gbandb as zzy
-from geez.database import gmutedb as Gmute
+from geez.database.mongodb import gbandb as geez
+from geez.database.mongodb import gmutedb as Gmute
 from geez.modules.help import add_command_help
 
 ok = []
 
-@gez.on_message(filters.command("cgban", ".") & filters.user(DEVS) & ~filters.via_bot)
-@gez.on_message(filters.command("gban", ".") & filters.me)
+@gez.on_message(filters.command("cgban", cmd) & filters.user(DEVS) & ~filters.via_bot)
+@gez.on_message(filters.command("gban", cmd) & filters.me)
 async def gban_user(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
     if message.from_user.id != client.me.id:
@@ -29,9 +29,9 @@ async def gban_user(client: Client, message: Message):
         try:
             user = await client.get_users(user_id)
         except Exception:
-            return await ex.edit("`Harap tentukan pengguna yang valid!`")
+            return await ex.edit("`Please specify a valid user!`")
 
-    if (await zzy.gban_info(user.id)):
+    if (await geez.gban_info(user.id)):
         return await ex.edit(
             f"[user](tg://user?id={user.id}) **sudah ada di gbanned daftar**"
         )
@@ -46,7 +46,7 @@ async def gban_user(client: Client, message: Message):
             done += 1
         except BaseException:
             er += 1
-    await zzy.gban_user(user.id)
+    await geez.gban_user(user.id)
     ok.append(user.id)
     msg = (
         r"**\\#GBanned_User//**"
@@ -58,8 +58,8 @@ async def gban_user(client: Client, message: Message):
     msg += f"\n**Affected To:** `{done}` **Chats**"
     await ex.edit(msg)
 
-@gez.on_message(filters.command("cungban", ".") & filters.user(DEVS) & ~filters.via_bot)
-@gez.on_message(filters.command("ungban", ".") & filters.me)
+@gez.on_message(filters.command("cungban", cmd) & filters.user(DEVS) & ~filters.via_bot)
+@gez.on_message(filters.command("ungban", cmd) & filters.me)
 async def ungban_user(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
     if message.from_user.id != client.me.id:
@@ -75,7 +75,7 @@ async def ungban_user(client: Client, message: Message):
             return await ex.edit("`Harap tentukan pengguna yang valid!`")
 
     try:
-        if not (await zzy.gban_info(user.id)):
+        if not (await geez.gban_info(user.id)):
             return await ex.edit("`pengguna sudah ungban`")
         ung_chats = await get_ub_chats(client)
         ok.remove(user.id)
@@ -89,7 +89,7 @@ async def ungban_user(client: Client, message: Message):
                 done += 1
             except BaseException:
                 er += 1
-        await zzy.ungban_user(user.id)
+        await geez.ungban_user(user.id)
         msg = (
             r"**\\#UnGbanned_User//**"
             f"\n\n**First Name:** [{user.first_name}](tg://user?id={user.id})"
@@ -103,10 +103,10 @@ async def ungban_user(client: Client, message: Message):
         await ex.edit(f"**ERROR:** `{e}`")
         return
 
-@gez.on_message(filters.command("clistgban", ".") & filters.user(DEVS) & ~filters.via_bot)
-@gez.on_message(filters.command("listgban", ".") & filters.me)
+@gez.on_message(filters.command("clistgban", cmd) & filters.user(DEVS) & ~filters.via_bot)
+@gez.on_message(filters.command("listgban", cmd) & filters.me)
 async def gbanlist(client: Client, message: Message):
-    users = (await zzy.gban_list())
+    users = (await geez.gban_list())
     ex = await message.edit_text("`Processing...`")
     if not users:
         return await ex.edit("belum ada pengguna yang diblokir")
@@ -117,8 +117,8 @@ async def gbanlist(client: Client, message: Message):
         gban_list += f"**{count} -** `{i.sender}`\n"
     return await ex.edit(gban_list)
 
-@gez.on_message(filters.command("cgmute", ".") & filters.user(DEVS) & ~filters.via_bot)
-@gez.on_message(filters.command("gmute", ".") & filters.me)
+@gez.on_message(filters.command("cgmute", cmd) & filters.user(DEVS) & ~filters.via_bot)
+@gez.on_message(filters.command("gmute", cmd) & filters.me)
 async def gmute_user(client: Client, message: Message):
     args = await extract_user(message)
     reply = message.reply_to_message
@@ -136,13 +136,13 @@ async def gmute_user(client: Client, message: Message):
         await ex.edit(f"`Harap tentukan pengguna yang valid!`")
         return
     if user.id == client.me.id:
-        return await ex.edit("**oke tentu**")
+        return await ex.edit("**Oke tentu**")
     if user.id in DEVS:
         return await ex.edit("**Lah, au yaaa**")
     try:
         replied_user = reply.from_user
         if replied_user.is_self:
-            return await ex.edit("`kamu tidak bisa mem-gmute dirimu sendiri`")
+            return await ex.edit("`haa, gimana...`")
     except BaseException:
         pass
 
@@ -163,7 +163,7 @@ async def gmute_user(client: Client, message: Message):
         await ex.edit(f"**ERROR:** `{e}`")
         return
 
-@gez.on_message(filters.command("cungmute", ".") & filters.user(DEVS) & ~filters.via_bot)
+@gez.on_message(filters.command("cungmute", cmd) & filters.user(DEVS) & ~filters.via_bot)
 @gez.on_message(filters.command("ungmute", ".") & filters.me)
 async def ungmute_user(client: Client, message: Message):
     args = await extract_user(message)
@@ -173,13 +173,13 @@ async def ungmute_user(client: Client, message: Message):
         try:
             user = await client.get_users(args)
         except Exception:
-            await ex.edit(f"`Please specify a valid user!`")
+            await ex.edit(f"`Harap tentukan pengguna yang valid!`")
             return
     elif reply:
         user_id = reply.from_user.id
         user = await client.get_users(user_id)
     else:
-        await ex.edit(f"`Please specify a valid user!`")
+        await ex.edit(f"`Harap tentukan pengguna yang valid!`")
         return
 
     try:
@@ -191,7 +191,7 @@ async def ungmute_user(client: Client, message: Message):
 
     try:
         if not (await Gmute.is_gmuted(user.id)):
-            return await ex.edit("`User already ungmuted`")
+            return await ex.edit("`pengguna sudah ungmuted`")
         await Gmute.ungmute(user.id)
         ok.remove(user.id)
         try:
@@ -207,13 +207,13 @@ async def ungmute_user(client: Client, message: Message):
         await ex.edit(f"**ERROR:** `{e}`")
         return
 
-@gez.on_message(filters.command("clistgmute", ".") & filters.user(DEVS) & ~filters.via_bot)
+@gez.on_message(filters.command("clistgmute", cmd) & filters.user(DEVS) & ~filters.via_bot)
 @gez.on_message(filters.command("listgmute", ".") & filters.me)
 async def gmutelist(client: Client, message: Message):
     users = (await Gmute.gmute_list())
     ex = await message.edit_text("`Processing...`")
     if not users:
-        return await ex.edit("There are no Muted Users yet")
+        return await ex.edit("belum ada pengguna yang dibisukan")
     gmute_list = "**GMuted Users:**\n"
     count = 0
     for i in users:
@@ -232,7 +232,7 @@ if ok:
     chat_id = message.chat.id
     if not user_id:
         return
-    if (await zzy.gban_info(user_id)):
+    if (await geez.gban_info(user_id)):
         try:
             await client.ban_chat_member(chat_id, user_id)
         except BaseException:
