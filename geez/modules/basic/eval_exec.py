@@ -7,7 +7,7 @@ import traceback
 from pyrogram import filters, Client
 from pyrogram.types import Message
 
-from geez.database import cli as database
+from geez.database.mongodb import cli as database
 from geez.helper.PyroHelpers import ReplyCheck
 
 
