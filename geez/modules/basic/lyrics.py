@@ -8,7 +8,7 @@ from geez.modules.help import add_command_help
 
 
 @Client.on_message(
-    filters.command(["l", "lyrics"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["l", "lirik"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def send_lyrics(bot: Client, message: Message):
     try:
@@ -59,4 +59,4 @@ async def send_lyrics(bot: Client, message: Message):
         await message.delete()
 
 
-add_command_help("lyrics", [[".l `or` .lyrics", "Search lyrics and send."]])
+add_command_help("Lirik", [["l `or` .lirik", "Search lyrics and send."]])
