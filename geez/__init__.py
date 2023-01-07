@@ -9,7 +9,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from aiohttp import ClientSession
 from logging.handlers import RotatingFileHandler
 from pytgcalls import PyTgCalls
-from pytgcalls.types import *
+from pytgcalls.types.groups import *
 
 StartTime = time.time()
 START_TIME = datetime.now()
