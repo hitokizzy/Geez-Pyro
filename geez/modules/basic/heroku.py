@@ -112,8 +112,8 @@ async def vardel_(client: Client, message: Message):
         restart()
 
 
-@Client.on_message(filters.command("usage", CMD_HANDLER) & filters.me)
-async def usage(message: Message):
+@Client.on_message(filters.command("usage", ".") & filters.me)
+async def usage(client: Client, message: Message):
     """Get your account Dyno Usage"""
     if not HEROKU_APP_NAME:
         await message.err("Heroku App Not Found !")
