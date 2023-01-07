@@ -1,5 +1,5 @@
 
-from geez.database import cli
+from geez.database.mongodb import cli
 
 collection = cli["geez"]["rraid"]
 
