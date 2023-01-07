@@ -12,6 +12,7 @@ from pytgcalls.exceptions import GroupCallNotFound, NoActiveGroupCall
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 from geez.core.decorators import *
 from geez.core import *
+from geez.modules.help import *
 
 
 
