@@ -11,7 +11,7 @@ from logging.handlers import RotatingFileHandler
 from pytgcalls import PyTgCalls
 app = PyTgCalls(client)
 client = bot
-else:
+ else:
   client = app
 
 StartTime = time.time()
