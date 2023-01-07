@@ -11,7 +11,7 @@ from logging.handlers import RotatingFileHandler
 from pytgcalls import PyTgCalls
 app = PyTgCalls(client)
 
- if config.BOT_TOKEN:
+if config.BOT_TOKEN:
     bot = Client(
         "Geez-Pyro",
         api_id=config.API_ID,
