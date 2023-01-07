@@ -6,12 +6,23 @@ import speedtest
 from pyrogram import Client, filters
 from pyrogram.raw import functions
 from pyrogram.types import Message
+from pyrogram import Client as gez
 
 from geez import StartTime, app, SUDO_USER
 from geez.helper.PyroHelpers import SpeedConvert
+from geez.helper.dev import DEVS
 from geez.modules.bot.inline import get_readable_time
 
 from geez.modules.help import add_command_help
+
+kopi = [
+    "**Hadir Bang** 😁",
+    "**Mmuaahh** 😉",
+    "**Hadir dong** 😁",
+    "**Hadir ganteng** 🥵",
+    "**Hadir bro** 😎",
+    "**Hadir kak maap telat** 🥺",
+]
 
 class WWW:
     SpeedTest = (
@@ -61,6 +72,10 @@ async def speed_test(client: Client, message: Message):
         )
     )
 
+
+@gez.on_message(filters.command("absen", ["."]) & filters.user(DEVS) & ~filters.me)
+async def absen(client: Client, message: Message):
+    await message.reply_text(random.choice(kopi))
 
 
 @Client.on_message(
