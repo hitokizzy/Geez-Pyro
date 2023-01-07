@@ -579,7 +579,7 @@ async def stick2png(client: Client, message: Message):
 
 
 add_command_help(
-    "sticker",
+    "Sticker",
     [
         [
             f"kang `reply` image",
@@ -598,24 +598,10 @@ add_command_help(
             "Reply to sticker to get sticker photo.",
         ],
         ["stickers [nama sticker]", "To find sticker packs."],
-    ],
-)
-
-
-add_command_help(
-    "memify",
-    [
         [
             "mmf Top Text ; Bottom Text",
             "Reply To Message Sticker or Photo will be Converted to the specified meme text sticker.",
         ],
-    ],
-)
-
-
-add_command_help(
-    "tiny",
-    [
         [
             "tiny [reply ke photo/sticker]",
             "To Change the Sticker to be Small.",
