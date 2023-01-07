@@ -25,11 +25,11 @@ def get_arg(message: Message):
 @gez.on_message(
     filters.command(["gcast"], ".") & (filters.me | filters.user(SUDO_USER))
 )
-async def gcast_"."(client: Client, message: Message):
+async def gcast_cmd(client: Client, message: Message):
     if message.reply_to_message or get_arg(message):
-        tex = await message.reply_text("`Started global broadcast...`")
+        tex = await message.reply_text("`Memulai Gcast...`")
     else:
-        return await message.edit_text("**Give A Message or Reply**")
+        return await message.edit_text("**Berikan pesan atau balas kepesan**")
     done = 0
     error = 0
     async for dialog in client.get_dialogs():
@@ -39,7 +39,7 @@ async def gcast_"."(client: Client, message: Message):
             elif get_arg:
                 msg = get_arg(message)
             chat = dialog.chat.id
-            if chat not in BLACKLIST:
+            if chat not in NB:
                 try:
                     if message.reply_to_message:
                         await msg.copy(chat)
@@ -51,7 +51,7 @@ async def gcast_"."(client: Client, message: Message):
                     error += 1
                     await asyncio.sleep(0.3)
     await tex.edit_text(
-        f"**Successfully Sent Message To** `{done}` **Groups, chat, Failed to Send Message To** `{error}` **Groups**"
+        f"**Berhasil mengirim ke** `{done}` **Groups, chat, Gagal mengirim** `{error}` **Groups**"
     )
 
 
