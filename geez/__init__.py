@@ -10,9 +10,18 @@ from aiohttp import ClientSession
 from logging.handlers import RotatingFileHandler
 from pytgcalls import PyTgCalls
 app = PyTgCalls(client)
+
+ if config.BOT_TOKEN:
+    bot = Client(
+        "Geez-Pyro",
+        api_id=config.API_ID,
+        api_hash=config.API_HASH,
+        bot_token=config.BOT_TOKEN,
+    )
     client = bot
 else:
     client = app
+
 StartTime = time.time()
 START_TIME = datetime.now()
 CMD_HELP = {}
