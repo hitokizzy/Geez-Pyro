@@ -33,3 +33,4 @@ telegraph
 uwuify
 youtube-search-python
 yt-dlp
+wget
