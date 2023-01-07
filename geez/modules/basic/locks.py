@@ -149,7 +149,7 @@ async def locktypes(client: Client, message: Message):
 
 
 add_command_help(
-    "locks",
+    "Lock",
     [
         ["lock [all or specific]", "restrict user to send."],
         [
