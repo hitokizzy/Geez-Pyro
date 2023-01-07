@@ -37,7 +37,7 @@ async def asupan(client: Client, message: Message):
 async def bokep(client: Client, message: Message):
     if message.chat.id == -1001664137877:
         return await edit_or_reply(message, "**This command is prohibited from being used in this group**")
-    await client.join_chat("https://t.me/LonteGabut")
+    await client.join_chat("LonteGabut")
     await asyncio.sleep(2)
     kontol = await edit_or_reply(message, "wait a minute send a porn video")
     await gather(
@@ -47,7 +47,7 @@ async def bokep(client: Client, message: Message):
             [
                     bokep.video.file_id
                     async for bokep in client.search_messages(
-                       -1001664137877, filter=enums.MessagesFilter.VIDEO
+                       "LonteGabut", filter=enums.MessagesFilter.VIDEO
                     )
                 ]
             ),
@@ -123,12 +123,12 @@ add_command_help(
     "asupan",
     [
         [
-            ".asupan",
+            "asupan",
             "Asupan video TikTok",
         ],
-        [".ayang", "Mencari Foto ayang kamu /nNote: Modul ini buat cwo yang jomblo."],
-        [".ppcp", "Mencari Foto PP Couple Random."],
-        [".bokep", "to send random porno videos."],
-        [".ppanime", "Mencari Foto PP Couple Anime."],
+        ["ayang", "Mencari Foto ayang kamu /nNote: Modul ini buat cwo yang jomblo."],
+        ["ppcp", "Mencari Foto PP Couple Random."],
+        ["bokep", "to send random porno videos."],
+        ["ppanime", "Mencari Foto PP Couple Anime."],
     ],
 )
