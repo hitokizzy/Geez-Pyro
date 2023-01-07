@@ -20,6 +20,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 def restart():
     os.execvp(sys.executable, [sys.executable, "-m", "geez"])
 
+Heroku = heroku3.from_key(HEROKU_API_KEY)
+
 @Client.on_message(filters.command("setvar", CMD_HANDLER) & filters.me)
 async def set_var(client: Client, message: Message):
     if len(message.command) < 3:
@@ -122,7 +124,7 @@ async def usage(client: Client, message: Message):
     useragent = ('Mozilla/5.0 (Linux; Android 10; SM-G975F) '
                  'AppleWebKit/537.36 (KHTML, like Gecko) '
                  'Chrome/80.0.3987.149 Mobile Safari/537.36')
-    u_id = HEROKU_APP_NAME.owner.id
+    u_id = Heroku.account().id
     headers = {
         'User-Agent': useragent,
         'Authorization': f'Bearer {HEROKU_API_KEY}',
