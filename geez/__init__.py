@@ -10,6 +10,7 @@ from aiohttp import ClientSession
 from logging.handlers import RotatingFileHandler
 from pytgcalls import PyTgCalls
 from pytgcalls.types.groups import *
+from pytgcalls.types.py_object import PyObject
 
 StartTime = time.time()
 START_TIME = datetime.now()
