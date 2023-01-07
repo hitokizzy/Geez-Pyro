@@ -59,10 +59,7 @@ async def play_stream(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["sk", "skip"], ".")
-    & ~filters.private
-    & ~filters.edited
-)
+    filters.command(["sk", "skip"], ".") & filters.me)
 async def skip_track(_, message: Message, lang):
     chat_id = message.chat.id
     group = get_group(chat_id)
@@ -103,10 +100,7 @@ async def mute_vc(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["um", "unmute"], ".")
-    & ~filters.private
-    & ~filters.edited
-)
+    filters.command(["um", "unmute"], ".") & filters.me)
 async def unmute_vc(_, message: Message, lang):
     chat_id = message.chat.id
     try:
@@ -118,10 +112,7 @@ async def unmute_vc(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["ps", "pause"], ".")
-    & ~filters.private
-    & ~filters.edited
-)
+    filters.command(["ps", "pause"], ".") & filters.me)
 async def pause_vc(_, message: Message, lang):
     chat_id = message.chat.id
     try:
@@ -133,10 +124,7 @@ async def pause_vc(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["rs", "resume"], ".")
-    & ~filters.private
-    & ~filters.edited
-)
+    filters.command(["rs", "resume"], ".") & filters.me)
 async def resume_vc(_, message: Message, lang):
     chat_id = message.chat.id
     try:
@@ -148,10 +136,7 @@ async def resume_vc(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["end", "stop"], ".")
-    & ~filters.private
-    & ~filters.edited
-)
+    filters.command(["end", "stop"], ".") & filters.me)
 async def leave_vc(_, message: Message, lang):
     chat_id = message.chat.id
     set_group(chat_id, is_playing=False, now_playing=None)
@@ -166,10 +151,7 @@ async def leave_vc(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["list", "queue"], ".")
-    & ~filters.private
-    & ~filters.edited
-)
+    filters.command(["list", "queue"], ".") & filters.me)
 async def queue_list(_, message: Message, lang):
     chat_id = message.chat.id
     queue = get_queue(chat_id)
@@ -181,10 +163,7 @@ async def queue_list(_, message: Message, lang):
     
 
 @gez.on_message(
-    filters.command(["mode", "switch"], ".")
-    & ~filters.private
-    & ~filters.edited
-)
+    filters.command(["mode", "switch"], ".") & filters.me)
 async def switch_mode(_, message: Message, lang):
     chat_id = message.chat.id
     group = get_group(chat_id)
@@ -198,10 +177,7 @@ async def switch_mode(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["admins", "adminsonly"], ".")
-    & ~filters.private
-    & ~filters.edited
-)
+    filters.command(["admins", "adminsonly"], ".") & filters.me)
 async def admins_only(_, message: Message, lang):
     chat_id = message.chat.id
     group = get_group(chat_id)
@@ -215,10 +191,7 @@ async def admins_only(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["pl", "playlist"], ".")
-    & ~filters.private
-    & ~filters.edited
-)
+    filters.command(["pl", "playlist"], ".") & filters.me)
 async def import_playlist(_, message: Message, lang):
     chat_id = message.chat.id
     group = get_group(chat_id)
