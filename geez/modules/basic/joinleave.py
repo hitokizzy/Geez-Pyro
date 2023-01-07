@@ -69,7 +69,7 @@ async def kickmeallch(client: Client, message: Message):
 
 
 add_command_help(
-    "joinleave",
+    "Join Leave",
     [
         [
             "kickme",
