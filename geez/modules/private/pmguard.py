@@ -33,10 +33,10 @@ def get_arg(message):
 async def pmguard(client, message):
     arg = get_arg(message)
     if not arg:
-        await message.edit("**Set limit to what?**")
+        await message.edit("**Apaan ya?**")
         return
     await geez.set_limit(int(arg))
-    await message.edit(f"**Limit set to {arg}**")
+    await message.edit(f"**Limit Di Set {arg}**")
 
 
 
@@ -44,17 +44,17 @@ async def pmguard(client, message):
 async def setpmmsg(client, message):
     arg = get_arg(message)
     if not arg:
-        await message.edit("**What message to set**")
+        await message.edit("**Lah apaan tuh ?**")
         return
     if arg == "default":
         await geez.set_block_message(geez.BLOCKED)
-        await message.edit("**Block message set to default**.")
+        await message.edit("**Block Anajay **.")
         return
     await geez.set_block_message(f"`{arg}`")
     await message.edit("**Custom block message set**")
 
 
-@gez.on_message(filters.command(["allow", "approve", "a"], ["."]) & filters.me & filters.private)
+@gez.on_message(filters.command(["ok", "setuju", "a"], ["."]) & filters.me & filters.private)
 async def allow(client, message):
     chat_id = message.chat.id
     pmpermit, pm_message, limit, block_message = await geez.get_pm_settings()
@@ -67,11 +67,11 @@ async def allow(client, message):
     USERS_AND_WARNS.update({chat_id: 0})
 
 
-@gez.on_message(filters.command(["deny", "da", "disapprove"], ["."]) & filters.me & filters.private)
+@gez.on_message(filters.command(["tolak", "no", "disa"], ["."]) & filters.me & filters.private)
 async def deny(client, message):
     chat_id = message.chat.id
     await geez.deny_user(chat_id)
-    await message.edit(f"**I have denied [you](tg://user?id={chat_id}) to PM me.**")
+    await message.edit(f"**Udahan Cok [you](tg://user?id={chat_id}).**")
 
 
 @gez.on_message(
