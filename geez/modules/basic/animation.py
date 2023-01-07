@@ -1292,7 +1292,7 @@ async def santet(client: Client, message: Message):
 
 
 add_command_help(
-    "animation",
+    "Animasi",
     [
         ["fuck", "To display the middle finger animation."],
         ["dino", "To display dino chased animation."],
