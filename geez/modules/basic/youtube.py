@@ -27,7 +27,7 @@ def get_text(message: Message) -> [None, str]:
 
 
 @gez.on_message(
-    filters.command(["vid", "video"], [".", "-", "^", "!", "?"]) & filters.me
+    filters.command(["vid", "video"], ".") & filters.me
 )
 async def yt_vid(client: Client, message: Message):
     input_st = message.text
@@ -85,7 +85,7 @@ async def yt_vid(client: Client, message: Message):
             os.remove(files)
 
 
-@gez.on_message(filters.command("song", [".", "-", "^", "!", "?"]) & filters.me)
+@gez.on_message(filters.command("lagu", ".") & filters.me)
 async def song(client: Client, message: Message):
     input_str = get_text(message)
     rep = await message.reply("`Bentar...`")
@@ -148,9 +148,9 @@ async def song(client: Client, message: Message):
 
 
 add_command_help(
-    "youtube",
+    "Youtube",
     [
-        [".song <title>", "Download Audio From YouTube."],
+        [".lagu <title>", "Download Audio From YouTube."],
         [".video <title>", "Download Video from YouTube."],
         [".tt <link>", "Download Video Tiktok tanpa Watermark."],
     ],
