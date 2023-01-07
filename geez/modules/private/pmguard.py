@@ -1,10 +1,11 @@
 from pyrogram import filters, Client
+from pyrogram import Client as gez
 import asyncio
 from pyrogram.types import Message 
 
 from pyrogram.methods import messages
-from geez.database.pmpermitdb import get_approved_users, pm_guard
-import geez.database.pmpermitdb as zzy
+from geez.database.mongodb.pmpermitdb import get_approved_users, pm_guard
+import geez.database.mongodb.pmpermitdb as geez
 from config import LOG_GROUP, PM_LOGGER
 FLOOD_CTRL = 0
 ALLOWED = []
@@ -28,36 +29,36 @@ def get_arg(message):
     return " ".join(split[1:])
 
 
-@Client.on_message(filters.command("setlimit", ["."]) & filters.me)
+@gez.on_message(filters.command("setlimit", ["."]) & filters.me)
 async def pmguard(client, message):
     arg = get_arg(message)
     if not arg:
         await message.edit("**Set limit to what?**")
         return
-    await zzy.set_limit(int(arg))
+    await geez.set_limit(int(arg))
     await message.edit(f"**Limit set to {arg}**")
 
 
 
-@Client.on_message(filters.command("setblockmsg", ["."]) & filters.me)
+@gez.on_message(filters.command("setblockmsg", ["."]) & filters.me)
 async def setpmmsg(client, message):
     arg = get_arg(message)
     if not arg:
         await message.edit("**What message to set**")
         return
     if arg == "default":
-        await zzy.set_block_message(zzy.BLOCKED)
+        await geez.set_block_message(geez.BLOCKED)
         await message.edit("**Block message set to default**.")
         return
-    await zzy.set_block_message(f"`{arg}`")
+    await geez.set_block_message(f"`{arg}`")
     await message.edit("**Custom block message set**")
 
 
-@Client.on_message(filters.command(["allow", "ap", "approve", "a"], ["."]) & filters.me & filters.private)
+@gez.on_message(filters.command(["allow", "approve", "a"], ["."]) & filters.me & filters.private)
 async def allow(client, message):
     chat_id = message.chat.id
-    pmpermit, pm_message, limit, block_message = await zzy.get_pm_settings()
-    await zzy.allow_user(chat_id)
+    pmpermit, pm_message, limit, block_message = await geez.get_pm_settings()
+    await geez.allow_user(chat_id)
     await message.edit(f"**I have allowed [you](tg://user?id={chat_id}) to PM me.**")
     async for message in client.search_messages(
         chat_id=message.chat.id, query=pm_message, limit=1, from_user="me"
@@ -66,14 +67,14 @@ async def allow(client, message):
     USERS_AND_WARNS.update({chat_id: 0})
 
 
-@Client.on_message(filters.command(["deny", "dap", "disapprove", "dapp"], ["."]) & filters.me & filters.private)
+@gez.on_message(filters.command(["deny", "da", "disapprove"], ["."]) & filters.me & filters.private)
 async def deny(client, message):
     chat_id = message.chat.id
-    await Zectdb.deny_user(chat_id)
+    await geez.deny_user(chat_id)
     await message.edit(f"**I have denied [you](tg://user?id={chat_id}) to PM me.**")
 
 
-@Client.on_message(
+@gez.on_message(
     filters.private
     & filters.create(denied_users)
     & filters.incoming
@@ -83,7 +84,7 @@ async def deny(client, message):
 )
 async def reply_pm(app: Client, message):
     global FLOOD_CTRL
-    pmpermit, pm_message, limit, block_message = await zzy.get_pm_settings()
+    pmpermit, pm_message, limit, block_message = await geez.get_pm_settings()
     user = message.from_user.id
     user_warns = 0 if user not in USERS_AND_WARNS else USERS_AND_WARNS[user]
     if PM_LOGGER:
