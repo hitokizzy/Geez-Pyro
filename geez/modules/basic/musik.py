@@ -8,7 +8,8 @@ from pytgcalls.types import Update
 from pyrogram import enums, filters
 from pyrogram import Client as gez
 from pyrogram import Client
-from pytgcalls import GroupCallNotFoundError, from from from pytgcalls import GroupCallFactory
+from pytgcalls import GroupCallNotFoundError
+from pytgcalls import GroupCallFactory
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 from geez.core.decorators import *
 from geez.core import *
