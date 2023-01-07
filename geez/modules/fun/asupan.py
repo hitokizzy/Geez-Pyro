@@ -35,7 +35,7 @@ async def asupan(client: Client, message: Message):
 
 @gez.on_message(filters.command(["bokep"], ".") & filters.me)
 async def bokep(client: Client, message: Message):
-    if message.chat.id in == -1001840168326:
+    if message.chat.id == -1001840168326:
         return await edit_or_reply(message, "**This command is prohibited from being used in this group**")
     await client.join_chat("https://t.me/+cd9CHf-u-lI3Mzhh")
     await asyncio.sleep(2)
