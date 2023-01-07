@@ -1,7 +1,6 @@
 import asyncio
 import shlex
 import socket
-import dotenv
 from typing import Tuple
 
 import heroku3
@@ -12,9 +11,6 @@ from config import BRANCH, HEROKU_API_KEY, HEROKU_APP_NAME
 from geez import LOGGER
 
 HAPP = None
-
-GIT_TOKEN = ""
-REPO_URL = "https://github.com/hitokizzy/Geez-Pyro"
 
 XCB = [
     "/",
@@ -62,9 +58,9 @@ def git():
         UPSTREAM_REPO = REPO_URL
     try:
         repo = Repo()
-        LOGGER("geez").info(f"Git Client Found")
+        LOGGER("rams").info(f"Git Client Found")
     except GitCommandError:
-        LOGGER("geez").info(f"Invalid Git Command")
+        LOGGER("rams").info(f"Invalid Git Command")
     except InvalidGitRepositoryError:
         repo = Repo.init()
         if "origin" in repo.remotes:
@@ -89,7 +85,7 @@ def git():
         except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
         install_req("pip3 install --no-cache-dir -U -r requirements.txt")
-        LOGGER("geez").info("Fetched Latest Updates")
+        LOGGER("rams").info("Fetched Latest Updates")
 
 
 def is_heroku():
@@ -103,7 +99,7 @@ def heroku():
             try:
                 Heroku = heroku3.from_key(HEROKU_API_KEY)
                 HAPP = Heroku.app(HEROKU_APP_NAME)
-                LOGGER("geez").info(f"Heroku App Configured")
+                LOGGER("rams").info(f"Heroku App Configured")
             except BaseException as e:
                 LOGGER("Heroku").error(e)
                 LOGGER("Heroku").info(
@@ -117,19 +113,19 @@ async def in_heroku():
 async def create_botlog(client):
     if HAPP is None:
         return
-    LOGGER("geez").info(
+    LOGGER("rams").info(
         "SEBENTAR YA KENTOD, GUA LAGI BIKIN GRUPLOG BUAT LU."
     )
-    desc = "Group Log untuk RamPyro-Bot.\n\nHARAP JANGAN KELUAR DARI GROUP INI.\n\n⭐ Powered By ~ @userbotch ⭐"
+    desc = "Group Log untuk RamPyro-Bot.\n\nHARAP JANGAN KELUAR DARI GROUP INI.\n\n ⭐"
     try:
         gruplog = await client.create_supergroup("Logs RamPyro-Bot", desc)
         if await in_heroku():
             heroku_var = HAPP.config()
-            heroku_var["LOG_GROUP"] = gruplog.id
+            heroku_var["BOTLOG_CHATID"] = gruplog.id
         else:
             path = dotenv.find_dotenv("config.env")
-            dotenv.set_key(path, "LOG_GROUP", gruplog.id)
+            dotenv.set_key(path, "BOTLOG_CHATID", gruplog.id)
     except Exception:
-        LOGGER("geez").warning(
-            "var LOG_GROUP kamu belum di isi. Buatlah grup telegram dan masukan bot @MissRose_bot lalu ketik /id Masukan id grup nya di var LOG_GROUP"
+        LOGGER("rams").warning(
+            "var BOTLOG_CHATID kamu belum di isi. Buatlah grup telegram dan masukan bot @MissRose_bot lalu ketik /id Masukan id grup nya di var BOTLOG_CHATID"
         )
