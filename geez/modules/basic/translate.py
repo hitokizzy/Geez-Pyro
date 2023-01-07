@@ -64,7 +64,7 @@ async def pytrans_tr(_, message: Message):
       await tr_msg.edit(tred_txt)
 
 add_command_help(
-    "translate",
+    "Translate",
     [
         [".tr", "Translate some text by give a text or reply that text/caption."],
     ],
