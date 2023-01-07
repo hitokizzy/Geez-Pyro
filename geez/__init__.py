@@ -9,7 +9,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from aiohttp import ClientSession
 from logging.handlers import RotatingFileHandler
 from pytgcalls import PyTgCalls
-app = PyTgCalls(client)
+app = PyTgCalls(Client)
 
 if config.BOT_TOKEN:
     bot = Client(
