@@ -50,7 +50,7 @@ async def stats(client: Client, message: Message):
 
 
 add_command_help(
-    "stats",
+    "Stats",
     [
         ["stats", "cek status akun."],
     ],
