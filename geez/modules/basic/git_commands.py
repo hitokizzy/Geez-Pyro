@@ -60,7 +60,7 @@ async def commit_graph(bot: Client, message: Message):
 
 
 add_command_help(
-    "git",
+    "Git",
     [
         [".ggraph | .commitgraph", "Gets the commit graph for a Github user."],
     ],
