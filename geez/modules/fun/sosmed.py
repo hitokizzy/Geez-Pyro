@@ -39,7 +39,7 @@ async def sosmed(client: Client, message: Message):
         await client.delete_messages(bot, 2)
 
 add_command_help(
-    "sosmed",
+    "Sosmed",
     [
         [f"sosmed <link>", ", to download media from Facebook/Tiktok/Instagram/Twitter/Youtube",],
     ],
