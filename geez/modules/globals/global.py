@@ -252,7 +252,7 @@ if ok:
 
 
 add_command_help(
-    "globals",
+    "Gban",
     [
         [
             "gban <reply/username/userid>",
