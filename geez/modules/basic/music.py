@@ -1,7 +1,7 @@
 import os
 import json
 import shutil
-from config import config
+import config
 from geez.core.song import Song
 from pyrogram.types import Message
 from pytgcalls.types import Update
