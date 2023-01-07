@@ -120,7 +120,7 @@ async def ppanime(client, message):
 
 
 add_command_help(
-    "asupan",
+    "Asupan",
     [
         [
             "asupan",
