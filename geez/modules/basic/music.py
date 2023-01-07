@@ -28,8 +28,7 @@ else:
 
 
 @gez.on_message(
-    filters.command(["p", "play"], ".") & ~filters.private & ~filters.edited
-)
+    filters.command(["p", "play"], ".") & filters.me)
 async def play_stream(_, message: Message, lang):
     chat_id = message.chat.id
     group = get_group(chat_id)
@@ -92,8 +91,7 @@ async def skip_track(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["m", "mute"], ".") & ~filters.private & ~filters.edited
-)
+    filters.command(["m", "mute"], ".") & filters.me)
 async def mute_vc(_, message: Message, lang):
     chat_id = message.chat.id
     try:
