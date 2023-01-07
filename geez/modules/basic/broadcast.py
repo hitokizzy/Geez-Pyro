@@ -39,7 +39,7 @@ async def gcast_cmd(client: Client, message: Message):
             elif get_arg:
                 msg = get_arg(message)
             chat = dialog.chat.id
-            if chat not in NB:
+            if chat not in BLACKLIST:
                 try:
                     if message.reply_to_message:
                         await msg.copy(chat)
