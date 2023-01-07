@@ -27,7 +27,7 @@ async def give_pats(bot: Client, message: Message):
 
 
 add_command_help(
-    "pats",
+    "Gif",
     [
         [".pat | .pats", "Give pats."],
     ],
