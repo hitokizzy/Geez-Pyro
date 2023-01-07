@@ -20,7 +20,7 @@ from pyrogram.types import ChatPermissions, Message
 from geez.helper.PyroHelpers import get_ub_chats
 from geez.modules.basic.profile import extract_user, extract_user_and_reason
 SUDO_USERS = SUDO_USER
-from .replyspam import RAIDS
+from .spam import RAIDS
 
 
 
