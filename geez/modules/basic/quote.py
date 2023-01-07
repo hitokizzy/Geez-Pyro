@@ -38,7 +38,7 @@ async def quotly(client: Client, message: Message):
 
 
 add_command_help(
-    "quotly",
+    "Quotly",
     [
         [
             f"q or .quotly",
