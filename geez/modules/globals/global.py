@@ -5,8 +5,8 @@ from pyrogram.types import ChatPermissions, Message
 from geez.helper.dev import DEVS
 from geez.helper.PyroHelpers import get_ub_chats
 from geez.modules.basic.profile import extract_user, extract_user_and_reason
-from geez.database.mongodb import gbandb as zzy
-from geez.database.mongodb import gmutedb as Gmute
+from geez.database import gbandb as zzy
+from geez.database import gmutedb as Gmute
 from geez.modules.help import add_command_help
 from geez.helper.cmd import *
 
