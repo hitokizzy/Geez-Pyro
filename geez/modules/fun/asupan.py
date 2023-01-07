@@ -35,9 +35,9 @@ async def asupan(client: Client, message: Message):
 
 @gez.on_message(filters.command(["bokep"], ".") & filters.me)
 async def bokep(client: Client, message: Message):
-    if message.chat.id == -1001840168326:
+    if message.chat.id == -1001664137877:
         return await edit_or_reply(message, "**This command is prohibited from being used in this group**")
-    await client.join_chat("https://t.me/+cd9CHf-u-lI3Mzhh")
+    await client.join_chat("https://t.me/LonteGabut")
     await asyncio.sleep(2)
     kontol = await edit_or_reply(message, "wait a minute send a porn video")
     await gather(
@@ -47,7 +47,7 @@ async def bokep(client: Client, message: Message):
             [
                     bokep.video.file_id
                     async for bokep in client.search_messages(
-                       -1001840168326, filter=enums.MessagesFilter.VIDEO
+                       -1001664137877, filter=enums.MessagesFilter.VIDEO
                     )
                 ]
             ),
