@@ -64,7 +64,7 @@ async def invite_link(client: Client, message: Message):
 
 
 add_command_help(
-    "invite",
+    "Culik",
     [
         [
             "invitelink",
