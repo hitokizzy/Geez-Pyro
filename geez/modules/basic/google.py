@@ -63,7 +63,7 @@ async def gs(client: Client, message: Message):
 
 
 add_command_help(
-    "google",
+    "Google",
     [
         [
             "google",
