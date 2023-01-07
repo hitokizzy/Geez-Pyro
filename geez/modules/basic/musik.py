@@ -1,14 +1,14 @@
 import os
 import json
 import shutil
-import config
+from config import config
 from geez.core.song import Song
 from pyrogram.types import Message
 from pytgcalls.types import Update
 from pyrogram import enums, filters
 from pyrogram import Client as gez
 from pyrogram import Client
-from pytgcalls.exceptions import GroupCallNotFound, NoActiveGroupCall
+from pytgcalls import GroupCallNotFoundError, from from from pytgcalls import GroupCallFactory
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 from geez.core.decorators import *
 from geez.core import *
@@ -86,7 +86,7 @@ async def skip_track(_, message: Message, lang):
             try:
                 await pytgcalls.leave_group_call(chat_id)
                 k = await message.reply_text(lang["queueEmpty"])
-            except (NoActiveGroupCall, GroupCallNotFound):
+            except (GroupCallNotFoundError):
                 k = await message.reply_text(lang["notActive"])
             await delete_messages([message, k])
 
@@ -99,7 +99,7 @@ async def mute_vc(_, message: Message, lang):
     try:
         await pytgcalls.mute_stream(chat_id)
         k = await message.reply_text(lang["muted"])
-    except (NoActiveGroupCall, GroupCallNotFound):
+    except (GroupCallNotFoundError):
         k = await message.reply_text(lang["notActive"])
     await delete_messages([message, k])
 
@@ -114,7 +114,7 @@ async def unmute_vc(_, message: Message, lang):
     try:
         await pytgcalls.unmute_stream(chat_id)
         k = await message.reply_text(lang["unmuted"])
-    except (NoActiveGroupCall, GroupCallNotFound):
+    except (GroupCallNotFoundError):
         k = await message.reply_text(lang["notActive"])
     await delete_messages([message, k])
 
@@ -129,7 +129,7 @@ async def pause_vc(_, message: Message, lang):
     try:
         await pytgcalls.pause_stream(chat_id)
         k = await message.reply_text(lang["paused"])
-    except (NoActiveGroupCall, GroupCallNotFound):
+    except (GroupCallNotFoundError):
         k = await message.reply_text(lang["notActive"])
     await delete_messages([message, k])
 
@@ -144,7 +144,7 @@ async def resume_vc(_, message: Message, lang):
     try:
         await pytgcalls.resume_stream(chat_id)
         k = await message.reply_text(lang["resumed"])
-    except (NoActiveGroupCall, GroupCallNotFound):
+    except (GroupCallNotFoundError):
         k = await message.reply_text(lang["notActive"])
     await delete_messages([message, k])
 
@@ -162,7 +162,7 @@ async def leave_vc(_, message: Message, lang):
     try:
         await pytgcalls.leave_group_call(chat_id)
         k = await message.reply_text(lang["leaveVC"])
-    except (NoActiveGroupCall, GroupCallNotFound):
+    except (GroupCallNotFoundError):
         k = await message.reply_text(lang["notActive"])
     await delete_messages([message, k])
 
