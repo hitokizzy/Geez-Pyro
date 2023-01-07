@@ -190,5 +190,7 @@ add_command_help(
         [".up `or` .uptime", "Check bot's current uptime."],
         [".limit", "Check spambot."],
         [".restart", "You are retarded if you do not know what this does."],
+        ["ping", "Check bot alive or not."],
+        ["speedtest", "Check bot alive or not."],
     ],
 )
