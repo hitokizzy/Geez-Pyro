@@ -9,7 +9,7 @@ from pyrogram.raw.functions.messages import GetFullChat
 from pyrogram.raw.functions.phone import CreateGroupCall, DiscardGroupCall
 from pyrogram.raw.types import InputGroupCall, InputPeerChannel, InputPeerChat
 from pyrogram.types import Message
-from geez.helper.devs import DEVS
+from geez.helper.dev import DEVS
 from geez import SUDO_USER
 from geez.modules.help import add_command_help
 from geez.helper.basic import edit_or_reply
