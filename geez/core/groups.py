@@ -1,5 +1,5 @@
 import config
-from core.queue import Queue
+from geez.core.queue import Queue
 from pyrogram.types import Message
 from typing import Any, Dict, Union
 from pyrogram.raw.functions.channels import GetFullChannel
