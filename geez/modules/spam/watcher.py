@@ -13,11 +13,10 @@ from random import choice
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from cache.data import *
-from geez.database.mongodb.rraid import *
+from geez.database.rraid import *
 from geez import SUDO_USER
 from pyrogram import Client, errors, filters
 from pyrogram.types import ChatPermissions, Message
-DEVS = int(1669178360)
 from geez.helper.PyroHelpers import get_ub_chats
 from geez.modules.basic.profile import extract_user, extract_user_and_reason
 SUDO_USERS = SUDO_USER
@@ -34,6 +33,6 @@ if RAIDS:
         return
     try:
         if message.from_user.id in (await get_rraid_users()):
-            await message.reply_text(f"{random.choice(RAID)}")
+            await message.reply_text(f"{random.choice(RAM)}")
     except AttributeError:
         pass

@@ -32,7 +32,7 @@ async def set_var(client: Client, message: Message):
     if await in_heroku():
         if HAPP is None:
             return await Man.edit(
-                "Pastikan HEROKU_API_KEY dan HEROKU_APP_NAME anda dikonfigurasi dengan benar di config vars heroku"
+                "Pastikan HEROKU_API_KEY dan HEROKU_APP_NAME_NAME anda dikonfigurasi dengan benar di config vars heroku"
             )
         heroku_config = HAPP.config()
         if to_set in heroku_config:
@@ -63,7 +63,7 @@ async def varget_(client: Client, message: Message):
     if await in_heroku():
         if HAPP is None:
             return await Man.edit(
-                "Pastikan HEROKU_API_KEY dan HEROKU_APP_NAME anda dikonfigurasi dengan benar di config vars heroku"
+                "Pastikan HEROKU_API_KEY dan HEROKU_APP_NAME_NAME anda dikonfigurasi dengan benar di config vars heroku"
             )
         heroku_config = HAPP.config()
         if check_var in heroku_config:
@@ -92,7 +92,7 @@ async def vardel_(client: Client, message: Message):
     if await in_heroku():
         if HAPP is None:
             return await Man.edit(
-                "Pastikan HEROKU_API_KEY dan HEROKU_APP_NAME anda dikonfigurasi dengan benar di config vars heroku"
+                "Pastikan HEROKU_API_KEY dan HEROKU_APP_NAME_NAME anda dikonfigurasi dengan benar di config vars heroku"
             )
         heroku_config = HAPP.config()
         if check_var in heroku_config:
@@ -113,68 +113,61 @@ async def vardel_(client: Client, message: Message):
 
 
 @Client.on_message(filters.command("usage", CMD_HANDLER) & filters.me)
-async def usage_heroku(client: Client, message: Message):
-    ### Credits CatUserbot
-    if await in_heroku():
-        if HAPP is None:
-            return await message.edit(
-                "Pastikan HEROKU_API_KEY dan HEROKU_APP_NAME anda dikonfigurasi dengan benar di config vars heroku"
-            )
-    else:
-        return await edit_or_reply(message, "Only for Heroku Apps")
-    dyno = await edit_or_reply(message, "`Checking Heroku Usage. Please Wait...`")
-    Heroku = heroku3.from_key(HEROKU_API_KEY)
-    account_id = Heroku.account().id
-    useragent = (
-        "Mozilla/5.0 (Linux; Android 10; SM-G975F) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/80.0.3987.149 Mobile Safari/537.36"
-    )
+async def usage(message: Message):
+    """Get your account Dyno Usage"""
+    if not HEROKU_APP_NAME:
+        await message.err("Heroku App Not Found !")
+        return
+    await message.edit("`Processing...`")
+    useragent = ('Mozilla/5.0 (Linux; Android 10; SM-G975F) '
+                 'AppleWebKit/537.36 (KHTML, like Gecko) '
+                 'Chrome/80.0.3987.149 Mobile Safari/537.36')
+    u_id = HEROKU_APP_NAME.owner.id
     headers = {
-        "User-Agent": useragent,
-        "Authorization": f"Bearer {HEROKU_API_KEY}",
-        "Accept": "application/vnd.heroku+json; version=3.account-quotas",
+        'User-Agent': useragent,
+        'Authorization': f'Bearer {HEROKU_API_KEY}',
+        'Accept': 'application/vnd.heroku+json; version=3.account-quotas',
     }
-    path = "/accounts/" + account_id + "/actions/get-quota"
+    path = "/accounts/" + u_id + "/actions/get-quota"
     r = requests.get("https://api.heroku.com" + path, headers=headers)
     if r.status_code != 200:
-        return await dyno.edit("Unable to fetch.")
+        return await message.edit("`Error: something bad happened`\n\n"
+                                  f">.`{r.reason}`\n")
     result = r.json()
-    quota = result["account_quota"]
-    quota_used = result["quota_used"]
+    quota = result['account_quota']
+    quota_used = result['quota_used']
+
+    # Used
     remaining_quota = quota - quota_used
     percentage = math.floor(remaining_quota / quota * 100)
     minutes_remaining = remaining_quota / 60
     hours = math.floor(minutes_remaining / 60)
     minutes = math.floor(minutes_remaining % 60)
-    day = math.floor(hours / 24)
-    App = result["apps"]
+
+    # Current
+    App = result['apps']
     try:
-        App[0]["quota_used"]
+        App[0]['quota_used']
     except IndexError:
         AppQuotaUsed = 0
         AppPercentage = 0
     else:
-        AppQuotaUsed = App[0]["quota_used"] / 60
-        AppPercentage = math.floor(App[0]["quota_used"] * 100 / quota)
+        AppQuotaUsed = App[0]['quota_used'] / 60
+        AppPercentage = math.floor(App[0]['quota_used'] * 100 / quota)
     AppHours = math.floor(AppQuotaUsed / 60)
     AppMinutes = math.floor(AppQuotaUsed % 60)
+
     await asyncio.sleep(1.5)
-    text =f"""
-𝗜𝗡𝗙𝗢 𝗞𝗘𝗞𝗨𝗔𝗧𝗔𝗡 𝗥𝗔𝗠-𝗨𝗕𝗢𝗧!!
-╭✠╼━━━━━━❖━━━━━━━✠╮
-┣•𝗣𝗘𝗡𝗚𝗚𝗨𝗡𝗔𝗔𝗡 𝗦𝗔𝗔𝗧 𝗜𝗡𝗜 : 
-┣•   ▸ {AppHours} ᴊᴀᴍ - {AppMinutes} ᴍᴇɴɪᴛ.
-┣•   ▸ ᴘʀᴇꜱᴇɴᴛᴀꜱᴇ : {AppPercentage}% 
-╰✠╼━━━━━━❖━━━━━━━✠╯
-╼┅━━━━━━━━╍━━━━━━━━┅╾ 
-╭✠╼━━━━━━❖━━━━━━━✠╮ 
-┣•𝗣𝗘𝗡𝗚𝗚𝗨𝗡𝗔𝗔𝗡 𝗕𝗨𝗟𝗔𝗡 𝗜𝗡𝗜 : 
-┣•  ▸ {hours} ᴊᴀᴍ - {minutes} ᴍᴇɴɪᴛ. 
-┣•  ▸ ᴘʀᴇꜱᴇɴᴛᴀꜱᴇ : {percentage}%. 
-╰✠╼━━━━━━❖━━━━━━━✠╯
-• 𝗦𝗜𝗦𝗔 𝗗𝗬𝗡𝗢  : `{day}` Hari"""
-    return await dyno.edit(text)
+
+    await message.edit("**Dyno Usage:**\n\n"
+                       f" -> `Dyno usage for`  **{HEROKU_APP_NAME_NAME}**:\n"
+                       f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
+                       f"**|**  [`{AppPercentage}`**%**]"
+                       "\n"
+                       " -> `Dyno hours quota remaining this month`:\n"
+                       f"     •  `{hours}`**h**  `{minutes}`**m**  "
+                       f"**|**  [`{percentage}`**%**]")
+
 
 
 @Client.on_message(filters.command("usange", CMD_HANDLER) & filters.me)
@@ -183,7 +176,7 @@ async def usange_heroku(client: Client, message: Message):
     await xx.edit(
         "✥ **Informasi Dyno Heroku :**"
         "\n╔════════════════════╗\n"
-        f" ➠ **Penggunaan Dyno** `{HEROKU_APP_NAME}` :\n"
+        f" ➠ **Penggunaan Dyno** `{HEROKU_APP_NAME_NAME}` :\n"
         f"     •  `0`**Jam**  `0`**Menit**  "
         f"**|**  [`0`**%**]"
         "\n◖════════════════════◗\n"
