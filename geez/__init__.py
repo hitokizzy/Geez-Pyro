@@ -8,6 +8,7 @@ from datetime import datetime
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from aiohttp import ClientSession
 from logging.handlers import RotatingFileHandler
+from pytgcalls import *
 
 StartTime = time.time()
 START_TIME = datetime.now()
@@ -122,5 +123,5 @@ if STRING_SESSION10:
 client = [client for client in[STRING_SESSION1, STRING_SESSION2, STRING_SESSION3, STRING_SESSION4, STRING_SESSION5]if client]
 for client in clients:
     if not hasattr(client, "group_call"):
-        setattr(client, "group_call" (client))
+        setattr(client, "group_call", GroupCallNotFound(client).get_group_call())
 
