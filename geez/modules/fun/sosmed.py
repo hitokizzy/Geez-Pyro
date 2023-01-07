@@ -7,6 +7,7 @@ from geez.helper.basic import *
 from geez.helper.PyroHelpers import *
 from geez.helper.misc import *
 from geez.modules.help import *
+from geez.helper.tools import *
 
 @gez.on_message(filters.command(["sosmed"], ".") & filters.me)
 async def sosmed(client: Client, message: Message):
