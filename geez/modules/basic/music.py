@@ -28,7 +28,7 @@ else:
 
 
 @gez.on_message(
-    filters.command(["p", "play"], config.PREFIXES) & ~filters.private & ~filters.edited
+    filters.command(["p", "play"], ".") & ~filters.private & ~filters.edited
 )
 async def play_stream(_, message: Message, lang):
     chat_id = message.chat.id
@@ -60,7 +60,7 @@ async def play_stream(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["sk", "skip"], config.PREFIXES)
+    filters.command(["sk", "skip"], ".")
     & ~filters.private
     & ~filters.edited
 )
@@ -92,7 +92,7 @@ async def skip_track(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["m", "mute"], config.PREFIXES) & ~filters.private & ~filters.edited
+    filters.command(["m", "mute"], ".") & ~filters.private & ~filters.edited
 )
 async def mute_vc(_, message: Message, lang):
     chat_id = message.chat.id
@@ -105,7 +105,7 @@ async def mute_vc(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["um", "unmute"], config.PREFIXES)
+    filters.command(["um", "unmute"], ".")
     & ~filters.private
     & ~filters.edited
 )
@@ -120,7 +120,7 @@ async def unmute_vc(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["ps", "pause"], config.PREFIXES)
+    filters.command(["ps", "pause"], ".")
     & ~filters.private
     & ~filters.edited
 )
@@ -135,7 +135,7 @@ async def pause_vc(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["rs", "resume"], config.PREFIXES)
+    filters.command(["rs", "resume"], ".")
     & ~filters.private
     & ~filters.edited
 )
@@ -150,7 +150,7 @@ async def resume_vc(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["end", "stop"], config.PREFIXES)
+    filters.command(["end", "stop"], ".")
     & ~filters.private
     & ~filters.edited
 )
@@ -168,7 +168,7 @@ async def leave_vc(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["list", "queue"], config.PREFIXES)
+    filters.command(["list", "queue"], ".")
     & ~filters.private
     & ~filters.edited
 )
@@ -183,7 +183,7 @@ async def queue_list(_, message: Message, lang):
     
 
 @gez.on_message(
-    filters.command(["mode", "switch"], config.PREFIXES)
+    filters.command(["mode", "switch"], ".")
     & ~filters.private
     & ~filters.edited
 )
@@ -200,7 +200,7 @@ async def switch_mode(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["admins", "adminsonly"], config.PREFIXES)
+    filters.command(["admins", "adminsonly"], ".")
     & ~filters.private
     & ~filters.edited
 )
@@ -217,7 +217,7 @@ async def admins_only(_, message: Message, lang):
 
 
 @gez.on_message(
-    filters.command(["pl", "playlist"], config.PREFIXES)
+    filters.command(["pl", "playlist"], ".")
     & ~filters.private
     & ~filters.edited
 )
