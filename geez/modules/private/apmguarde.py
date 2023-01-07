@@ -1,42 +1,44 @@
 from pyrogram import filters, Client
+from pyrogram import Client as ren
 import asyncio
 from geez import SUDO_USER
 from geez.modules.help import *
 from pyrogram.methods import messages
 from .pmguard import get_arg, denied_users
 
-import geez.database.pmpermitdb as zzy
+import geez.database.mongodb.pmpermitdb as geez
 
 
 
-@Client.on_message(filters.command("pmguard", ["."]) & filters.me)
+@gez.on_message(filters.command("pmguard", ["."]) & filters.me)
 async def pmguard(client, message):
     arg = get_arg(message)
     if not arg:
         await message.edit("**I only understand on or off**")
         return
     if arg == "off":
-        await zzy.set_pm(False)
+        await geez.set_pm(False)
         await message.edit("**PM Guard Deactivated**")
     if arg == "on":
-        await zzy.set_pm(True)
+        await geez.set_pm(True)
         await message.edit("**PM Guard Activated**")
-@Client.on_message(filters.command("setpmmsg", ["."]) & filters.me)
+
+@gez.on_message(filters.command("setpmmsg", ["."]) & filters.me)
 async def setpmmsg(client, message):
     arg = get_arg(message)
     if not arg:
         await message.edit("**What message to set**")
         return
     if arg == "default":
-        await zzy.set_permit_message(zzy.PMPERMIT_MESSAGE)
+        await geez.set_permit_message(geez.PMPERMIT_MESSAGE)
         await message.edit("**Anti_PM message set to default**.")
         return
-    await zzy.set_permit_message(f"`{arg}`")
+    await geez.set_permit_message(f"`{arg}`")
     await message.edit("**Custom anti-pm message set**")
 
 
 add_command_help(
-    "antipm",
+    "Antipm",
     [
         [".pmguard [on or off]", " -> Activates or deactivates anti-pm."],
         [".setpmmsg [message or default]", " -> Sets a custom anti-pm message."],
