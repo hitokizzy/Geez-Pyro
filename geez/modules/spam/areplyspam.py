@@ -6,7 +6,7 @@ from random import choice
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from cache.data import *
-from geez.database.rraid import *
+from geez.database.mongodb.rraid import *
 from geez import SUDO_USER
 from pyrogram import Client, errors, filters
 from pyrogram.types import ChatPermissions, Message
