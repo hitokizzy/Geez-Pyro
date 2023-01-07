@@ -1,4 +1,4 @@
-from KillerXBase.database.mongodb import cli
+from geez.database.mongodb import cli
 
 gmuteh = cli["GMUTE"]
 
