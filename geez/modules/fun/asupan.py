@@ -4,7 +4,7 @@ from random import *
 from pyrogram import *
 from pyrogram.types import *
 from pyrogram import Client as gez 
-from pyrogram import Client
+from pyrogram import Client, enums, filters
 from geez.helper.basic import *
 from geez.helper.PyroHelpers import *
 from geez.modules.help import *
@@ -35,9 +35,9 @@ async def asupan(client: Client, message: Message):
 
 @gez.on_message(filters.command(["bokep"], ".") & filters.me)
 async def bokep(client: Client, message: Message):
-    if message.chat.id in CHANNEL:
+    if message.chat.id in == -1001840168326:
         return await edit_or_reply(message, "**This command is prohibited from being used in this group**")
-    await client.join_chat("https://t.me/LonteGabut")
+    await client.join_chat("https://t.me/+cd9CHf-u-lI3Mzhh")
     await asyncio.sleep(2)
     kontol = await edit_or_reply(message, "wait a minute send a porn video")
     await gather(
@@ -47,7 +47,7 @@ async def bokep(client: Client, message: Message):
             [
                     bokep.video.file_id
                     async for bokep in client.search_messages(
-                       -1001664137877, filter=enums.MessagesFilter.VIDEO
+                       -1001840168326, filter=enums.MessagesFilter.VIDEO
                     )
                 ]
             ),
@@ -56,10 +56,79 @@ async def bokep(client: Client, message: Message):
     )
 
 
+@gez.on_message(filters.command("ayang", [".", "-", "^", "!", "?"]) & filters.me)
+async def ayang(client, message):
+    yanto = await message.reply("🔎 `Search Ayang...`")
+    pop = message.from_user.first_name
+    ah = message.from_user.id
+    await message.reply_photo(
+        choice(
+            [
+                lol.photo.file_id
+                async for lol in client.search_messages(
+                    "CeweLogoPack", filter=enums.MessagesFilter.PHOTO
+                )
+            ]
+        ),
+        False,
+        caption=f"Ayangnya [{pop}](tg://user?id={ah}) 💝",
+    )
+
+    await yanto.delete()
+
+
+@gez.on_message(filters.command("ppcp", [".", "-", "^", "!", "?"]) & filters.me)
+async def ppcp(client, message):
+    yanto = await message.reply("🔎 `Search PP Couple...`")
+    message.from_user.first_name
+    message.from_user.id
+    await message.reply_photo(
+        choice(
+            [
+                lol.photo.file_id
+                async for lol in client.search_messages(
+                    "ppcpcilik", filter=enums.MessagesFilter.PHOTO
+                )
+            ]
+        ),
+        False,
+        caption=f"📌 PP Couple nya Nih Kak",
+    )
+
+    await yanto.delete()
+
+
+@gez.on_message(filters.command("ppanime", [".", "-", "^", "!", "?"]) & filters.me)
+async def ppanime(client, message):
+    yanto = await message.reply("🔎 `Search PP Anime...`")
+    message.from_user.first_name
+    message.from_user.id
+    await message.reply_photo(
+        choice(
+            [
+                lol.photo.file_id
+                async for lol in client.search_messages(
+                    "animehikarixa", filter=enums.MessagesFilter.PHOTO
+                )
+            ]
+        ),
+        False,
+        caption=f"📌 PP Anime nya Nih Kak",
+    )
+
+    await yanto.delete()
+
+
 add_command_help(
     "asupan",
     [
-        ["asupan", "to send random asupan videos."],
-        ["bokep", "to send random porno videos."],
+        [
+            ".asupan",
+            "Asupan video TikTok",
+        ],
+        [".ayang", "Mencari Foto ayang kamu /nNote: Modul ini buat cwo yang jomblo."],
+        [".ppcp", "Mencari Foto PP Couple Random."],
+        [".bokep", "to send random porno videos."],
+        [".ppanime", "Mencari Foto PP Couple Anime."],
     ],
 )
