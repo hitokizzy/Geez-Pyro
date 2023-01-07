@@ -4,7 +4,7 @@ from pyrogram.types import Message
 from geez.modules.help import add_command_help
 
 
-@Client.on_message(filters.command("create", ".") & filters.me)
+@Client.on_message(filters.command("buat", ".") & filters.me)
 async def create(client: Client, message: Message):
     if len(message.command) < 3:
         return await message.edit_text(
@@ -32,9 +32,9 @@ async def create(client: Client, message: Message):
 
 
 add_command_help(
-    "create",
+    "Buat",
     [
-        ["create ch", "create an channel"],
-        ["create gc", "create an group"],
+        ["buat ch", "create an channel"],
+        ["buat gc", "create an group"],
     ],
 )
