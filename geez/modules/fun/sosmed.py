@@ -3,13 +3,12 @@ from pyrogram.types import *
 from pyrogram import *
 from pyrogram import Client as gez
 from pyrogram import Client
-from geez.helper.cmd import *
 from geez.helper.basic import *
 from geez.helper.PyroHelpers import *
 from geez.helper.misc import *
 from geez.modules.help import *
 
-@gez.on_message(filters.command(["sosmed"], cmd) & filters.me)
+@gez.on_message(filters.command(["sosmed"], ".") & filters.me)
 async def sosmed(client: Client, message: Message):
     prik = await message.edit("`Bentar . . .`")
     link = get_arg(message)
