@@ -135,7 +135,7 @@ async def chatinfo_handler(client: Client, message: Message):
 
 
 add_command_help(
-    "info",
+    "Info",
     [
         [
             "info <username/userid/reply>",
