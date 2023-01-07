@@ -202,7 +202,7 @@ async def view_pfp(client: Client, message: Message):
 
 
 add_command_help(
-    "profile",
+    "Profile",
     [
         ["block", "to block someone on telegram"],
         ["unblock", "to unblock someone on telegram"],
