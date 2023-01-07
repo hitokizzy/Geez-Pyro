@@ -1,5 +1,6 @@
 import time
 import asyncio
+import random
 from datetime import datetime
 
 import speedtest
