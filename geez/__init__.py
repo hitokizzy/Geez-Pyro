@@ -10,10 +10,9 @@ from aiohttp import ClientSession
 from logging.handlers import RotatingFileHandler
 from pytgcalls import PyTgCalls
 app = PyTgCalls(client)
-client = bot
- else:
-  client = app
-
+    client = bot
+else:
+    client = app
 StartTime = time.time()
 START_TIME = datetime.now()
 CMD_HELP = {}
