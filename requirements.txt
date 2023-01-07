@@ -23,6 +23,9 @@ pymongo
 python-dotenv
 pymediainfo
 prettytable
+pytube
+pillow
+spotipy
 git+https://github.com/Itz-fork/py-trans.git
 reportlab
 requests
@@ -33,4 +36,4 @@ telegraph
 uwuify
 youtube-search-python
 yt-dlp
-wget
+git+https://github.com/Onlymeriz/downloader
