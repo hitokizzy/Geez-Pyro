@@ -98,11 +98,3 @@ async def pingme(client: Client, message: Message):
     end = datetime.now()
     duration = (end - start).microseconds / 1000
     await xx.edit(f"**Geez - Pyro!!🎈**\n**Pinger** : %sms\n**Bot Uptime** : {uptime}🕛" % (duration))
-
-
-add_command_help(
-    "ping",
-    [
-        ["ping", "Check bot alive or not."],
-    ],
-)
