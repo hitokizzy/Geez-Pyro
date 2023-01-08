@@ -38,20 +38,20 @@ GPC = {}
 )
 async def pl(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
-    play = await edit_or_reply(message, "`Please Wait!`")
-    song = f"**PlayList in {message.chat.title}** \n"
+    play = await edit_or_reply(message, "`Bentar Cuk!`")
+    song = f"**📋 Daftar Menu {message.chat.title} :** \n"
     s = s_dict.get((message.chat.id, client.me.id))
     if not group_call:
-        return await play.edit("`Voice Chat Not Connected. So How Am i Supposed To Give You Playlist?`")
+        return await play.edit("`Minimal Buka Os Lag`")
     if not s:
         if group_call.is_connected:
-            return await play.edit(f"**Currently Playing :** `{group_call.song_name}`")
+            return await play.edit(f"**📀 Sedang diputar :** `{group_call.song_name}`")
         else:
-            return await play.edit("`Voice Chat Not Connected. So How Am i Supposed To Give You Playlist?`")
+            return await play.edit("`Minimal Buka Os Lag`")
     if group_call.is_connected:
-        song += f"**Currently Playing :** `{group_call.song_name}` \n\n"
+        song += f"**📀 Sedang diputar :** `{group_call.song_name}` \n\n"
     for sno, i in enumerate(s, start=1):
-        song += f"**{sno} ▶** [{i['song_name']}]({i['url']}) `| {i['singer']} | {i['dur']}` \n\n"
+        song += f"**{sno} 🎧** [{i['song_name']}]({i['url']}) `| {i['singer']} | {i['dur']}` \n\n"
     await play.edit(song, disable_web_page_preview=True)
     
 async def get_chat_(client, chat_):
@@ -81,7 +81,7 @@ async def playout_ended_handler(group_call, filename):
     raw_file = s[0]['raw']
     link = s[0]['url']
     file_size = humanbytes(os.stat(raw_file).st_size)
-    song_info = f'<u><b>🎼 Now Playing 🎼</b></u> \n<b>🎵 Song :</b> <a href="{link}">{name_}</a> \n<b>🎸 Singer :</b> <code>{singer_}</code> \n<b>⏲️ Duration :</b> <code>{dur_}</code> \n<b>📂 Size :</b> <code>{file_size}</code>'
+    song_info = f'<u><b>📀 Sedang dimainkan</b></u> \n<b>🎵 Lagu :</b> <a href="{link}">{name_}</a> \n<b>🎸 Artis :</b> <code>{singer_}</code> \n<b>⏲️ Waktu :</b> <code>{dur_}</code> \n<b>📂 Ukuran :</b> <code>{file_size}</code>'
     await client_.send_message(
         chat_, 
         song_info,
@@ -95,42 +95,42 @@ async def playout_ended_handler(group_call, filename):
 @gez.on_message(filters.command(["skip"], ".") & filters.me
 )
 async def ski_p(client, message):
-    m_ = await edit_or_reply(message, "`Please Wait!`")
+    m_ = await edit_or_reply(message, "`Bentar Cuk!`")
     no_t_s = get_text(message)
     group_call = GPC.get((message.chat.id, client.me.id))
     s = s_dict.get((message.chat.id, client.me.id))
     if not group_call:
-        await m_.edit("`Is Group Call Even Connected?`")
+        await m_.edit("`Yang Bener Lah...`")
         return 
     if not group_call.is_connected:
-        await m_.edit("`Is Group Call Even Connected?`")
+        await m_.edit("`Yang Bener Lah...`")
         return 
     if not no_t_s:
-        return await m_.edit("`Give Me Valid List Key Len.`")
+        return await m_.edit("`Yang Bener Dikit Lah...`")
     if no_t_s == "current":
         if not s:
-            return await m_.edit("`No Song in List. So Stopping Song is A Smarter Way.`")
+            return await m_.edit("`Lah tau yaaa`")
         next_s = s[0]['raw']
         name = str(s[0]['song_name'])
         s.pop(0)
         prev = group_call.song_name
         group_call.input_filename = next_s
-        return await m_.edit(f"`Skipped {prev}. Now Playing {name}!`")       
+        return await m_.edit(f"`Ganti Lagu {prev}📀 Sedang dimainkan {name}!`")       
     else:
         if not s:
-            return await m_.edit("`There is No Playlist!`")
+            return await m_.edit("`Laah kaga tau bujet !`")
         if not no_t_s.isdigit():
-            return await m_.edit("`Input Should Be In Digits.`")
+            return await m_.edit("`Kasih angka anjay...`")
         no_t_s = int(no_t_s)
         if int(no_t_s) == 0:
-            return await m_.edit("`0? What?`")
+            return await m_.edit("`0? Lah tau yaaaa?`")
         no_t_s = int(no_t_s - 1)
         try:
             s_ = s[no_t_s]['song_name']
             s.pop(no_t_s)
         except:
-            return await m_.edit("`Invalid Key.`")
-        return await m_.edit(f"`Skipped : {s_} At Position #{no_t_s}`")
+            return await m_.edit("`Buset dah luh.`")
+        return await m_.edit(f"`Ganti Lagu : {s_} At Posisi #{no_t_s}`")
    
                 
 @gez.on_message(filters.command(["play"], ".") & filters.me
@@ -141,10 +141,10 @@ async def play_m(client, message):
     input_str = get_text(message)
     if not input_str:
         if not message.reply_to_message:
-            return await u_s.edit_text("`Reply To A File To PLay It.`")
+            return await u_s.edit_text("`Minimal kasih judul lah....`")
         if not message.reply_to_message.audio:
-            return await u_s.edit("`Reply To A File To PLay It.`")
-        await u_s.edit_text("`Please Wait, Let Me Download This File!`")
+            return await u_s.edit("`Minimal kasih judul lah....`")
+        await u_s.edit_text("`Bentar cuy otw...`")
         audio = message.reply_to_message.audio
         audio_original = await message.reply_to_message.download()
         vid_title = audio.title or audio.file_name
@@ -162,7 +162,7 @@ async def play_m(client, message):
         rt = search.result()
         result_s = rt.get("search_result")
         if not result_s:
-           return await u_s.edit(f"`No Song Found Matching With Query - {input_str}, Please Try Giving Some Other Name.`")
+           return await u_s.edit(f"`Lah tau ya kaga nemu - {input_str}, Judul yang bener banh....`")
         url = result_s[0]["link"]
         dur = result_s[0]["duration"]
         vid_title = result_s[0]["title"]
@@ -172,7 +172,7 @@ async def play_m(client, message):
         try:
            audio_original = await yt_dl(url, client, message, start)
         except BaseException as e:
-           return await u_s.edit(f"**Failed To Download** \n**Error :** `{str(e)}`")
+           return await u_s.edit(f"**Lah bujet gagal** \n**Error :** `{str(e)}`")
         raw_file_name = (
             ''.join(random.choice(string.ascii_lowercase) for i in range(5))
             + ".raw"
@@ -181,7 +181,7 @@ async def play_m(client, message):
     try:
         raw_file_name = await convert_to_raw(audio_original, raw_file_name)
     except BaseException as e:
-        return await u_s.edit(f"`FFmpeg Failed To Convert Song To raw Format.` \n**Error :** `{e}`")
+        return await u_s.edit(f"`Lah tau ngapa ini...` \n**Error :** `{e}`")
     if os.path.exists(audio_original):
         os.remove(audio_original)
     if not group_call:
@@ -191,19 +191,19 @@ async def play_m(client, message):
         try:
             await group_call.start(message.chat.id)
         except BaseException as e:
-            return await u_s.edit(f"**Error While Joining VC:** `{e}`")
+            return await u_s.edit(f"**Lah ngapa dah...:** `{e}`")
         group_call.add_handler(playout_ended_handler, GroupCallFileAction.PLAYOUT_ENDED)
         group_call.input_filename = raw_file_name
-        return await u_s.edit(f"Playing `{vid_title}` in `{message.chat.title}`!")
+        return await u_s.edit(f"📀 Sedang memainkan `{vid_title}` di `{message.chat.title}`!")
     elif not group_call.is_connected:
         try:
             await group_call.start(message.chat.id)
         except BaseException as e:
-            return await u_s.edit(f"**Error While Joining VC:** `{e}`")
+            return await u_s.edit(f"**Ngapa yaa...:** `{e}`")
         group_call.add_handler(playout_ended_handler, GroupCallFileAction.PLAYOUT_ENDED)
         group_call.input_filename = raw_file_name
         group_call.song_name = vid_title
-        return await u_s.edit(f"Playing `{vid_title}` in `{message.chat.title}`!")
+        return await u_s.edit(f"📀 Sedang memainkan `{vid_title}` di `{message.chat.title}`!")
     else:
         s_d = s_dict.get((message.chat.id, client.me.id))
         f_info = {"song_name": vid_title,
@@ -217,7 +217,7 @@ async def play_m(client, message):
         else:
             s_dict[(message.chat.id, client.me.id)] = [f_info]
         s_d = s_dict.get((message.chat.id, client.me.id))
-        return await u_s.edit(f"Added `{vid_title}` To Position `#{len(s_d)+1}`!")
+        return await u_s.edit(f"✚ Ditambahkan 🎵 `{vid_title}` Di posisi `#{len(s_d)+1}`!")
     
 @run_in_exc      
 def convert_to_raw(audio_original, raw_file_name):
@@ -242,7 +242,7 @@ def download_progress_hook(d, message, client, start):
         eta = d.get('_eta_str', "N/A")
         percent = d.get("_percent_str", "N/A")
         speed = d.get("_speed_str", "N/A")
-        to_edit = f"<b><u>Downloading File</b></u> \n<b>File Name :</b> <code>{file_name}</code> \n<b>File Size :</b> <code>{total}</code> \n<b>Speed :</b> <code>{speed}</code> \n<b>ETA :</b> <code>{eta}</code> \n<i>Download {current} out of {total}</i> (__{percent}__)"
+        to_edit = f"<b><u>🖇 Mengunduh File</b></u> \n<b>🏷 Nama file :</b> <code>{file_name}</code> \n<b>🗂 Ukuran file :</b> <code>{total}</code> \n<b>⚡Speed :</b> <code>{speed}</code> \n<b>ETA :</b> <code>{eta}</code> \n<i>🕹️ Unduh {current} out of {total}</i> (__{percent}__)"
         threading.Thread(target=edit_msg, args=(client, message, to_edit)).start()
 
 @run_in_exc
@@ -277,12 +277,12 @@ FFMPEG_PROCESSES = {}
 async def no_song_play(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
     if not group_call:
-        await edit_or_reply(message, "`Is Group Call Even Connected?`")
+        await edit_or_reply(message, "`Lah tau yaaaa`")
         return
     if not group_call.is_connected:
-        await edit_or_reply(message, "`Is Group Call Even Connected?`")
+        await edit_or_reply(message, "`Lah tau yaaaa`")
         return    
-    await edit_or_reply(message, f"`⏸ Paused {str(group_call.input_filename).replace('.raw', '')}.`")
+    await edit_or_reply(message, f"`⏸ Dijeda {str(group_call.input_filename).replace('.raw', '')}.`")
     group_call.pause_playout()
     
     
@@ -291,13 +291,13 @@ async def no_song_play(client, message):
 async def wow_dont_stop_songs(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
     if not group_call:
-        await edit_or_reply(message, "`Is Group Call Even Connected?`")
+        await edit_or_reply(message, "`Lah tau yaaaa`")
         return    
     if not group_call.is_connected:
-        await edit_or_reply(message, "`Is Group Call Even Connected?`")
+        await edit_or_reply(message, "`Lah tau yaaaa`")
         return    
     group_call.resume_playout()
-    await edit_or_reply(message, f"`▶️ Resumed.`")
+    await edit_or_reply(message, f"`▶️ Dilanjutkan.`")
         
 
 @gez.on_message(filters.command(["end"], ".") & filters.me
@@ -305,13 +305,28 @@ async def wow_dont_stop_songs(client, message):
 async def leave_vc_test(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
     if not group_call:
-        await edit_or_reply(message, "`Is Group Call Even Connected?`")
+        await edit_or_reply(message, "`Lah tau yaaaa`")
         return
     if not group_call.is_connected:
-        await edit_or_reply(message, "`Is Group Call Even Connected?`")
+        await edit_or_reply(message, "`Lah tau yaaaa`")
         return
     if os.path.exists(group_call.input_filename):
         os.remove(group_call.input_filename)
     await group_call.stop()
-    await edit_or_reply(message, f"`Left : {message.chat.title} - Vc`")
+    await edit_or_reply(message, f"`❌ Turun dulu cuyyy : {message.chat.title} - Vc`")
     del GPC[(message.chat.id, client.me.id)]
+    
+add_command_help(
+    "Musik",
+    [
+        [
+            "play",
+            "Play Musik & Video Dengan Judul Lagu",
+        ],
+        ["skip", "Skip Lagu."],
+        ["pause", "Pause Musik."],
+        ["resume", "Resume Musik."],
+        ["end", "Stop Musik."],
+        ["playlist", "Play Playlist Musik."],
+    ],
+)
