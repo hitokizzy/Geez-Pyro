@@ -1,7 +1,6 @@
 import logging
 import time
 import asyncio
-import asyncio
 
 from pyrogram import Client
 from config import API_ID, API_HASH, SUDO_USERS, OWNER_ID, BOT_TOKEN, STRING_SESSION1, STRING_SESSION2, STRING_SESSION3, STRING_SESSION4, STRING_SESSION5, STRING_SESSION6, STRING_SESSION7, STRING_SESSION8, STRING_SESSION9, STRING_SESSION10, BOTLOG_CHATID
@@ -11,6 +10,8 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from aiohttp import ClientSession
 from logging.handlers import RotatingFileHandler
 from pytgcalls import GroupCallFactory
+from typing import Any, Dict
+from gpytranslate import Translator
 
 StartTime = time.time()
 START_TIME = datetime.now()
@@ -24,12 +25,27 @@ SUDO_USERS.append(OWNER_ID)
 
 aiosession = ClientSession()
 
+trl = Translator()
+
 scheduler = AsyncIOScheduler()
 
-if BOTLOG_CHATID:
-    BOTLOG_CHATID = BOTLOG_CHATID
-else:
-    BOTLOG_CHATID = "me"
+from config import (
+    API_HASH,
+    API_ID,
+    BOTLOG_CHATID,
+    MONGO_URL,
+    STRING_SESSION1,
+    STRING_SESSION2,
+    STRING_SESSION3,
+    STRING_SESSION4,
+    STRING_SESSION5,
+    STRING_SESSION6,
+    STRING_SESSION7,
+    STRING_SESSION8,
+    STRING_SESSION9,
+    STRING_SESSION10,
+    SUDO_USERS,
+)
     
 LOG_FILE_NAME = "logs.txt"
 logging.basicConfig(
@@ -57,17 +73,24 @@ def LOGGER(name: str) -> logging.Logger:
 if API_ID:
    API_ID = API_ID
 else:
-   print("WARNING: MEMULAI BOT TANPA API_ID ")
+   print("PERINGATAN: API ID TIDAK DITEMUKAN MENGGUNAKAN API KILLERXBASE")
    API_ID = "6435225"
 
 if API_HASH:
    API_HASH = API_HASH
 else:
-   print("WARNING: MEMULAI BOT TANPA APP HASH ")   
+   print("PERINGATAN: API HASH TIDAK DITEMUKAN MENGGUNAKAN API KILLERXBASE")   
    API_HASH = "4e984ea35f854762dcde906dce426c2d"
 
 if not BOT_TOKEN:
-   print("WARNING: BOT TOKEN BELUM DIMASUKAN ")   
+   print("PERINGATAN: BOT TOKEN TIDAK DITEMUKAN")   
+
+if BOTLOG_CHATID:
+    BOTLOG_CHATID = BOTLOG_CHATID
+else:
+    BOTLOG_CHATID = "me"
+
+LOOP = asyncio.get_event_loop()
 
 app = Client(
     name="app",
