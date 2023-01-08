@@ -15,7 +15,6 @@ from gpytranslate import Translator
 StartTime = time.time()
 START_TIME = datetime.now()
 CMD_HELP = {}
-SUDO_USER = SUDO_USERS
 clients = []
 ids = []
 
