@@ -28,7 +28,7 @@ import os
 import time
 import requests
 import datetime
-from youtube_dl import YoutubeDL
+from yt_dlp import YoutubeDL
 from youtubesearchpython import SearchVideos
 
 s_dict = {}
