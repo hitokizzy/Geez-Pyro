@@ -44,7 +44,7 @@ async def encod(client: Client, message: Message):
 add_command_help(
     "base64",
     [
-        [".encode", "Encode base64."],
-        [".decode", "Decode bade64."],
+        ["encode", "Encode base64."],
+        ["decode", "Decode bade64."],
     ],
 )
