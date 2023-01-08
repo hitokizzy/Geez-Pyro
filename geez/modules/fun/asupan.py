@@ -3,12 +3,15 @@ from asyncio import *
 from random import *
 from pyrogram import *
 from pyrogram.types import *
-from pyrogram import Client as gez 
-from pyrogram import Client, enums, filters
+from pyrogram import Client as ren 
+from pyrogram import Client
 from geez.helper.basic import *
-from geez.helper.dev import *
 from geez.helper.PyroHelpers import *
 from geez.modules.help import *
+from geez.helper.dev import *
+from geez.helper.misc import *
+from geez.helper.goblok import *
+from config import *
 
 caption = f"**UPLOADED BY** [Geez-Pyro](https://t.me/{SUPPORT})"
 
