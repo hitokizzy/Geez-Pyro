@@ -12,7 +12,7 @@ from geez.modules.help import *
 
 # credits @xtsea
 
-@gez.on_message(filters.command("copy", cmd) & filters.me)
+@gez.on_message(filters.command("copy", ".") & filters.me)
 async def kangcopy(client: Client, message: Message):
     mmk = await message.reply_text("`Processing . . .`")
     link = get_arg(message)
