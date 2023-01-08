@@ -20,6 +20,7 @@ pyrogram
 pytgcalls==3.0.0.dev22
 sqlalchemy==1.3.23
 pymongo
+psycopg2
 python-dotenv
 pymediainfo
 prettytable
