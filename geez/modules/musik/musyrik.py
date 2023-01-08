@@ -19,6 +19,7 @@ import multiprocessing
 import time
 import calendar
 from geez.helper.tools import *
+from geez.modules.help.help import *
 from pytgcalls import GroupCallFactory, GroupCallFileAction
 import signal
 import random
