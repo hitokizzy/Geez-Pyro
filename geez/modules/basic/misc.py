@@ -180,7 +180,7 @@ async def spamban(client: Client, message: Message):
 
 
 add_command_help(
-    "misc",
+    "Misc",
     [
         [".alive", "Check if the bot is alive or not."],
         [".repo", "Display the repo of this userbot."],
@@ -192,7 +192,7 @@ add_command_help(
 )
 
 add_command_help(
-    "restart",
+    "Restart",
     [
         [".restart", "You are retarded if you do not know what this does."],
     ],
