@@ -56,24 +56,24 @@ def LOGGER(name: str) -> logging.Logger:
 if API_ID:
    API_ID = API_ID
 else:
-   print("WARNING: MEMULAI BOT TANPA API_ID ")
+   print("PERINGATAN: API ID TIDAK DITEMUKAN MENGGUNAKAN API KILLERXBASE")
    API_ID = "6435225"
 
 if API_HASH:
    API_HASH = API_HASH
 else:
-   print("WARNING: MEMULAI BOT TANPA APP HASH ")   
+   print("PERINGATAN: API HASH TIDAK DITEMUKAN MENGGUNAKAN API KILLERXBASE")   
    API_HASH = "4e984ea35f854762dcde906dce426c2d"
 
 if not BOT_TOKEN:
-   print("WARNING: BOT TOKEN BELUM DIMASUKAN ")   
+   print("PERINGATAN: BOT TOKEN TIDAK DITEMUKAN")   
 
 app = Client(
     name="app",
     api_id=API_ID,
     api_hash=API_HASH,
     bot_token=BOT_TOKEN,
-    plugins=dict(root="geez/modules/bot"),
+    plugins=dict(root="KillerXBase/modules/bot"),
     in_memory=True,
 )
 
