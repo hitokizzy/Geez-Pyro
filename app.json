@@ -37,7 +37,11 @@
             "required": true,
             "value": ""
         },
-<<<<<<< Updated upstream
+        "BOTLOG_CHATID": {
+            "description": "Group publik untuk log botnya",
+            "required": true,
+            "value": "-100"
+        },
         "buildpacks": [
           {
               "url": "heroku/python"
@@ -53,15 +57,8 @@
         "worker": {
             "quantity": 1,
             "size": "basic"
-=======
-        "BOTLOG_CHATID": {
-            "description": "Group publik untuk log botnya",
-            "required": true,
-            "value": "-100"
->>>>>>> Stashed changes
         }
-    },
-    "stack": "container"
 
     }
   }
+}
