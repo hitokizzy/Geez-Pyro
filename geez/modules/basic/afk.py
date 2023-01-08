@@ -62,7 +62,7 @@ async def collect_afk_messages(bot: Client, message: Message):
                 text = (
                     f"`Maaf, saya maih Offline/afk.\n"
                     f"Last seen: {last_seen}\n"
-                    f"Still busy: ```{AFK_REASON.upper()}```\n"
+                    f"Masih sibuk: ```{AFK_REASON.upper()}```\n"
                     f"Coba lagi lain kali.`"
                 )
                 await bot.send_message(
@@ -101,7 +101,7 @@ async def afk_unset(bot: Client, message: Message):
         last_seen = subtract_time(datetime.now(), AFK_TIME).replace("ago", "").strip()
         await message.edit(
             f"`Selama AFK (for {last_seen}), kamu menerima {sum(USERS.values()) + sum(GROUPS.values())} "
-            f"pesan dari {len(USERS) + len(GROUPS)}`"
+            f" {len(USERS) + len(GROUPS)} pesan`"
         )
         AFK = False
         AFK_TIME = ""
@@ -121,7 +121,7 @@ if AFK:
            last_seen = subtract_time(datetime.now(), AFK_TIME).replace("ago", "").strip()
            reply = await message.reply(
                f"`Selama AFK (for {last_seen}), kamu menerima {sum(USERS.values()) + sum(GROUPS.values())} "
-               f"pesan dari {len(USERS) + len(GROUPS)}`"
+               f"{len(USERS) + len(GROUPS)} pesan`"
            )
            AFK = False
            AFK_TIME = ""
@@ -135,7 +135,7 @@ if AFK:
 add_command_help(
     "Afk",
     [
-        ["afk", "Activates AFK mode with reason as anything after .afk\nUsage: ```.afk <reason>```"],
-        ["afk", "Deactivates AFK mode."],
+        ["afk", "Mengaktifkan mode AFK .afk\ncontoh: ```.afk <alasan>```"],
+        ["afk", "Menonaktifkan AFK mode."],
     ],
 )

@@ -21,11 +21,10 @@ else:
     txt = (
         f"**Geez Pyro Userbot**\n\n"
         f"〄 **Versi**: `1.01`\n"
-        f"├• **Uptime**: `{str(datetime.now() - START_TIME).split('.')[0]}`\n"
-        f"├• **Phython**: `{python_version()}`\n"
-        f"├• **Pyrogram**: `{__version__}`\n"
-        f"├• **Geez Support**: [Click Me](t.me/GeezSupport)\n"
-        f"├• **Ram Support**: [Click Me](t.me/ramsupportt)\n"   
+        f"  ├• **Uptime**: `{str(datetime.now() - START_TIME).split('.')[0]}`\n"
+        f"  ├• **Phython**: `{python_version()}`\n"
+        f"  ├• **Pyrogram**: `{__version__}`\n"
+        f"  ├• **Geez Support**: [Click Me](t.me/GeezSupport) | **Ram Support**: [Click Me](t.me/ramsupportt)\n"
     )
 
 @Client.on_message(
@@ -181,7 +180,7 @@ async def spamban(client: Client, message: Message):
 
 
 add_command_help(
-    "Alive",
+    "misc",
     [
         [".alive", "Check if the bot is alive or not."],
         [".repo", "Display the repo of this userbot."],
@@ -189,8 +188,12 @@ add_command_help(
         [".id", "Send id of what you replied to."],
         [".up `or` .uptime", "Check bot's current uptime."],
         [".limit", "Check spambot."],
+    ],
+)
+
+add_command_help(
+    "restart",
+    [
         [".restart", "You are retarded if you do not know what this does."],
-        ["ping", "Check bot alive or not."],
-        ["speedtest", "Check bot alive or not."],
     ],
 )
