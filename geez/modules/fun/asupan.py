@@ -21,7 +21,7 @@ async def vvip(client: Client, message: Message):
     kk = await edit_or_reply(message, "`Prossesing...`")
     await gather(
         kk.delete(),
-        client.send_photo(message.chat.id, ANAK_BANGSAD))
+        client.send_photo(message.chat.id, ANAK_BANGSAD, caption))
 
 @gez.on_message(filters.command(["asupan"], ".") & filters.me)
 async def asupan(client: Client, message: Message):
