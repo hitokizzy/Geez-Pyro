@@ -19,8 +19,11 @@ ids = []
 
 
 SUDO_USERS.append(OWNER_ID)
-
 aiosession = ClientSession()
+
+TEMP_SETTINGS: Dict[Any, Any] = {}
+TEMP_SETTINGS["PM_COUNT"] = {}
+TEMP_SETTINGS["PM_LAST_MSG"] = {}
 
 scheduler = AsyncIOScheduler()
     
