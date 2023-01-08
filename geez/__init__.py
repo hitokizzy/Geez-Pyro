@@ -17,18 +17,17 @@ SUDO_USER = SUDO_USERS
 clients = []
 ids = []
 
+
 SUDO_USERS.append(OWNER_ID)
+
+aiosession = ClientSession()
+
+scheduler = AsyncIOScheduler()
 
 if BOTLOG_CHATID:
     BOTLOG_CHATID = BOTLOG_CHATID
 else:
     BOTLOG_CHATID = "me"
-
-LOOP = asyncio.get_event_loop()
-
-aiosession = ClientSession()
-
-scheduler = AsyncIOScheduler()
     
 LOG_FILE_NAME = "logs.txt"
 logging.basicConfig(
@@ -56,24 +55,24 @@ def LOGGER(name: str) -> logging.Logger:
 if API_ID:
    API_ID = API_ID
 else:
-   print("PERINGATAN: API ID TIDAK DITEMUKAN MENGGUNAKAN API KILLERXBASE")
+   print("WARNING: MEMULAI BOT TANPA API_ID ")
    API_ID = "6435225"
 
 if API_HASH:
    API_HASH = API_HASH
 else:
-   print("PERINGATAN: API HASH TIDAK DITEMUKAN MENGGUNAKAN API KILLERXBASE")   
+   print("WARNING: MEMULAI BOT TANPA APP HASH ")   
    API_HASH = "4e984ea35f854762dcde906dce426c2d"
 
 if not BOT_TOKEN:
-   print("PERINGATAN: BOT TOKEN TIDAK DITEMUKAN")   
+   print("WARNING: BOT TOKEN BELUM DIMASUKAN ")   
 
 app = Client(
     name="app",
     api_id=API_ID,
     api_hash=API_HASH,
     bot_token=BOT_TOKEN,
-    plugins=dict(root="KillerXBase/modules/bot"),
+    plugins=dict(root="geez/modules/bot"),
     in_memory=True,
 )
 
