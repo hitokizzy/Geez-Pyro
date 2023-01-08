@@ -1,14 +1,12 @@
 import base64
 
-from pyrogram import filters
-from pyrogram import Client
-from pyrogram import Client as gez
+from pyrogram import Client, filters
 from pyrogram.types import Message
 
 from geez.modules.help import add_command_help
 
 
-@gez.on_message(filters.command("encod", ".") & filters.me)
+@Client.on_message(filters.command("encode", [".", "-", "^", "!"]) & filters.me)
 async def encod(client: Client, message: Message):
     match = message.pattern_match.group(1)
     if not match and message.is_reply:
@@ -23,7 +21,7 @@ async def encod(client: Client, message: Message):
     await message.edit(f"**=>> Encoded Text :** `{match}`\n\n**=>> OUTPUT :**\n`{atc}`")
 
 
-@gez.on_message(filters.command("decod", ".") & filters.me)
+@Client.on_message(filters.command("decode", [".", "-", "^", "!"]) & filters.me)
 async def encod(client: Client, message: Message):
     match = message.pattern_match.group(1)
     if not match and message.is_reply:
@@ -44,9 +42,9 @@ async def encod(client: Client, message: Message):
 
 
 add_command_help(
-    "Base64",
+    "base64",
     [
-        ["encod", "Encode base64."],
-        ["decod", "Decode bade64."],
+        [".encode", "Encode base64."],
+        [".decode", "Decode bade64."],
     ],
 )
