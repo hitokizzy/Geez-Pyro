@@ -3,6 +3,9 @@ import math
 import os
 import shlex
 from typing import Tuple
+import mimetypes
+import functools
+import threading
 
 from PIL import Image
 from pymediainfo import MediaInfo
