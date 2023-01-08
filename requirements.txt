@@ -34,8 +34,11 @@ speedtest-cli==2.1.3
 tgcrypto 
 telegraph
 uwuify
-youtube-search-python==1.4.6
+youtube-search-python
+ffmpeg-python
 yt-dlp
 wget
 gTTS
 googletrans==4.0.0rc1
+search-engine-parser
+youtube-search
