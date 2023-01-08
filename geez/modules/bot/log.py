@@ -26,7 +26,7 @@ LOG_CHATS_ = LOG_CHATS()
     filters.private & filters.incoming & ~filters.service & ~filters.me & ~filters.bot
 )
 async def monito_p_m_s(client: Client, message: Message):
-    if LOG_GROUP == -100:
+    if BOTLOG_CHATID == -100:
         return
     if gvarstatus("PMLOG") and gvarstatus("PMLOG") == "false":
         return
@@ -48,7 +48,7 @@ async def monito_p_m_s(client: Client, message: Message):
             )
         try:
             async for pmlog in client.search_messages(message.chat.id, limit=1):
-                await pmlog.forward(LOG_GROUP)
+                await pmlog.forward(BOTLOG_CHATID)
             LOG_CHATS_.COUNT += 1
         except BaseException:
             pass
@@ -56,11 +56,11 @@ async def monito_p_m_s(client: Client, message: Message):
 
 @gez.on_message(filters.group & filters.mentioned & filters.incoming)
 async def log_tagged_messages(client: Client, message: Message):
-    if LOG_GROUP == -100:
+    if BOTLOG_CHATID == -100:
         return
     if gvarstatus("GRUPLOG") and gvarstatus("GRUPLOG") == "false":
         return
-    if (no_log_pms_sql.is_approved(message.chat.id)) or (LOG_GROUP == -100):
+    if (no_log_pms_sql.is_approved(message.chat.id)) or (BOTLOG_CHATID == -100):
         return
     result = f"<b>📨 #TAGS #MESSAGE</b>\n<b> • From : </b>{message.from_user.mention}"
     result += f"\n<b> • Grup : </b>{message.chat.title}"
@@ -68,7 +68,7 @@ async def log_tagged_messages(client: Client, message: Message):
     result += f"\n<b> • Message : </b><code>{message.text}</code>"
     await asyncio.sleep(0.5)
     await client.send_message(
-        LOG_GROUP,
+        BOTLOG_CHATID,
         result,
         parse_mode=enums.ParseMode.HTML,
         disable_web_page_preview=True,
@@ -77,7 +77,7 @@ async def log_tagged_messages(client: Client, message: Message):
 
 @gez.on_message(filters.command("log", ".") & filters.me)
 async def set_log_p_m(client: Client, message: Message):
-    if LOG_GROUP != -100:
+    if BOTLOG_CHATID != -100:
         if no_log_pms_sql.is_approved(message.chat.id):
             no_log_pms_sql.disapprove(message.chat.id)
             await message.edit("**The LOG chat of this group has been activated successfully**")
@@ -85,7 +85,7 @@ async def set_log_p_m(client: Client, message: Message):
 
 @gez.on_message(filters.command("nolog", ".") & filters.me)
 async def set_no_log_p_m(client: Client, message: Message):
-    if LOG_GROUP != -100:
+    if BOTLOG_CHATID != -100:
         if not no_log_pms_sql.is_approved(message.chat.id):
             no_log_pms_sql.approve(message.chat.id)
             await message.edit("**LOG chat from this group has been disabled successfully**")
@@ -93,9 +93,9 @@ async def set_no_log_p_m(client: Client, message: Message):
 
 @gez.on_message(filters.command(["pmlog", "pmlogger"], ".") & filters.me)
 async def set_pmlog(client: Client, message: Message):
-    if LOG_GROUP == -100:
+    if BOTLOG_CHATID == -100:
         return await message.edit(
-            "**To Use this Module, you have to set ** `LOG_GROUP` **in config vars**"
+            "**To Use this Module, you have to set ** `BOTLOG_CHATID` **in config vars**"
         )
     input_str = get_arg(message)
     if input_str == "off":
@@ -121,9 +121,9 @@ async def set_pmlog(client: Client, message: Message):
 
 @gez.on_message(filters.command(["gruplog", "grouplog", "gclog"], ".") & filters.me)
 async def set_gruplog(client: Client, message: Message):
-    if LOG_GROUP == -100:
+    if BOTLOG_CHATID == -100:
         return await message.edit(
-            "**To Use this Module, you have to set ** `LOG_GROUP` **in config vars**"
+            "**To Use this Module, you have to set ** `BOTLOG_CHATID` **in config vars**"
         )
     input_str = get_arg(message)
     if input_str == "off":
