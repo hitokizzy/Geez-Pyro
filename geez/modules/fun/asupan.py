@@ -3,7 +3,7 @@ from asyncio import *
 from random import *
 from pyrogram import *
 from pyrogram.types import *
-from pyrogram import Client as ren 
+from pyrogram import Client as gez 
 from pyrogram import Client
 from geez.helper.basic import *
 from geez.helper.PyroHelpers import *
