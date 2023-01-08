@@ -6,7 +6,7 @@ from geez.helper.handlers import skip_current_song, skip_item
 from geez.helper.queues import QUEUE, clear_queue
 
 
-@Client.on_message(filters.command(["skip"], ".")
+@Client.on_message(filters.command(["skip"], "."))
 @authorized_users_only
 async def skip(client, m: Message):
     await m.delete()
@@ -40,7 +40,7 @@ async def skip(client, m: Message):
             await m.reply(OP)
 
 
-@Client.on_message(filters.command(["end", "stop"], ".")
+@Client.on_message(filters.command(["end", "stop"], "."))
 @authorized_users_only
 async def stop(client, m: Message):
     await m.delete()
@@ -56,7 +56,7 @@ async def stop(client, m: Message):
         await m.reply("**❌ Tidak ada apapun yang sedang diputar!**")
 
 
-@Client.on_message(filters.command(["pause"], ".")
+@Client.on_message(filters.command(["pause"], "."))
 @authorized_users_only
 async def pause(client, m: Message):
     await m.delete()
@@ -73,7 +73,7 @@ async def pause(client, m: Message):
         await m.reply("** ❌ Tidak ada apapun yang sedang diputar!**")
 
 
-@Client.on_message(filters.command(["resume"], ".")
+@Client.on_message(filters.command(["resume"], "."))
 @authorized_users_only
 async def resume(client, m: Message):
     await m.delete()
