@@ -23,7 +23,6 @@ from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-from geez.helper.cmd import *
 from geez.helper.basic import *
 from geez.helper.PyroHelpers import *
 from geez.modules.help import *
