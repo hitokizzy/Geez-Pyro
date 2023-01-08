@@ -24,6 +24,7 @@ python-dotenv
 pymediainfo
 prettytable
 pytube
+python-arq
 pillow
 spotipy
 git+https://github.com/Itz-fork/py-trans.git
@@ -36,4 +37,6 @@ telegraph
 uwuify
 youtube-search-python
 yt-dlp
-git+https://github.com/Onlymeriz/downloader
+wget
+gTTS
+googletrans==4.0.0rc1
