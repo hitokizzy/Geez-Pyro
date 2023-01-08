@@ -34,6 +34,12 @@ CMD_HANDLER = getenv("CMD_HANDLER", ".")
 HEROKU_API_KEY = getenv("HEROKU_API_KEY", None)
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME", None)
 
+CHANNEL = "@userbotch"
+SUPPORT = "@ramsupportt"
+
+BOT_VER = "2.0.5"
+BRANCH = getenv("BRANCH", "main")
+
 STRING_SESSION1 = getenv("STRING_SESSION1", "")
 STRING_SESSION2 = getenv("STRING_SESSION2", "")
 STRING_SESSION3 = getenv("STRING_SESSION3", "")
