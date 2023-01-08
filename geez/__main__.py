@@ -1,5 +1,7 @@
 import asyncio
 import importlib
+from pytgcalls import idle
+from config import call_py, bot
 from pyrogram import Client, idle
 from geez.helper import join
 from geez.modules import ALL_MODULES
