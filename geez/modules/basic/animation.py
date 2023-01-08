@@ -340,7 +340,7 @@ async def gkahgagw(client: Client, message: Message):
         "⬜⬜⬛⬜⬜\n⬜⬜⬛⬜⬜\n⬜⬜🔴⬜⬜",
         "⬜⬜⬛⬜⬜\n⬜⬛⬜⬜⬜\n🔴⬜⬜⬜⬜",
         "🔴⬛⬛⬜⬜\n⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜",
-        "⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜\n⬜  [KING IS BEST](https://github.com/ToxicCybers/KingUserbot) ⬜\n⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜",
+        "⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜\n⬜  ⬜\n⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜",
     ]
     if message.forward_from:
         return
@@ -382,21 +382,21 @@ async def okihakga(client: Client, message: Message):
 
 @Client.on_message(filters.command(["gangsta", "gang", "gangstar"], ".") & filters.me)
 async def gajjajay(client: Client, message: Message):
-    await message.edit("EVERyBOdy")
+    await message.edit("Semua orang")
     await asyncio.sleep(0.3)
-    await message.edit("iZ")
+    await message.edit("adalah")
     await asyncio.sleep(0.2)
-    await message.edit("GangSTur")
+    await message.edit("BANGSAT")
     await asyncio.sleep(0.5)
-    await message.edit("UNtIL ")
+    await message.edit("Sampe")
     await asyncio.sleep(0.2)
-    await message.edit("I")
+    await message.edit("Saya")
     await asyncio.sleep(0.3)
-    await message.edit("ArRivE")
+    await message.edit("Datang")
     await asyncio.sleep(0.3)
     await message.edit("🔥🔥🔥")
     await asyncio.sleep(0.3)
-    await message.edit("EVERyBOdy iZ GangSTur UNtIL I ArRivE 🔥🔥🔥")
+    await message.edit("Semua orang adalah BANGSAT sampe saya datang 🔥🔥🔥")
 
 
 @Client.on_message(filters.command("charging", ".") & filters.me)
@@ -537,7 +537,7 @@ async def hak(client: Client, message: Message):
     await message.edit_text("Hacking complete!\nUploading file...")
     await asyncio.sleep(2)
     await message.edit_text(
-        "Targeted Account Hacked...!\n\n ✅ File has been successfully uploaded to my server.\nWhatsApp Database:\n`./DOWNLOADS/msgstore.db.crypt12`"
+        "Targeted Account Hacked...!\n\n ✅ File has been successfully uploaded to GDrive.\nWhatsApp Database:\n`./DOWNLOADS/msgstore.db.crypt12`"
     )
 
 
@@ -882,7 +882,7 @@ async def dornembak(client: Client, message: Message):
 async def ngebundir(client: Client, message: Message):
     await edit_or_reply(
         message,
-        "`Drugs Everything...`          \n　　　　　|"
+        "`Dahlah...`          \n　　　　　|"
         "\n　　　　　| \n"
         "　　　　　| \n"
         "　　　　　| \n"
@@ -981,11 +981,11 @@ async def nahlove(client: Client, message: Message):
 
 @Client.on_message(filters.command("santet", ".") & filters.me)
 async def santet(client: Client, message: Message):
-    typew = await edit_or_reply(message, "`Enabling Online Witchcraft Command....`")
+    typew = await edit_or_reply(message, "`Mengaktifkan Santet Oline....`")
     await asyncio.sleep(2)
-    await typew.edit("`Searching for This Person's Name...`")
+    await typew.edit("`mencari nama target...`")
     await asyncio.sleep(1)
-    await typew.edit("`Online Witchcraft to be Done Immediately`")
+    await typew.edit("`mengirimkan nama target ke database santet online`")
     await asyncio.sleep(1)
     await typew.edit("0%")
     number = 1
@@ -1288,7 +1288,7 @@ async def santet(client: Client, message: Message):
     await asyncio.sleep(0.03)
     await typew.edit(str(number) + "%   ████████████████▌")
     await asyncio.sleep(1)
-    await typew.edit("**Target Successfully Stuck Online 🥴**")
+    await typew.edit("**Target berhasil ter santet BERAK PAKU**")
 
 
 add_command_help(

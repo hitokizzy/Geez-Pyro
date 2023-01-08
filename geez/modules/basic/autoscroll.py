@@ -18,10 +18,10 @@ if f:
 async def add_to_auto_read(bot: Client, message: Message):
     if message.chat.id in f:
         f.remove(message.chat.id)
-        await message.edit("Autoscroll deactivated")
+        await message.edit("Autoscroll dimatikan")
     else:
         f.add(message.chat.id)
-        await message.edit("Autoscroll activated")
+        await message.edit("Autoscroll diaktifkan")
 
 
 add_command_help(

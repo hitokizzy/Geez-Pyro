@@ -134,7 +134,7 @@ async def dmraid(xspam: Client, e: Message):
               counts = int(zzy[0])
               await e.reply_text("`Dm Spam Strated Successfully`")
               for _ in range(counts):
-                    reply = choice(RAID)
+                    reply = choice(RAM)
                     msg = f"{reply}"
                     await xspam.send_message(id, msg)
                     await asyncio.sleep(0.10)
