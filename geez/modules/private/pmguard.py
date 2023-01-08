@@ -6,7 +6,7 @@ from pyrogram.types import Message
 from pyrogram.methods import messages
 from geez.database.mongodb.pmpermitdb import get_approved_users, pm_guard
 import geez.database.mongodb.pmpermitdb as geez
-from config import LOG_GROUP, PM_LOGGER
+from config import BOTLOG_CHATID, PM_LOGGER
 FLOOD_CTRL = 0
 ALLOWED = []
 USERS_AND_WARNS = {}

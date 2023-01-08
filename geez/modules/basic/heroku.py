@@ -18,6 +18,12 @@ from geez.modules.help import add_command_help
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+
+from config import HEROKU_API_KEY, HEROKU_APP_NAME
+if HEROKU_API_KEY is not None or HEROKU_APP_NAME is not None:
+    HEROKU_APP = heroku3.from_key(HEROKU_API_KEY).apps()[HEROKU_APP_NAME] 
+    
+    
 @Client.on_message(filters.command("setvar", CMD_HANDLER) & filters.me)
 async def set_var(client: Client, message: Message):
     if len(message.command) < 3:

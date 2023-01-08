@@ -1,13 +1,13 @@
 from pyrogram import Client, enums, filters 
 from pyrogram.types import Message 
-from config import LOG_GROUP
+from config import BOTLOG_CHATID
 from geez.modules.help import add_command_help
 log = []
 
 
 @Client.on_message(filters.command("tagalert on", ".") & filters.me)
 async def set_no_log_p_m(client: Client, message: Message):
-    if LOG_GROUP != -100:
+    if BOTLOG_CHATID != -100:
         if not message.chat.id in log:
             log.append(message.chat.id)
             await message.edit("**Tag alert Activated Successfully**")
@@ -27,7 +27,7 @@ if log:
     result += f"\n<b> • Message : </b><code>{message.text}</code>"
     await asyncio.sleep(0.5)
     await client.send_message(
-        LOG_GROUP,
+        BOTLOG_CHATID,
         result,
         parse_mode=enums.ParseMode.HTML,
         disable_web_page_preview=True,

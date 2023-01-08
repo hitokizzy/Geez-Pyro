@@ -18,13 +18,15 @@ MONGO_URL = getenv("MONGO_URL")
 ALIVE_PIC = getenv("ALIVE_PIC", "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png")
 ALIVE_TEXT = getenv("ALIVE_TEXT", "")
 PM_LOGGER = getenv("PM_LOGGER")
-LOG_GROUP = getenv("LOG_GROUP")
+BOTLOG_CHATID = getenv("BOTLOG_CHATID")
 GIT_TOKEN = getenv("GIT_TOKEN") #personal access token
 REPO_URL = getenv("REPO_URL", "https://github.com/hitokizzy/Geez-Pyro")
 BRANCH = getenv("BRANCH", "main") #don't change
 CMD_HANDLER = getenv("CMD_HANDLER", ".")
+
 HEROKU_API_KEY = getenv("HEROKU_API_KEY", None)
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME", None)
+
 STRING_SESSION1 = getenv("STRING_SESSION1", "")
 STRING_SESSION2 = getenv("STRING_SESSION2", "")
 STRING_SESSION3 = getenv("STRING_SESSION3", "")

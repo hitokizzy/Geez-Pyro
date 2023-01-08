@@ -7,11 +7,11 @@
     "stack": "container",
     "env": {
         "STRING_SESSION1": {
-            "description": "fill with the pyrogram session string from https://t.me/geezramstringbot",
+            "description": "Ambil string pyrogram dari https://t.me/geezramstringbot",
             "required": true
         },
         "MONGO_URL": {
-            "description": "an mongodb.com Database",
+            "description": "mongodb.com Database",
             "required": true
         },
         "SUDO_USERS": {
@@ -19,11 +19,11 @@
             "required": false
         },
         "OWNER_ID": {
-            "description": "fill your I'd (can access all things)",
+            "description": "id telegram anda",
             "required": true
         },
         "BOT_TOKEN": {
-            "description": "fill with your bot token get from @BotFather on telegram",
+            "description": "bot token dari @BotFather telegram",
             "required": true,
             "value": ""
         },
@@ -37,6 +37,7 @@
             "required": true,
             "value": ""
         },
+<<<<<<< Updated upstream
         "buildpacks": [
           {
               "url": "heroku/python"
@@ -52,6 +53,12 @@
         "worker": {
             "quantity": 1,
             "size": "basic"
+=======
+        "BOTLOG_CHATID": {
+            "description": "Group publik untuk log botnya",
+            "required": true,
+            "value": "-100"
+>>>>>>> Stashed changes
         }
     },
     "stack": "container"

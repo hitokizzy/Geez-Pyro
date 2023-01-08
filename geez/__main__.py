@@ -4,12 +4,12 @@ from pyrogram import Client, idle
 from geez.helper import join
 from geez.modules import ALL_MODULES
 from geez import clients, app, ids
-from config import LOG_GROUP
+from config import BOTLOG_CHATID
 
 BOT_VER = "0.1.0"
 CMD_HANDLER = ["."]
 MSG_ON = """
-🔥 **Geez Pyro Menyala** 🔥
+🔥 **Geez Pyro Userbot** 🔥
 ╼┅━━━━━━━━━━╍━━━━━━━━━━┅╾
 🤖 **Userbot Version -** `{}`
 ⌨️ **Ketik** `{}alive` **untuk Mengecek Bot**
@@ -28,7 +28,7 @@ async def start_bot():
             ex = await cli.get_me()
             await join(cli)
             print(f"Started {ex.first_name} ✔ ")
-            #await cli.send_message(LOG_GROUP, MSG_ON.format(BOT_VER, CMD_HANDLER))
+            await cli.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, CMD_HANDLER))
             ids.append(ex.id)
         except Exception as e:
             print(f"{e}")

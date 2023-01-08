@@ -7,7 +7,7 @@ import heroku3
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError
 
-from config import BRANCH, HEROKU_API_KEY, HEROKU_APP_NAME
+from config import BRANCH, GIT_TOKEN, HEROKU_API_KEY, HEROKU_APP_NAME, REPO_URL
 from geez import LOGGER
 
 HAPP = None
