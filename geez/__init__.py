@@ -43,6 +43,7 @@ from config import (
     STRING_SESSION8,
     STRING_SESSION9,
     STRING_SESSION10,
+    OWNER_ID,
     SUDO_USERS,
 )
     
