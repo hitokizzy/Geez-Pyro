@@ -1,7 +1,6 @@
 import logging
 import time
 import asyncio
-
 from pyrogram import Client
 from config import *
 from datetime import datetime
@@ -10,8 +9,6 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from aiohttp import ClientSession
 from logging.handlers import RotatingFileHandler
 from pytgcalls import GroupCallFactory
-from typing import Any, Dict
-from gpytranslate import Translator
 
 StartTime = time.time()
 START_TIME = datetime.now()
@@ -20,16 +17,19 @@ SUDO_USER = SUDO_USERS
 clients = []
 ids = []
 
-
 SUDO_USERS.append(OWNER_ID)
+
+if BOTLOG_CHATID:
+    BOTLOG_CHATID = BOTLOG_CHATID
+else:
+    BOTLOG_CHATID = "me"
+
+LOOP = asyncio.get_event_loop()
 
 aiosession = ClientSession()
 
-trl = Translator()
-
 scheduler = AsyncIOScheduler()
-
-
+    
 LOG_FILE_NAME = "logs.txt"
 logging.basicConfig(
     level=logging.INFO,
@@ -56,24 +56,17 @@ def LOGGER(name: str) -> logging.Logger:
 if API_ID:
    API_ID = API_ID
 else:
-   print("PERINGATAN: API ID TIDAK DITEMUKAN MENGGUNAKAN API KILLERXBASE")
+   print("WARNING: MEMULAI BOT TANPA API_ID ")
    API_ID = "6435225"
 
 if API_HASH:
    API_HASH = API_HASH
 else:
-   print("PERINGATAN: API HASH TIDAK DITEMUKAN MENGGUNAKAN API KILLERXBASE")   
+   print("WARNING: MEMULAI BOT TANPA APP HASH ")   
    API_HASH = "4e984ea35f854762dcde906dce426c2d"
 
 if not BOT_TOKEN:
-   print("PERINGATAN: BOT TOKEN TIDAK DITEMUKAN")   
-
-if BOTLOG_CHATID:
-    BOTLOG_CHATID = BOTLOG_CHATID
-else:
-    BOTLOG_CHATID = "me"
-
-LOOP = asyncio.get_event_loop()
+   print("WARNING: BOT TOKEN BELUM DIMASUKAN ")   
 
 app = Client(
     name="app",
@@ -134,7 +127,7 @@ if STRING_SESSION10:
    client10 = Client(name="ten", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION10, plugins=dict(root="geez/modules")) 
    clients.append(client10)
 
-client = [client for client in[STRING_SESSION1, STRING_SESSION2, STRING_SESSION3, STRING_SESSION4, STRING_SESSION5]if client]
+client = [client for client in[STRING_SESSION1, STRING_SESSION2, STRING_SESSION3, STRING_SESSION4, STRING_SESSION5, STRING_SESSION6, STRING_SESSION7, STRING_SESSION8, STRING_SESSION9, STRING_SESSION10]if client]
 for client in clients:
     if not hasattr(client, "group_call"):
         setattr(client, "group_call", GroupCallFactory(client).get_group_call())
