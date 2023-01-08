@@ -36,12 +36,3 @@ STRING_SESSION7 = getenv("STRING_SESSION7", "")
 STRING_SESSION8 = getenv("STRING_SESSION8", "")
 STRING_SESSION9 = getenv("STRING_SESSION9", "")
 STRING_SESSION10 = getenv("STRING_SESSION10", "")
-
-
-contact_filter = filters.create(
-    lambda _, __, message: (message.from_user and message.from_user.is_contact)
-    or message.outgoing
-)
-
-bot = Client(STRING_SESSION1, API_ID, API_HASH, plugins=dict(root="geez"))
-call_py = PyTgCalls(bot)
