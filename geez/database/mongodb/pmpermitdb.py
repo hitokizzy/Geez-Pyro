@@ -5,12 +5,12 @@ collection = cli["geez"]["pmpermit"]
 
 PMPERMIT_MESSAGE = (
     "**peringatan! tolong baca pesan ini dengan hati-hati..\n\n**"
-    "**Saya Geez-Pyro saya di sini untuk melindungi tuanku dari smsm**"
+    "**Saya Geez-Pyro saya di sini untuk melindungi tuanku dari spam**"
     "**jika Anda bukan spammer, harap tunggu!.\n\n**"
-    "**sampai saat itu, jangan spam atau Anda akan diblokir dan dilaporkan bb saya, jadi berhati-hatilah untuk mengirim pesan pesan!**"
+    "**Jadi, jangan spam atau Anda akan diblokir, jadi berhati-hatilah untuk mengirim pesan!**"
 )
 
-BLOCKED = "**beep boop menemukan spammer!, berhasil diblokir!**"
+BLOCKED = "**spammer!, berhasil diblokir!**"
 
 LIMIT = 5
 

@@ -3,7 +3,7 @@ from pyrogram.types import InlineKeyboardButton, WebAppInfo
 class Data:
 
     text_help_menu = (
-        "**Command List & Help**\n**— Prefixes:** `.`"
+        "**List Plugin Geez Pyro**\n**— Prefixes:** `.`"
         .replace(",", "")
         .replace("[", "")
         .replace("]", "")
