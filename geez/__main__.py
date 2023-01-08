@@ -1,9 +1,6 @@
 import asyncio
 import importlib
-from pyrogram import Client, idle
-
-
-
+from pyrogram import idle
 from geez.helper import join
 from geez.modules import ALL_MODULES
 from geez import clients, app, ids
