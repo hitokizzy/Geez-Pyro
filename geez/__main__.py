@@ -1,7 +1,5 @@
 import asyncio
 import importlib
-from pytgcalls import idle
-from config import call_py, bot
 from pyrogram import Client, idle
 from geez.helper import join
 from geez.modules import ALL_MODULES
@@ -20,7 +18,6 @@ MSG_ON = """
 
 async def start_bot():
     await app.start()
-    await call_py.start()
     print("LOG: Founded Bot token Booting..")
     for all_module in ALL_MODULES:
         importlib.import_module("geez.modules" + all_module)
