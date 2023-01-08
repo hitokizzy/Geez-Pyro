@@ -15,7 +15,6 @@ from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError
 from config import *
 from geez import LOGGER
-from geez.helper.error import *
 
 admins_in_chat = {}
 
