@@ -3,13 +3,19 @@ import math
 import os
 import shlex
 from typing import Tuple
-import mimetypes
-import functools
-import threading
 
 from PIL import Image
 from pymediainfo import MediaInfo
 from pyrogram.types import Message
+
+import multiprocessing
+import mimetypes
+import functools
+import threading
+from concurrent.futures import ThreadPoolExecutor
+
+max_workers = multiprocessing.cpu_count() * 5
+exc_ = ThreadPoolExecutor(max_workers=max_workers)
 
 
 def get_text(message: Message) -> [None, str]:
