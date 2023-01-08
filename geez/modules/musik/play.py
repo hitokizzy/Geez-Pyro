@@ -15,8 +15,6 @@ from youtubesearchpython import VideosSearch
 
 from config import bot, call_py
 from geez.helper.queues import QUEUE, add_to_queue, get_queue
-from geez.core.decorators import *
-from geez.core import *
 from geez.modules.help import *
 
 AMBILFOTO = [
