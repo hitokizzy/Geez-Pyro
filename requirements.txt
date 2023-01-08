@@ -35,11 +35,10 @@ tgcrypto
 telegraph
 uwuify
 youtube-search
-youtube-search-python
+youtube-search-python==1.4.6
 ffmpeg-python
 yt-dlp
 wget
 gTTS
 googletrans==4.0.0rc1
 search-engine-parser
-youtube-search
