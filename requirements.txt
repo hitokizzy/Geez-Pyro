@@ -1,4 +1,5 @@
 flask
+base64
 gunicorn
 aiohttp
 aiofiles
