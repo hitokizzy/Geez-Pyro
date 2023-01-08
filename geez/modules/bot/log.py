@@ -148,7 +148,7 @@ async def set_gruplog(client: Client, message: Message):
 
 
 add_command_help(
-    "log",
+    "Log",
     [
         ["log", "To enable chat logs from that chat/group",],
         ["nolog", "To disable chat logs from that chat/group",],
