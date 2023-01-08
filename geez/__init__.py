@@ -23,11 +23,6 @@ SUDO_USERS.append(OWNER_ID)
 aiosession = ClientSession()
 
 scheduler = AsyncIOScheduler()
-
-if BOTLOG_CHATID:
-    BOTLOG_CHATID = BOTLOG_CHATID
-else:
-    BOTLOG_CHATID = "me"
     
 LOG_FILE_NAME = "logs.txt"
 logging.basicConfig(

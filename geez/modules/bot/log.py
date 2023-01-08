@@ -10,7 +10,6 @@ from geez.database.SQL import no_log_pms_sql
 from geez.database.SQL.globals import *
 from geez.helper.misc import *
 from geez.modules.help import *
-from geez.helper.cmd import *
 
 
 class LOG_CHATS:
@@ -76,7 +75,7 @@ async def log_tagged_messages(client: Client, message: Message):
     )
 
 
-@gez.on_message(filters.command("log", cmd) & filters.me)
+@gez.on_message(filters.command("log", ".") & filters.me)
 async def set_log_p_m(client: Client, message: Message):
     if LOG_GROUP != -100:
         if no_log_pms_sql.is_approved(message.chat.id):
@@ -84,7 +83,7 @@ async def set_log_p_m(client: Client, message: Message):
             await message.edit("**The LOG chat of this group has been activated successfully**")
 
 
-@gez.on_message(filters.command("nolog", cmd) & filters.me)
+@gez.on_message(filters.command("nolog", ".") & filters.me)
 async def set_no_log_p_m(client: Client, message: Message):
     if LOG_GROUP != -100:
         if not no_log_pms_sql.is_approved(message.chat.id):
@@ -92,7 +91,7 @@ async def set_no_log_p_m(client: Client, message: Message):
             await message.edit("**LOG chat from this group has been disabled successfully**")
 
 
-@gez.on_message(filters.command(["pmlog", "pmlogger"], cmd) & filters.me)
+@gez.on_message(filters.command(["pmlog", "pmlogger"], ".") & filters.me)
 async def set_pmlog(client: Client, message: Message):
     if LOG_GROUP == -100:
         return await message.edit(
@@ -120,7 +119,7 @@ async def set_pmlog(client: Client, message: Message):
         await edit_or_reply(message, "**PM LOG turned off successfully**")
 
 
-@gez.on_message(filters.command(["gruplog", "grouplog", "gclog"], cmd) & filters.me)
+@gez.on_message(filters.command(["gruplog", "grouplog", "gclog"], ".") & filters.me)
 async def set_gruplog(client: Client, message: Message):
     if LOG_GROUP == -100:
         return await message.edit(
