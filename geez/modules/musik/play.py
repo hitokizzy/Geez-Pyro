@@ -106,7 +106,7 @@ async def ytdl(link):
         return 0, stderr.decode()
 
 
-@Client.on_message(filters.command(["play"], ".")
+@Client.on_message(filters.command(["play"], "."))
 async def play(client, m: Message):
     replied = m.reply_to_message
     chat_id = m.chat.id
@@ -220,7 +220,7 @@ async def play(client, m: Message):
                             await huehue.edit(f"`{ep}`")
 
 
-@Client.on_message(filters.command(["videoplay", "vplay"], ".")
+@Client.on_message(filters.command(["videoplay", "vplay"], "."))
 async def videoplay(client, m: Message):
     replied = m.reply_to_message
     chat_id = m.chat.id
@@ -350,7 +350,7 @@ async def videoplay(client, m: Message):
                             await huehue.edit(f"`{ep}`")
 
 
-@Client.on_message(filters.command(["playfrom"], ".")
+@Client.on_message(filters.command(["playfrom"], "."))
 async def playfrom(client, m: Message):
     chat_id = m.chat.id
     if len(m.command) < 2:
@@ -403,7 +403,7 @@ async def playfrom(client, m: Message):
             await hmm.edit(f"**ERROR** \n`{e}`")
 
 
-@Client.on_message(filters.command(["playlist", "queue"], ".")
+@Client.on_message(filters.command(["playlist", "queue"], "."))
 async def playlist(client, m: Message):
     chat_id = m.chat.id
     if chat_id in QUEUE:
