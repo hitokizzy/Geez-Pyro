@@ -3,6 +3,7 @@ import time
 import asyncio
 import asyncio
 from pytgcalls import idle
+from config import call_py
 
 from pyrogram import Client
 from config import API_ID, API_HASH, SUDO_USERS, OWNER_ID, BOT_TOKEN, STRING_SESSION1, STRING_SESSION2, STRING_SESSION3, STRING_SESSION4, STRING_SESSION5, STRING_SESSION6, STRING_SESSION7, STRING_SESSION8, STRING_SESSION9, STRING_SESSION10, BOTLOG_CHATID
@@ -50,6 +51,18 @@ logging.getLogger("pyrogram.session.auth").setLevel(logging.CRITICAL)
 logging.getLogger("pyrogram.session.session").setLevel(logging.CRITICAL)
 
 LOGS = logging.getLogger(__name__)
+
+
+async def main():
+    await call_py.start()
+    print(
+        """
+    ------------------
+   | Geez-Pyro Started! |
+    ------------------
+"""
+    )
+    await idle()
 
 
 def LOGGER(name: str) -> logging.Logger:
@@ -130,3 +143,7 @@ if STRING_SESSION10:
    clients.append(client10)
 
 client = [client for client in[STRING_SESSION1, STRING_SESSION2, STRING_SESSION3, STRING_SESSION4, STRING_SESSION5]if client]
+
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
