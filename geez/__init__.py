@@ -2,7 +2,6 @@ import logging
 import time
 import asyncio
 import asyncio
-from pytgcalls import idle
 
 from pyrogram import Client
 from config import API_ID, API_HASH, SUDO_USERS, OWNER_ID, BOT_TOKEN, STRING_SESSION1, STRING_SESSION2, STRING_SESSION3, STRING_SESSION4, STRING_SESSION5, STRING_SESSION6, STRING_SESSION7, STRING_SESSION8, STRING_SESSION9, STRING_SESSION10, BOTLOG_CHATID
@@ -11,7 +10,7 @@ from datetime import datetime
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from aiohttp import ClientSession
 from logging.handlers import RotatingFileHandler
-from pytgcalls import PyTgCalls
+from pytgcalls import GroupCallFactory
 
 StartTime = time.time()
 START_TIME = datetime.now()
@@ -130,4 +129,6 @@ if STRING_SESSION10:
    clients.append(client10)
 
 client = [client for client in[STRING_SESSION1, STRING_SESSION2, STRING_SESSION3, STRING_SESSION4, STRING_SESSION5]if client]
-
+for client in clients:
+    if not hasattr(client, "group_call"):
+        setattr(client, "group_call", GroupCallFactory(client).get_group_call())
