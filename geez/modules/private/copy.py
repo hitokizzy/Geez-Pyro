@@ -3,7 +3,6 @@ from pyrogram.types import *
 from pyrogram import *
 from pyrogram import Client as gez
 from pyrogram import Client
-from geez.helper.cmd import *
 from geez.helper.basic import *
 from geez.helper.PyroHelpers import *
 from geez.helper.misc import *
