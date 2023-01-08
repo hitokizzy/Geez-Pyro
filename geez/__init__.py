@@ -1,13 +1,18 @@
-import logging
-import time
-import asyncio
 from pyrogram import Client
+import asyncio
+import logging
+import sys
+import time
+from datetime import datetime
+from logging.handlers import RotatingFileHandler
+from typing import Any, Dict
+from aiohttp import ClientSession
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from gpytranslate import Translator
 from config import *
 from datetime import datetime
-
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
+import time
 from aiohttp import ClientSession
-from logging.handlers import RotatingFileHandler
 from pytgcalls import GroupCallFactory
 
 StartTime = time.time()
