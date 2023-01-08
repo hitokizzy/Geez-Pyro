@@ -6,7 +6,6 @@ from pyrogram.types import *
 from pyrogram import Client as gez
 from pyrogram import Client
 from base64 import b64decode as who
-from geez.helper.cmd import *
 from geez.helper.basic import *
 from geez.helper.PyroHelpers import *
 from geez.modules.help import *
