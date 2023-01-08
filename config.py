@@ -42,5 +42,5 @@ contact_filter = filters.create(
     or message.outgoing
 )
 
-bot = Client(STRING_SESSION1, API_ID, API_HASH, plugins=dict(root="MusicUserbot"))
+bot = Client(STRING_SESSION1, API_ID, API_HASH, plugins=dict(root="geez"))
 call_py = PyTgCalls(bot)
