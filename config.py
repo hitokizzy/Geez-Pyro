@@ -31,7 +31,7 @@ GIT_TOKEN = getenv("GIT_TOKEN") #personal access token
 REPO_URL = getenv("REPO_URL", "https://github.com/hitokizzy/Geez-Pyro")
 BRANCH = getenv("BRANCH", "main") #don't change
 CMD_HANDLER = getenv("CMD_HANDLER", ".")
-
+BOTLOG_CHATID = LOG_GROUP
 HEROKU_API_KEY = getenv("HEROKU_API_KEY", None)
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME", None)
 
