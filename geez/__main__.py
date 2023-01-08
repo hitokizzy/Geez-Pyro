@@ -29,7 +29,7 @@ async def start_bot():
             await join(cli)
             print(f"Started {ex.first_name} ✔ ")
             ids.append(ex.id)
-            await cli.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, CMD_HANDLER))
+            await cli.send_message(LOG_GROUP, MSG_ON.format(BOT_VER, CMD_HANDLER))
         except Exception as e:
             print(f"{e}")
     await idle()
