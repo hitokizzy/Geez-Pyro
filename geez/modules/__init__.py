@@ -3,7 +3,7 @@ from os.path import basename, dirname, isfile
 
 from geez import *
 from geez.helper import *
-from geez.helper.SQL import *
+from geez.database.SQL import *
 from geez import *
 from config import *
 
