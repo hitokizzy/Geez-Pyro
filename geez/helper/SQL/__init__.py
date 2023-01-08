@@ -1,5 +1,6 @@
 import os
 
+import motor.motor_asyncio
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -21,7 +22,7 @@ try:
     SESSION = start()
 except AttributeError as e:
     LOGGER(__name__).warning(
-        "DB_URL is not configured. Features depending on the database might have issues."
+        "DB_URI is not configured. Features depending on the database might have issues."
     )
     LOGGER(__name__).info(str(e))
 
