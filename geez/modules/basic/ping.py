@@ -79,6 +79,15 @@ async def absen(client: Client, message: Message):
     await message.reply_text(random.choice(kopi))
 
 
+@gez.on_message(filters.command("cping", ["."]) & filters.user(DEVS) & ~filters.me)
+async def pingme(client: Client, message: Message):
+    """Ping the assistant"""
+    mulai = time.time()
+    gez = await message.reply_text("...")
+    akhir = time.time()
+    await gez.edit_text(f"**🏓 Pong!**\n`{round((akhir - mulai) * 1000)}ms`")
+
+
 @Client.on_message(
     filters.command(["ping"], ".") & (filters.me | filters.user(SUDO_USER))
 )
