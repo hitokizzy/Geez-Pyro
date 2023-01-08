@@ -20,6 +20,21 @@ MSG_ON = """
 
 async def start_bot():
     await app.start()
+    print("STARTING UBOT CLIENT")
+    await bot.start()
+    print("STARTING PYTGCALLS CLIENT")
+    await call_py.start()
+    print(
+        """
+    ------------------------
+   | Geez-Pyro Actived! |
+    ------------------------
+"""
+    )
+    await idle()
+    print("STOPPING USERBOT")
+    await bot.stop()
+    
     print("LOG: Founded Bot token Booting..")
     for all_module in ALL_MODULES:
         importlib.import_module("geez.modules" + all_module)
@@ -35,6 +50,22 @@ async def start_bot():
         except Exception as e:
             print(f"{e}")
     await idle()
+    
+async def main():
+    print("STARTING UBOT CLIENT")
+    await bot.start()
+    print("STARTING PYTGCALLS CLIENT")
+    await call_py.start()
+    print(
+        """
+    ------------------------
+   | Geez-Pyro Actived! |
+    ------------------------
+"""
+    )
+    await idle()
+    print("STOPPING USERBOT")
+    await bot.stop()
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(start_bot())
