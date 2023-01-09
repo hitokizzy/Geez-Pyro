@@ -26,6 +26,8 @@ ids = []
 SUDO_USERS.append(OWNER_ID)
 aiosession = ClientSession()
 
+LOOP = asyncio.get_event_loop()
+
 TEMP_SETTINGS: Dict[Any, Any] = {}
 TEMP_SETTINGS["PM_COUNT"] = {}
 TEMP_SETTINGS["PM_LAST_MSG"] = {}
