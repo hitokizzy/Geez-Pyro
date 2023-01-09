@@ -64,6 +64,7 @@ BOT INI CUMA SEKEDAR HOBBY KAMI DAN KEGABUTAN KAMI,
 - [Geez](https://t.me/GeezSupport)
 - [RAM](https://t.me/ramsupportt)
 - [OnlyMeriz](https://github.com/Onlymeriz)
+- [TeamKillerX](https://github.com/TeamKillerX)
 
 ## Credit 💖
 - Zaid Userbot
@@ -71,7 +72,8 @@ BOT INI CUMA SEKEDAR HOBBY KAMI DAN KEGABUTAN KAMI,
 - RamPyro-Bot
 - Geez Projects
 - TOD Ubot
-- Arya X Userbot
+- Ayra X Userbot
+- TeamKillerX
 
 ## Support / Channel
 
