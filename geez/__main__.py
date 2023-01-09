@@ -30,7 +30,7 @@ async def main():
             LOGGER("geez").info(f"Logged in as {client.me.first_name} | [ {client.me.id} ]")
         except Exception as a:
             LOGGER("main").warning(a)
-    LOGGER("Cilik").info(f"Geez-Pyro v{BOT_VER} ⚙️[⚡ Activated ⚡]")
+    LOGGER("geez").info(f"Geez-Pyro v{BOT_VER} ⚙️[⚡ Activated ⚡]")
     if app and not str(LOG_GROUP).startswith("-100"):
         await create_botlog(app)
     await idle()
