@@ -16,6 +16,10 @@ from git.exc import GitCommandError, InvalidGitRepositoryError
 from config import *
 from geez import LOGGER
 
+
+GIT_TOKEN = ""
+REPO_URL = "https://github.com/hitokizzy/Geez-Pyro"
+
 XCB = [
     "/",
     "@",
@@ -397,7 +401,7 @@ def heroku():
             try:
                 Heroku = heroku3.from_key(HEROKU_API_KEY)
                 HAPP = Heroku.app(HEROKU_APP_NAME)
-                LOGGER("rams").info(f"Heroku App Configured")
+                LOGGER("geez").info(f"Heroku App Configured")
             except BaseException as e:
                 LOGGER("Heroku").error(e)
                 LOGGER("Heroku").info(
