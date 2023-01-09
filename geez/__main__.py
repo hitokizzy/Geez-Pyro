@@ -15,7 +15,7 @@ MSG_ON = """
 
 
 async def main():
-    for for client in clients:
+    for client in clients:
         try:
             await client.start()
             client.me = await client.get_me()
