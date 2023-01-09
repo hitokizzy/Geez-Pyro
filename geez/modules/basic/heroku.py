@@ -13,7 +13,7 @@ from geez.helper.basic import edit_or_reply
 from geez.helper.misc import HAPP, in_heroku
 from geez.utils.misc import restart
 
-from .help import add_command_help
+from geez.modules.help import add_command_help
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
