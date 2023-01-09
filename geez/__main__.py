@@ -1,37 +1,45 @@
-import asyncio
-import importlib
+from pyrogram import idle
 from uvloop import install
-from pyrogram import Client, idle
-from geez.helper import join
-from geez.modules import ALL_MODULES
-from geez import clients, ids, app
-from geez.helper.error import *
-from geez.helper.misc import heroku
-from config import *
+
+from geez import *
+from geez.helper.misc import create_botlog, git, heroku
+from config import BOT_VER
+
+MSG_ON = """
+🔥 **Geez-Pyro** 🔥
+╼┅━━━━━━━━━━╍━━━━━━━━━━┅╾
+🤖 **Userbot Version -** `{}`
+⌨️ **Ketik** `{}alive` **untuk Mengecek Bot**
+╼┅━━━━━━━━━━╍━━━━━━━━━━┅╾
+"""
 
 
-async def start_bot():
-    await app.start()
-    print("LOG: Mendirikan Bot token Booting..")
-    for all_module in ALL_MODULES:
-        importlib.import_module("geez.modules" + all_module)
-        print(f"Successfully Imported {all_module} 🛠️")
-    for cli in clients:
+async def main():
+    for for client in clients:
         try:
-            await cli.start()
-            ex = await cli.get_me()
-            await join(cli)
+            await client.start()
+            client.me = await client.get_me()
+            await client.join_chat("ramsupportt")
+            await client.join_chat("GeezSupport")
+            await client.join_chat("Geezprojectt")
+            await client.join_chat("userbotch")
             try:
-                await cli.send_photo(LOG_GROUP, photo=LOG_ALIVE, caption=ALIVE_ONLINE)
+                await client.send_message(LOG_GROUP, MSG_ON.format(BOT_VER))
             except BaseException:
                 pass
-            print(f"Started {ex.first_name} 🛠️")
-            ids.append(ex.id)
-        except Exception as e:
-            print(f"{e}")
+            LOGGER("geez").info(f"Logged in as {client.me.first_name} | [ {client.me.id} ]")
+        except Exception as a:
+            LOGGER("main").warning(a)
+    LOGGER("Cilik").info(f"Geez-Pyro v{BOT_VER} ⚙️[⚡ Activated ⚡]")
+    if app and not str(LOG_GROUP).startswith("-100"):
+        await create_botlog(app)
     await idle()
+    await aiosession.close()
 
-loop = asyncio.get_event_loop()
-install()
-heroku()
-loop.run_until_complete(start_bot())
+
+if __name__ == "__main__":
+    LOGGER("geez").info("Starting Geez-Pyro")
+    install()
+    git()
+    heroku()
+    LOOP.run_until_complete(main())
