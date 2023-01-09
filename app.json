@@ -37,7 +37,7 @@
             "required": true,
             "value": ""
         },
-        "BOTLOG_CHATID": {
+        "LOG_GROUP": {
             "description": "Group publik untuk log botnya",
             "required": true,
             "value": "-100"
