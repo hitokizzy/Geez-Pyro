@@ -1,10 +1,12 @@
 import asyncio
 import importlib
+from uvloop import install
 from pyrogram import Client, idle
 from geez.helper import join
 from geez.modules import ALL_MODULES
 from geez import clients, ids, app
 from geez.helper.error import *
+from geez.helper.misc import heroku
 from config import *
 
 
@@ -30,4 +32,6 @@ async def start_bot():
     await idle()
 
 loop = asyncio.get_event_loop()
+install()
+heroku()
 loop.run_until_complete(start_bot())
