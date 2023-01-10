@@ -6,7 +6,7 @@ from geez.helper import join
 from geez.modules import ALL_MODULES
 from geez import clients, ids, app
 from geez.helper.error import *
-from geez.helper.misc import heroku
+from geez.helper.misc import heroku, git
 from config import *
 from geez import LOGGER
 
