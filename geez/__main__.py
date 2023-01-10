@@ -30,8 +30,12 @@ async def start_bot():
         except Exception as e:
             print(f"{e}")
     await idle()
+    await aiosession.close()
 
-loop = asyncio.get_event_loop()
-install()
-heroku()
-loop.run_until_complete(start_bot())
+
+if __name__ == "__main__":
+    LOGGER("Geez").info("Geez Pyro Diaktifkan")
+    install()
+    git()
+    heroku()
+    loop.run_until_complete(start_bot())
