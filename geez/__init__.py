@@ -22,11 +22,8 @@ SUDO_USER = SUDO_USERS
 clients = []
 ids = []
 
-
 SUDO_USERS.append(OWNER_ID)
 aiosession = ClientSession()
-
-LOOP = asyncio.get_event_loop()
 
 TEMP_SETTINGS: Dict[Any, Any] = {}
 TEMP_SETTINGS["PM_COUNT"] = {}
@@ -135,3 +132,5 @@ client = [client for client in[STRING_SESSION1, STRING_SESSION2, STRING_SESSION3
 for client in clients:
     if not hasattr(client, "group_call"):
         setattr(client, "group_call", GroupCallFactory(client).get_group_call())
+        
+loop = asyncio.get_event_loop()
