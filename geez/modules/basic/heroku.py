@@ -17,11 +17,11 @@ from geez.modules.help import add_command_help
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-@Client.on_message(filters.command("setvar", CMD_HANDLER) & filters.me)
+@Client.on_message(filters.command("setvar", ".") & filters.me)
 async def set_var(client: Client, message: Message):
     if len(message.command) < 3:
         return await edit_or_reply(
-            message, f"<b>Usage:</b> {CMD_HANDLER}setvar [Var Name] [Var Value]"
+            message, f"<b>Usage:</b> {"."}setvar [Var Name] [Var Value]"
         )
     Geez = await edit_or_reply(message, "`Processing...`")
     to_set = message.text.split(None, 2)[1].strip()
@@ -49,11 +49,11 @@ async def set_var(client: Client, message: Message):
         restart()
 
 
-@Client.on_message(filters.command("getvar", CMD_HANDLER) & filters.me)
+@Client.on_message(filters.command("getvar", ".") & filters.me)
 async def varget_(client: Client, message: Message):
     if len(message.command) != 2:
         return await edit_or_reply(
-            message, f"<b>Usage:</b> {CMD_HANDLER}getvar [Var Name]"
+            message, f"<b>Usage:</b> {"."}getvar [Var Name]"
         )
     Geez = await edit_or_reply(message, "`Processing...`")
     check_var = message.text.split(None, 2)[1]
@@ -80,10 +80,10 @@ async def varget_(client: Client, message: Message):
             return await Geez.edit(f"<b>{check_var}:</b> <code>{str(output)}</code>")
 
 
-@Client.on_message(filters.command("delvar", CMD_HANDLER) & filters.me)
+@Client.on_message(filters.command("delvar", ".") & filters.me)
 async def vardel_(client: Client, message: Message):
     if len(message.command) != 2:
-        return await message.edit(f"<b>Usage:</b> {CMD_HANDLER}delvar [Var Name]")
+        return await message.edit(f"<b>Usage:</b> {"."}delvar [Var Name]")
     Geez = await edit_or_reply(message, "`Processing...`")
     check_var = message.text.split(None, 2)[1]
     if await in_heroku():
@@ -109,7 +109,7 @@ async def vardel_(client: Client, message: Message):
         restart()
 
 
-@Client.on_message(filters.command("usage", CMD_HANDLER) & filters.me)
+@Client.on_message(filters.command("usage", ".") & filters.me)
 async def usage_heroku(client: Client, message: Message):
     ### Credits CatUserbot
     if await in_heroku():
@@ -175,7 +175,7 @@ async def usage_heroku(client: Client, message: Message):
     return await dyno.edit(text)
 
 
-@Client.on_message(filters.command("usange", CMD_HANDLER) & filters.me)
+@Client.on_message(filters.command("usange", ".") & filters.me)
 async def usange_heroku(client: Client, message: Message):
     xx = await edit_or_reply(message, "`Processing...`")
     await xx.edit(
@@ -193,13 +193,13 @@ async def usange_heroku(client: Client, message: Message):
 
 
 add_command_help(
-    "heroku",
+    "Heroku",
     [
         ["setvar", "Untuk mengatur variabel config userbot."],
         ["delvar", "Untuk menghapus variabel config userbot."],
         ["getvar", "Untuk melihat variabel config userbot."],
         [
-            f"usage atau {CMD_HANDLER}dyno",
+            f"usage atau {"."}dyno",
             "Untuk mengecheck kouta dyno heroku.",
         ],
         [
