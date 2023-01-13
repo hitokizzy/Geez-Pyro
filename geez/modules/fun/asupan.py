@@ -11,6 +11,7 @@ from geez.modules.help import *
 from geez.helper.adminHelpers import *
 from geez.helper.misc import *
 from geez.helper.goblok import *
+from geez.helper.dev import *
 from config import *
 
 caption = f"**UPLOADED BY** [Geez-Pyro](https://t.me/{SUPPORT})"
