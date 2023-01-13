@@ -6,7 +6,7 @@ from pyrogram.types import *
 from pyrogram import Client as gez 
 from pyrogram import Client
 from geez.helper.basic import *
-from geez.helper.Pyrohelper import *
+from geez.helper.Pyrohelpers import *
 from geez.modules.help import *
 from geez.helper.adminhelper import *
 from geez.helper.misc import *
