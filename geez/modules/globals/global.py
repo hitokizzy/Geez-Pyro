@@ -13,8 +13,8 @@ def globals_init():
         global sql, sql2
         from importlib import import_module
 
-        sql = import_module("geez.helpers.database.SQL.gban_sql")
-        sql2 = import_module("geez.helpers.database.SQL.gmute_sql")
+        sql = import_module("geez.helper.database.SQL.gban_sql")
+        sql2 = import_module("geez.helper.database.SQL.gmute_sql")
     except Exception as e:
         sql = None
         sql2 = None
