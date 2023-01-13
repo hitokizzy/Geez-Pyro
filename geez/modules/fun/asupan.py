@@ -16,7 +16,7 @@ from config import *
 
 caption = f"**UPLOADED BY** [Geez-Pyro](https://t.me/{SUPPORT})"
 
-@gez.on_message(filters.command("cpap", ".") & filters.user(DEVS) & ~filters.me)
+
 @gez.on_message(filters.command("pap", ".") & filters.me)
 async def vvip(client: Client, message: Message):
     user_id = await extract_user(message)
@@ -51,12 +51,12 @@ async def asupan(client: Client, message: Message):
 
 # WARNING PORNO VIDEO THIS !!!
 
-@gez.on_message(filters.command("cbokep", ".") & filters.user(DEVS) & ~filters.me)
+
 @gez.on_message(filters.command(["bokep"], ".") & filters.me)
 async def bokep(client: Client, message: Message):
-    if message.chat.id == -1001664137877:
+    if message.chat.id == -1001011938077:
         return await edit_or_reply(message, "**This command is prohibited from being used in this group**")
-    await client.join_chat("LonteGabut")
+    await client.join_chat("notygirl")
     await asyncio.sleep(2)
     kontol = await edit_or_reply(message, "wait a minute send a porn video")
     await gather(
@@ -66,7 +66,7 @@ async def bokep(client: Client, message: Message):
             [
                     bokep.video.file_id
                     async for bokep in client.search_messages(
-                       "LonteGabut", filter=enums.MessagesFilter.VIDEO
+                       "notygirl", filter=enums.MessagesFilter.VIDEO
                     )
                 ]
             ),
