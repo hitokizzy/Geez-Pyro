@@ -8,7 +8,7 @@ from geez import clients, ids, app
 from geez.helper.error import *
 from geez.helper.misc import heroku, git
 from config import *
-from geez import LOGGER, loop
+from geez import *
 
 async def start_bot():
     await app.start()
