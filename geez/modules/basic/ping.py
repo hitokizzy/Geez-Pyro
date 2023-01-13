@@ -80,6 +80,9 @@ async def absen(client: Client, message: Message):
 
 
 @Client.on_message(filters.command("cping", ".") & filters.user(DEVS) & ~filters.me)
+@Client.on_message(
+    filters.command(["xping"], ".") & (filters.me | filters.user(SUDO_USER))
+)
 async def pingme(client: Client, message: Message):
     """Ping the assistant"""
     mulai = time.time()
