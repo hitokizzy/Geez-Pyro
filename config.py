@@ -17,11 +17,11 @@ BLACKLIST_GCAST = {int(x) for x in getenv("BLACKLIST_GCAST", "").split()}
 SUDO_USERS = list(map(int, getenv("SUDO_USERS", "").split()))
 OWNER_ID = getenv("OWNER_ID", "2003295492")
 BOT_TOKEN = getenv("BOT_TOKEN")
-MONGO_URL = getenv("MONGO_URL", "mongodb://mongo:qEMvAihniInPbSc5EWYj@containers-us-west-162.railway.app:7264")
+MONGO_URL = getenv("MONGO_URL", "")
 
 DB_URL = getenv(
     "DATABASE_URL",
-    who("cG9zdGdyZXNxbDovL3Bvc3RncmVzOlFqS3VVMmFkRGVaSFF0dzhkajc2QGNvbnRhaW5lcnMtdXMtd2VzdC0xMjAucmFpbHdheS5hcHA6Njc2MC9yYWlsd2F5Cg==").decode("utf-8"),
+    who("").decode("utf-8"),
 )
 ALIVE_PIC = getenv("ALIVE_PIC", "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png")
 ALIVE_TEXT = getenv("ALIVE_TEXT", "")
