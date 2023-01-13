@@ -8,7 +8,7 @@ from pyrogram import Client
 from geez.helper.basic import *
 from geez.helper.PyroHelpers import *
 from geez.modules.help import *
-from geez.helper.adminhelper import *
+from geez.helper.adminHelpers import *
 from geez.helper.misc import *
 from geez.helper.goblok import *
 from config import *
