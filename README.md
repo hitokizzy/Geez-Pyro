@@ -39,7 +39,7 @@
 
 ```console
  $ screen -S Geez
- $ bash startgeez
+ $ python3 -m Geez
 ```
 
 ## Heroku Deploy!
@@ -64,7 +64,6 @@ BOT INI CUMA SEKEDAR HOBBY KAMI DAN KEGABUTAN KAMI,
 - [Geez](https://t.me/GeezSupport)
 - [RAM](https://t.me/ramsupportt)
 - [OnlyMeriz](https://github.com/Onlymeriz)
-- [TeamKillerX](https://github.com/TeamKillerX)
 
 ## Credit 💖
 - Zaid Userbot
@@ -73,7 +72,6 @@ BOT INI CUMA SEKEDAR HOBBY KAMI DAN KEGABUTAN KAMI,
 - Geez Projects
 - TOD Ubot
 - Ayra X Userbot
-- TeamKillerX
 
 ## Support / Channel
 
