@@ -7,7 +7,7 @@
     "stack": "container",
     "env": {
         "STRING_SESSION1": {
-            "description": "fill with the telethon session string from @geezramstringbot",
+            "description": "fill with the pyrogram V2 session string from @geezramstringbot",
             "required": true
         },
         "MONGO_URL": {

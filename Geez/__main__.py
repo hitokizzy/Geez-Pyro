@@ -25,13 +25,13 @@ async def main():
     for all_module in ALL_MODULES:
         importlib.import_module("Geez.modules" + all_module)
         print(f"Successfully Imported {all_module} ")
-    for bot in bots:
+    for ain in bots:
         try:
-            await bot.start()
-            ex = await bot.get_me()
-            await join(bot)
+            await ain.start()
+            ex = await ain.get_me()
+            await join(ain)
             try:
-                await bot.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, CMD_HNDLR, gver))
+                await ain.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, CMD_HNDLR, gver))
             except BaseException:
                 pass
             print(f"Started as {ex.first_name} | {ex.id} ")

@@ -9,10 +9,9 @@
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez & Ram Team
 import asyncio
-
 from pyrogram import Client, filters
 from pyrogram.types import Message 
-
+from pyrogram.errors import FloodWait
 from Geez.modules.basic import add_command_help, DEVS
 
 @Client.on_message(filters.command("gdel", ["."]) & filters.user(DEVS) & ~filters.me)
