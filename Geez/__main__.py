@@ -7,6 +7,7 @@ from Geez.modules import ALL_MODULES
 from Geez import BOTLOG_CHATID, LOGGER, LOOP, aiosession, bot1, bots, app, ids
 from geezlibs import join
 from geezlibs import BOT_VER, __version__ as gver
+
 MSG_ON = """
 **Geez Pyro Userbot**
 ╼┅━━━━━━━━━━╍━━━━━━━━━━┅╾
@@ -25,13 +26,13 @@ async def main():
     for all_module in ALL_MODULES:
         importlib.import_module("Geez.modules" + all_module)
         print(f"Successfully Imported {all_module} ")
-    for ain in bots:
+    for bot in bots:
         try:
-            await ain.start()
-            ex = await ain.get_me()
-            await join(ain)
+            await bot.start()
+            ex = await bot.get_me()
+            await join(bot)
             try:
-                await ain.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, CMD_HNDLR, gver))
+                await bot.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, CMD_HNDLR, gver))
             except BaseException:
                 pass
             print(f"Started as {ex.first_name} | {ex.id} ")

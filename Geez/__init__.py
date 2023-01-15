@@ -81,10 +81,10 @@ if not BOT_TOKEN:
    LOGGER(__name__).error("WARNING: BOT TOKEN TIDAK DITEMUKAN, SHUTDOWN BOT")
    sys.exit
 
-if BOTLOG_CHATID:
-    BOTLOG_CHATID = BOTLOG_CHATID
-else:
-    BOTLOG_CHATID = "me"
+#if BOTLOG_CHATID:
+#   BOTLOG_CHATID = BOTLOG_CHATID
+#else:
+#   BOTLOG_CHATID = "me"
 
 LOOP = asyncio.get_event_loop()
 
