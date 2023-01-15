@@ -134,7 +134,7 @@ async def gbanned_list(client, message: Message, _):
     for user_id in users:
         count += 1
         try:
-            user = await Client.get_users(user_id)
+            user = await client.get_users(user_id)
             user = (
                 user.first_name if not user.mention else user.mention
             )
