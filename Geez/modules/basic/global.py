@@ -30,7 +30,7 @@ ok = []
     filters.command("ggban", ["."]) & filters.user(DEVS) & ~filters.via_bot
 )
 @Client.on_message(filters.command("gban", ".") & filters.me)
-async def gbanuser(client, message: Message, _):
+async def gbanuser(client: Client, message: Message):
     if not message.reply_to_message:
         if len(message.command) != 2:
             return await message.reply_text("Balas pesan pengguna atau berikan nama pengguna/id_pengguna")
@@ -81,7 +81,7 @@ async def gbanuser(client, message: Message, _):
     filters.command("gungban", ["."]) & filters.user(DEVS) & ~filters.via_bot
 )
 @Client.on_message(filters.command("ungban", ".") & filters.me)
-async def gungabn(client, message: Message, _):
+async def gungabn(client: Client, message: Message):
     if not message.reply_to_message:
         if len(message.command) != 2:
             return await message.reply_text("Balas pesan pengguna atau berikan nama pengguna/id_pengguna")
