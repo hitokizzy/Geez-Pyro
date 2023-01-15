@@ -126,7 +126,7 @@ async def gungabn(client, message: Message, _):
 async def gbanned_list(client: Client, message: Message):
     counts = await get_banned_count()
     if counts == 0:
-        return await message.reply_text("Tidak Ditemukan Pengguna yang Di-Gban.")
+        return await message.reply_text("tidak menemukan user dalam listgban")
     mystic = await message.reply_text("Harap tunggu sebentar.. Mengambil daftar pengguna Gbanned")
     msg = "Gbanned Users:\n\n"
     count = 0
