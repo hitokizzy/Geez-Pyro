@@ -32,12 +32,12 @@ from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 from pyrogram import Client, filters
 from pyrogram.types import Message
-
+from geezlibs import DEVS
 from config import GIT_TOKEN, REPO_URL, BRANCH
 HEROKU_API_KEY = getenv("HEROKU_API_KEY", None)
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME", None)
 
-from Geez.modules.basic import add_command_help, DEVS
+from Geez.modules.basic import add_command_help
 HAPP = None
 
 
