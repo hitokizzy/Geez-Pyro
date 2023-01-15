@@ -29,7 +29,9 @@
  $ sudo apt-get upgrade
  $ git clone https://github.com/hitokizzy/Geez-Pyro
  $ cd Geez-Pyro
- $ pip3 install -U-r requirements.txt
+ $ python3 -m venv venv
+ $ source venv/bin/act*
+ $ pip3 install -U-r req*
  $ cp sample.env .env
 ```
 
