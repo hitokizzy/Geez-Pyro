@@ -13,7 +13,7 @@ from pyrogram.errors import FloodWait
 from pyrogram import Client, errors, filters
 from pyrogram.types import ChatPermissions, Message
 from geezlibs import DEVS, BL_GEEZ
-from geezlibs.geez.helper.PyroHelpers import get_ub_chats
+from geezlibs.geez.database import gmutedb as Gmute
 from geezlibs.geez.database import (add_banned_user,
                                        get_banned_count,
                                        get_banned_users,
