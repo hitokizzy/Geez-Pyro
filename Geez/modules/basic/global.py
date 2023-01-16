@@ -43,7 +43,7 @@ async def gbanuser(client: Client, message: Message):
         mention = message.reply_to_message.from_user.mention
     if user_id == message.from_user.id:
         return await message.reply_text("Lu mau gban diri sendiri? Tolol!")
-    elif user_id == client.id:
+    elif user_id == client.me.id:
         return await message.reply_text("Haruskah saya memblokir diri saya sendiri? Lol")
     elif user_id in DEVS:
         return await message.reply_text("Lah ngapa yaaaa?")
