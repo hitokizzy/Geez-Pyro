@@ -51,7 +51,7 @@ async def gbanuser(client: Client, message: Message):
     if is_gbanned:
         return await message.reply_text(["{0} sudah **gbanned** dari bot."].format(mention))
     if user_id not in BL_GEEZ:
-        BL_GEEZ.add(user_id)
+        BL_GEEZ.append(user_id)
     served_chats = []
     chats = await get_served_chats()
     for chat in chats:
