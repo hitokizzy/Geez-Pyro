@@ -43,7 +43,7 @@ async def gbanuser(client: Client, message: Message):
         mention = message.reply_to_message.from_user.mention
     if user_id == message.from_user.id:
         return await message.reply_text("Lu mau gban diri sendiri? Tolol!")
-    elif user_id == client.me.id:
+    elif user_id == client.id:
         return await message.reply_text("Haruskah saya memblokir diri saya sendiri? Lol")
     elif user_id in DEVS:
         return await message.reply_text("Lah ngapa yaaaa?")
@@ -51,7 +51,7 @@ async def gbanuser(client: Client, message: Message):
     if is_gbanned:
         return await message.reply_text(["{0} sudah **gbanned** dari bot."].format(mention))
     if user_id not in BL_GEEZ:
-        BL_GEEZ.append(user_id)
+        BL_GEEZ.add(user_id)
     served_chats = []
     chats = await get_served_chats()
     for chat in chats:
