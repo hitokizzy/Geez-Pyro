@@ -29,7 +29,7 @@ from pyrogram.types import Message
 from config import BOTLOG_CHATID, HEROKU_API_KEY, HEROKU_APP_NAME, BRANCH, REPO_URL
 from config import CMD_HNDLR as cmds
 from Geez import SUDO_USER, Client
-
+from Geez.modules.basic import add_command_help
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -51,7 +51,9 @@ XCB = [
 ]
 
 
-@Client.on_message(filters.command("logs", cmds) & filters.user(SUDO_USER))
+@Client.on_message(
+    filters.command(["logs"], ".") & (filters.me | filters.user(SUDO_USER))
+)
 async def log_(client, message):
     if await is_heroku():
         if HEROKU_API_KEY == "" and HEROKU_APP_NAME == "":
@@ -82,9 +84,11 @@ async def log_(client, message):
         return await message.reply_text(data)
 
 
-@Client.on_message(filters.command("get_var", cmds) & filters.user(SUDO_USER))
-async def varget_(client, message):
-    usage = "**Usage:**\n/get_var [Var Name]"
+@Client.on_message(
+    filters.command(["getvar"], ".") & (filters.me | filters.user(SUDO_USER))
+)
+async def varget(client: Client, message: Message):
+    usage = "**Usage:**\n/getvar [Var Name]"
     if len(message.command) != 2:
         return await message.reply_text(usage)
     check_var = message.text.split(None, 2)[1]
@@ -124,9 +128,11 @@ async def varget_(client, message):
             )
 
 
-@Client.on_message(filters.command("del_var", cmds) & filters.user(SUDO_USER))
-async def vardel_(client, message):
-    usage = "**Usage:**\n/del_var [Var Name]"
+@Client.on_message(
+    filters.command(["delvar"], ".") & (filters.me | filters.user(SUDO_USER))
+)
+async def vardel(client: Client, message: Message):
+    usage = "**Usage:**\n/delvar [Var Name]"
     if len(message.command) != 2:
         return await message.reply_text(usage)
     check_var = message.text.split(None, 2)[1]
@@ -167,9 +173,11 @@ async def vardel_(client, message):
             )
 
 
-@Client.on_message(filters.command("set_var", cmds) & filters.user(SUDO_USER))
-async def set_var(client, message):
-    usage = "**Usage:**\n/set_var [Var Name] [Var Value]"
+@Client.on_message(
+    filters.command(["setvar"], ".") & (filters.me | filters.user(SUDO_USER))
+)
+async def setvar(client: Client, message: Message):
+    usage = "**Usage:**\n/setvar [Var Name] [Var Value]"
     if len(message.command) < 3:
         return await message.reply_text(usage)
     to_set = message.text.split(None, 2)[1].strip()
@@ -207,13 +215,12 @@ async def set_var(client, message):
         output = dotenv.set_key(path, to_set, value)
         if dotenv.get_key(path, to_set):
             return await message.reply_text(
-                f"**.env Var Updation:**\n\n`{to_set}`has been updated successfully. To restart the bot touch /restart command."
+                f"**.env Var updated:**\n\n`{to_set}`has been updated successfully. To restart the bot touch /restart command."
             )
         else:
             return await message.reply_text(
-                f"**.env dəyişən əlavə edilməsi:**\n\n`{to_set}` has been added sucsessfully. To restart the bot touch /restart command."
+                f"**.env var updated:**\n\n`{to_set}` has been added sucsessfully. To restart the bot touch /restart command."
             )
-
 
 @Client.on_message(
     filters.command(["usage"], ".") & (filters.me | filters.user(SUDO_USER))
@@ -282,3 +289,13 @@ Usage:
 Remaining Quota:
   ╰┈➤Tersisa: `{hours}`**h**  `{minutes}`**m**  [`{percentage}`**%**]"""
     return await dyno.edit(text)
+
+add_command_help(
+    "Heroku",
+    [
+        ["delvar <vars>", "Delete var in Heroku/env."],
+        ["getvar <vars>", "See var in Heroku/env."],
+        ["setvar <old var> <new var>", "Set var in Heroku/env."],
+        ["usage", "See dyno usage in heroku."],
+    ],
+)
