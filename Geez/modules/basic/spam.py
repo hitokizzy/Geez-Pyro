@@ -22,6 +22,7 @@ from geezlibs.geez.database.rraid import *
 from Geez import SUDO_USER
 from pyrogram import Client, errors, filters
 from pyrogram.types import ChatPermissions, Message
+from geezlibs import BL_GCAST as GROUP
 from geezlibs.geez.helper.PyroHelpers import get_ub_chats
 from Geez.modules.basic import *
 from Geez.modules.basic.profile import extract_user, extract_user_and_reason
