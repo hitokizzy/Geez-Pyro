@@ -15,7 +15,7 @@ from pyrogram import Client, filters, enums
 from pyrogram.types import ChatPermissions, ChatPrivileges, Message
 from pyrogram import Client as gez 
 from geezlibs.geez.helper import edit_or_reply, get_text, ReplyCheck
-from Geez.helper.cmd import *
+from geezlibs.geez.helper.cmd import *
 from geezlibs import DEVS, BL_GCAST
 from Geez.modules.basic import add_command_help
 from config import *
