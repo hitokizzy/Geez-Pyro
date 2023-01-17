@@ -14,7 +14,7 @@ bs4
 googlesearch-python==1.0.1
 gitpython
 humanize
-geezlibs==1.2.2
+geezlibs==1.2.3
 httpx
 heroku3
 requests

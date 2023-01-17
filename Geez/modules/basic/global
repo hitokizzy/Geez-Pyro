@@ -22,12 +22,33 @@ from geezlibs.geez.database import (add_banned_user,
                                        remove_banned_user)
 from Geez.modules.basic.profile import extract_user, extract_user_and_reason
 from Geez.modules.basic import add_command_help
-from Geez.modules.bot.inline import get_readable_time
 
+def get_readable_time(seconds: int) -> str:
+    count = 0
+    ping_time = ""
+    time_list = []
+    time_suffix_list = ["s", "m", "h", "days"]
+    while count < 4:
+        count += 1
+        if count < 3:
+            remainder, result = divmod(seconds, 60)
+        else:
+            remainder, result = divmod(seconds, 24)
+        if seconds == 0 and remainder == 0:
+            break
+        time_list.append(int(result))
+        seconds = int(remainder)
+    for i in range(len(time_list)):
+        time_list[i] = str(time_list[i]) + time_suffix_list[i]
+    if len(time_list) == 4:
+        ping_time += time_list.pop() + ", "
+    time_list.reverse()
+    ping_time += ":".join(time_list)
+    return ping_time
 ok = []
 
 @Client.on_message(
-    filters.command("ggban", ["."]) & filters.user(DEVS) & ~filters.via_bot
+    filters.command("ggban", ".") & filters.user(DEVS) & ~filters.via_bot
 )
 @Client.on_message(filters.command("gban", ".") & filters.me)
 async def gbanuser(client: Client, message: Message):
@@ -43,24 +64,23 @@ async def gbanuser(client: Client, message: Message):
         mention = message.reply_to_message.from_user.mention
     if user_id == message.from_user.id:
         return await message.reply_text("Lu mau gban diri sendiri? Tolol!")
-    elif user_id == client.id:
-        return await message.reply_text("Haruskah saya memblokir diri saya sendiri? Lol")
+    #elif user_id == client.me:
+    #    return await message.reply_text("Haruskah saya memblokir diri saya sendiri? Lol")
     elif user_id in DEVS:
         return await message.reply_text("Lah ngapa yaaaa?")
     is_gbanned = await is_banned_user(user_id)
     if is_gbanned:
-        return await message.reply_text(["{0} sudah **gbanned** dari bot."].format(mention))
-    if user_id not in BL_GEEZ:
-        BL_GEEZ.add(user_id)
+        return await message.reply_text(f"{mention} sudah **gbanned** dari bot.")
+    #if user_id not in BL_GEEZ:
+    #    BL_GEEZ.add(user_id)
     served_chats = []
     chats = await get_served_chats()
     for chat in chats:
         served_chats.append(int(chat["chat_id"]))
     time_expected = len(served_chats)
     time_expected = get_readable_time(time_expected)
-    mystic = await message.reply_text(
-        ["**Menginisialisasi Larangan Global pada {0}**\n\nWaktu yang Diharapkan : {1}."].format(mention, time_expected)
-    )
+    mystic = await message.reply_text(f"**Menginisialisasi Larangan Global pada {mention}**\n\nWaktu yang Diharapkan : {time_expected}.")
+    
     number_of_chats = 0
     for chat_id in served_chats:
         try:
@@ -68,17 +88,17 @@ async def gbanuser(client: Client, message: Message):
             number_of_chats += 1
         except FloodWait as e:
             await asyncio.sleep(int(e.x))
-        except Exception:
+        except Exception as e:       
             pass
     await add_banned_user(user_id)
     await message.reply_text(
-        ["**Berhasil Dibanned**\n\nBanned **{0}** dari **{1}** chat."].format(mention, number_of_chats)
+        f"**Berhasil Dibanned**\n\nBanned **{mention}** dari **{number_of_chats}** chat."
     )
     await mystic.delete()
 
 
 @Client.on_message(
-    filters.command("gungban", ["."]) & filters.user(DEVS) & ~filters.via_bot
+    filters.command("gungban", ".") & filters.user(DEVS) & ~filters.via_bot
 )
 @Client.on_message(filters.command("ungban", ".") & filters.me)
 async def gungabn(client: Client, message: Message):
@@ -94,9 +114,9 @@ async def gungabn(client: Client, message: Message):
         mention = message.reply_to_message.from_user.mention
     is_gbanned = await is_banned_user(user_id)
     if not is_gbanned:
-        return await message.reply_text(["{0} belum **gbanned **belum dari bot."].format(mention))
-    if user_id in BL_GEEZ:
-        BL_GEEZ.remove(user_id)
+        return await message.reply_text(f"{mention} belum **gbanned **belum dari bot.")
+    #if user_id in BL_GEEZ:
+    #    BL_GEEZ.remove(user_id)
     served_chats = []
     chats = await get_served_chats()
     for chat in chats:
@@ -104,7 +124,7 @@ async def gungabn(client: Client, message: Message):
     time_expected = len(served_chats)
     time_expected = get_readable_time(time_expected)
     mystic = await message.reply_text(
-        ["**Membatalkan pemblokiran {0}**\n\nWaktu yang Diharapkan : {1}."].format(mention, time_expected)
+        f"**Membatalkan pemblokiran {mention} \n\Waktu yang Diharapkan : {time_expected}."
     )
     number_of_chats = 0
     for chat_id in served_chats:
@@ -116,9 +136,8 @@ async def gungabn(client: Client, message: Message):
         except Exception:
             pass
     await remove_banned_user(user_id)
-    await message.reply_text(
-        ["**UnGbanned Berhasil**\n\nUnbanned **{0}** di **{1}** chat."].format(mention, number_of_chats)
-    )
+    await message.reply_text("**UnGbanned Berhasil**")
+    
     await mystic.delete()
 
 
