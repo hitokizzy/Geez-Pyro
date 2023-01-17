@@ -134,7 +134,7 @@ async def gbanlist(client: Client, message: Message):
 
 
 add_command_help(
-    "Global",
+    "globals",
     [
         [
             "gban <reply/username/userid>",
