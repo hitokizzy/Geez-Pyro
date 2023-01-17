@@ -15,6 +15,7 @@ from pyrogram import Client, filters, enums
 from pyrogram.types import ChatPermissions, ChatPrivileges, Message
 from pyrogram import Client as gez 
 from geezlibs.geez.helper import edit_or_reply, get_text, ReplyCheck
+from Geez.helper.cmd import *
 from geezlibs import DEVS, BL_GCAST
 from Geez.modules.basic import add_command_help
 from config import *
@@ -23,8 +24,8 @@ caption = f"**UPLOADED BY** Geez | RAM"
 
 
 
-@gez.on_message(filters.command("casupan", ".") & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command(["asupan"], ".") & filters.me)
+@gez.on_message(filters.command("casupan", cmd) & filters.user(DEVS) & ~filters.me)
+@gez.on_message(filters.command(["asupan"], cmd) & filters.me)
 async def asupan(client: Client, message: Message):
     if message.chat.id in BL_GCAST:
         return await edit_or_reply(message, "**This command is prohibited from being used in this group**")
@@ -47,12 +48,12 @@ async def asupan(client: Client, message: Message):
 
 # WARNING PORNO VIDEO THIS !!!
 
-@gez.on_message(filters.command("gbokep", ".") & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command(["bokep"], ".") & filters.me)
+@gez.on_message(filters.command("gbokep", cmd) & filters.user(DEVS) & ~filters.me)
+@gez.on_message(filters.command(["bokep"], cmd) & filters.me)
 async def bokep(client: Client, message: Message):
     if message.chat.id in BL_GCAST:
         return await edit_or_reply(message, "**This command is prohibited from being used in this group**")
-    await client.join_chat("LonteGabut")
+    await client.join_chat("notygirl")
     await asyncio.sleep(2)
     kontol = await edit_or_reply(message, "wait a minute send a porn video")
     await gather(
@@ -62,7 +63,7 @@ async def bokep(client: Client, message: Message):
             [
                     bokep.video.file_id
                     async for bokep in client.search_messages(
-                       "LonteGabut", filter=enums.MessagesFilter.VIDEO
+                       "notygirl", filter=enums.MessagesFilter.VIDEO
                     )
                 ]
             ),
@@ -71,8 +72,8 @@ async def bokep(client: Client, message: Message):
     )
 
 
-@gez.on_message(filters.command("gayang", ".") & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command("ayang", [".", "-", "^", "!", "?"]) & filters.me)
+@gez.on_message(filters.command("gayang", cmd) & filters.user(DEVS) & ~filters.me)
+@gez.on_message(filters.command("ayang", cmd) & filters.me)
 async def ayang(client, message):
     yanto = await message.reply("🔎 `Search Ayang...`")
     pop = message.from_user.first_name
@@ -93,8 +94,8 @@ async def ayang(client, message):
     await yanto.delete()
 
 
-@gez.on_message(filters.command("gppcp", ".") & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command("ppcp", [".", "-", "^", "!", "?"]) & filters.me)
+@gez.on_message(filters.command("gppcp", cmd) & filters.user(DEVS) & ~filters.me)
+@gez.on_message(filters.command("ppcp", cmd) & filters.me)
 async def ppcp(client, message):
     yanto = await message.reply("🔎 `Search PP Couple...`")
     message.from_user.first_name
@@ -115,8 +116,8 @@ async def ppcp(client, message):
     await yanto.delete()
 
 
-@gez.on_message(filters.command("gppanime", ".") & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command("ppanime", [".", "-", "^", "!", "?"]) & filters.me)
+@gez.on_message(filters.command("gppanime", cmd) & filters.user(DEVS) & ~filters.me)
+@gez.on_message(filters.command("ppanime", cmd) & filters.me)
 async def ppanime(client, message):
     yanto = await message.reply("🔎 `Search PP Anime...`")
     message.from_user.first_name
