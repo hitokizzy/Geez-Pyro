@@ -11,7 +11,7 @@
 
 - PyroGram Session
 - Host (VPS atau HEROKU)
-- Python 3.8+ or 3.7
+- Python 3.9+
 - [Mongo Db](https://youtu.be/mnvjt_a5JYA)
 - OTAK
 
@@ -53,12 +53,12 @@
 
 
 ```console
-      ⚠️ WARNING FOR YOU ⚠️
-       AKUN TELEGRAM ANDA BISA AJA KE DEAK.
-   NGGA AKAN ADA PERTANGGUNGJAWABAN DARI KAMI
+⚠️ WARNING FOR YOU ⚠️
+AKUN TELEGRAM ANDA BISA AJA KE DEAK.
+NGGA AKAN ADA PERTANGGUNGJAWABAN DARI KAMI
 BOT INI CUMA SEKEDAR HOBBY KAMI DAN KEGABUTAN KAMI,
       
-      DAN SEMUA INI GRATIS !!!!!
+DAN SEMUA INI GRATIS !!!!!
 ```
 
 ## Thanks to 💖
@@ -77,7 +77,7 @@ BOT INI CUMA SEKEDAR HOBBY KAMI DAN KEGABUTAN KAMI,
 
 ## Support / Channel
 
-<p align="center">𝐒𝐮𝐩𝐩𝐨𝐫𝐭 / 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ----> </p>
+<p align="center">𝐒𝐮𝐩𝐩𝐨𝐫𝐭 ----> </p>
 
 <p align="center"><a href="https://t.me/ramsupportt"><img src="https://img.shields.io/badge/ᴛᴇʟᴇɢʀᴀᴍ-𝐒𝐮𝐩𝐩𝐨𝐫𝐭-black?&style=for-the-badge&logo=telegram" width="220" height="38.45"></a></p>
 <p align="center"><a href="https://t.me/GeezSupport"><img src="https://img.shields.io/badge/ᴛᴇʟᴇɢʀᴀᴍ-𝐒𝐮𝐩𝐩𝐨𝐫𝐭-black?&style=for-the-badge&logo=telegram" width="220" height="38.45"></a></p>
