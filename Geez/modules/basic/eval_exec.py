@@ -42,7 +42,7 @@ async def eval_func_edited(bot, message):
     await evaluation_func(bot, message)
 
 
-async def evaluation_func(bot: db_xent, message: Message):
+async def evaluation_func(bot: Client, message: Message):
     status_message = await message.reply_text("Processing ...")
     cmd = message.text.split(" ", maxsplit=1)[1]
 
@@ -125,7 +125,7 @@ async def execution_func(bot, message):
     await execution(bot, message)
 
 
-async def execution(bot: db_xent, message: Message):
+async def execution(bot: Client, message: Message):
     cmd = message.text.split(" ", maxsplit=1)[1]
 
     reply_to_id = message.id
