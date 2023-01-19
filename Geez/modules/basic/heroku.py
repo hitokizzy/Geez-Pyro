@@ -327,7 +327,7 @@ Remaining Quota:
     return await dyno.edit(text)
 
 add_command_help(
-    "Heroku",
+    "heroku",
     [
         ["delvar <vars>", "Delete var in Heroku/env."],
         ["getvar <vars>", "See var in Heroku/env."],
