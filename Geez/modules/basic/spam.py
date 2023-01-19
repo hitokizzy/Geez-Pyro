@@ -208,7 +208,7 @@ async def dmspam(spam: Client, e: Message):
 
 
 add_command_help(
-    "Spam",
+    "spam",
     [
         ["replyspam", "Reply To User\n To Roast on Someone."],
         ["dreplyspam", "To Disable Replyspam."],
