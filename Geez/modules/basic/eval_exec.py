@@ -18,11 +18,12 @@ from pyrogram import filters, Client
 from pyrogram.types import Message
 
 from geezlibs.geez.database import db_x as database
+from geezlibs.geez.helper.cmd import *
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 
 
-@db_xent.on_message(
-    filters.command("eval", ".")
+@Client.on_message(
+    filters.command("eval", cmd)
     & filters.me
     & ~filters.forwarded
     & ~filters.via_bot
@@ -31,8 +32,8 @@ async def eval_func_init(bot, message):
     await evaluation_func(bot, message)
 
 
-@db_xent.on_edited_message(
-    filters.command("eval", ".")
+@Client.on_edited_message(
+    filters.command("eval", cmd)
     & filters.me
     & ~filters.forwarded
     & ~filters.via_bot
@@ -104,8 +105,8 @@ async def aexec(code, b, m, r, d):
     return await locals()["__aexec"](b, m, r, d)
 
 
-@db_xent.on_edited_message(
-    filters.command("exec", ".")
+@Client.on_edited_message(
+    filters.command("exec", cmd)
     & filters.me
     & ~filters.forwarded
     & ~filters.via_bot
@@ -114,8 +115,8 @@ async def execution_func_edited(bot, message):
     await execution(bot, message)
 
 
-@db_xent.on_message(
-    filters.command("exec", ".")
+@Client.on_message(
+    filters.command("exec", cmd)
     & filters.me
     & ~filters.forwarded
     & ~filters.via_bot
