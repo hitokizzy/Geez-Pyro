@@ -1,12 +1,17 @@
 import importlib
+import time
 from pyrogram import idle
 from uvloop import install
-
-from config import CMD_HNDLR
-from Geez.modules import ALL_MODULES
-from Geez import BOTLOG_CHATID, LOGGER, LOOP, aiosession, bot1, bots, app, ids
 from geezlibs import join
 from geezlibs import BOT_VER, __version__ as gver
+from Geez import BOTLOG_CHATID, LOGGER, LOOP, aiosession, bot1, bots, app, ids
+from config import CMD_HNDLR, StartTime
+from Geez.modules import ALL_MODULES
+from Geez.modules.bot.inline import get_readable_time
+
+async def uptime():
+    await get_readable_time((time.time() - StartTime))
+
 
 MSG_ON = """
 **Geez Pyro Userbot**
@@ -17,7 +22,7 @@ MSG_ON = """
 ╼┅━━━━━━━━━━╍━━━━━━━━━━┅╾
 ©️2023 Geez|RAM Projects
 """
-
+MSG_BOT = (f"**Geez Pyro Assistant**\nis alive...")
 
 async def main():
     await app.start()
@@ -33,6 +38,7 @@ async def main():
             await join(bot)
             try:
                 await bot.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, CMD_HNDLR, gver))
+                await app.send_message(BOTLOG_CHATID, MSG_BOT)
             except BaseException:
                 pass
             print(f"Started as {ex.first_name} | {ex.id} ")
