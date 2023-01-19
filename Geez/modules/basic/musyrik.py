@@ -319,7 +319,7 @@ async def leave_vc_test(client, message):
     del GPC[(message.chat.id, client.me.id)]
     
 add_command_help(
-    "Musik",
+    "musik",
     [
         [
             "play",
