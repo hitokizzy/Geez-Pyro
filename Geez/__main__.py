@@ -16,7 +16,7 @@ MSG_ON = """
 ╼┅━━━━━━━━━━╍━━━━━━━━━━┅╾
 ©️2023 Geez|RAM Projects
 """
-
+BOT_ON = (f"**Geez Pyro Assistant**\n\nready and connected")
 
 async def main():
     await app.start()
@@ -32,6 +32,7 @@ async def main():
             await join(bot)
             try:
                 await bot.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, gver, CMD_HNDLR))
+                await app.send_message(BOTLOG_CHATID, BOT_ON)
             except BaseException:
                 pass
             print(f"Started as {ex.first_name} | {ex.id} ")
