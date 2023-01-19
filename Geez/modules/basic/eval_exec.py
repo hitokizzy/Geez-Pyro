@@ -14,7 +14,7 @@ import os
 import sys
 import traceback
 
-from pyrogram import filters, db_xent
+from pyrogram import filters, Client
 from pyrogram.types import Message
 
 from geezlibs.geez.database import db_x as database
