@@ -14,14 +14,14 @@ import os
 import sys
 import traceback
 
-from pyrogram import filters, Client
+from pyrogram import filters, db_xent
 from pyrogram.types import Message
 
-from geezlibs.geez.database import cli as database
+from geezlibs.geez.database import db_x as database
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 
 
-@Client.on_message(
+@db_xent.on_message(
     filters.command("eval", ".")
     & filters.me
     & ~filters.forwarded
@@ -31,7 +31,7 @@ async def eval_func_init(bot, message):
     await evaluation_func(bot, message)
 
 
-@Client.on_edited_message(
+@db_xent.on_edited_message(
     filters.command("eval", ".")
     & filters.me
     & ~filters.forwarded
@@ -41,7 +41,7 @@ async def eval_func_edited(bot, message):
     await evaluation_func(bot, message)
 
 
-async def evaluation_func(bot: Client, message: Message):
+async def evaluation_func(bot: db_xent, message: Message):
     status_message = await message.reply_text("Processing ...")
     cmd = message.text.split(" ", maxsplit=1)[1]
 
@@ -104,7 +104,7 @@ async def aexec(code, b, m, r, d):
     return await locals()["__aexec"](b, m, r, d)
 
 
-@Client.on_edited_message(
+@db_xent.on_edited_message(
     filters.command("exec", ".")
     & filters.me
     & ~filters.forwarded
@@ -114,7 +114,7 @@ async def execution_func_edited(bot, message):
     await execution(bot, message)
 
 
-@Client.on_message(
+@db_xent.on_message(
     filters.command("exec", ".")
     & filters.me
     & ~filters.forwarded
@@ -124,7 +124,7 @@ async def execution_func(bot, message):
     await execution(bot, message)
 
 
-async def execution(bot: Client, message: Message):
+async def execution(bot: db_xent, message: Message):
     cmd = message.text.split(" ", maxsplit=1)[1]
 
     reply_to_id = message.id
