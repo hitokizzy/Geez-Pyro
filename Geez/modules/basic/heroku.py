@@ -29,7 +29,7 @@ from pyrogram.types import Message
 from config import BOTLOG_CHATID, HEROKU_API_KEY, HEROKU_APP_NAME, BRANCH, REPO_URL
 from config import CMD_HNDLR as cmds
 from geezlibs.geez.helper.cmd import *
-from Geez import SUDO_USER, Client
+from Geez import *
 from Geez.modules.basic import add_command_help
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
