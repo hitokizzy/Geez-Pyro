@@ -5,12 +5,10 @@ from uvloop import install
 from geezlibs import join
 from geezlibs import BOT_VER, __version__ as gver
 from Geez import BOTLOG_CHATID, LOGGER, LOOP, aiosession, bot1, bots, app, ids
-from config import CMD_HNDLR, StartTime
+from config import CMD_HNDLR
 from Geez.modules import ALL_MODULES
-from Geez.modules.bot.inline import get_readable_time
 
-async def uptime():
-    await get_readable_time((time.time() - StartTime))
+
 
 
 MSG_ON = """
@@ -26,25 +24,25 @@ MSG_BOT = (f"**Geez Pyro Assistant**\nis alive...")
 
 async def main():
     await app.start()
-    print("LOG: Memulai Geez Pyro..")
-    print("LOG: Loading Everything.")
+    LOGGER("Geez").info("LOG: Memulai Geez Pyro..")
+    LOGGER("Geez").info("LOG: Loading Everything.")
     for all_module in ALL_MODULES:
         importlib.import_module("Geez.modules" + all_module)
-        print(f"Successfully Imported {all_module} ")
+        LOGGER("Geez").info(f"Successfully Imported {all_module} ")
     for bot in bots:
         try:
             await bot.start()
             ex = await bot.get_me()
             await join(bot)
             try:
-                await bot.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, CMD_HNDLR, gver))
+                await bot.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, gver, CMD_HNDLR))
                 await app.send_message(BOTLOG_CHATID, MSG_BOT)
             except BaseException:
                 pass
-            print(f"Started as {ex.first_name} | {ex.id} ")
+            LOGGER("Geez").info(f"Started as {ex.first_name} | {ex.id} ")
             ids.append(ex.id)
         except Exception as e:
-            print(f"{e}")
+            LOGGER("Geez").info(f"{e}")
     await idle()
     await aiosession.close()
 
