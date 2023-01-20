@@ -19,6 +19,7 @@ from pyrogram.errors import ChatAdminRequired
 from pyrogram.types import ChatPermissions, ChatPrivileges, Message
 from geezlibs import DEVS
 from geezlibs.geez.helper import *
+from geezlibs.geez.helper.cmd import *
 from Geez.modules.basic import add_command_help
 from Geez.modules.basic.profile import extract_user, extract_userid
 
