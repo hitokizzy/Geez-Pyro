@@ -15,6 +15,7 @@ import random
 import shutil
 import sys
 import dotenv
+from os import environ, execle, remove
 import heroku3
 import requests
 import urllib3
