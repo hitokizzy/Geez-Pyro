@@ -41,7 +41,7 @@ HAPP = None
 XCB = [
     "/",
     "@",
-    ".",
+    cmd,
     "com",
     ":",
     "git",
@@ -88,7 +88,7 @@ async def shutdown_bot(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.command(["logs"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["logs"], cmd) & (filters.me | filters.user(SUDO_USER))
 )
 async def log_(client, message):
     if await is_heroku():
@@ -121,7 +121,7 @@ async def log_(client, message):
 
 
 @Client.on_message(
-    filters.command(["getvar"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["getvar"], cmd) & (filters.me | filters.user(SUDO_USER))
 )
 async def varget(client: Client, message: Message):
     usage = "**Usage:**\n/getvar [Var Name]"
@@ -165,7 +165,7 @@ async def varget(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.command(["delvar"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["delvar"], cmd) & (filters.me | filters.user(SUDO_USER))
 )
 async def vardel(client: Client, message: Message):
     usage = "**Usage:**\n/delvar [Var Name]"
@@ -210,7 +210,7 @@ async def vardel(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.command(["setvar"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["setvar"], cmd) & (filters.me | filters.user(SUDO_USER))
 )
 async def setvar(client: Client, message: Message):
     usage = "**Usage:**\n/setvar [Var Name] [Var Value]"
@@ -259,7 +259,7 @@ async def setvar(client: Client, message: Message):
             )
 
 @Client.on_message(
-    filters.command(["usage"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["usage"], cmd) & (filters.me | filters.user(SUDO_USER))
 )
 async def usage_dynos(client, message):
     ### Credits CatUserbot
