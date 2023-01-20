@@ -5,6 +5,8 @@ import time
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 from typing import Any, Dict
+import motor.motor_asyncio
+from .config_var import Config
 
 from aiohttp import ClientSession
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -50,6 +52,7 @@ logging.getLogger("pyrogram.session.session").setLevel(logging.CRITICAL)
 
 LOGS = logging.getLogger(__name__)
 
+mongo_client = motor.motor_asyncio.AsyncIOMotorClient(Config.MONGO_URL)
 
 def LOGGER(name: str) -> logging.Logger:
     return logging.getLogger(name)
