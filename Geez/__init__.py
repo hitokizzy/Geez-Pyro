@@ -24,6 +24,11 @@ from config import (
     STRING_SESSION3,
     STRING_SESSION4,
     STRING_SESSION5,
+    STRING_SESSION6,
+    STRING_SESSION7,
+    STRING_SESSION8,
+    STRING_SESSION9,
+    STRING_SESSION10,
     SUDO_USERS,
     BOT_TOKEN
 )
@@ -177,8 +182,68 @@ bot5 = (
     else None
 )
 
+bot6 = (
+    Client(
+        name="bot6",
+        api_id=API_ID,
+        api_hash=API_HASH,
+        session_string=STRING_SESSION6,
+        plugins=dict(root="Geez/modules"),
+    )
+    if STRING_SESSION6
+    else None
+)
 
-bots = [bot for bot in [bot1, bot2, bot3, bot4, bot5] if bot]
+bot7 = (
+    Client(
+        name="bot7",
+        api_id=API_ID,
+        api_hash=API_HASH,
+        session_string=STRING_SESSION7,
+        plugins=dict(root="Geez/modules"),
+    )
+    if STRING_SESSION7
+    else None
+)
+
+bot8 = (
+    Client(
+        name="bot8",
+        api_id=API_ID,
+        api_hash=API_HASH,
+        session_string=STRING_SESSION8,
+        plugins=dict(root="Geez/modules"),
+    )
+    if STRING_SESSION8
+    else None
+)
+
+bot9 = (
+    Client(
+        name="bot9",
+        api_id=API_ID,
+        api_hash=API_HASH,
+        session_string=STRING_SESSION9,
+        plugins=dict(root="Geez/modules"),
+    )
+    if STRING_SESSION9
+    else None
+)
+
+bot10 = (
+    Client(
+        name="bot10",
+        api_id=API_ID,
+        api_hash=API_HASH,
+        session_string=STRING_SESSION10,
+        plugins=dict(root="Geez/modules"),
+    )
+    if STRING_SESSION10
+    else None
+)
+
+
+bots = [bot for bot in [bot1, bot2, bot3, bot4, bot5, bot6, bot7, bot8, bot9, bot10] if bot]
 
 for bot in bots:
     if not hasattr(bot, "group_call"):
