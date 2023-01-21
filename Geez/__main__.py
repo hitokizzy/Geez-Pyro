@@ -37,8 +37,8 @@ async def main():
             try:
                 await bot.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, gver, CMD_HNDLR))
                 await app.send_message(BOTLOG_CHATID, MSG_BOT)
-            except BaseException:
-                pass
+            except BaseException as a:
+                LOGGER("Geez").warning(f"{a}")
             LOGGER("Geez").info(f"Started as {ex.first_name} | {ex.id} ")
             ids.append(ex.id)
         except Exception as e:
