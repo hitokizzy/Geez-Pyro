@@ -7,7 +7,6 @@ from geezlibs import BOT_VER, __version__ as gver
 from Geez import BOTLOG_CHATID, LOGGER, LOOP, aiosession, bot1, bots, app, ids
 from config import CMD_HNDLR
 from Geez.modules import ALL_MODULES
-from telegram import ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 
 
 MSG_ON = """
