@@ -124,11 +124,11 @@ async def pingme(client: Client, message: Message):
     except:
        pass
     end = datetime.now()
+    duration = (end - start).microseconds / 1000
     await xx.edit("**Pinging..**")
     await xx.edit("**Pinging...**")
     await xx.edit("**Pinging....**")
     await asyncio.sleep(1)
-    duration = (end - start).microseconds / 1000
     await xx.edit(f"**Geez - Pyro!!🎈**\n**Pinger** : %sms\n**Bot Uptime** : {uptime}🕛" % (duration))
     
 
