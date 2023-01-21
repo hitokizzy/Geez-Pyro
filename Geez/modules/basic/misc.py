@@ -35,7 +35,7 @@ else:
         f"  ├• **Phython**: `{python_version()}`\n"
         f"  ├• **Pyrogram**: `{__version__}`\n"
         f"  └• **Geez Library**: `{gver}`\n\n"
-        f"©️2023 [Geez Support](t.me/GeezSupport)><[RAM Support](t.me/ramsupportt)\n"
+        f"©️2023 [Geez|RAM Support](t.me/GeezRam)\n"
     )
 
 @Client.on_message(
