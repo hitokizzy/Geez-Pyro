@@ -23,7 +23,7 @@ from Geez.modules.basic import add_command_help
 from Geez.modules.bot.inline import get_readable_time
 
 
-alive_logo = ALIVE_PIC or "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png"
+alive_logo = ALIVE_PIC or "https://telegra.ph/file/200355acbe58c46400f5b.png"
 
 if ALIVE_TEXT:
    txt = ALIVE_TEXT
