@@ -44,7 +44,7 @@ add_command_help(
         [".setpmmsg [message or default]", " -> Sets a custom anti-pm message."],
         [".setblockmsg [message or default]", "-> Sets custom block message."],
         [".setlimit [value]", " -> This one sets a max. message limit for unwanted PMs and when they go beyond it, bamm!."],
-        [".allow", " -> Allows a user to PM you."],
-        [".deny", " -> Denies a user to PM you."],
+        [".ok", " -> Allows a user to PM you."],
+        [".no", " -> Denies a user to PM you."],
     ],
 )

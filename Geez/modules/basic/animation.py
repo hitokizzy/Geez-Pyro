@@ -920,7 +920,6 @@ async def awikwok(client: Client, message: Message):
         "─▀───────▀▀─▀───────▀▀\n`Awkwokwokwok..`",
     )
 
-
 @Client.on_message(filters.command("y", ".") & filters.me)
 async def ysaja(client: Client, message: Message):
     await edit_or_reply(
