@@ -47,22 +47,21 @@ async def asupan(client: Client, message: Message):
 
 # WARNING PORNO VIDEO THIS !!!
 
-@gez.on_message(filters.command("gbokep", ".") & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command(["bokep"], ".") & filters.me)
-async def bokep(client: Client, message: Message):
+@gez.on_message(filters.command("gbokep", cmd) & filters.user(DEVS) & ~filters.me)
+@gez.on_message(filters.command(["bokep"], cmd) & filters.me)
+async def asupan(client: Client, message: Message):
     if message.chat.id in BL_GCAST:
         return await edit_or_reply(message, "**This command is prohibited from being used in this group**")
-    await client.join_chat("LonteGabut")
-    await asyncio.sleep(2)
-    kontol = await edit_or_reply(message, "wait a minute send a porn video")
+    gez = await edit_or_reply(message, "`Wait a moment...`")
     await gather(
-        kontol.delete(),
-        client.send_video(message.chat.id,
-        choice(
-            [
-                    bokep.video.file_id
-                    async for bokep in client.search_messages(
-                       "LonteGabut", filter=enums.MessagesFilter.VIDEO
+        gez.delete(),
+        client.send_video(
+            message.chat.id,
+            choice(
+                [
+                    asupan.video.file_id
+                    async for asupan in client.search_messages(
+                        "bahaninimah", filter=enums.MessagesFilter.VIDEO
                     )
                 ]
             ),
