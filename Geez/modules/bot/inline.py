@@ -11,13 +11,14 @@
 import time
 import traceback
 from sys import version as pyver
+from datetime import datetime
 import os
 import shlex
 import textwrap
 from typing import Tuple
 import asyncio 
 
-from pyrogram import Client
+from pyrogram import Client, filters
 from pyrogram import __version__ as pyrover
 from pyrogram.enums import ParseMode
 from pyrogram.types import (
@@ -121,3 +122,4 @@ async def inline_query_handler(client: Client, query):
     except Exception as e:
         e = traceback.format_exc()
         print(e, "InLine")
+

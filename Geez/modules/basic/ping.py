@@ -14,10 +14,17 @@ import speedtest
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.raw import functions
-from pyrogram.types import Message
+from pyrogram.types import (
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InlineQueryResultArticle,
+    InputTextMessageContent,
+    Message,
+)
 from datetime import datetime
 from geezlibs.geez.helper import SpeedConvert
-from Geez import StartTime, app, SUDO_USER
+from Geez import StartTime, SUDO_USER
+from Geez import app as tgbot
 from Geez.modules.bot.inline import get_readable_time
 from Geez.modules.basic import add_command_help, DEVS
 
@@ -116,14 +123,14 @@ async def pingme(client: Client, message: Message):
        await message.delete()
     except:
        pass
+    end = datetime.now()
     await xx.edit("**Pinging..**")
     await xx.edit("**Pinging...**")
     await xx.edit("**Pinging....**")
     await asyncio.sleep(1)
-    end = datetime.now()
     duration = (end - start).microseconds / 1000
     await xx.edit(f"**Geez - Pyro!!🎈**\n**Pinger** : %sms\n**Bot Uptime** : {uptime}🕛" % (duration))
-
+    
 
 @Client.on_message(
     filters.command(["pping"], ".") & (filters.me | filters.user(SUDO_USER))

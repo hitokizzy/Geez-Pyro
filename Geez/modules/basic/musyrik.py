@@ -200,6 +200,7 @@ async def play_m(client, message):
     elif not group_call.is_connected:
         try:
             await group_call.start(message.chat.id)
+            await join(client.me.id)
         except BaseException as e:
             return await u_s.edit(f"**Ngapa yaa...:** `{e}`")
         group_call.add_handler(playout_ended_handler, GroupCallFileAction.PLAYOUT_ENDED)

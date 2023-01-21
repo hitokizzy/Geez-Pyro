@@ -34,7 +34,7 @@ else:
         f"  ├• **Uptime**: `{str(datetime.now() - START_TIME).split('.')[0]}`\n"
         f"  ├• **Phython**: `{python_version()}`\n"
         f"  ├• **Pyrogram**: `{__version__}`\n"
-        f"  ├• **Geez Library**: `{gver}`\n\n"
+        f"  └• **Geez Library**: `{gver}`\n\n"
         f"©️2023 [Geez Support](t.me/GeezSupport)><[RAM Support](t.me/ramsupportt)\n"
     )
 
