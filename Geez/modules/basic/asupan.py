@@ -137,7 +137,7 @@ async def ppanime(client, message):
 
 
 add_command_help(
-    "Asupan",
+    "asupan",
     [
         [
             "asupan",
