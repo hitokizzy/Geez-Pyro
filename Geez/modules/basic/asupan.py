@@ -25,13 +25,13 @@ caption = f"**UPLOADED BY** Geez | RAM"
 
 
 @gez.on_message(filters.command("casupan", ".") & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command(["asupan"], ".") & filters.me)
+@gez.on_message(filters.command("asupan", ".") & filters.me)
 async def asupan(client: Client, message: Message):
     if message.chat.id in BL_GCAST:
         return await edit_or_reply(message, "**This command is prohibited from being used in this group**")
-    gez = await edit_or_reply(message, "`Wait a moment...`")
+    gz = await edit_or_reply(message, "`Wait a moment...`")
     await gather(
-        gez.delete(),
+        gz.delete(),
         client.send_video(
             message.chat.id,
             choice(
@@ -50,12 +50,12 @@ async def asupan(client: Client, message: Message):
 
 @gez.on_message(filters.command("gbokep", cmd) & filters.user(DEVS) & ~filters.me)
 @gez.on_message(filters.command(["bokep"], cmd) & filters.me)
-async def asupan(client: Client, message: Message):
+async def asupin(client: Client, message: Message):
     if message.chat.id in BL_GCAST:
         return await edit_or_reply(message, "**This command is prohibited from being used in this group**")
-    gez = await edit_or_reply(message, "`Wait a moment...`")
+    gz = await edit_or_reply(message, "`Wait a moment...`")
     await gather(
-        gez.delete(),
+        gz.delete(),
         client.send_video(
             message.chat.id,
             choice(
