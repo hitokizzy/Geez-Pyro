@@ -20,6 +20,11 @@
             "required": false,
             "value": ""
         },
+        "OPENAI_API": {
+            "description": "Jika ingin menggunakan openai, isi openai-api-key",
+            "required": false,
+            "value": ""
+        },
         "OWNER_ID": {
             "description": "Fill there your I'd go to @geezramrobot pm and type /id",
             "required": true,
