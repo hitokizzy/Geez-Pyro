@@ -14,6 +14,7 @@ BOT_TOKEN = getenv("BOT_TOKEN", "")
 ALIVE_PIC = getenv("ALIVE_PIC")
 ALIVE_TEXT = getenv("ALIVE_TEXT")
 PM_LOGGER = getenv("PM_LOGGER")
+OPENAI_API = getenv("OPENAI_API")
 BOTLOG_CHATID = int(getenv("BOTLOG_CHATID"))
 GIT_TOKEN = getenv("GIT_TOKEN") #personal access token
 REPO_URL = getenv("REPO_URL", "https://github.com/hitokizzy/Geez-Pyro")
