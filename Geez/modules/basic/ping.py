@@ -112,7 +112,7 @@ async def cpingme(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.command(["ping"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["pink"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def pingme(client: Client, message: Message):
     uptime = await get_readable_time((time.time() - StartTime))
@@ -131,7 +131,7 @@ async def pingme(client: Client, message: Message):
     await asyncio.sleep(1)
     await xx.edit(f"**Geez - Pyro!!🎈**\n**Pinger** : %sms\n**Bot Uptime** : {uptime}🕛" % (duration))
     
-@Client.on_message(filters.command(["pink"], ".") & filters.me)
+@Client.on_message(filters.command(["ping"], ".") & filters.me)
 async def module_ping(client: Client, message: Message):
     cmd = message.command
     help_arg = ""
