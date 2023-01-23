@@ -24,7 +24,7 @@ from pyrogram.types import (
 from datetime import datetime
 from geezlibs.geez.helper import SpeedConvert
 from Geez import StartTime, SUDO_USER
-from Geez import app as tgbot
+from Geez import app 
 from Geez.modules.bot.inline import get_readable_time
 from Geez.modules.basic import add_command_help, DEVS
 
@@ -131,6 +131,24 @@ async def pingme(client: Client, message: Message):
     await asyncio.sleep(1)
     await xx.edit(f"**Geez - Pyro!!🎈**\n**Pinger** : %sms\n**Bot Uptime** : {uptime}🕛" % (duration))
     
+@Client.on_message(filters.command(["pink"], ".") & filters.me)
+async def module_ping(client: Client, message: Message):
+    cmd = message.command
+    help_arg = ""
+    bot_username = (await app.get_me()).username
+    if len(cmd) > 1:
+        help_arg = " ".join(cmd[1:])
+    elif not message.reply_to_message and len(cmd) == 1:
+        try:
+            nice = await client.get_inline_bot_results(bot=bot_username, query="ping")
+            await asyncio.gather(
+                message.delete(),
+                client.send_inline_bot_result(
+                    message.chat.id, nice.query_id, nice.results[0].id
+                ),
+            )
+        except BaseException as e:
+            print(f"{e}")
 
 @Client.on_message(
     filters.command(["pping"], ".") & (filters.me | filters.user(SUDO_USER))

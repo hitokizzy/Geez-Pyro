@@ -30,9 +30,10 @@ from pyrogram.types import (
 )
 from geezlibs.geez.helper.data import Data
 from geezlibs.geez.helper.inline import inline_wrapper, paginate_help
-from geezlibs import BOT_VER
+from geezlibs import BOT_VER, __version__ as gver
 from Geez import CMD_HELP, StartTime, app
 
+photo = "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png"
 
 async def get_readable_time(seconds: int) -> str:
     count = 0
@@ -68,6 +69,7 @@ async def alive_function(message: Message, answers):
 <b> • Plugins :</b> <code>{len(CMD_HELP)} Modules</code>
 <b> • Python Version :</b> <code>{pyver.split()[0]}</code>
 <b> • Pyrogram Version :</b> <code>{pyrover}</code>
+<b> • Geezlibs Version :</b> <code>{gver}</code>
 <b> • Bot Uptime :</b> <code>{uptime}</code>
 
 <b> — Bot version: {BOT_VER}</b>
@@ -87,6 +89,30 @@ async def alive_function(message: Message, answers):
     )
     return answers
 
+async def ping_function(message: Message, answers):
+    start = datetime.now()
+    uptime = await get_readable_time((time.time() - StartTime))
+    end = datetime.now()
+    duration = (end - start).microseconds / 1000
+    msg = (
+        f"<b>Geez - Pyro!!🎈</b>\n\n"
+        f"Pɪɴɢᴇʀ :</b> <code>{duration}ms</code>\n"
+        f"Uᴘᴛɪᴍᴇ :</b> <code>{uptime}</code>"
+    )
+    answers.append(
+        InlineQueryResultArticle(
+            title="ping",
+            description="Check Bot's Stats",
+            thumb_url="https://telegra.ph/file/c78bb1efdeed38ee16eb2.png",
+            input_message_content=InputTextMessageContent(
+                msg, parse_mode=ParseMode.HTML, disable_web_page_preview=True
+            ),
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("Support", url="t.me/GeezRam")]]
+            ),
+        )
+    )
+    return answers
 
 async def help_function(answers):
     bttn = paginate_help(0, CMD_HELP, "helpme")
@@ -119,7 +145,9 @@ async def inline_query_handler(client: Client, query):
         elif string_given.startswith("helper"):
             answers = await help_function(answers)
             await client.answer_inline_query(query.id, results=answers, cache_time=0)
+        elif string_given.startswith("ping"):
+            answers = await ping_function(query, answers)
+            await client.answer_inline_query(query.id, results=answers, cache_time=0)
     except Exception as e:
         e = traceback.format_exc()
         print(e, "InLine")
-

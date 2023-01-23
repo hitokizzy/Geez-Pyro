@@ -18,7 +18,7 @@ from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from pyrogram import __version__, filters, Client
 from pyrogram.types import Message
 from config import ALIVE_PIC, ALIVE_TEXT
-from Geez import START_TIME, SUDO_USER
+from Geez import START_TIME, SUDO_USER, app
 from Geez.modules.basic import add_command_help
 from Geez.modules.bot.inline import get_readable_time
 
@@ -37,6 +37,26 @@ else:
         f"  └• **Geez Library**: `{gver}`\n\n"
         f"©️2023 [Geez|RAM Support](t.me/GeezRam)\n"
     )
+
+@Client.on_message(filters.command(["geez"], ".") & filters.me)
+async def module_help(client: Client, message: Message):
+    await join(client)
+    cmd = message.command
+    help_arg = ""
+    bot_username = (await app.get_me()).username
+    if len(cmd) > 1:
+        help_arg = " ".join(cmd[1:])
+    elif not message.reply_to_message and len(cmd) == 1:
+        try:
+            nice = await client.get_inline_bot_results(bot=bot_username, query="Alive")
+            await asyncio.gather(
+                message.delete(),
+                client.send_inline_bot_result(
+                    message.chat.id, nice.query_id, nice.results[0].id
+                ),
+            )
+        except BaseException as e:
+            print(f"{e}")
 
 @Client.on_message(
     filters.command(["alive", "awake"], ".") & (filters.me | filters.user(SUDO_USER))
