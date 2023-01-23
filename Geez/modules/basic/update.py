@@ -140,7 +140,7 @@ async def updateme_requirements():
     except Exception as e:
         return repr(e)
 
-@Client.on_message(filters.command("gupdate", ["."]) & filters.user(DEVS) & ~filters.me)
+@Client.on_message(filters.command("gupdate", ".") & filters.user(DEVS) & ~filters.me)
 @Client.on_message(filters.command("update", ".") & filters.me)
 async def upstream(client: Client, message: Message):
     status = await message.edit_text("`Checking for Updates, Wait a Moment...`")
