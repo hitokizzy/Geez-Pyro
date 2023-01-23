@@ -13,6 +13,7 @@ aiofiles
 bs4
 googlesearch-python==1.0.1
 gitpython
+httpx[http2]
 humanize
 geezlibs==1.3.3
 httpx
