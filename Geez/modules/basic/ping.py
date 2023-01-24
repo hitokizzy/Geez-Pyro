@@ -23,7 +23,6 @@ from pyrogram.types import (
 )
 from datetime import datetime
 from geezlibs.geez.helper import SpeedConvert
-from geezlibs.decorator import geez
 from Geez import StartTime, SUDO_USER
 from Geez import app, cmds 
 from Geez.modules.bot.inline import get_readable_time
