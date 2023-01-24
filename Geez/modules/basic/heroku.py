@@ -124,7 +124,7 @@ async def varget_(client, message):
             )
 
 
-@Client.on_message(filters.command("delvar", cmds) & filters.user(SUDO_USER))
+@Client.on_message(filters.command("delvar", cmds) & filters.me)
 async def vardel_(client, message):
     usage = "**Usage:**\n/del_var [Var Name]"
     if len(message.command) != 2:
@@ -167,7 +167,7 @@ async def vardel_(client, message):
             )
 
 
-@Client.on_message(filters.command("setvar", cmds) & filters.user(SUDO_USER))
+@Client.on_message(filters.command("setvar", cmds) & filters.me)
 async def setvar(client, message):
     usage = "**Usage:**\n/setvar [Var Name] [Var Value]"
     if len(message.command) < 3:
