@@ -8,7 +8,7 @@ from Geez.modules.basic.help import *
 from .pmguard import get_arg, denied_users
 from Geez import cmds
 
-@Client.on_message(filters.command("pmguard", [f"{cmds}"]) & filters.me)
+@Client.on_message(filters.command("pmguard", cmds) & filters.me)
 async def pmguard(client, message):
     arg = get_arg(message)
     if not arg:
@@ -20,7 +20,7 @@ async def pmguard(client, message):
     if arg == "on":
         await TOD.set_pm(True)
         await message.edit("**PM Guard Activated**")
-@Client.on_message(filters.command("setpmmsg", [f"{cmds}"]) & filters.me)
+@Client.on_message(filters.command("setpmmsg", cmds) & filters.me)
 async def setpmmsg(client, message):
     arg = get_arg(message)
     if not arg:

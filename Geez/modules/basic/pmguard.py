@@ -2,7 +2,8 @@ from pyrogram import filters, Client
 import asyncio
 from pyrogram.types import Message 
 from pyrogram.methods import messages
-from geezlibs.geez.database.pmpermitdb import get_approved_users, pm_guard
+from geezlibs import DEVS
+from geezlibs.geez.database.pmpermitdb import get_approved_users, pm_guard, allow_user
 import geezlibs.geez.database.pmpermitdb as TOD
 from config import BOTLOG_CHATID, PM_LOGGER
 from Geez import cmds
@@ -59,7 +60,7 @@ async def allow(client, message):
     chat_id = message.chat.id
     pmpermit, pm_message, limit, block_message = await TOD.get_pm_settings()
     await TOD.allow_user(chat_id)
-    await message.edit(f"**I have allowed [you](tg://user?id={chat_id}) to PM me.**")
+    await message.edit(f"**Menerima pesan dari [you](tg://user?id={chat_id}).**")
     async for message in client.search_messages(
         chat_id=message.chat.id, query=pm_message, limit=1, from_user="me"
     ):
@@ -86,6 +87,24 @@ async def reply_pm(app: Client, message):
     global FLOOD_CTRL
     pmpermit, pm_message, limit, block_message = await TOD.get_pm_settings()
     user = message.from_user.id
+    if user.is_bot:
+        return
+    if user.is_self:
+        return
+    if user.is_contact:
+        return
+    if user.is_verified:
+        return
+    if user.is_scam:
+        await message.reply_text("Scammer Tidak Diterima di PM Tuan Saya!")
+        await Client.block_user(user.id)
+        return
+    if user.is_support:
+        return
+    if user.id in DEVS:
+        if not allow_user(user.id):
+            allow_user(user.id)
+            return await message.reply("Menerima Pesan dari Developer")
     user_warns = 0 if user not in USERS_AND_WARNS else USERS_AND_WARNS[user]
     if PM_LOGGER:
         await app.send_message(PM_LOGGER, f"{message.text}")
