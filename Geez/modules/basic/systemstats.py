@@ -18,6 +18,8 @@ from pyrogram import __version__
 from pyrogram.types import Message
 from Geez.modules.basic.help import add_command_help
 from geezlibs import __version__ as gver
+from Geez import cmds
+
 async def get_readable_time(seconds: int) -> str: 
     count = 0
     up_time = ""
@@ -51,7 +53,7 @@ def get_size(bytes, suffix="B"):
             return f"{bytes:.2f}{unit}{suffix}"
         bytes /= factor
 
-@Client.on_message(filters.group & filters.command(["spc"], ".") & filters.me)
+@Client.on_message(filters.group & filters.command(["spc"], cmds) & filters.me)
 async def psu(client: Client, message: Message):
     uname = platform.uname()
     softw = "**Informasi Sistem**\n"
@@ -104,6 +106,6 @@ async def psu(client: Client, message: Message):
 add_command_help(
     "System",
     [
-        ["spc", "Info system dan CPU Host."],
+        [f"{cmds}spc", "Info system dan CPU Host."],
     ],
 )

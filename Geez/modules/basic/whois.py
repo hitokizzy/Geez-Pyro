@@ -16,9 +16,9 @@ from pyrogram.types import Message
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from Geez.modules.basic.profile import extract_user
 from Geez.modules.basic import add_command_help
+from Geez import cmds
 
-
-@Client.on_message(filters.command(["whois", "info"], ".") & filters.me)
+@Client.on_message(filters.command(["whois", "info"], cmds) & filters.me)
 async def who_is(client: Client, message: Message):
     user_id = await extract_user(message)
     ex = await message.edit_text("`Processing . . .`")
@@ -81,7 +81,7 @@ async def who_is(client: Client, message: Message):
         return await ex.edit(f"**INFO:** `{e}`")
 
 
-@Client.on_message(filters.command(["chatinfo", "cinfo", "ginfo"], ".") & filters.me)
+@Client.on_message(filters.command(["chatinfo", "cinfo", "ginfo"], cmds) & filters.me)
 async def chatinfo_handler(client: Client, message: Message):
     ex = await message.edit_text("`Processing...`")
     try:
@@ -145,11 +145,11 @@ add_command_help(
     "info",
     [
         [
-            "info <username/userid/reply>",
+            f"{cmds}info <username/userid/reply>",
             "get telegram user info with full description.",
         ],
         [
-            "chatinfo <username/chatid/reply>",
+            f"{cmds}chatinfo <username/chatid/reply>",
             "get group info with full description.",
         ],
     ],

@@ -25,12 +25,13 @@ from pyrogram.types import ChatPermissions, Message
 from geezlibs.geez.helper.PyroHelpers import get_ub_chats
 from Geez.modules.basic import *
 from Geez.modules.basic.profile import extract_user, extract_user_and_reason
+from Geez import cmds
 SUDO_USERS = SUDO_USER
 RAIDS = []
 
 
 @Client.on_message(
-    filters.command(["replyspam"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["replyspam"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def raid(xspam: Client, e: Message):  
       zzy = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
@@ -91,7 +92,7 @@ async def raid(xspam: Client, e: Message):
 
 
 @Client.on_message(
-    filters.command(["dreplyspam"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["dreplyspam"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def gmute_user(client: Client, message: Message):
     args = await extract_user(message)
@@ -122,7 +123,7 @@ async def gmute_user(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.command(["dmspam"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["dmspam"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def dmraid(xspam: Client, e: Message):
       """ Module: Dm Spam """
@@ -164,7 +165,7 @@ async def dmraid(xspam: Client, e: Message):
                     await asyncio.sleep(0.10)
 
 @Client.on_message(
-    filters.command(["dmsp"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["dmsp"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def dmspam(spam: Client, e: Message):
       text = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)

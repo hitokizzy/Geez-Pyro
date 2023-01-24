@@ -13,11 +13,10 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from geezlibs.geez.helper.basic import edit_or_reply
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
-from config import CMD_HNDLR as cmd
 from Geez.modules.basic import add_command_help
+from Geez import cmds
 
-
-@Client.on_message(filters.command("p", cmd) & filters.me)
+@Client.on_message(filters.command("p", cmds) & filters.me)
 async def salamone(client: Client, message: Message):
     await asyncio.gather(
         message.delete(),
@@ -29,7 +28,7 @@ async def salamone(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command("pe", cmd) & filters.me)
+@Client.on_message(filters.command("pe", cmds) & filters.me)
 async def salamdua(client: Client, message: Message):
     await asyncio.gather(
         message.delete(),
@@ -41,7 +40,7 @@ async def salamdua(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command("l", cmd) & filters.me)
+@Client.on_message(filters.command("l", cmds) & filters.me)
 async def jwbsalam(client: Client, message: Message):
     await asyncio.gather(
         message.delete(),
@@ -53,7 +52,7 @@ async def jwbsalam(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command("el", cmd) & filters.me)
+@Client.on_message(filters.command("el", cmds) & filters.me)
 async def jwbsalamlngkp(client: Client, message: Message):
     await asyncio.gather(
         message.delete(),
@@ -66,7 +65,7 @@ async def jwbsalamlngkp(client: Client, message: Message):
 
 
 
-@Client.on_message(filters.command("ass", cmd) & filters.me)
+@Client.on_message(filters.command("ass", cmds) & filters.me)
 async def salamarab(client: Client, message: Message):
     xx = await edit_or_reply(message, "Salam Dulu Gua..")
     await asyncio.sleep(2)

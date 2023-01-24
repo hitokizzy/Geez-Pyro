@@ -24,9 +24,9 @@ from svglib.svglib import svg2rlg
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from geezlibs.geez.helper.aiohttp_helper import AioHttp
 from Geez.modules.basic import add_command_help
+from Geez import cmds
 
-
-@Client.on_message(filters.command(["ggraph", "commitgraph"], ".") & filters.me)
+@Client.on_message(filters.command(["ggraph", "commitgraph"], cmds) & filters.me)
 async def commit_graph(bot: Client, message: Message):
     if len(message.command) < 2:
         await message.edit(
@@ -72,6 +72,6 @@ async def commit_graph(bot: Client, message: Message):
 add_command_help(
     "git",
     [
-        [".ggraph | .commitgraph", "Gets the commit graph for a Github user."],
+        [f"{cmds}ggraph | {cmds}commitgraph", "Gets the commit graph for a Github user."],
     ],
 )

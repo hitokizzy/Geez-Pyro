@@ -29,7 +29,7 @@ from pyrogram.types import Message
 from config import BOTLOG_CHATID, HEROKU_API_KEY, HEROKU_APP_NAME, BRANCH, REPO_URL
 from config import CMD_HNDLR as cmds
 from Geez import SUDO_USER, Client
-
+from Geez.modules.basic import add_command_help
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -82,7 +82,7 @@ async def log_(client, message):
         return await message.reply_text(data)
 
 
-@Client.on_message(filters.command("get_var", cmds) & filters.user(SUDO_USER))
+@Client.on_message(filters.command("getvar", cmds) & filters.user(SUDO_USER))
 async def varget_(client, message):
     usage = "**Usage:**\n/get_var [Var Name]"
     if len(message.command) != 2:
@@ -124,7 +124,7 @@ async def varget_(client, message):
             )
 
 
-@Client.on_message(filters.command("del_var", cmds) & filters.user(SUDO_USER))
+@Client.on_message(filters.command("delvar", cmds) & filters.user(SUDO_USER))
 async def vardel_(client, message):
     usage = "**Usage:**\n/del_var [Var Name]"
     if len(message.command) != 2:
@@ -167,9 +167,9 @@ async def vardel_(client, message):
             )
 
 
-@Client.on_message(filters.command("set_var", cmds) & filters.user(SUDO_USER))
-async def set_var(client, message):
-    usage = "**Usage:**\n/set_var [Var Name] [Var Value]"
+@Client.on_message(filters.command("setvar", cmds) & filters.user(SUDO_USER))
+async def setvar(client, message):
+    usage = "**Usage:**\n/setvar [Var Name] [Var Value]"
     if len(message.command) < 3:
         return await message.reply_text(usage)
     to_set = message.text.split(None, 2)[1].strip()
@@ -216,7 +216,7 @@ async def set_var(client, message):
 
 
 @Client.on_message(
-    filters.command(["usage"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["usage"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def usage_dynos(client, message):
     ### Credits CatUserbot
@@ -282,3 +282,13 @@ Usage:
 Remaining Quota:
   ╰┈➤Tersisa: `{hours}`**h**  `{minutes}`**m**  [`{percentage}`**%**]"""
     return await dyno.edit(text)
+
+add_command_help(
+    "Heroku",
+    [
+        [f"{cmds}getvar", "Check vars."],
+        [f"{cmds}setvar", "Set Var."],
+        [f"{cmds}usage", "Check Dyno usage."],
+        [f"{cmds}delvar", "Del var."],
+    ],
+)

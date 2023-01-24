@@ -38,7 +38,7 @@ async def _callbacks(_, callback_query: CallbackQuery):
            return
         await app.edit_inline_text(
             callback_query.inline_message_id,
-            "**— CLOSED MENU HELP**",
+            "**CLOSED MENU HELP**",
             reply_markup=InlineKeyboardMarkup(Data.reopen),
         )
         return
@@ -71,7 +71,7 @@ async def on_plug_in_cb(_, callback_query: CallbackQuery):
     commands: dict = CMD_HELP[modul_name]
     this_command = f"**Help For {str(modul_name).upper()}** 」──\n\n"
     for x in commands:
-        this_command += f"  •  **Command:** `.{str(x)}`\n  •  **Function:** `{str(commands[x])}`\n\n"
+        this_command += f"  •  **Command:** `{str(x)}`\n  •  **Function:** `{str(commands[x])}`\n\n"
     this_command += "© Geez | RAM"
     bttn = [
         [InlineKeyboardButton(text="Return", callback_data="reopen")],

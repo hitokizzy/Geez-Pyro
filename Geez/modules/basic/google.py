@@ -17,7 +17,7 @@ from pyrogram.types import Message
 from geezlibs.geez.helper.basic import edit_or_reply
 
 from Geez.modules.basic import *
-
+from Geez import cmds
 
 def googlesearch(query):
     co = 1
@@ -40,7 +40,7 @@ def googlesearch(query):
     return returnquery
 
 
-@Client.on_message(filters.command(["gs", "google"], ".") & filters.me)
+@Client.on_message(filters.command(["gs", "google"], cmds) & filters.me)
 async def gs(client: Client, message: Message):
     Man = await edit_or_reply(message, "`Processing...`")
     msg_txt = message.text
@@ -76,7 +76,7 @@ add_command_help(
     "google",
     [
         [
-            "google",
+            f"{cmds}google",
             "Featch Details on Google.",
         ],
     ],

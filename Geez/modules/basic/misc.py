@@ -21,7 +21,7 @@ from config import ALIVE_PIC, ALIVE_TEXT
 from Geez import START_TIME, SUDO_USER, app
 from Geez.modules.basic import add_command_help
 from Geez.modules.bot.inline import get_readable_time
-
+from Geez import cmds
 
 alive_logo = ALIVE_PIC or "https://telegra.ph/file/200355acbe58c46400f5b.png"
 
@@ -38,14 +38,14 @@ else:
         f"©️2023 [Geez|RAM Support](t.me/GeezRam)\n"
     )
 
-@Client.on_message(filters.command(["geez"], ".") & filters.me)
+@Client.on_message(filters.command(["geez"], cmds) & filters.me)
 async def module_help(client: Client, message: Message):
     await join(client)
     cmd = message.command
     help_arg = ""
     bot_username = (await app.get_me()).username
     if len(cmd) > 1:
-        help_arg = " ".join(cmd[1:])
+        help_arg = "".join(cmd[1:])
     elif not message.reply_to_message and len(cmd) == 1:
         try:
             nice = await client.get_inline_bot_results(bot=bot_username, query="Alive")
@@ -59,7 +59,7 @@ async def module_help(client: Client, message: Message):
             print(f"{e}")
 
 @Client.on_message(
-    filters.command(["alive", "awake"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["alive", "awake"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def alive(client: Client, message: Message):
     xx = await message.reply_text("⚡️")
@@ -69,7 +69,7 @@ async def alive(client: Client, message: Message):
        await message.delete()
     except:
        pass
-    send = client.send_video if alive_logo.endswith(".mp4") else client.send_photo
+    send = client.send_video if alive_logo.endswith(f"{cmds}mp4") else client.send_photo
     xd = (f"{txt}")
     try:
         await asyncio.gather(
@@ -84,7 +84,7 @@ async def alive(client: Client, message: Message):
     except BaseException:
         await xx.edit(xd, disable_web_page_preview=True)
 
-@Client.on_message(filters.command("repo", ".") & filters.me)
+@Client.on_message(filters.command("repo", cmds) & filters.me)
 async def repo(bot: Client, message: Message):
     await asyncio.sleep(1)
     await message.edit("Fetching Source Code.....")
@@ -92,19 +92,12 @@ async def repo(bot: Client, message: Message):
     await message.edit("Here is repo: \n\n\nhttps://github.com/hitokizzy/Geez-Pyro")
 
 
-@Client.on_message(filters.command("creator", ".") & filters.me)
+@Client.on_message(filters.command("creator", cmds) & filters.me)
 async def creator(bot: Client, message: Message):
     await message.edit("https://gitHub.com/hitokizzy")
 
 
-@Client.on_message(filters.command(["uptime", "up"], ".") & filters.me)
-async def uptime(bot: Client, message: Message):
-    now = datetime.now()
-    current_uptime = now - START_TIME
-    await message.edit(f"Uptime ⚡\n" f"```{str(current_uptime).split('.')[0]}```")
-
-
-@Client.on_message(filters.command("id", ".") & filters.me)
+@Client.on_message(filters.command("id", cmds) & filters.me)
 async def get_id(bot: Client, message: Message):
     file_id = None
     user_id = None
@@ -198,17 +191,16 @@ async def get_id(bot: Client, message: Message):
 add_command_help(
     "start",
     [
-        [".alive", "Check if the bot is alive or not."],
-        [".repo", "Display the repo of this userbot."],
-        [".creator", "Show the creator of this userbot."],
-        [".id", "Send id of what you replied to."],
-        [".up `or` .uptime", "Check bot's current uptime."],
+        [f"{cmds}alive", "Check if the bot is alive or not."],
+        [f"{cmds}repo", "Display the repo of this userbot."],
+        [f"{cmds}creator", "Show the creator of this userbot."],
+        [f"{cmds}id", "Send id of what you replied to."],
     ],
 )
 
 add_command_help(
     "restart",
     [
-        [".restart", "You are retarded if you do not know what this does."],
+        [f"{cmds}restart", "You are retarded if you do not know what this does."],
     ],
 )

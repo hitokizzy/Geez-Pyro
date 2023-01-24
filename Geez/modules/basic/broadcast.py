@@ -16,7 +16,7 @@ from requests import get
 from geezlibs import BL_GCAST, DEVS
 
 from Geez import SUDO_USER
-
+from Geez import cmds
 from Geez.modules.basic import add_command_help
 
 def get_arg(message: Message):
@@ -29,10 +29,10 @@ def get_arg(message: Message):
 
 
 @Client.on_message(
-    filters.group & filters.command("ggcast", ["."]) & filters.user(DEVS) & ~filters.me
+    filters.group & filters.command("ggcast", ["*"]) & filters.user(DEVS) & ~filters.me
 )
 @Client.on_message(
-    filters.command(["gcast"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["gcast"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def gcast_cmd(client: Client, message: Message):
     if message.reply_to_message or get_arg(message):
@@ -64,14 +64,14 @@ async def gcast_cmd(client: Client, message: Message):
     )
 
 @Client.on_message(
-    filters.group & filters.command("ggucast", ["."]) & filters.user(DEVS) & ~filters.me
+    filters.group & filters.command("ggucast", ["*"]) & filters.user(DEVS) & ~filters.me
 )
 @Client.on_message(
-    filters.command(["gucast"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["gucast"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def gucast(client: Client, message: Message):
     if message.reply_to_message or get_arg(message):
-        tex = await message.reply_text("`Started global broadcast...`")
+        text = await message.reply_text("`Started global broadcast...`")
     else:
         return await message.edit_text("**Give A Message or Reply**")
     done = 0
@@ -103,11 +103,11 @@ add_command_help(
     "broadcast",
     [
         [
-            "gcast [text/reply]",
+            f"{cmds}gcast [text/reply]",
             "Sending Global Broadcast messages to all groups you are logged into. (Can Send Media/Sticker)",
         ],
         [
-            "gucast [text/reply]",
+            f"{cmds}gucast [text/reply]",
             "Sending Global Broadcast messages to all incoming Private Massages / PCs. (Can Send Media/Sticker)",
         ],
     ],

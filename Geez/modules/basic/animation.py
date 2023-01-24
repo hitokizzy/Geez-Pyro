@@ -21,7 +21,7 @@ from pyrogram.types import Message
 
 from geezlibs.geez.helper.basic import edit_or_reply, get_text
 from geezlibs.geez.helper.constants import MEMES
-
+from Geez import cmds
 from Geez.modules.basic.help import *
 
 DEFAULTUSER = "Man"
@@ -82,7 +82,7 @@ async def phase1(message):
 
 async def phase2(message):
     """Per-heart randomiser"""
-    ALL = ["❤️"] + list("🧡💛💚💙💜🤎🖤")  # don't include white heart
+    ALL = [f"{cmds}❤️"] + list("🧡💛💚💙💜🤎🖤")  # don't include white heart
 
     format_heart = joined_heart.replace(R, "{}")
     for _ in range(5):
@@ -110,7 +110,7 @@ async def phase4(message):
         await asyncio.sleep(SLEEP)
 
 
-@Client.on_message(filters.command(["heart", "love"], ".") & filters.me)
+@Client.on_message(filters.command([f"{cmds}heart", "love"], cmds) & filters.me)
 async def hearts(client: Client, message: Message):
     await phase1(message)
     await asyncio.sleep(SLEEP * 3)
@@ -124,7 +124,7 @@ async def hearts(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.me & (filters.command(["loveyou"], ".") | filters.regex("^loveyou "))
+    filters.me & (filters.command([f"{cmds}loveyou"], cmds) | filters.regex("^loveyou "))
 )
 async def _(client: Client, message: Message):
     noble = random.randint(1, len(NOBLE) - 2)
@@ -132,38 +132,38 @@ async def _(client: Client, message: Message):
     await edit_or_reply(message, reply_text)
 
 
-@Client.on_message(filters.command("wink", ".") & filters.me)
+@Client.on_message(filters.command("wink", cmds) & filters.me)
 async def wink(client: Client, message: Message):
     hmm_s = "https://some-random-api.ml/animu/wink"
     r = requests.get(url=hmm_s).json()
-    image_s = r["link"]
+    image_s = r[f"{cmds}link"]
     await client.send_video(message.chat.id, image_s)
     await message.delete()
 
 
-@Client.on_message(filters.command("hug", ".") & filters.me)
+@Client.on_message(filters.command("hug", cmds) & filters.me)
 async def hug(client: Client, message: Message):
     hmm_s = "https://some-random-api.ml/animu/hug"
     r = requests.get(url=hmm_s).json()
-    image_s = r["link"]
+    image_s = r[f"{cmds}link"]
     await client.send_video(message.chat.id, image_s)
     await message.delete()
 
 
-@Client.on_message(filters.command("pat", ".") & filters.me)
+@Client.on_message(filters.command("pat", cmds) & filters.me)
 async def pat(client: Client, message: Message):
     hmm_s = "https://some-random-api.ml/animu/pat"
     r = requests.get(url=hmm_s).json()
-    image_s = r["link"]
+    image_s = r[f"{cmds}link"]
     await client.send_video(message.chat.id, image_s)
     await message.delete()
 
 
-@Client.on_message(filters.command("pikachu", ".") & filters.me)
+@Client.on_message(filters.command("pikachu", cmds) & filters.me)
 async def pikachu(client: Client, message: Message):
     hmm_s = "https://some-random-api.ml/img/pikachu"
     r = requests.get(url=hmm_s).json()
-    image_s = r["link"]
+    image_s = r[f"{cmds}link"]
     await client.send_video(message.chat.id, image_s)
     if image_s.endswith(".png"):
         await client.send_photo(message.chat.id, image_s)
@@ -174,7 +174,7 @@ async def pikachu(client: Client, message: Message):
     await message.delete()
 
 
-@Client.on_message(filters.command("hmm", ".") & filters.me)
+@Client.on_message(filters.command("hmm", cmds) & filters.me)
 async def hello_world(client: Client, message: Message):
     mg = await edit_or_reply(
         message,
@@ -183,7 +183,7 @@ async def hello_world(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.me & (filters.command(["ahh"], ".") | filters.regex("^ahh "))
+    filters.me & (filters.command([f"{cmds}ahh"], cmds) | filters.regex("^ahh "))
 )
 async def ahh(client: Client, message: Message):
     mg = await edit_or_reply(message, "ahh")
@@ -203,7 +203,7 @@ async def ahh(client: Client, message: Message):
     await mg.edit("aaahhhhhhhh")
 
 
-@Client.on_message(filters.command("brain", ".") & filters.me)
+@Client.on_message(filters.command("brain", cmds) & filters.me)
 async def pijtau(client: Client, message: Message):
     if message.forward_from:
         return
@@ -232,7 +232,7 @@ async def pijtau(client: Client, message: Message):
         await message.edit(animation_chars[i % 14])
 
 
-@Client.on_message(filters.command("bomb", ".") & filters.me)
+@Client.on_message(filters.command("bomb", cmds) & filters.me)
 async def gahite(client: Client, message: Message):
     if message.forward_from:
         return
@@ -258,7 +258,7 @@ async def gahite(client: Client, message: Message):
     await asyncio.sleep(2)
 
 
-@Client.on_message(filters.command("call", ".") & filters.me)
+@Client.on_message(filters.command("call", cmds) & filters.me)
 async def hajqag(client: Client, message: Message):
     if message.forward_from:
         return
@@ -290,7 +290,7 @@ async def hajqag(client: Client, message: Message):
         await message.edit(animation_chars[i % 18])
 
 
-@Client.on_message(filters.command("kill", ".") & filters.me)
+@Client.on_message(filters.command("kill", cmds) & filters.me)
 async def gahah(client: Client, message: Message):
     if message.forward_from:
         return
@@ -316,7 +316,7 @@ async def gahah(client: Client, message: Message):
         await message.edit(animation_chars[i % 12])
 
 
-@Client.on_message(filters.command("wtf", ".") & filters.me)
+@Client.on_message(filters.command("wtf", cmds) & filters.me)
 async def gagahkah(client: Client, message: Message):
     if message.forward_from:
         return
@@ -336,7 +336,7 @@ async def gagahkah(client: Client, message: Message):
         await message.edit(animation_chars[i % 5])
 
 
-@Client.on_message(filters.command("ding", ".") & filters.me)
+@Client.on_message(filters.command("ding", cmds) & filters.me)
 async def gkahgagw(client: Client, message: Message):
     animation_interval = 0.3
     animation_ttl = range(0, 30)
@@ -361,7 +361,7 @@ async def gkahgagw(client: Client, message: Message):
         await message.edit(animation_chars[i % 10])
 
 
-@Client.on_message(filters.command("hypo", ".") & filters.me)
+@Client.on_message(filters.command("hypo", cmds) & filters.me)
 async def okihakga(client: Client, message: Message):
     if message.forward_from:
         return
@@ -390,7 +390,7 @@ async def okihakga(client: Client, message: Message):
         await message.edit(animation_chars[i % 15])
 
 
-@Client.on_message(filters.command(["gangsta", "gang", "gangstar"], ".") & filters.me)
+@Client.on_message(filters.command([f"{cmds}gangsta", "gang", "gangstar"], cmds) & filters.me)
 async def gajjajay(client: Client, message: Message):
     await message.edit("EVERyBOdy")
     await asyncio.sleep(0.3)
@@ -409,7 +409,7 @@ async def gajjajay(client: Client, message: Message):
     await message.edit("EVERyBOdy iZ GangSTur UNtIL I ArRivE 🔥🔥🔥")
 
 
-@Client.on_message(filters.command("charging", ".") & filters.me)
+@Client.on_message(filters.command("charging", cmds) & filters.me)
 async def timer_blankx(client: Client, message: Message):
     txt = (
         message.text[10:]
@@ -428,7 +428,7 @@ async def timer_blankx(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command(["koc", "kocok"], ".") & filters.me)
+@Client.on_message(filters.command([f"{cmds}koc", "kocok"], cmds) & filters.me)
 async def kocok(client: Client, message: Message):
     e = await edit_or_reply(message, "8✊===D")
     await e.edit("8=✊==D")
@@ -462,7 +462,7 @@ async def kocok(client: Client, message: Message):
     await e.edit("RIP 😭😭😭😭")
 
 
-@Client.on_message(filters.command(["fuck", "fucek"], ".") & filters.me)
+@Client.on_message(filters.command([f"{cmds}fuck", "fucek"], cmds) & filters.me)
 async def ngefuck(client: Client, message: Message):
     e = await edit_or_reply(message, ".                       /¯ )")
     await e.edit(".                       /¯ )\n                      /¯  /")
@@ -492,7 +492,7 @@ async def ngefuck(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command("hack", ".") & filters.me)
+@Client.on_message(filters.command("hack", cmds) & filters.me)
 async def hak(client: Client, message: Message):
     await message.edit_text("Looking for WhatsApp databases in targeted person...")
     await asyncio.sleep(2)
@@ -551,7 +551,7 @@ async def hak(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command(["kontol", "kntl"], ".") & filters.me)
+@Client.on_message(filters.command([f"{cmds}kontol", "kntl"], cmds) & filters.me)
 async def kontol(client: Client, message: Message):
     emoji = get_text(message)
     kontol = MEMES.GAMBAR_KONTOL
@@ -560,7 +560,7 @@ async def kontol(client: Client, message: Message):
     await message.edit(kontol)
 
 
-@Client.on_message(filters.command(["penis", "dick"], ".") & filters.me)
+@Client.on_message(filters.command([f"{cmds}penis", "dick"], cmds) & filters.me)
 async def titid(client: Client, message: Message):
     emoji = get_text(message)
     titid = MEMES.GAMBAR_TITIT
@@ -569,7 +569,7 @@ async def titid(client: Client, message: Message):
     await message.edit(titid)
 
 
-@Client.on_message(filters.command("dino", ".") & filters.me)
+@Client.on_message(filters.command("dino", cmds) & filters.me)
 async def adadino(client: Client, message: Message):
     typew = await edit_or_reply(message, "`DIN DINNN.....`")
     await asyncio.sleep(1)
@@ -626,7 +626,7 @@ async def adadino(client: Client, message: Message):
     await typew.edit("`-DIED-`")
 
 
-@Client.on_message(filters.command(["sayang", "lover"], ".") & filters.me)
+@Client.on_message(filters.command([f"{cmds}sayang", "lover"], cmds) & filters.me)
 async def zeyenk(client: Client, message: Message):
     e = await edit_or_reply(message, "I LOVEE YOUUU 💕")
     await e.edit("💝💘💓💗")
@@ -654,7 +654,7 @@ async def zeyenk(client: Client, message: Message):
     await e.edit("LOVE YOU 💞")
 
 
-@Client.on_message(filters.command("gabut", ".") & filters.me)
+@Client.on_message(filters.command("gabut", cmds) & filters.me)
 async def menggabut(client: Client, message: Message):
     e = await edit_or_reply(message, "`GO AWAY`")
     await e.edit("`THHARA VAI JOGINDER`")
@@ -857,7 +857,7 @@ async def menggabut(client: Client, message: Message):
     await e.edit("`GABUT`")
 
 
-@Client.on_message(filters.command(["helikopter", "heli"], ".") & filters.me)
+@Client.on_message(filters.command([f"{cmds}helikopter", "heli"], cmds) & filters.me)
 async def helikopter(client: Client, message: Message):
     await edit_or_reply(
         message,
@@ -880,7 +880,7 @@ async def helikopter(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command("tembak", ".") & filters.me)
+@Client.on_message(filters.command("tembak", cmds) & filters.me)
 async def dornembak(client: Client, message: Message):
     await edit_or_reply(
         message,
@@ -888,7 +888,7 @@ async def dornembak(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command("bundir", ".") & filters.me)
+@Client.on_message(filters.command("bundir", cmds) & filters.me)
 async def ngebundir(client: Client, message: Message):
     await edit_or_reply(
         message,
@@ -909,7 +909,7 @@ async def ngebundir(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command(["awk", "awikwok"], ".") & filters.me)
+@Client.on_message(filters.command([f"{cmds}awk", "awikwok"], cmds) & filters.me)
 async def awikwok(client: Client, message: Message):
     await edit_or_reply(
         message,
@@ -920,7 +920,7 @@ async def awikwok(client: Client, message: Message):
         "─▀───────▀▀─▀───────▀▀\n`Awkwokwokwok..`",
     )
 
-@Client.on_message(filters.command("y", ".") & filters.me)
+@Client.on_message(filters.command("y", cmds) & filters.me)
 async def ysaja(client: Client, message: Message):
     await edit_or_reply(
         message,
@@ -940,7 +940,7 @@ async def ysaja(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command("tank", ".") & filters.me)
+@Client.on_message(filters.command("tank", cmds) & filters.me)
 async def tank(client: Client, message: Message):
     await edit_or_reply(
         message,
@@ -951,7 +951,7 @@ async def tank(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command("babi", ".") & filters.me)
+@Client.on_message(filters.command("babi", cmds) & filters.me)
 async def babi(client: Client, message: Message):
     await edit_or_reply(
         message,
@@ -966,7 +966,7 @@ async def babi(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command(["ajg", "anjg"], ".") & filters.me)
+@Client.on_message(filters.command([f"{cmds}ajg", "anjg"], cmds) & filters.me)
 async def anjg(client: Client, message: Message):
     await edit_or_reply(
         message,
@@ -979,7 +979,7 @@ async def anjg(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command("nah", ".") & filters.me)
+@Client.on_message(filters.command("nah", cmds) & filters.me)
 async def nahlove(client: Client, message: Message):
     typew = await edit_or_reply(
         message, "`\n(\\_/)`" "`\n(●_●)`" "`\n />💖 *This is for you`"
@@ -988,7 +988,7 @@ async def nahlove(client: Client, message: Message):
     await typew.edit("`\n(\\_/)`" "`\n(●_●)`")
 
 
-@Client.on_message(filters.command("santet", ".") & filters.me)
+@Client.on_message(filters.command("santet", cmds) & filters.me)
 async def santet(client: Client, message: Message):
     typew = await edit_or_reply(message, "`Enabling Online Witchcraft Command....`")
     await asyncio.sleep(2)
@@ -1303,44 +1303,44 @@ async def santet(client: Client, message: Message):
 add_command_help(
     "animation",
     [
-        ["fuck", "To display the middle finger animation."],
-        ["dino", "To display dino chased animation."],
-        ["santet", "To display online blackmail animation."],
-        ["gabut", "To display the animation gait."],
-        ["sayang or lover", "To display the animation dear."],
-        ["hack", "To display a fake hacking animation."],
-        ["bomb", "To display the Bomb animation."],
-        ["brain", "To display the Brain animation 🧠."],
-        ["kontol", "To display dick art."],
-        ["penis", "To display penis art with emoji."],
-        ["tembak", "To display shooting art."],
-        ["bundir", "To display bundir art."],
-        ["helikopter", "To display helicopter art."],
-        ["y", "To display art y sj."],
-        ["awk", "to display art awkowkowk."],
-        ["nah", "To display art love."],
-        ["ajg", "To Display art anjing."],
-        ["babi", "To display art babi."],
-        ["hug", "To get A Hug Gifs anime."],
-        ["hmm", "Get Random Hmmm."],
-        ["wink", "To Get A Winking Gifs."],
-        ["love", "To Propose Someone."],
-        ["loveyou", "It Will Send Random Emojis."],
+        [f"{cmds}fuck", "animasi fuck."],
+        [f"{cmds}dino", "animasi dino."],
+        [f"{cmds}santet", "animasi santet."],
+        [f"{cmds}gabut", "animasi gabut."],
+        [f"{cmds}sayang or lover", "animasi sayang."],
+        [f"{cmds}hack", "animasi hack."],
+        [f"{cmds}bomb", "animasi bomb."],
+        [f"{cmds}brain", "animasi 🧠."],
+        [f"{cmds}kontol", "animasi kontol."],
+        [f"{cmds}penis", "animasi penis."],
+        [f"{cmds}tembak", "animasi tembak."],
+        [f"{cmds}bundir", "animasi bunuh diri."],
+        [f"{cmds}helikopter", "animasi helikopter."],
+        [f"{cmds}y", " y sj."],
+        [f"{cmds}awk", "awkowkowk."],
+        [f"{cmds}nah", "love."],
+        [f"{cmds}ajg", "anjing."],
+        [f"{cmds}babi", "babi."],
+        [f"{cmds}hug", "animasi hug."],
+        [f"{cmds}hmm", "Hmmm."],
+        [f"{cmds}wink", "Winking Gifs."],
+        [f"{cmds}love", "animasi love."],
+        [f"{cmds}loveyou", "randomm emojies."],
         [
             "pat",
-            "To get a pat gifs",
+            "pat gifs",
         ],
         [
             "pikachu",
-            "to get a Pikachu Gifs",
+            "Pikachu Gifs",
         ],
         [
             "kill",
-            "To kill Someone randomly",
+            "To kill",
         ],
         [
             "wtf",
-            "Wtf animation",
+            "Wtf",
         ],
         [
             "ding",
@@ -1348,11 +1348,11 @@ add_command_help(
         ],
         [
             "ganstar",
-            "Animation Gangster",
+            "Animasi Gangster",
         ],
         [
             "charge",
-            " Tesla animation charging",
+            " Tesla animasi",
         ],
     ],
 )

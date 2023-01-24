@@ -6,12 +6,9 @@ import geezlibs.geez.database.pmpermitdb as TOD
 from Geez import SUDO_USER
 from Geez.modules.basic.help import *
 from .pmguard import get_arg, denied_users
+from Geez import cmds
 
-
-
-
-
-@Client.on_message(filters.command("pmguard", ["."]) & filters.me)
+@Client.on_message(filters.command("pmguard", [f"{cmds}"]) & filters.me)
 async def pmguard(client, message):
     arg = get_arg(message)
     if not arg:
@@ -23,7 +20,7 @@ async def pmguard(client, message):
     if arg == "on":
         await TOD.set_pm(True)
         await message.edit("**PM Guard Activated**")
-@Client.on_message(filters.command("setpmmsg", ["."]) & filters.me)
+@Client.on_message(filters.command("setpmmsg", [f"{cmds}"]) & filters.me)
 async def setpmmsg(client, message):
     arg = get_arg(message)
     if not arg:
@@ -40,11 +37,11 @@ async def setpmmsg(client, message):
 add_command_help(
     "antipm",
     [
-        [".pmguard [on or off]", " -> Activates or deactivates anti-pm."],
-        [".setpmmsg [message or default]", " -> Sets a custom anti-pm message."],
-        [".setblockmsg [message or default]", "-> Sets custom block message."],
-        [".setlimit [value]", " -> This one sets a max. message limit for unwanted PMs and when they go beyond it, bamm!."],
-        [".ok", " -> Allows a user to PM you."],
-        [".no", " -> Denies a user to PM you."],
+        [f"{cmds}pmguard [on or off]", " -> mengaktifkan dan menonaktifkan anti-pm."],
+        [f"{cmds}setpmmsg [message or default]", " -> Sets a custom anti-pm message."],
+        [f"{cmds}setblockmsg [message or default]", "-> Sets custom block message."],
+        [f"{cmds}setlimit [value]", " -> This one sets a max. message limit for unwanted PMs and when they go beyond it, bamm!."],
+        [f"{cmds}ok", " -> Allows a user to PM you."],
+        [f"{cmds}no", " -> Denies a user to PM you."],
     ],
 )

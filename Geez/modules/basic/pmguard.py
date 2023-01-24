@@ -5,6 +5,7 @@ from pyrogram.methods import messages
 from geezlibs.geez.database.pmpermitdb import get_approved_users, pm_guard
 import geezlibs.geez.database.pmpermitdb as TOD
 from config import BOTLOG_CHATID, PM_LOGGER
+from Geez import cmds
 
 FLOOD_CTRL = 0
 ALLOWED = []
@@ -28,7 +29,7 @@ def get_arg(message):
     return " ".join(split[1:])
 
 
-@Client.on_message(filters.command("setlimit", ["."]) & filters.me)
+@Client.on_message(filters.command("setlimit", cmds) & filters.me)
 async def pmguard(client, message):
     arg = get_arg(message)
     if not arg:
@@ -39,7 +40,7 @@ async def pmguard(client, message):
 
 
 
-@Client.on_message(filters.command("setblockmsg", ["."]) & filters.me)
+@Client.on_message(filters.command("setblockmsg", cmds) & filters.me)
 async def setpmmsg(client, message):
     arg = get_arg(message)
     if not arg:
@@ -53,7 +54,7 @@ async def setpmmsg(client, message):
     await message.edit("**Custom block message set**")
 
 
-@Client.on_message(filters.command(["allow", "ok", "approve", "k"], ["."]) & filters.me & filters.private)
+@Client.on_message(filters.command(["allow", "ok", "approve", "k"], cmds) & filters.me & filters.private)
 async def allow(client, message):
     chat_id = message.chat.id
     pmpermit, pm_message, limit, block_message = await TOD.get_pm_settings()
@@ -66,7 +67,7 @@ async def allow(client, message):
     USERS_AND_WARNS.update({chat_id: 0})
 
 
-@Client.on_message(filters.command(["deny", "fuck", "no", "blok"], ["."]) & filters.me & filters.private)
+@Client.on_message(filters.command(["deny", "fuck", "no", "blok"], cmds) & filters.me & filters.private)
 async def deny(client, message):
     chat_id = message.chat.id
     await TOD.deny_user(chat_id)

@@ -26,7 +26,7 @@ from geezlibs.geez.helper.utility import get_arg
 from geezlibs.geez.helper.PyroHelpers import get_ub_chats
 from geezlibs.geez.database.rraid import *
 from cache.data import *
-from Geez import SUDO_USER
+from Geez import SUDO_USER, cmds
 from Geez.modules.basic import *
 from Geez.modules.basic.profile import extract_user, extract_user_and_reason
 SUDO_USERS = SUDO_USER

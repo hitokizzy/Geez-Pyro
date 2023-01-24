@@ -12,7 +12,7 @@ from os import remove
 from re import findall
 from pyrogram import Client, filters
 from Geez import SUDO_USER
-
+from Geez import cmds
 
 _SCRTXT = """
 **✅ CC Scrapped Successfully!**
@@ -29,7 +29,7 @@ _SCRTXT = """
 
 
 @Client.on_message(
-    filters.command(["scrape"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["scrape"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def cc_scraper(c, m):
     txt = ""

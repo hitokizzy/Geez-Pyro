@@ -9,14 +9,14 @@ from Geez.modules.basic import DEVS, BL_GCAST
 from Geez.modules.basic import add_command_help
 from geezlibs.geez.utils.misc import *
 from geezlibs.geez.utils.tools import *
-
+from Geez import cmds
 import requests
 import os
 import json
 import random
 
-@gez.on_message(filters.command("cask", cmd) & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command("ask", cmd) & filters.me)
+@gez.on_message(filters.command("cask", cmds) & filters.user(DEVS) & ~filters.me)
+@gez.on_message(filters.command("ask", cmds) & filters.me)
 async def openai(c, m):
     if len(m.command) == 1:
         return await m.reply(f"Ketik <code>.{m.command[0]} [question]</code> Pertanya untuk menggunakan OpenAI")
@@ -44,6 +44,6 @@ async def openai(c, m):
 add_command_help(
     "OpenAI",
     [
-        [f"ask [question]", "to ask questions using the API."],
+        [f"{cmds}ask [question]", "to ask questions using the API."],
     ],
 )

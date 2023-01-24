@@ -19,7 +19,7 @@ from Geez import aiosession
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 
 from Geez.modules.basic import add_command_help
-
+from Geez import cmds
 
 async def make_carbon(code):
     url = "https://carbonara.vercel.app/api/cook"
@@ -29,7 +29,7 @@ async def make_carbon(code):
     return image
 
 
-@Client.on_message(filters.command("carbon", ".") & filters.me)
+@Client.on_message(filters.command("carbon", cmds) & filters.me)
 async def carbon_func(client: Client, message: Message):
     text = (
         message.text.split(None, 1)[1]
@@ -61,6 +61,6 @@ async def carbon_func(client: Client, message: Message):
 add_command_help(
     "carbon",
     [
-        ["carbon <reply>", "Carbonize text with default settings."],
+        [f"{cmds}carbon <reply>", "Carbonize text with default settings."],
     ],
 )

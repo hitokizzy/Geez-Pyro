@@ -21,7 +21,9 @@ class Config((object)):
     HEROKU_API_KEY = getenv("HEROKU_API_KEY")
     HEROKU_APP_NAME = getenv("HEROKU_APP_NAME")
     BRANCH = getenv("BRANCH", "main") #don't change
-    CMD_HNDLR = getenv("CMD_HNDLR", ".") 
+    CMD_HNDLR = getenv("CMD_HNDLR", ".")
+    HNDLR = CMD_HNDLR 
+    TZ = getenv("TZ", "Asia/Jakarta")
     STRING_SESSION1 = getenv("STRING_SESSION1", "")
     STRING_SESSION2 = getenv("STRING_SESSION2", "")
     STRING_SESSION3 = getenv("STRING_SESSION3", "")

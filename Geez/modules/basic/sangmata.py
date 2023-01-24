@@ -15,8 +15,9 @@ from pyrogram.errors import YouBlockedUser
 from pyrogram.types import *
 from Geez.modules.basic import add_command_help
 from Geez.modules.basic.profile import extract_user
+from Geez import cmds
 
-@Client.on_message(filters.command(["sg", "sa", "sangmata"], ".") & filters.me)
+@Client.on_message(filters.command(["sg", "sa", "sangmata"], cmds) & filters.me)
 async def sg(client: Client, message: Message):
     args = await extract_user(message)
     lol = await message.edit_text("`Processing...`")

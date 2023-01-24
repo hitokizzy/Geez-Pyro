@@ -31,11 +31,12 @@ from geezlibs.geez.utils.tools import get_text, humanbytes, run_in_exc, run_cmd
 from geezlibs.geez.helper.basic import edit_or_reply
 from geezlibs import join
 from Geez.modules.basic import add_command_help
+from Geez import cmds
 
 s_dict = {}
 GPC = {}
 
-@gez.on_message(filters.command(["playlist"], ".") & filters.me
+@gez.on_message(filters.command(["playlist"], cmds) & filters.me
 )
 async def pl(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
@@ -94,7 +95,7 @@ async def playout_ended_handler(group_call, filename):
     group_call.song_name = name_
     group_call.input_filename = raw_file
 
-@gez.on_message(filters.command(["skip"], ".") & filters.me
+@gez.on_message(filters.command(["skip"], cmds) & filters.me
 )
 async def ski_p(client, message):
     m_ = await edit_or_reply(message, "`Bentar Cuk!`")
@@ -135,7 +136,7 @@ async def ski_p(client, message):
         return await m_.edit(f"`Ganti Lagu : {s_} At Posisi #{no_t_s}`")
    
                 
-@gez.on_message(filters.command(["play"], ".") & filters.me
+@gez.on_message(filters.command(["play"], cmds) & filters.me
 )
 async def play_m(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
@@ -275,7 +276,7 @@ def yt_dl(url, client, message, start):
 RD_ = {}
 FFMPEG_PROCESSES = {}
  
-@gez.on_message(filters.command(["pause"], ".") & filters.me
+@gez.on_message(filters.command(["pause"], cmds) & filters.me
 )
 async def no_song_play(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
@@ -289,7 +290,7 @@ async def no_song_play(client, message):
     group_call.pause_playout()
     
     
-@gez.on_message(filters.command(["resume"], ".") & filters.me
+@gez.on_message(filters.command(["resume"], cmds) & filters.me
 )
 async def wow_dont_stop_songs(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
@@ -303,7 +304,7 @@ async def wow_dont_stop_songs(client, message):
     await edit_or_reply(message, f"`▶️ Dilanjutkan.`")
         
 
-@gez.on_message(filters.command(["end"], ".") & filters.me
+@gez.on_message(filters.command(["end"], cmds) & filters.me
 )
 async def leave_vc_test(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
@@ -323,13 +324,13 @@ add_command_help(
     "Musik",
     [
         [
-            "play",
-            "Play Musik & Video Dengan Judul Lagu",
+            f"{cmds}play",
+            f"{cmds}Play Musik & Video Dengan Judul Lagu",
         ],
-        ["skip", "Skip Lagu."],
-        ["pause", "Pause Musik."],
-        ["resume", "Resume Musik."],
-        ["end", "Stop Musik."],
-        ["playlist", "Play Playlist Musik."],
+        [f"{cmds}skip", "Skip Lagu."],
+        [f"{cmds}pause", "Pause Musik."],
+        [f"{cmds}resume", "Resume Musik."],
+        [f"{cmds}end", "Stop Musik."],
+        [f"{cmds}playlist", "Play Playlist Musik."],
     ],
 )

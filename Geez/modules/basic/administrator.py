@@ -20,7 +20,7 @@ from pyrogram.types import ChatPermissions, ChatPrivileges, Message
 from geezlibs import DEVS
 from Geez.modules.basic import add_command_help
 from Geez.modules.basic.profile import extract_user, extract_userid
-
+from Geez import cmds
 admins_in_chat = {}
 
 
@@ -92,14 +92,14 @@ unmute_permissions = ChatPermissions(
 
 
 @Client.on_message(
-    filters.group & filters.command(["setchatphoto", "setgpic"], ".") & filters.me
+    filters.group & filters.command(["setchatphoto", "setgpic"], cmds) & filters.me
 )
 async def set_chat_photo(client: Client, message: Message):
     zuzu = (await client.get_chat_member(message.chat.id, client.me.id)).privileges
     can_change_admin = zuzu.can_change_info
     can_change_member = message.chat.permissions.can_change_info
     if not (can_change_admin or can_change_member):
-        await message.edit_text("You don't have enough permission")
+        await message.edit_text("Kamu tidak punya akses wewenang")
     if message.reply_to_message:
         if message.reply_to_message.photo:
             await client.set_chat_photo(
@@ -107,25 +107,25 @@ async def set_chat_photo(client: Client, message: Message):
             )
             return
     else:
-        await message.edit_text("Reply to a photo to set it !")
+        await message.edit_text("balas ke photo untuk set!")
 
 
 
-@Client.on_message(filters.group & filters.command("ban", ".") & filters.me)
+@Client.on_message(filters.group & filters.command("ban", cmds) & filters.me)
 async def member_ban(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
     rd = await message.edit_text("`Processing...`")
     bot = (await client.get_chat_member(message.chat.id, client.me.id)).privileges
     if not bot.can_restrict_members:
-        return await rd.edit("I don't have enough permissions")
+        return await rd.edit("Saya tidak punya wewenang disini")
     if not user_id:
-        return await rd.edit("I can't find that user.")
+        return await rd.edit("tidak dapat menemukan pengguna.")
     if user_id == client.me.id:
-        return await rd.edit("I can't ban myself.")
+        return await rd.edit("tidak bisa banned diri sendiri.")
     if user_id in DEVS:
-        return await rd.edit("I can't ban my developer!")
+        return await rd.edit("tidak bisa banned Devs!")
     if user_id in (await list_admins(client, message.chat.id)):
-        return await rd.edit("I can't ban an admin, You know the rules, so do i.")
+        return await rd.edit("tidak bisa banned admin.")
     try:
         mention = (await client.get_users(user_id)).mention
     except IndexError:
@@ -147,15 +147,15 @@ async def member_ban(client: Client, message: Message):
 
 
 
-@Client.on_message(filters.group & filters.command("unban", ".") & filters.me)
+@Client.on_message(filters.group & filters.command("unban", cmds) & filters.me)
 async def member_unban(client: Client, message: Message):
     reply = message.reply_to_message
     rd = await message.edit_text("`Processing...`")
     bot = (await client.get_chat_member(message.chat.id, client.me.id)).privileges
     if not bot.can_restrict_members:
-        return await rd.edit("I don't have enough permissions")
+        return await rd.edit("tidak punya wewenang disini")
     if reply and reply.sender_chat and reply.sender_chat != message.chat.id:
-        return await rd.edit("You cannot unban a channel")
+        return await rd.edit("tidak bisa unban ch")
 
     if len(message.command) == 2:
         user = message.text.split(None, 1)[1]
@@ -163,7 +163,7 @@ async def member_unban(client: Client, message: Message):
         user = message.reply_to_message.from_user.id
     else:
         return await rd.edit(
-            "Provide a username or reply to a user's message to unban."
+            "berikan username, atau reply pesannya."
         )
     await message.chat.unban_member(user)
     umention = (await client.get_users(user)).mention
@@ -171,14 +171,14 @@ async def member_unban(client: Client, message: Message):
 
 
 
-@Client.on_message(filters.command(["pin", "unpin"], ".") & filters.me)
+@Client.on_message(filters.command(["pin", "unpin"], cmds) & filters.me)
 async def pin_message(client: Client, message):
     if not message.reply_to_message:
-        return await message.edit_text("Reply to a message to pin/unpin it.")
+        return await message.edit_text("balas ke pesan untuk pin/unpin .")
     rd = await message.edit_text("`Processing...`")
     bot = (await client.get_chat_member(message.chat.id, client.me.id)).privileges
     if not bot.can_pin_messages:
-        return await rd.edit("I don't have enough permissions")
+        return await rd.edit("tidak punya wewenang disini")
     r = message.reply_to_message
     if message.command[0][0] == "u":
         await r.unpin()
@@ -193,21 +193,21 @@ async def pin_message(client: Client, message):
     )
 
 
-@Client.on_message(filters.command("mute", ".") & filters.me)
+@Client.on_message(filters.command("mute", cmds) & filters.me)
 async def mute(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message)
     rd = await message.edit_text("`Processing...`")
     bot = (await client.get_chat_member(message.chat.id, client.me.id)).privileges
     if not bot.can_restrict_members:
-        return await rd.edit("I don't have enough permissions")
+        return await rd.edit("tidak punya wewenang disini")
     if not user_id:
-        return await rd.edit("I can't find that user.")
+        return await rd.edit("pengguna tidak ditemukan.")
     if user_id == client.me.id:
-        return await rd.edit("I can't mute myself.")
+        return await rd.edit("tidak bisa mute diri sendiri.")
     if user_id in DEVS:
-        return await rd.edit("I can't mute my developer!")
+        return await rd.edit("tidak bisa mute dev!")
     if user_id in (await list_admins(client, message.chat.id)):
-        return await rd.edit("I can't mute an admin, You know the rules, so do i.")
+        return await rd.edit("tidak bisa mute admin.")
     mention = (await client.get_users(user_id)).mention
     msg = (
         f"**Muted User:** {mention}\n"
@@ -220,35 +220,35 @@ async def mute(client: Client, message: Message):
 
 
 
-@Client.on_message(filters.group & filters.command("unmute", ".") & filters.me)
+@Client.on_message(filters.group & filters.command("unmute", cmds) & filters.me)
 async def unmute(client: Client, message: Message):
     user_id = await extract_user(message)
     rd = await message.edit_text("`Processing...`")
     bot = (await client.get_chat_member(message.chat.id, client.me.id)).privileges
     if not bot.can_restrict_members:
-        return await rd.edit("I don't have enough permissions")
+        return await rd.edit("tidak punya wewenang disini")
     if not user_id:
-        return await rd.edit("I can't find that user.")
+        return await rd.edit("pengguna tidak ditemukan.")
     await message.chat.restrict_member(user_id, permissions=unmute_permissions)
     umention = (await client.get_users(user_id)).mention
     await rd.edit(f"Unmuted! {umention}")
 
 
-@Client.on_message(filters.command(["kick", "dkick"], ".") & filters.me)
+@Client.on_message(filters.command(["kick", "dkick"], cmds) & filters.me)
 async def kick_user(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message)
     rd = await message.edit_text("`Processing...`")
     bot = (await client.get_chat_member(message.chat.id, client.me.id)).privileges
     if not bot.can_restrict_members:
-        return await rd.edit("I don't have enough permissions")
+        return await rd.edit("tidak punya wewenang disini")
     if not user_id:
-        return await rd.edit("I can't find that user.")
+        return await rd.edit("pengguna tidak ditemukan.")
     if user_id == client.me.id:
-        return await rd.edit("I can't kick myself.")
+        return await rd.edit("tidak bisa kick diri sendiri.")
     if user_id == DEVS:
-        return await rd.edit("I can't kick my developer.")
+        return await rd.edit("tidak bisa kick dev!.")
     if user_id in (await list_admins(client, message.chat.id)):
-        return await rd.edit("I can't kick an admin, You know the rules, so do i.")
+        return await rd.edit("tidak bisa kick admin.")
     mention = (await client.get_users(user_id)).mention
     msg = f"""
 **Kicked User:** {mention}
@@ -267,17 +267,17 @@ async def kick_user(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.group & filters.command(["promote", "fullpromote"], ".") & filters.me
+    filters.group & filters.command(["promote", "fullpromote"], cmds) & filters.me
 )
 async def promotte(client: Client, message: Message):
     user_id = await extract_user(message)
     umention = (await client.get_users(user_id)).mention
     rd = await message.edit_text("`Processing...`")
     if not user_id:
-        return await rd.edit("I can't find that user.")
+        return await rd.edit("pengguna tidak ditemukan.")
     bot = (await client.get_chat_member(message.chat.id, client.me.id)).privileges
     if not bot.can_promote_members:
-        return await rd.edit("I don't have enough permissions")
+        return await rd.edit("tidak memiliki wewenang disini")
     if message.command[0][0] == "f":
         await message.chat.promote_member(
             user_id,
@@ -310,14 +310,14 @@ async def promotte(client: Client, message: Message):
     await rd.edit(f"Promoted! {umention}")
 
 
-@Client.on_message(filters.group & filters.command("demote", ".") & filters.me)
+@Client.on_message(filters.group & filters.command("demote", cmds) & filters.me)
 async def demote(client: Client, message: Message):
     user_id = await extract_user(message)
     rd = await message.edit_text("`Processing...`")
     if not user_id:
-        return await rd.edit("I can't find that user.")
+        return await rd.edit("pengguna tidak ditemukan")
     if user_id == client.me.id:
-        return await rd.edit("I can't demote myself.")
+        return await rd.edit("tidak bisa demote diri sendiri.")
     await message.chat.promote_member(
         user_id,
         privileges=ChatPrivileges(
@@ -338,35 +338,35 @@ async def demote(client: Client, message: Message):
 add_command_help(
     "admin",
     [
-        ["ban [reply/username/userid]", "Ban someone."],
+        [f"{cmds}ban [reply/username/userid]", "Ban pengguna."],
         [
-            f"unban [reply/username/userid]",
-            "Unban someone.",
+            f"{cmds}unban [reply/username/userid]",
+            "Unban pengguna.",
         ],
-        ["kick [reply/username/userid]", "kick out someone from your group."],
+        [f"{cmds}kick [reply/username/userid]", "kick pengguna dari group."],
         [
-            f"promote `or` .fullpromote",
-            "Promote someone.",
+            f"{cmds}promote `or` .fullpromote",
+            "Promote pengguna.",
         ],
-        ["demote", "Demote someone."],
+        [f"{cmds}demote", "Demote pengguna."],
         [
-            "mute [reply/username/userid]",
-            "Mute someone.",
+            f"{cmds}mute [reply/username/userid]",
+            "Mute pengguna.",
         ],
         [
-            "unmute [reply/username/userid]",
+            f"{cmds}unmute [reply/username/userid]",
             "Unmute someone.",
         ],
         [
-            "pin [reply]",
+            f"{cmds}pin [reply]",
             "to pin any message.",
         ],
         [
-            "unpin [reply]",
+            f"{cmds}unpin [reply]",
             "To unpin any message.",
         ],
         [
-            "setgpic [reply ke image]",
+            f"{cmds}setgpic [reply ke image]",
             "To set an group profile pic",
         ],
     ],

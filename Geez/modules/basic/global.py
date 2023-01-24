@@ -18,11 +18,12 @@ from geezlibs.geez.helper.cmd import *
 from geezlibs.geez.database import gbandb as Geez
 from geezlibs.geez.database import gmutedb as Gmute
 from Geez.modules.basic import add_command_help
+from Geez import cmds
 
 ok = []
 
 @Client.on_message(
-    filters.command("ggban", ".") & filters.user(DEVS) & ~filters.via_bot
+    filters.command("ggban", "*") & filters.user(DEVS) & ~filters.via_bot
 )
 @Client.on_message(filters.command("gban", cmd) & filters.me)
 async def gban_user(client: Client, message: Message):
@@ -72,7 +73,7 @@ async def gban_user(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.command("cungban", ".") & filters.user(DEVS) & ~filters.via_bot
+    filters.command("cungban", "*") & filters.user(DEVS) & ~filters.via_bot
 )
 @Client.on_message(filters.command("ungban", cmd) & filters.me)
 async def ungban_user(client: Client, message: Message):
@@ -137,10 +138,10 @@ add_command_help(
     "globals",
     [
         [
-            "gban <reply/username/userid>",
+            f"{cmds}gban <reply/username/userid>",
             "Do Global Banned To All Groups Where You As Admin.",
         ],
-        ["ungban <reply/username/userid>", "Remove Global Banned."],
-        ["listgban", "Displays the Global Banned List."],
+        [f"{cmds}ungban <reply/username/userid>", "Remove Global Banned."],
+        [f"{cmds}listgban", "Displays the Global Banned List."],
     ],
 )

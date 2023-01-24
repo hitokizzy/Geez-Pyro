@@ -23,10 +23,12 @@ from pyrogram.types import (
 )
 from datetime import datetime
 from geezlibs.geez.helper import SpeedConvert
+from geezlibs.decorator import geez
 from Geez import StartTime, SUDO_USER
-from Geez import app 
+from Geez import app, cmds 
 from Geez.modules.bot.inline import get_readable_time
 from Geez.modules.basic import add_command_help, DEVS
+from Geez import cmds
 
 class WWW:
     SpeedTest = (
@@ -40,7 +42,7 @@ class WWW:
     NearestDC = "Country: `{}`\n" "Nearest Datacenter: `{}`\n" "This Datacenter: `{}`"
 
 @Client.on_message(
-    filters.command(["speedtest"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["speedtest"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def speed_test(client: Client, message: Message):
     new_msg = await message.reply_text("`Running speed test . . .`")
@@ -97,12 +99,12 @@ class WWW:
     NearestDC = "Country: `{}`\n" "Nearest Datacenter: `{}`\n" "This Datacenter: `{}`"
 
 
-@Client.on_message(filters.command("absen", ["."]) & filters.user(DEVS) & ~filters.me)
+@Client.on_message(filters.command("absen", ["*"]) & filters.user(DEVS) & ~filters.me)
 async def absen(client: Client, message: Message):
     await message.reply_text(random.choice(kopi))
 
 
-@Client.on_message(filters.command("gping", ".") & filters.user(DEVS) & ~filters.me)
+@Client.on_message(filters.command("gping", "*") & filters.user(DEVS) & ~filters.me)
 async def cpingme(client: Client, message: Message):
     """Ping the assistant"""
     mulai = time.time()
@@ -112,7 +114,7 @@ async def cpingme(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.command(["pink"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["pink"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def pingme(client: Client, message: Message):
     uptime = await get_readable_time((time.time() - StartTime))
@@ -131,7 +133,9 @@ async def pingme(client: Client, message: Message):
     await asyncio.sleep(1)
     await xx.edit(f"**Geez - Pyro!!🎈**\n**Pinger** : %sms\n**Bot Uptime** : {uptime}🕛" % (duration))
     
-@Client.on_message(filters.command(["ping"], ".") & filters.me)
+@Client.on_message(
+    filters.command("ping", cmds) & (filters.me)
+)
 async def module_ping(client: Client, message: Message):
     cmd = message.command
     help_arg = ""
@@ -151,7 +155,7 @@ async def module_ping(client: Client, message: Message):
             print(f"{e}")
 
 @Client.on_message(
-    filters.command(["pping"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["pping"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def ppingme(client: Client, message: Message):
     uptime = await get_readable_time((time.time() - StartTime))
@@ -179,6 +183,14 @@ async def ppingme(client: Client, message: Message):
 add_command_help(
     "ping",
     [
-        ["ping", "Check bot alive or not."],
+        [f"{cmds}ping", "Check bot alive or not."],
+        [f"{cmds}pping", "Check bot alive or not."],
+    ],
+)
+add_command_help(
+    "Alive",
+    [
+        [f"{cmds}alive", "Check bot alive or not."],
+        [f"{cmds}geez", "Check bot alive or not."],
     ],
 )

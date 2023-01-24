@@ -16,6 +16,7 @@ from pyrogram.types import Message
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from geezlibs.geez.helper.utility import split_list
 from Geez import app, CMD_HELP
+from Geez import cmds
 
 async def edit_or_reply(message: Message, *args, **kwargs) -> Message:
     xyz = (
@@ -25,7 +26,7 @@ async def edit_or_reply(message: Message, *args, **kwargs) -> Message:
     )
     return await xyz(*args, **kwargs)
 
-@Client.on_message(filters.command(["help", "helpme"], ".") & filters.me)
+@Client.on_message(filters.command(["help", "helpme"], cmds) & filters.me)
 async def module_help(client: Client, message: Message):
     cmd = message.command
     help_arg = ""
@@ -76,7 +77,7 @@ async def module_help(client: Client, message: Message):
             )
 
 
-@Client.on_message(filters.command(["plugins", "modules"], ".") & filters.me)
+@Client.on_message(filters.command(["plugins", "modules"], cmds) & filters.me)
 async def module_helper(client: Client, message: Message):
     cmd = message.command
     help_arg = ""

@@ -13,6 +13,7 @@ from pyrogram.types import Message
 from telegraph import Telegraph, exceptions, upload_file
 import os
 from Geez.modules.basic import *
+from Geez import cmds
 
 telegraph = Telegraph()
 r = telegraph.create_account(short_name="telegram")
@@ -33,7 +34,7 @@ def get_text(message: Message) -> [None, str]:
     else:
         return None
 
-@Client.on_message(filters.command(["tg", "telegraph", "tm", "tgt"], ".") & filters.me)
+@Client.on_message(filters.command(["tg", "telegraph", "tm", "tgt"], cmds) & filters.me)
 async def uptotelegraph(client: Client, message: Message):
     tex = await message.edit_text("`Processing . . .`")
     if not message.reply_to_message:
@@ -74,7 +75,7 @@ add_command_help(
     "telegraph",
     [
         [
-            f"telegraph `or` .tg",
+            f"{cmds}telegraph `or` {cmds}tg",
             "To upload on telegraph.",
         ],
     ],

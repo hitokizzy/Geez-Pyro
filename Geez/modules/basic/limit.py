@@ -13,9 +13,9 @@ from pyrogram import Client, filters, raw
 from pyrogram.types import Message
 from geezlibs.geez.helper.basic import edit_or_reply
 from Geez.modules.basic import add_command_help
-from config import CMD_HNDLR as cmd
+from Geez import cmds
 
-@Client.on_message(filters.command("limit", cmd) & filters.me)
+@Client.on_message(filters.command("limit", cmds) & filters.me)
 async def spamban(client: Client, m: Message):
     await client.unblock_user("SpamBot")
     response = await client.send(
@@ -35,6 +35,6 @@ async def spamban(client: Client, m: Message):
 add_command_help(
     "Limit",
     [
-        [".limit", "cek your limitation."],
+        [f"{cmds}limit", "cek your limitation."],
     ],
 )

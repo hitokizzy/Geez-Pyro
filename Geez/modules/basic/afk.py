@@ -17,6 +17,7 @@ from pyrogram.types import Message
 
 from geezlibs.geez.helper.PyroHelpers import GetChatID, ReplyCheck
 from Geez.modules.basic import add_command_help
+from Geez import cmds
 
 AFK = False
 AFK_REASON = ""
@@ -82,7 +83,7 @@ async def collect_afk_messages(bot: Client, message: Message):
         CHAT_TYPE[GetChatID(message)] += 1
 
 
-@Client.on_message(filters.command("afk", ".") & filters.me, group=3)
+@Client.on_message(filters.command("afk", cmds) & filters.me, group=3)
 async def afk_set(bot: Client, message: Message):
     global AFK_REASON, AFK, AFK_TIME
 
@@ -108,8 +109,8 @@ async def afk_unset(bot: Client, message: Message):
     if AFK:
         last_seen = subtract_time(datetime.now(), AFK_TIME).replace("ago", "").strip()
         await message.edit(
-            f"`While you were away (for {last_seen}), you received {sum(USERS.values()) + sum(GROUPS.values())} "
-            f"messages from {len(USERS) + len(GROUPS)} chats`"
+            f"`selama afk (afk sejak : {last_seen}), kamu menerima {sum(USERS.values()) + sum(GROUPS.values())} "
+            f"pesan dari {len(USERS) + len(GROUPS)}`"
         )
         AFK = False
         AFK_TIME = ""
@@ -128,8 +129,8 @@ if AFK:
        if AFK:
            last_seen = subtract_time(datetime.now(), AFK_TIME).replace("ago", "").strip()
            reply = await message.reply(
-               f"`While you were away (for {last_seen}), you received {sum(USERS.values()) + sum(GROUPS.values())} "
-               f"messages from {len(USERS) + len(GROUPS)} chats`"
+                f"`selama afk (afk sejak : {last_seen}), kamu menerima {sum(USERS.values()) + sum(GROUPS.values())} "
+                f"pesan dari {len(USERS) + len(GROUPS)}`"
            )
            AFK = False
            AFK_TIME = ""
@@ -143,7 +144,7 @@ if AFK:
 add_command_help(
     "afk",
     [
-        [".afk", "Activates AFK mode with reason as anything after .afk\nUsage: ```.afk <reason>```"],
-        ["!afk", "Deactivates AFK mode."],
+        [f"{cmds}afk", "mengaktifkan mode AFK .afk\nUsage: ```.afk <alasan>```"],
+        ["!afk", "menonaktifkan mode afk."],
     ],
 )

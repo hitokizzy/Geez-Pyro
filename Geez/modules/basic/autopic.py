@@ -19,7 +19,7 @@ from pyrogram import filters, Client
 
 from Geez import SUDO_USER
 from Geez.modules.basic import add_command_help
-
+from Geez import cmds
 
 __XOR = []
 FIRST_TIME = True
@@ -56,7 +56,7 @@ async def _autopic(_, delay):
 
 
 @Client.on_message(
-    filters.command(["autopic"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["autopic"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def autopic_Geez(_, m):
     global __XOR
@@ -75,5 +75,5 @@ async def autopic_Geez(_, m):
 
 add_command_help(
     "autopic",
-    [["autopic", "Change your DP every 5 minute. \nRun .autopic again to stop it."]],
+    [[f"{cmds}autopic", "Change your DP every 5 minute. \nRun {cmds}autopic again to stop it."]],
 )

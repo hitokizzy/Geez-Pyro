@@ -15,10 +15,10 @@ from pyrogram.types import Message
 
 from Geez import SUDO_USER
 from Geez.modules.basic import add_command_help
-
+from Geez import cmds
 
 @Client.on_message(
-    filters.command(["lyrics"], ".") & (filters.me | filters.user(SUDO_USER))
+    filters.command(["lyrics"], cmds) & (filters.me | filters.user(SUDO_USER))
 )
 async def send_lyrics(bot: Client, message: Message):
     try:
@@ -69,4 +69,4 @@ async def send_lyrics(bot: Client, message: Message):
         await message.delete()
 
 
-add_command_help("lyrics", [[".l `or` .lyrics", "Search lyrics and send."]])
+add_command_help("lyrics", [[f"{cmds}lyrics", "Search lyrics and send."]])

@@ -15,9 +15,9 @@ from pyrogram.types import Message
 from py_trans import Async_PyTranslator
 from geezlibs.geez.helper.utility import get_arg
 from Geez.modules.basic import *
+from Geez import cmds
 
-
-@Client.on_message(filters.command(["tr", "translate"], ["."]) & filters.me)
+@Client.on_message(filters.command(["tr", "translate"], cmds) & filters.me)
 async def pytrans_tr(_, message: Message):
   tr_msg = await message.edit("`Processing...`")
   r_msg = message.reply_to_message
@@ -29,7 +29,7 @@ async def pytrans_tr(_, message: Message):
       return await tr_msg.edit("`Reply to a message that contains text!`")
     # Checks if dest lang is defined by the user
     if not args:
-      return await tr_msg.edit(f"`Please define a destination language!` \n\n**Ex:** `{Config.CMD_PREFIX}ptr si Hey, I'm using telegram!`")
+      return await tr_msg.edit(f"`Please define a destination language!`!`")
     # Setting translation if provided
     else:
       sp_args = args.split(" ")
@@ -76,6 +76,6 @@ async def pytrans_tr(_, message: Message):
 add_command_help(
     "translate",
     [
-        [".tr", "Translate some text by give a text or reply that text/caption."],
+        [f"{cmds}tr", "Translate some text by give a text or reply that text/caption."],
     ],
 )

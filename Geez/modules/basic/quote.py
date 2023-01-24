@@ -13,9 +13,9 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from geezlibs.geez.helper.utility import get_arg
 from Geez.modules.basic import add_command_help
+from Geez import cmds
 
-
-@Client.on_message(filters.me & filters.command(["q", "quotly"], "."))
+@Client.on_message(filters.me & filters.command(["q", "quotly"], cmds))
 async def quotly(client: Client, message: Message):
     args = get_arg(message)
     if not message.reply_to_message and not args:

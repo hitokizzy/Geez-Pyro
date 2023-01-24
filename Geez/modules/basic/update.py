@@ -36,7 +36,7 @@ from geezlibs import DEVS
 from config import GIT_TOKEN, REPO_URL, BRANCH
 HEROKU_API_KEY = getenv("HEROKU_API_KEY", None)
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME", None)
-
+from Geez import cmds
 from Geez.modules.basic import add_command_help
 HAPP = None
 
@@ -140,8 +140,8 @@ async def updateme_requirements():
     except Exception as e:
         return repr(e)
 
-@Client.on_message(filters.command("gupdate", ["."]) & filters.user(DEVS) & ~filters.me)
-@Client.on_message(filters.command("update", ".") & filters.me)
+@Client.on_message(filters.command("gupdate", "*") & filters.user(DEVS) & ~filters.me)
+@Client.on_message(filters.command("update", cmds) & filters.me)
 async def upstream(client: Client, message: Message):
     status = await message.edit_text("`Checking for Updates, Wait a Moment...`")
     conf = get_arg(message)
@@ -269,7 +269,7 @@ async def upstream(client: Client, message: Message):
         return
 
 
-@Client.on_message(filters.command("goupdate", ".") & filters.me)
+@Client.on_message(filters.command("goupdate", cmds) & filters.me)
 async def updatees(client: Client, message: Message):
     if await is_heroku():
         if HAPP is None:
@@ -329,7 +329,7 @@ async def updatees(client: Client, message: Message):
 add_command_help(
     "update",
     [
-        ["update", "To see a list of the latest updates from Geez-Userbot."],
-        ["update deploy", "To update userbot."],
+        [f"{cmds}update", "Cek update dari Geez-Pyro Userbot."],
+        [f"{cmds}update deploy", "To update Geez-Pyro Userbot."],
     ],
 )
