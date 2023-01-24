@@ -10,6 +10,7 @@ from Geez.modules.basic import add_command_help
 from geezlibs.geez.utils.misc import *
 from geezlibs.geez.utils.tools import *
 from Geez import cmds
+from config import OPENAI_API
 import requests
 import os
 import json
