@@ -19,7 +19,7 @@ import random
 @gez.on_message(filters.command("ask", cmds) & filters.me)
 async def openai(c, m):
     if len(m.command) == 1:
-        return await m.reply(f"Ketik <code>.{m.command[0]} [question]</code> Pertanya untuk menggunakan OpenAI")
+        return await m.reply(f"Ketik <code>{cmds}{m.command[0]} [question]</code> Pertanya untuk menggunakan OpenAI")
     question = m.text.split(" ", maxsplit=1)[1]
     headers = {
         "Content-Type": "application/json",
