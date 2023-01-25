@@ -82,6 +82,7 @@ async def deny(client, message):
     & ~filters.service
     & ~filters.me
     & ~filters.bot
+    & ~filters.via_bot
 )
 async def reply_pm(app: Client, message):
     global FLOOD_CTRL

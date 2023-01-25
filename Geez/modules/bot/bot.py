@@ -69,9 +69,9 @@ async def _callbacks(_, callback_query: CallbackQuery):
 async def on_plug_in_cb(_, callback_query: CallbackQuery):
     modul_name = callback_query.matches[0].group(1)
     commands: dict = CMD_HELP[modul_name]
-    this_command = f"**Help For {str(modul_name).upper()}** 」──\n\n"
+    this_command = f"**Help For {str(modul_name).upper()}**\n\n"
     for x in commands:
-        this_command += f"  •  **Command:** `{str(x)}`\n  •  **Function:** `{str(commands[x])}`\n\n"
+        this_command += f"**Command:** `{str(x)}`\n ┗*Function:** `{str(commands[x])}`\n\n"
     this_command += "© Geez | RAM"
     bttn = [
         [InlineKeyboardButton(text="Return", callback_data="reopen")],
@@ -79,7 +79,7 @@ async def on_plug_in_cb(_, callback_query: CallbackQuery):
     reply_pop_up_alert = (
         this_command
         if this_command is not None
-        else f"{module_name} No documentation has been written for the module."
+        else f"{modul_name} Belum ada penjelasannya ."
     )
     await app.edit_inline_text(
         callback_query.inline_message_id,

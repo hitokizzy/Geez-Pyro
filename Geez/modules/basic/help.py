@@ -56,7 +56,7 @@ async def module_help(client: Client, message: Message):
                 reply_to_message_id=ReplyCheck(message),
             )
             await xx.reply(
-                f"**Usage:** `.help broadcast` **To View Module Information**"
+                f"**Usage:** `{cmds}help broadcast` **To View Module Information**"
             )
             return
 
@@ -102,7 +102,7 @@ async def module_helper(client: Client, message: Message):
     if help_arg:
         if help_arg in CMD_HELP:
             commands: dict = CMD_HELP[help_arg]
-            this_command = f"**Help For {str(help_arg).upper()}** 」──\n\n"
+            this_command = f"**Help For {str(help_arg).upper()}**\n\n"
             for x in commands:
                 this_command += f" -**Command:** `.{str(x)}`\n  ┗**Function:** `{str(commands[x])}`\n\n"
             this_command += "© @GeezSupport >< @ramsupportt"
