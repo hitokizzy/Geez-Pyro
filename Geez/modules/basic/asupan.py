@@ -143,7 +143,5 @@ add_command_help(
         [f"{cmds}ppcp", "Mencari Foto PP Couple Random."],
         [f"{cmds}bokep", "to send random porno videos."],
         [f"{cmds}ppanime", "Mencari Foto PP Couple Anime."],
-
-        ["notes, Untuk menghormati para devs, modul ini tidak berfunsi di Support Group"],
     ],
 )
