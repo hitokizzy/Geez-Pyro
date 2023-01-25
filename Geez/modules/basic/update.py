@@ -181,8 +181,8 @@ async def upstream(client: Client, message: Message):
         return
     try:
         repo.create_remote("upstream", off_repo)
-    except BaseException:
-        pass
+    except BaseException as a:
+        print(a)
     ups_rem = repo.remote("upstream")
     ups_rem.fetch(ac_br)
     changelog = await gen_chlog(repo, f"HEAD..upstream/{ac_br}")

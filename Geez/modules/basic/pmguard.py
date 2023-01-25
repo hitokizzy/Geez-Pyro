@@ -88,21 +88,7 @@ async def reply_pm(app: Client, message):
     global FLOOD_CTRL
     pmpermit, pm_message, limit, block_message = await TOD.get_pm_settings()
     user = message.from_user.id
-    #if user.is_bot:
-    #    return
-    #if user.is_self:
-    #    return
-    #if user.is_contact:
-    #    return
-    #if user.is_verified:
-    #    return
-    #if user.is_scam:
-    #    await message.reply_text("Scammer Tidak Diterima di PM Tuan Saya!")
-    #    await Client.block_user(user.id)
-    #    return
-    if user.is_support:
-        return
-    if user.id in DEVS:
+    if user in DEVS:
         if not allow_user(user.id):
             allow_user(user.id)
             return await message.reply("Menerima Pesan dari Developer")

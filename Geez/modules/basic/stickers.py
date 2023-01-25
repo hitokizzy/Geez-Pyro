@@ -596,7 +596,7 @@ add_command_help(
             "menambahkan stiker dengan spesifik emoji.`"],
         [f"{cmds}packinfo `or` {cmds}stickerinfo",
             "mengambil info stiker atau pack striker."],
-        [ f"{cmds}mtoi <balas ke sticker> or {cmds}getsticker balas ke sticker",
+        [ f"{cmds}mtoi atau {cmds}getsticker balas ke sticker",
             "balas ke stiker untuk mengubahnya jadi image/gambar." ],
         [f"{cmds}stickers <nama sticker>", "untuk mencari pack stikernya."],
     ],
