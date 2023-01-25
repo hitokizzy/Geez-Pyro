@@ -591,17 +591,13 @@ add_command_help(
     "sticker",
     [
         [f"{cmds}kang `Balas` Gambar",
-            f"Balas {cmds}kang menambahkan gamabr/stiker ke pack stiker anda.",
-        ],
+            f"Balas {cmds}kang menambahkan gambar/stiker ke pack stiker anda."],
         [f"{cmds}kang [emoji] `atau` double [emoji]",
-            f"menambahkan stiker denagn spesifik emoji.`",
-        ],
+            "menambahkan stiker denagn spesifik emoji.`"],
         [f"{cmds}packinfo `or` {cmds}stickerinfo",
-            "mengambil info stiker atau pack striker.",
-        ],
-        [ f"{cmds}mtoi [balas ke sticker] or {cmds}getsticker [balas ke sticker]",
-            "bals ke stiker untuk mengubahnya jadi image/gambar.",
-        ],
+            "mengambil info stiker atau pack striker."],
+        [ f"{cmds}mtoi [balas ke sticker] or {cmds}getsticker [balas ke sticker]"
+            "balas ke stiker untuk mengubahnya jadi image/gambar." ],
         [f"{cmds}stickers [nama sticker]", "untuk mencari pack stikernya."],
     ],
 )
@@ -610,10 +606,8 @@ add_command_help(
 add_command_help(
     "memify",
     [
-        [
-            f"{cmds}mmf Top Text ; Bottom Text",
-            "Reply To Message Sticker or Photo will be Converted to the specified meme text sticker.",
-        ],
+        [f"{cmds}mmf Top Text ; Bottom Text",
+            "balas ke stiker untuk membuat memify text stiker."],
     ],
 )
 

@@ -13,6 +13,7 @@ from re import findall
 from pyrogram import Client, filters
 from Geez import SUDO_USER
 from Geez import cmds
+from Geez.modules.basic import add_command_help
 
 _SCRTXT = """
 **✅ CC Scrapped Successfully!**
@@ -24,7 +25,7 @@ _SCRTXT = """
 
 
 🥷 **Scrapped By ->** {}
-👨‍🎤 **Developed By ->** @TheUpdatesChannel 🐲
+👨‍🎤 **Developed By ->** @GeezRam
 """
 
 
@@ -80,3 +81,12 @@ async def cc_scraper(c, m):
     )
     remove(file)
     await e3.delete()
+
+add_command_help(
+    "scrapper",
+    [
+        [f"{cmds}scrape",
+            "mencoba generate cc card (tidak 100% valid).",
+        ],
+    ],
+)

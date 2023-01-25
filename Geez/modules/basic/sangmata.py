@@ -54,7 +54,7 @@ add_command_help(
     "sangmata",
     [
         [f"{cmds}sg [reply/userid/username]",
-            "Its help uh to find someone name history.",
+            "mengambil info history pengguna.",
         ],
     ],
 )

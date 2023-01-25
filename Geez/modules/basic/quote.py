@@ -50,6 +50,6 @@ add_command_help(
         [f"{cmds}q or {cmds}quotly",
             "membuat gambar quote."],
         [f"{cmds}q <warna> or {cmds}quotly <warna>",
-            "Membuat gambar quote dengan warna backgroud.", ],
+            "Membuat gambar quote dengan warna background." ],
     ],
 )

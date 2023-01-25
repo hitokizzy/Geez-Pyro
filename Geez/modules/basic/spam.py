@@ -212,7 +212,7 @@ add_command_help(
     [
         [f"{cmds}replyspam", "Reply To User\n To Roast on Someone."],
         [f"{cmds}dreplyspam", "To Disable Replyspam."],
-        [f"{cmds}dmspam", "To Disable Replyspam."],
-        [f"{cmds}dmsp", "To Disable Replyspam."],
+        [f"{cmds}dmspam", "memulai spam DM."],
+        [f"{cmds}dmsp", "To Disable dm spam."],
     ],
 )
