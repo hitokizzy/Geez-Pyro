@@ -594,7 +594,7 @@ add_command_help(
             f"Balas {cmds}kang menambahkan gamabr/stiker ke pack stiker anda.",
         ],
         [f"{cmds}kang [emoji] `atau` double [emoji]",
-            f"menambahkan stiker denagn spesifik emoji.\n\n`",
+            f"menambahkan stiker denagn spesifik emoji.`",
         ],
         [f"{cmds}packinfo `or` {cmds}stickerinfo",
             "mengambil info stiker atau pack striker.",

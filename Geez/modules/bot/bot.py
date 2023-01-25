@@ -71,7 +71,7 @@ async def on_plug_in_cb(_, callback_query: CallbackQuery):
     commands: dict = CMD_HELP[modul_name]
     this_command = f"**Help For {str(modul_name).upper()}**\n\n"
     for x in commands:
-        this_command += f"**Command:** `{str(x)}`\n ┗*Function:** `{str(commands[x])}`\n\n"
+        this_command += f"**Command:** `{str(x)}`\n ∟ **Function:** `{str(commands[x])}`\n\n"
     this_command += "© Geez | RAM"
     bttn = [
         [InlineKeyboardButton(text="Return", callback_data="reopen")],
