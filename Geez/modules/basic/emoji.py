@@ -62,7 +62,7 @@ special_emoji_help = [
     [f"{cmds}clock", "Cycles all the phases of the clock emojis."],
     [f"{cmds}thunder", "Cycles thunder."],
     [f"{cmds}heart", "Cycles heart emojis."],
-    [f"{cmds}earth `or` .globe", "Make the world go round."],
+    [f"{cmds}earth `or` {cmds}globe", "Make the world go round."],
 ]
 
 for x in special_emojis_dict:

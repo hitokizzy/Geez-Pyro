@@ -137,15 +137,13 @@ async def ppanime(client, message):
 
 
 add_command_help(
-    "asupan",
-    [
-        [
-            f"{cmds}asupan",
-            f"{cmds}Asupan video TikTok",
-        ],
+    "asupan",[
+        [f"{cmds}asupan", "Asupan video TikTok",],
         [f"{cmds}ayang", "Mencari Foto ayang kamu /nNote: Modul ini buat cwo yang jomblo."],
         [f"{cmds}ppcp", "Mencari Foto PP Couple Random."],
         [f"{cmds}bokep", "to send random porno videos."],
         [f"{cmds}ppanime", "Mencari Foto PP Couple Anime."],
+
+        ["notes, Untuk menghormati para devs, modul ini tidak berfunsi di Support Group"]
     ],
 )

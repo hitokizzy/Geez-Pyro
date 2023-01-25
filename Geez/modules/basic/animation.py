@@ -1326,33 +1326,12 @@ add_command_help(
         [f"{cmds}wink", "Winking Gifs."],
         [f"{cmds}love", "animasi love."],
         [f"{cmds}loveyou", "randomm emojies."],
-        [
-            "pat",
-            "pat gifs",
-        ],
-        [
-            "pikachu",
-            "Pikachu Gifs",
-        ],
-        [
-            "kill",
-            "To kill",
-        ],
-        [
-            "wtf",
-            "Wtf",
-        ],
-        [
-            "ding",
-            "Get Dong",
-        ],
-        [
-            "ganstar",
-            "Animasi Gangster",
-        ],
-        [
-            "charge",
-            " Tesla animasi",
-        ],
+        [f"{cmds}pat","pat gifs", ],
+        [f"{cmds}pikachu","Pikachu Gifs"],
+        [f"{cmds}kill","To kill"],
+        [f"{cmds}wtf","Wtf"],
+        [f"{cmds}ding","Get Dong"],
+        [f"{cmds}ganstar","Animasi Gangster"],
+        [f"{cmds}charge"," Tesla animasi"],
     ],
 )

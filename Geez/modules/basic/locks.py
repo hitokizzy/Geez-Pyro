@@ -66,11 +66,11 @@ async def tg_lock(
 ):
     if lock:
         if perm not in permissions:
-            return await message.edit_text(f"🔒 `{parameter}` **is already locked!**")
+            return await message.edit_text(f"🔒 `{parameter}` **sudah di-lock!**")
         permissions.remove(perm)
     else:
         if perm in permissions:
-            return await message.edit_text(f"🔓 `{parameter}` **is already Unlocked!**")
+            return await message.edit_text(f"🔓 `{parameter}` **sudah di-unlock!**")
         permissions.append(perm)
     permissions = {perm: True for perm in list(set(permissions))}
     try:
@@ -79,15 +79,15 @@ async def tg_lock(
         )
     except ChatNotModified:
         return await message.edit_text(
-            f"To unlock this, you have to `unlock msg` first."
+            f"gunakan lock, terlebih dahulu."
         )
     except ChatAdminRequired:
-        return await message.edit_text("`I don't have permission to do that.`")
+        return await message.edit_text("`anda harus menjadi admin disini.`")
     await message.edit_text(
         (
-            f"🔒 **Locked for non-admin!**\n  **Type:** `{parameter}`\n  **Chat:** {message.chat.title}"
+            f"🔒 **Locked untuk non-admin!**\n  **Type:** `{parameter}`\n  **Chat:** {message.chat.title}"
             if lock
-            else f"🔒 **Unlocked for non-admin!**\n  **Type:** `{parameter}`\n  **Chat:** {message.chat.title}"
+            else f"🔒 **Unlocked untuk non-admin!**\n  **Type:** `{parameter}`\n  **Chat:** {message.chat.title}"
         )
     )
 
@@ -115,13 +115,13 @@ async def locks_func(client: Client, message: Message):
         try:
             await client.set_chat_permissions(chat_id, ChatPermissions())
             await message.edit_text(
-                f"🔒 **Locked for non-admin!**\n  **Type:** `{parameter}`\n  **Chat:** {message.chat.title}"
+                f"🔒 **Locked untuk non-admin!**\n  **Type:** `{parameter}`\n  **Chat:** {message.chat.title}"
             )
         except ChatAdminRequired:
-            return await message.edit_text("`I don't have permission to do that.`")
+            return await message.edit_text("`anda harus menjadi admin disini.`")
         except ChatNotModified:
             return await message.edit_text(
-                f"🔒 **Already locked!**\n  **Type:** `{parameter}`\n  **Chat:** {message.chat.title}"
+                f"🔒 **BErhasil di-Lock!**\n  **Type:** `{parameter}`\n  **Chat:** {message.chat.title}"
             )
     elif parameter == "all" and state == "unlock":
         try:
@@ -139,9 +139,9 @@ async def locks_func(client: Client, message: Message):
                 ),
             )
         except ChatAdminRequired:
-            return await message.edit_text("`I don't have permission to do that.`")
+            return await message.edit_text("`anda harus menjadi admin disini`")
         await message.edit(
-            f"🔒 **Unlocked for non-admin!**\n  **Type:** `{parameter}`\n  **Chat:** {message.chat.title}"
+            f"🔒 **Unlocked untuk non-admin!**\n  **Type:** `{parameter}`\n  **Chat:** {message.chat.title}"
         )
 
 
@@ -150,7 +150,7 @@ async def locktypes(client: Client, message: Message):
     permissions = await current_chat_permissions(client, message.chat.id)
 
     if not permissions:
-        return await message.edit("🔒 **Everything is locked!**")
+        return await message.edit("🔒 **lock untuk semua!**")
 
     perms = ""
     for i in permissions:
@@ -162,10 +162,9 @@ async def locktypes(client: Client, message: Message):
 add_command_help(
     "locks",
     [
-        [f"{cmds}lock [all or specific]", "restrict user to send."],
-        [
-            f"{cmds}unlock [all or specific]",
-            "Unrestrict\n\nSupported Locks / Unlocks:` `msg` | `media` | `stickers` | `polls` | `info`  | `invite` | `webprev` |`pin` | `all`.",
+        [f"{cmds}lock [all atau spesific content]", "membatasi kiriman group."],
+        [f"{cmds}unlock [all atau spesific content]",
+            "membuka lock\n\nspesific content : Locks / Unlocks:` `msg` | `media` | `stickers` | `polls` | `info`  | `invite` | `webprev` |`pin` | `all`.",
         ],
     ],
 )

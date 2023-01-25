@@ -142,8 +142,7 @@ if AFK:
 
 
 add_command_help(
-    "afk",
-    [
+    "afk",[
         [f"{cmds}afk", "mengaktifkan mode AFK .afk\nUsage: ```.afk <alasan>```"],
         ["!afk", "menonaktifkan mode afk."],
     ],

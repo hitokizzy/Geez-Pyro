@@ -33,12 +33,12 @@ async def send_lyrics(bot: Client, message: Message):
             elif len(cmd) == 1:
                 song_name = message.reply_to_message.text
         elif not message.reply_to_message and len(cmd) == 1:
-            await message.edit("Give a song name")
+            await message.edit("Berikan judul lagu")
             await asyncio.sleep(2)
             await message.delete()
             return
 
-        await message.edit(f"Getting lyrics for `{song_name}`")
+        await message.edit(f"mencari lirik `{song_name}`")
         lyrics_results = await bot.get_inline_bot_results("ilyricsbot", song_name)
 
         try:
@@ -60,11 +60,11 @@ async def send_lyrics(bot: Client, message: Message):
             # delete the message from Saved Messages
             await bot.delete_messages("me", saved.updates[1].message.id)
         except TimeoutError:
-            await message.edit("That didn't work out")
+            await message.edit("batas waktu habis")
             await asyncio.sleep(2)
         await message.delete()
     except Exception as e:
-        await message.edit("`Failed to find lyrics`")
+        await message.edit("`gagal mencari lirik`")
         await asyncio.sleep(2)
         await message.delete()
 

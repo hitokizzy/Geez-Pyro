@@ -53,8 +53,7 @@ async def sg(client: Client, message: Message):
 add_command_help(
     "sangmata",
     [
-        [
-            "sg [reply/userid/username]",
+        [f"{cmds}sg [reply/userid/username]",
             "Its help uh to find someone name history.",
         ],
     ],

@@ -590,23 +590,19 @@ async def stick2png(client: Client, message: Message):
 add_command_help(
     "sticker",
     [
-        [
-            f"{cmds}kang `reply` image",
-            f"Reply {cmds}kang To Sticker Or Image To Add To Sticker Pack.",
+        [f"{cmds}kang `Balas` Gambar",
+            f"Balas {cmds}kang menambahkan gamabr/stiker ke pack stiker anda.",
         ],
-        [
-            f"{cmds}kang [emoji] `or` {cmds}double [emoji]",
-            f"To add and custom emoji stickers to your sticker pack.\n\n`",
+        [f"{cmds}kang [emoji] `atau` double [emoji]",
+            f"menambahkan stiker denagn spesifik emoji.\n\n`",
         ],
-        [
-            f"{cmds}packinfo `or` {cmds}stickerinfo",
-            "To Get Sticker Pack Information.",
+        [f"{cmds}packinfo `or` {cmds}stickerinfo",
+            "mengambil info stiker atau pack striker.",
         ],
-        [
-            f"{cmds}mtoi [reply ke sticker] or {cmds}getsticker [reply ke sticker]",
-            "Reply to sticker to get sticker photo.",
+        [ f"{cmds}mtoi [balas ke sticker] or {cmds}getsticker [balas ke sticker]",
+            "bals ke stiker untuk mengubahnya jadi image/gambar.",
         ],
-        [f"{cmds}stickers [nama sticker]", "To find sticker packs."],
+        [f"{cmds}stickers [nama sticker]", "untuk mencari pack stikernya."],
     ],
 )
 
@@ -615,7 +611,7 @@ add_command_help(
     "memify",
     [
         [
-            "mmf Top Text ; Bottom Text",
+            f"{cmds}mmf Top Text ; Bottom Text",
             "Reply To Message Sticker or Photo will be Converted to the specified meme text sticker.",
         ],
     ],
@@ -626,7 +622,7 @@ add_command_help(
     "tiny",
     [
         [
-            "tiny [reply ke photo/sticker]",
+            f"{cmds}tiny [reply ke photo/sticker]",
             "To Change the Sticker to be Small.",
         ],
     ],

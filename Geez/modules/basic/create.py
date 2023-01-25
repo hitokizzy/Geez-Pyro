@@ -44,7 +44,7 @@ async def create(client: Client, message: Message):
 add_command_help(
     "create",
     [
-        [f"{cmds}create ch", "create an channel"],
-        [f"{cmds}create gc", "create an group"],
+        [f"{cmds}create ch", "membuat channel"],
+        [f"{cmds}create gc", "membuat group"],
     ],
 )

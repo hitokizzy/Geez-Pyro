@@ -135,10 +135,10 @@ async def leavevc(client: Client, message: Message):
 add_command_help(
     "Vctools",
     [
-        [f"{cmds}startvc", "Start voice chat of group."],
-        [f"{cmds}stopvc", "End voice chat of group."],
-        [f"{cmds}joinvcvc", "Join voice chat of group."],
-        [f"{cmds}leavevc", "Leavevoice chat of group."],
+        [f"{cmds}startvc", "Start voice chat group."],
+        [f"{cmds}stopvc", "End voice chat group."],
+        [f"{cmds}joinvcvc", "Join voice chat group."],
+        [f"{cmds}leavevc", "Leavevoice chat group."],
     ],
 )
 

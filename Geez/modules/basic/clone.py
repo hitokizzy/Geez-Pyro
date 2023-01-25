@@ -63,9 +63,8 @@ async def revert(client: Client, message: Message):
 
 
 add_command_help(
-    "clone",
-    [
-        [f"{cmds}clone", "To Clone someone Profile."],
-        [f"{cmds}revert", "To Get Your Account Back."],
+    "clone",[
+        [f"{cmds}clone", "Clone profile seseorang."],
+        [f"{cmds}revert", "Kembali ke profile (bio dan nama terkadang menggunakan default)."],
     ],
 )

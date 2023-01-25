@@ -87,14 +87,14 @@ async def alive(client: Client, message: Message):
 @Client.on_message(filters.command("repo", cmds) & filters.me)
 async def repo(bot: Client, message: Message):
     await asyncio.sleep(1)
-    await message.edit("Fetching Source Code.....")
+    await message.edit("Mengambil informasi repo.....")
     await asyncio.sleep(1)
-    await message.edit("Here is repo: \n\n\nhttps://github.com/hitokizzy/Geez-Pyro")
+    await message.edit("repo Geez-Pyro Official: \n\n\nhttps://github.com/hitokizzy/Geez-Pyro")
 
 
 @Client.on_message(filters.command("creator", cmds) & filters.me)
 async def creator(bot: Client, message: Message):
-    await message.edit("https://gitHub.com/hitokizzy")
+    await message.edit("https://github.com/vckyou")
 
 
 @Client.on_message(filters.command("id", cmds) & filters.me)

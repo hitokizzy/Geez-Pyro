@@ -99,8 +99,7 @@ async def rmsudo(client: Client, message: Message):
 add_command_help(
     "sudos",
     [
-        [
-            f"{cmds}addsudo <reply/username/userid>",
+        [f"{cmds}addsudo <reply/username/userid>",
             f"{cmds}Add any user as Sudo (Use This At your own risk maybe sudo users can control ur account).",
         ],
         [f"{cmds}rmsudo <reply/username/userid>", "Remove Sudo access."],

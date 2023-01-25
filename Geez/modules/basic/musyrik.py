@@ -323,10 +323,8 @@ async def leave_vc_test(client, message):
 add_command_help(
     "Musik",
     [
-        [
-            f"{cmds}play",
-            f"{cmds}Play Musik & Video Dengan Judul Lagu",
-        ],
+        [f"{cmds}play",
+            f"{cmds}Play Musik & Video Dengan Judul Lagu",],
         [f"{cmds}skip", "Skip Lagu."],
         [f"{cmds}pause", "Pause Musik."],
         [f"{cmds}resume", "Resume Musik."],

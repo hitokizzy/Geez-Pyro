@@ -76,11 +76,8 @@ async def invite_link(client: Client, message: Message):
 add_command_help(
     "invite",
     [
-        [
-            f"{cmds}invitelink",
-            "Get your private invite link. [Need Admin]",
-        ],
-        [f"{cmds}invite @username", "to invite someone."],
-        [f"{cmds}inviteall @username", "Mass adding (can affect your account)."],
+        [f"{cmds}invitelink","mengambil link group private. [Memerlukan wewenang Admin]",],
+        [f"{cmds}invite @username", "invite pengguna ke group."],
+        [f"{cmds}inviteall @username", "menambah member group secara masal (akun anda mungkin akan terbatasi/limit)."],
     ],
 )

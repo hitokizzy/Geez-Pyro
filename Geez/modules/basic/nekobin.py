@@ -116,8 +116,7 @@ async def paste_dis_text(_, message: Message):
 add_command_help(
     "paste",
     [
-        [
-            f"{cmds}paste `or` {cmds}nekobin `or` {cmds}hastebin `or` {cmds}spacebin",
+        [f"{cmds}paste `or` {cmds}nekobin `or` {cmds}hastebin `or` {cmds}spacebin",
             "To Paste Text to Hastebin / Nekobin or Spacebin \n\nCreate a Nekobin paste using replied to message.",
         ],
     ],

@@ -49,7 +49,7 @@ async def gs(client: Client, message: Message):
     if " " in msg_txt:
         query = msg_txt[msg_txt.index(" ") + 1 : len(msg_txt)]
     else:
-        await Man.edit("Give a query to search")
+        await Man.edit("berikan sesuatu untuk mencari")
         return
     results = googlesearch(query)
     for i in range(1, 10, 1):
@@ -75,9 +75,6 @@ async def gs(client: Client, message: Message):
 add_command_help(
     "google",
     [
-        [
-            f"{cmds}google",
-            "Featch Details on Google.",
-        ],
+        [ f"{cmds}google","Mencari melalui google."],
     ],
 )

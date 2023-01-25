@@ -83,13 +83,10 @@ async def kickmeallch(client: Client, message: Message):
 add_command_help(
     "joinleave",
     [
-        [
-            f"{cmds}kickme",
-            "To leave!!.",
-        ],
-        [f"{cmds}leaveallgc", "to leave all groups where you joined."],
-        [f"{cmds}leaveallch", "to leaveall channel where you joined."],
-        [f"{cmds}join [Username]", "give an specific username to join."],
-        [f"{cmds}leave [Username]", "give an specific username to leave."],
+        [f"{cmds}kickme","Leave group!!."],
+        [f"{cmds}leaveallgc", "leave semua group."],
+        [f"{cmds}leaveallch", "leave semua channel."],
+        [f"{cmds}join [Username]", "mengundang seseorang untuk join."],
+        [f"{cmds}leave [Username]", "mengeluarkan seseorang dari group."],
     ],
 )

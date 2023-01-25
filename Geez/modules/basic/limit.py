@@ -35,6 +35,6 @@ async def spamban(client: Client, m: Message):
 add_command_help(
     "Limit",
     [
-        [f"{cmds}limit", "cek your limitation."],
+        [f"{cmds}limit", "cek limit/batasan akun."],
     ],
 )

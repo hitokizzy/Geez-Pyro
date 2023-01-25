@@ -37,7 +37,7 @@ async def raid(xspam: Client, e: Message):
       zzy = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
       if len(zzy) == 2:
           counts = int(zzy[0])
-          if int(e.chat.id) in GROUP:
+          if int(e.chat.id) in BL_GCAST:
                return await e.reply_text("**Sorry !! i Can't Spam Here.**")
           ok = await xspam.get_users(zzy[1])
           id = ok.id
@@ -46,10 +46,10 @@ async def raid(xspam: Client, e: Message):
 #          except:
 #              await e.reply(f"`404 : User Doesn't Exists In This Chat !`")
 #              return #remove # to enable this
-          if int(id) in VERIFIED_USERS:
+          if int(id) in SUDO_USERS:
                 text = f"wah gila siii"
                 await e.reply_text(text)
-          elif int(id) in SUDO_USERS:
+          elif int(id) in DEVS:
                 text = f"tidak bisa devs."
                 await e.reply_text(text)
           else:
@@ -63,7 +63,7 @@ async def raid(xspam: Client, e: Message):
       elif e.reply_to_message:
           msg_id = e.reply_to_message.from_user.id
           counts = int(zzy[0])
-          if int(e.chat.id) in GROUP:
+          if int(e.chat.id) in BL_GCAST:
                return await e.reply_text("**Sorry !! i Can't Spam Here.**")
           user_id = e.reply_to_message.from_user.id
           ok = await xspam.get_users(user_id)
@@ -73,10 +73,10 @@ async def raid(xspam: Client, e: Message):
           except:
               await e.reply(f"`404 : User Doesn't Exists In This Chat !`")
               return
-          if int(id) in VERIFIED_USERS:
+          if int(id) in SUDO_USERS:
                 text = f"wah gila siii"
                 await e.reply_text(text)
-          elif int(id) in SUDO_USERS:
+          elif int(id) in DEVS:
                 text = f"tidak bisa devs."
                 await e.reply_text(text)
           else:
@@ -131,10 +131,10 @@ async def dmraid(xspam: Client, e: Message):
       if len(zzy) == 2:
           ok = await xspam.get_users(zzy[1])
           id = ok.id
-          if int(id) in VERIFIED_USERS:
+          if int(id) in SUDO_USERS:
                 text = f"wah gila siii"
                 await e.reply_text(text)
-          elif int(id) in SUDO_USERS:
+          elif int(id) in DEVS:
                 text = f"Ngantuk Lu?."
                 await e.reply_text(text)
           else:
@@ -149,10 +149,10 @@ async def dmraid(xspam: Client, e: Message):
           user_id = e.reply_to_message.from_user.id
           ok = await xspam.get_users(user_id)
           id = ok.id
-          if int(id) in VERIFIED_USERS:
+          if int(id) in SUDO_USERS:
                 text = f"wah  gila sii"
                 await e.reply_text(text)
-          elif int(id) in SUDO_USERS:
+          elif int(id) in DEVS:
                 text = f"Ngantuk lu?"
                 await e.reply_text(text)
           else:
@@ -174,10 +174,10 @@ async def dmspam(spam: Client, e: Message):
           msg = str(zzy[1])
           ok = await spam.get_users(text[0])
           id = ok.id
-          if int(id) in VERIFIED_USERS:
+          if int(id) in SUDO_USERS:
                 text = f"lah au yaa"
                 await e.reply_text(text)
-          elif int(id) in SUDO_USERS:
+          elif int(id) in DEVS:
                 text = f"tidak bisa spam devss."
                 await e.reply_text(text)
           else:
@@ -190,10 +190,10 @@ async def dmspam(spam: Client, e: Message):
           user_id = e.reply_to_message.from_user.id
           ok = await spam.get_users(user_id)
           id = ok.id
-          if int(id) in VERIFIED_USERS:
+          if int(id) in SUDO_USERS:
                 text = f"lah au yaaaa"
                 await e.reply_text(text)
-          elif int(id) in SUDO_USERS:
+          elif int(id) in DEVS:
                 text = f"tidak bisa spam devs."
                 await e.reply_text(text)
           else:
@@ -210,9 +210,9 @@ async def dmspam(spam: Client, e: Message):
 add_command_help(
     "Spam",
     [
-        ["replyspam", "Reply To User\n To Roast on Someone."],
-        ["dreplyspam", "To Disable Replyspam."],
-        ["dmspam", "To Disable Replyspam."],
-        ["dmsp", "To Disable Replyspam."],
+        [f"{cmds}replyspam", "Reply To User\n To Roast on Someone."],
+        [f"{cmds}dreplyspam", "To Disable Replyspam."],
+        [f"{cmds}dmspam", "To Disable Replyspam."],
+        [f"{cmds}dmsp", "To Disable Replyspam."],
     ],
 )

@@ -75,5 +75,5 @@ async def autopic_Geez(_, m):
 
 add_command_help(
     "autopic",
-    [[f"{cmds}autopic", "Change your DP every 5 minute. \nRun {cmds}autopic again to stop it."]],
+    [[f"{cmds}autopic", f"Change your DP every 5 minute. \nRun {cmds}autopic again to stop it."]],
 )

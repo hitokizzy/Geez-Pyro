@@ -29,15 +29,15 @@ ok = []
 async def gban_user(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
     if message.from_user.id != client.me.id:
-        ex = await message.reply_text("`Bentar...`")
+        ex = await message.reply_text("`Gbaning...`")
     else:
-        ex = await message.edit("`Lah bentar....`")
+        ex = await message.edit("`....`")
     if not user_id:
         return await ex.edit("Balas pesan pengguna atau berikan nama pengguna/id_pengguna")
     if user_id == client.me.id:
         return await ex.edit("**Lu mau gban diri sendiri? Tolol!**")
     if user_id in DEVS:
-        return await ex.edit("Lah ngapa yaaaa?")
+        return await ex.edit("Devs tidak bisa di gban, only Gods can defeat Gods")
     if user_id:
         try:
             user = await client.get_users(user_id)
@@ -46,11 +46,11 @@ async def gban_user(client: Client, message: Message):
 
     if (await Geez.gban_info(user.id)):
         return await ex.edit(
-            f"[user](tg://user?id={user.id}) **Lah tau ya, kan udah digban cuy**"
+            f"[user](tg://user?id={user.id}) **pengguna telah di gban**"
         )
     f_chats = await get_ub_chats(client)
     if not f_chats:
-        return await ex.edit("**Tutor admin kak 🥺**")
+        return await ex.edit("**tidak menjadi admin dimanapun, kasian...**")
     er = 0
     done = 0
     for gokid in f_chats:
@@ -83,20 +83,20 @@ async def ungban_user(client: Client, message: Message):
     else:
         ex = await message.edit("`UnGbanning....`")
     if not user_id:
-        return await ex.edit("I can't find that user.")
+        return await ex.edit("pengguna tidak ditemukan.")
     if user_id:
         try:
             user = await client.get_users(user_id)
         except Exception:
-            return await ex.edit("`Please specify a valid user!`")
+            return await ex.edit("`berikan pengguna dengan benar!`")
 
     try:
         if not (await Geez.gban_info(user.id)):
-            return await ex.edit("`User already ungban`")
+            return await ex.edit("`Pengguna sudah di ungban`")
         ung_chats = await get_ub_chats(client)
         ok.remove(user.id)
         if not ung_chats:
-            return await ex.edit("**You don't have a Group that you admin 🥺**")
+            return await ex.edit("**tidak ada group sebagai admin**")
         er = 0
         done = 0
         for good_boi in ung_chats:
@@ -124,10 +124,10 @@ async def ungban_user(client: Client, message: Message):
 async def gbanlist(client: Client, message: Message):
     users = (await Geez.gban_list())
     oof = "**#GBanned Users:**\n"
-    ex = await message.edit_text("`Mikir bentar...`")
+    ex = await message.edit_text("`mencari...`")
     list_ = await Geez.gban_list()
     if len(list_) == 0:
-        await ex.edit("**Letau ga nemu**")
+        await ex.edit("**Anak baik, belom gban orang**")
         return
     for lit in list_:
         oof += f"**User :** `{lit['user']}` \n**Alasan :** `{lit['reason']}` \n\n"
@@ -137,11 +137,8 @@ async def gbanlist(client: Client, message: Message):
 add_command_help(
     "globals",
     [
-        [
-            f"{cmds}gban <reply/username/userid>",
-            "Do Global Banned To All Groups Where You As Admin.",
-        ],
-        [f"{cmds}ungban <reply/username/userid>", "Remove Global Banned."],
-        [f"{cmds}listgban", "Displays the Global Banned List."],
+        [f"{cmds}gban <reply/username/userid>","Global Banning.",],
+        [f"{cmds}ungban <reply/username/userid>", "membatalkan Global Banned."],
+        [f"{cmds}listgban", "list Global banning."],
     ],
 )

@@ -339,35 +339,14 @@ add_command_help(
     "admin",
     [
         [f"{cmds}ban [reply/username/userid]", "Ban pengguna."],
-        [
-            f"{cmds}unban [reply/username/userid]",
-            "Unban pengguna.",
-        ],
+        [f"{cmds}unban [reply/username/userid]", "Unban pengguna.",],
         [f"{cmds}kick [reply/username/userid]", "kick pengguna dari group."],
-        [
-            f"{cmds}promote `or` .fullpromote",
-            "Promote pengguna.",
-        ],
+        [f"{cmds}promote `or` .fullpromote","Promote pengguna.",],
         [f"{cmds}demote", "Demote pengguna."],
-        [
-            f"{cmds}mute [reply/username/userid]",
-            "Mute pengguna.",
-        ],
-        [
-            f"{cmds}unmute [reply/username/userid]",
-            "Unmute someone.",
-        ],
-        [
-            f"{cmds}pin [reply]",
-            "to pin any message.",
-        ],
-        [
-            f"{cmds}unpin [reply]",
-            "To unpin any message.",
-        ],
-        [
-            f"{cmds}setgpic [reply ke image]",
-            "To set an group profile pic",
-        ],
+        [f"{cmds}mute [reply/username/userid]","Mute pengguna.",],
+        [f"{cmds}unmute [reply/username/userid]","Unmute someone.",],
+        [f"{cmds}pin [reply]","to pin any message.",],
+        [f"{cmds}unpin [reply]","To unpin any message.",],
+        [f"{cmds}setgpic [reply ke image]","To set an group profile pic",],
     ],
 )

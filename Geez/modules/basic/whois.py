@@ -144,12 +144,10 @@ async def chatinfo_handler(client: Client, message: Message):
 add_command_help(
     "info",
     [
-        [
-            f"{cmds}info <username/userid/reply>",
+        [f"{cmds}info <username/userid/reply>",
             "get telegram user info with full description.",
         ],
-        [
-            f"{cmds}chatinfo <username/chatid/reply>",
+        [f"{cmds}chatinfo <username/chatid/reply>",
             "get group info with full description.",
         ],
     ],

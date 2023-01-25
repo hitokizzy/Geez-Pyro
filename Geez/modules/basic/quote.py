@@ -47,13 +47,9 @@ async def quotly(client: Client, message: Message):
 add_command_help(
     "quotly",
     [
-        [
-            f"q or .quotly",
-            "To make an quote.",
-        ],
-        [
-            f"q <color> or .quotly <color>",
-            "Make a message into a sticker with the custom background color given.",
-        ],
+        [f"{cmds}q or {cmds}quotly",
+            "membuat gambar quote."],
+        [f"{cmds}q <warna> or {cmds}quotly <warna>",
+            "Membuat gambar quote dengan warna backgroud.", ],
     ],
 )

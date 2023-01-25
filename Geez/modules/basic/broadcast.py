@@ -102,13 +102,9 @@ async def gucast(client: Client, message: Message):
 add_command_help(
     "broadcast",
     [
-        [
-            f"{cmds}gcast [text/reply]",
-            "Sending Global Broadcast messages to all groups you are logged into. (Can Send Media/Sticker)",
-        ],
-        [
-            f"{cmds}gucast [text/reply]",
-            "Sending Global Broadcast messages to all incoming Private Massages / PCs. (Can Send Media/Sticker)",
-        ],
+        [f"{cmds}gcast [text/reply]","Broadcast pesan ke Group. (bisa menggunakan Media/Sticker)"],
+        [f"{cmds}gucast [text/reply]","Broadcast pesan ke semua chat. (bisa menggunakan Media/Sticker)"],
+
+        ["notes, pesan tidak akan masuk ke support group (yang sudah ada didatabase geez|ram)"]
     ],
 )
