@@ -76,7 +76,7 @@ async def gimut(client: Client, message: Message):
     if message.from_user.id != client.me.id:
         ex = await message.reply_text("`GMuting...`")
     else:
-        ex = await message.edit("`Error!`")
+        ex = await message.edit("`Gmuting...`")
     if not user_id:
         return await ex.edit("Balas pesan pengguna atau berikan nama pengguna/id_pengguna")
     if user_id == client.me.id:
@@ -107,7 +107,7 @@ async def gikik(client: Client, message: Message):
     if message.from_user.id != client.me.id:
         ex = await message.reply_text("`GKick...`")
     else:
-        ex = await message.edit("`Error!`")
+        ex = await message.edit("`Gkicking...!`")
     if not user_id:
         return await ex.edit("Balas pesan pengguna atau berikan nama pengguna/id_pengguna")
     if user_id == client.me.id:
@@ -130,3 +130,12 @@ async def gikik(client: Client, message: Message):
         msg += f"\n**Alasan:** `{reason}`"
     msg += f"\n**Sukses di:** `{done}` **Obrolan**"
     await ex.edit(msg)
+
+add_command_help(
+    "fakeadmin",
+    [
+        [f"{cmds}giben <reply/username/userid>", "Fake Global Banning."],
+        [f"{cmds}gimut <reply/username/userid>", "Fake Global Mute."],
+        [f"{cmds}gikik <reply/username/userid>", "Fake Global Kick."],
+    ],
+)
