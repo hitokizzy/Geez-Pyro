@@ -42,7 +42,7 @@ async def gban_user(client: Client, message: Message):
         try:
             user = await client.get_users(user_id)
         except Exception:
-            return await ex.edit("`Balas pesan pengguna atau berikan nama pengguna/id_penggun`")
+            return await ex.edit("`Balas pesan pengguna atau berikan nama pengguna/id_pengguna`")
 
     if (await Geez.gban_info(user.id)):
         return await ex.edit(
