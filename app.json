@@ -6,8 +6,18 @@
     "repository": "https://github.com/hitokizzy/Geez-Pyro",
     "stack": "container",
     "env": {
+        "APP_ID": {
+            "description": "Get this value from my.telegram.org! Please do not steal",
+            "value": ""
+            "required": false
+        },
+        "API_HASH": {
+            "description": "Get this value from my.telegram.org! Please do not steal",
+            "value": ""
+            "required": false
+        },
         "STRING_SESSION1": {
-            "description": "fill with the pyrogram V2 session string from @geezramstringbot",
+            "description": "fill with the pyrogram V2 session string from @geezramstringrobot",
             "required": true
         },
         "MONGO_URL": {
