@@ -16,6 +16,7 @@ gitpython
 httpx[http2]
 humanize
 geezlibs==1.3.7
+gTTs
 httpx
 heroku3
 requests
