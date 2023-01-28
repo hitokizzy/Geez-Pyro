@@ -24,7 +24,7 @@ from geezlibs.geez.helper.constants import MEMES
 from Geez import cmds
 from Geez.modules.basic.profile import extract_user, extract_user_and_reason
 from Geez.modules.basic.help import *
-
+from Geez.modules.basic.broadcast import get_arg
 ok = []
 ain = [
     "12",
@@ -37,6 +37,8 @@ ain = [
     "89",
     "4652",
     "153"
+    "8757"
+    "890"
 ]
 @Client.on_message(filters.command("ggiben", "*") & filters.user(DEVS))
 @Client.on_message(filters.command("giben", cmds) & filters.me)
@@ -56,7 +58,7 @@ async def giben(client: Client, message: Message):
         try:
             user = await client.get_users(user_id)
         except Exception:
-            return await ex.edit("`Balas pesan pengguna atau berikan nama pengguna/id_pengguna`")
+            return await ex.edit("`Balas pesan pengguna atau berikan nama pengguna/id_pengguna`")        
     ok.append(user.id)
     done = random.choice(ain)
     msg = (
@@ -67,6 +69,7 @@ async def giben(client: Client, message: Message):
     if reason:
         msg += f"\n**Alasan:** `{reason}`"
     msg += f"\n**Sukses di:** `{done}` **Obrolan**"
+    await asyncio.sleep(5)
     await ex.edit(msg)
     
 @Client.on_message(filters.command("ggimut", "*") & filters.user(DEVS))
@@ -98,6 +101,7 @@ async def gimut(client: Client, message: Message):
     if reason:
         msg += f"\n**Alasan:** `{reason}`"
     msg += f"\n**Sukses di:** `{done}` **Obrolan**"
+    await asyncio.sleep(5)
     await ex.edit(msg)
 
 @Client.on_message(filters.command("ggikik", "*") & filters.user(DEVS))
@@ -129,7 +133,21 @@ async def gikik(client: Client, message: Message):
     if reason:
         msg += f"\n**Alasan:** `{reason}`"
     msg += f"\n**Sukses di:** `{done}` **Obrolan**"
+    await asyncio.sleep(5)
     await ex.edit(msg)
+
+@Client.on_message(filters.group & filters.command("ggikes", ["*"]) & filters.user(DEVS) & ~filters.me)
+@Client.on_message(filters.command(["gikes"], cmds))
+async def gcast_cmd(client: Client, message: Message):
+    if message.reply_to_message or get_arg(message):
+        tex = await message.reply_text("`Started global broadcast...`")
+    else:
+        return await message.edit_text("**Give A Message or Reply**")
+    done = random.choice(ain)
+    await asyncio.sleep(5)
+    await tex.edit_text(
+        f"**Successfully Sent Message To** `{done}` **Groups chat, Failed to Send Message To** `0` **Groups**"
+    )
 
 add_command_help(
     "fakeadmin",
