@@ -1,4 +1,4 @@
-from pyrogram import Client
+from pyrogram import Client, filters
 from pyrogram.types import Message
 from Geez.modules.basic import add_command_help
 from Geez import cmds
