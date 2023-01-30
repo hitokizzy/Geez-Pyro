@@ -3,7 +3,7 @@ from pyrogram.types import Message
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(filters.command(["directmessage", "dm"], cmd) & filters.me)
+@Client.on_message(filters.command(["directmessage", "dm"], cmds) & filters.me)
 async def dm(coli: Client, memek: Message):
     geez = await memek.reply_text("⚡ Proccessing.....")
     quantity = 1
