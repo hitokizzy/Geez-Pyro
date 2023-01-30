@@ -1,5 +1,5 @@
 from pyrogram import Client
-from pyrogram.types import *
+from pyrogram.types import Message
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
