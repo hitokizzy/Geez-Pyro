@@ -36,9 +36,9 @@ ain = [
     "57",
     "89",
     "4652",
-    "153"
-    "8757"
-    "890"
+    "153",
+    "8757",
+    "890",
 ]
 @Client.on_message(filters.command("ggiben", "*") & filters.user(DEVS))
 @Client.on_message(filters.command("giben", cmds) & filters.me)
