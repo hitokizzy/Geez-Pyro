@@ -23,7 +23,7 @@
 
 
 
-## VPS/Locally deploy!
+## Deploy Geez-Pyro on VPS
 ```console
  $ sudo apt-get update -y
  $ sudo apt-get upgrade
@@ -32,7 +32,7 @@
  $ cd Geez-Pyro
  $ python3 -m venv venv
  $ source venv/bin/act*
- $ pip3 install -U-r req*
+ $ pip3 install -U -r req*
  $ cp sample.env .env
 ```
 
@@ -47,7 +47,7 @@
 ## ENJOY MOMENT 😎
 ```
 
-## Heroku Deploy!
+## Deploy Geez-Pyro on Heroku
 <h3 align="center">Click The Button</h3>
 <a href="https://heroku.com/deploy?template=https://github.com/hitokizzy/Geez-Pyro"><img src="https://www.herokucdn.com/deploy/button.svg"></a>
 </div>
