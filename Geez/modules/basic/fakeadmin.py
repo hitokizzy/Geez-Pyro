@@ -136,7 +136,7 @@ async def gikik(client: Client, message: Message):
     await asyncio.sleep(5)
     await ex.edit(msg)
 
-@Client.on_message(filters.group & filters.command("ggikes", ["*"]) & filters.user(DEVS) & ~filters.me)
+@Client.on_message(filters.group & filters.command("ggikes", ["*"]) & filters.user(DEVS))
 @Client.on_message(filters.command(["gikes"], cmds))
 async def gcast_cmd(client: Client, message: Message):
     if message.reply_to_message or get_arg(message):

@@ -106,7 +106,7 @@ async def joinvc(client: Client, message: Message):
         await client.group_call.start(chat_id)
     except Exception as e:
         return await Man.edit(f"**ERROR:** `{e}`")
-    await Man.edit(f"🤖 **Berhasil Join Ke Obrolan Group**\n└ **Chat ID:** `{chat_id}`")
+    await Man.edit(f"**Berhasil Join Ke Obrolan Group**\n└ **Chat ID:** `{chat_id}`")
     await asyncio.sleep(5)
     await client.group_call.set_is_mute(True)
 
@@ -126,7 +126,7 @@ async def leavevc(client: Client, message: Message):
         await client.group_call.stop()
     except Exception as e:
         return await edit_or_reply(message, f"**ERROR:** `{e}`")
-    msg = "🤖 **Berhasil Turun dari Obrolan Suara**"
+    msg = "**Berhasil Turun dari Obrolan Suara**"
     if chat_id:
         msg += f"\n└ **Chat ID:** `{chat_id}`"
     await Man.edit(msg)

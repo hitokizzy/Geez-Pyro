@@ -551,24 +551,6 @@ async def hak(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command([f"{cmds}kontol", "kntl"], cmds) & filters.me)
-async def kontol(client: Client, message: Message):
-    emoji = get_text(message)
-    kontol = MEMES.GAMBAR_KONTOL
-    if emoji:
-        kontol = kontol.replace("⡀", emoji)
-    await message.edit(kontol)
-
-
-@Client.on_message(filters.command([f"{cmds}penis", "dick"], cmds) & filters.me)
-async def titid(client: Client, message: Message):
-    emoji = get_text(message)
-    titid = MEMES.GAMBAR_TITIT
-    if emoji:
-        titid = titid.replace("😋", emoji)
-    await message.edit(titid)
-
-
 @Client.on_message(filters.command("dino", cmds) & filters.me)
 async def adadino(client: Client, message: Message):
     typew = await edit_or_reply(message, "`DIN DINNN.....`")
