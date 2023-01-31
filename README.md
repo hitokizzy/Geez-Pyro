@@ -27,6 +27,7 @@
 ```console
  $ sudo apt-get update -y
  $ sudo apt-get upgrade
+ $ sudo apt install python3-venv
  $ git clone https://github.com/hitokizzy/Geez-Pyro
  $ cd Geez-Pyro
  $ python3 -m venv venv
@@ -41,7 +42,9 @@
 
 ```console
  $ screen -S Geez
- $ python3 -m Geez
+ $ bash start
+
+## ENJOY MOMENT 😎
 ```
 
 ## Heroku Deploy!
