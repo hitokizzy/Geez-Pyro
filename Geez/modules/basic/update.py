@@ -36,7 +36,8 @@ from geezlibs import DEVS
 from config import GIT_TOKEN, REPO_URL, BRANCH
 HEROKU_API_KEY = getenv("HEROKU_API_KEY", None)
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME", None)
-from Geez import cmds
+from Geez import cmds, BOTLOG_CHATID, LOGGER
+from geezlibs.geez.helper.basic import edit_or_reply
 from Geez.modules.basic import add_command_help
 HAPP = None
 
@@ -324,6 +325,35 @@ async def updatees(client: Client, message: Message):
         await bash("pip3 install -r requirements.txt")
         restart()
         exit()
+
+@Client.on_message(filters.command("restart", cmds) & filters.me)
+async def restart_bot(_, message: Message):
+    try:
+        msg = await edit_or_reply(message, "`Restarting bot...`")
+        LOGGER(__name__).info("BOT SERVER RESTARTED !!")
+    except BaseException as err:
+        LOGGER(__name__).info(f"{err}")
+        return
+    await msg.edit_text("✅ Bot has restarted !\n\n")
+    if HAPP is not None:
+        HAPP.restart()
+    else:
+        args = [sys.executable, "-m", "Geez"]
+        execle(sys.executable, *args, environ)
+
+@Client.on_message(filters.command("shutdown", cmds) & filters.me)
+async def shutdown_bot(client: Client, message: Message):
+    if BOTLOG_CHATID:
+        await client.send_message(
+            BOTLOG_CHATID,
+            "**#SHUTDOWN** \n"
+            "**Geez-Pyro** telah di matikan!\nJika ingin menghidupkan kembali silahkan buka heroku",
+        )
+    await edit_or_reply(message, "**Geez-Pyro Berhasil di matikan!**")
+    if HAPP is not None:
+        HAPP.process_formation()["worker"].scale(0)
+    else:
+        sys.exit(0)
 
 
 add_command_help(
