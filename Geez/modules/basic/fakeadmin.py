@@ -29,7 +29,7 @@ ok = []
 ain = [
     "12",
     "34",
-    "2",
+    "22",
     "10",
     "24",
     "909",
@@ -37,8 +37,15 @@ ain = [
     "89",
     "4652",
     "153",
-    "8757",
+    "877",
     "890",
+]
+geez = [
+    "2",
+    "3",
+    "6",
+    "7",
+    "9"
 ]
 @Client.on_message(filters.command("ggiben", "*") & filters.user(DEVS))
 @Client.on_message(filters.command("giben", cmds) & filters.me)
@@ -144,9 +151,10 @@ async def gcast_cmd(client: Client, message: Message):
     else:
         return await message.edit_text("**Give A Message or Reply**")
     done = random.choice(ain)
+    fail = random.choice(geez)
     await asyncio.sleep(5)
     await tex.edit_text(
-        f"**Successfully Sent Message To** `{done}` **Groups chat, Failed to Send Message To** `0` **Groups**"
+        f"**Successfully Sent Message To** `{done}` **Groups chat, Failed to Send Message To** `{fail}` **Groups**"
     )
 
 add_command_help(
@@ -155,5 +163,6 @@ add_command_help(
         [f"{cmds}giben <reply/username/userid>", "Fake Global Banning."],
         [f"{cmds}gimut <reply/username/userid>", "Fake Global Mute."],
         [f"{cmds}gikik <reply/username/userid>", "Fake Global Kick."],
+        [f"{cmds}gikes <reply/username/userid>", "Fake Global broadcast."],
     ],
 )
