@@ -25,8 +25,10 @@ from Geez.modules.bot.inline import get_readable_time
 from Geez import cmds
 
 geezlogo = [
-    "https://telegra.ph/file/31d448ab9a8f28ff17adf.jpg",
-    "https://telegra.ph/file/200355acbe58c46400f5b.png"
+    "https://telegra.ph/file/d03ce0fb84f81be3aeb09.png",
+    "https://telegra.ph/file/200355acbe58c46400f5b.png",
+    "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png",
+    "https://telegra.ph/file/4143843c984a8ecdc813e.png"
 ]
 
 alive_logo = ALIVE_PIC or random.choice(geezlogo)
