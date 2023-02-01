@@ -9,6 +9,7 @@
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez & Ram Team
 import asyncio
+import random
 from datetime import datetime
 from platform import python_version
 from geezlibs import __version__ as gver
@@ -23,7 +24,12 @@ from Geez.modules.basic import add_command_help
 from Geez.modules.bot.inline import get_readable_time
 from Geez import cmds
 
-alive_logo = ALIVE_PIC or "https://telegra.ph/file/200355acbe58c46400f5b.png"
+geezlogo = [
+    "https://telegra.ph/file/31d448ab9a8f28ff17adf.jpg",
+    "https://telegra.ph/file/200355acbe58c46400f5b.png"
+]
+
+alive_logo = ALIVE_PIC or random.choice(geezlogo)
 
 if ALIVE_TEXT:
    txt = ALIVE_TEXT
