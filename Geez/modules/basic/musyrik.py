@@ -134,8 +134,7 @@ async def ski_p(client, message):
         except:
             return await m_.edit("`Buset dah luh.`")
         return await m_.edit(f"`Ganti Lagu : {s_} At Posisi #{no_t_s}`")
-   
-                
+                                  
 @gez.on_message(filters.command(["play"], cmds) & filters.me
 )
 async def play_m(client, message):
