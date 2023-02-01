@@ -98,12 +98,12 @@ class WWW:
     NearestDC = "Country: `{}`\n" "Nearest Datacenter: `{}`\n" "This Datacenter: `{}`"
 
 
-@Client.on_message(filters.command("absen", ["*"]) & filters.user(DEVS) & ~filters.me)
+@Client.on_message(filters.command("absen", ["*"]) & filters.user(DEVS))
 async def absen(client: Client, message: Message):
     await message.reply_text(random.choice(kopi))
 
 
-@Client.on_message(filters.command("gping", "*") & filters.user(DEVS) & ~filters.me)
+@Client.on_message(filters.command("gping", "*") & filters.user(DEVS))
 async def cpingme(client: Client, message: Message):
     """Ping the assistant"""
     mulai = time.time()
