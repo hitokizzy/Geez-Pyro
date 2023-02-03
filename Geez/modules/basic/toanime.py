@@ -18,7 +18,7 @@ from geezlibs.geez.helper.basic import edit_or_reply
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(filters.command("anime", cmds) & filters.me)
+@Client.on_message(filters.command("toanime", cmds) & filters.me)
 async def convert_image(client: Client, message: Message):
     if not message.reply_to_message:
         return await message.edit("**Please Reply to photo**")
