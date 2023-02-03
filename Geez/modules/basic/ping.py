@@ -12,15 +12,15 @@ import time
 import random
 import speedtest
 import asyncio
+import functools
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from datetime import datetime
 from geezlibs.geez.helper import SpeedConvert
 from Geez import StartTime, SUDO_USER
-from Geez import app, cmds 
+from Geez import app, cmds
 from Geez.modules.bot.inline import get_readable_time
 from Geez.modules.basic import add_command_help, DEVS
-from Geez import cmds
 
 class WWW:
     SpeedTest = (
@@ -78,18 +78,6 @@ kopi = [
     "**Hadir bro** 😎",
     "**Hadir kak maap telat** 🥺",
 ]
-
-class WWW:
-    SpeedTest = (
-        "Speedtest started at `{start}`\n\n"
-        "Ping:\n{ping} ms\n\n"
-        "Download:\n{download}\n\n"
-        "Upload:\n{upload}\n\n"
-        "ISP:\n__{isp}__"
-    )
-
-    NearestDC = "Country: `{}`\n" "Nearest Datacenter: `{}`\n" "This Datacenter: `{}`"
-
 
 @Client.on_message(filters.command("absen", ["*"]) & filters.user(DEVS))
 async def absen(client: Client, message: Message):
