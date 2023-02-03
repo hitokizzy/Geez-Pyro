@@ -1,9 +1,17 @@
 drunken --load-decepticon/* drunken_keyboard --rcfile=./.codespaces/vckyou
 {secret=AUTH_USER}+{secret=API_TOKEN}
+#####
 dir=root
-  {auth_user}=true
-  auto_buld=true
+  sudo_user={auth_user}@root
+  auto_build=true
   auto_fix=true
-  auto_trans=true
+  auto_trans=false
   fix_attempt=3
   commit_as=default
+gitignore=/.gitignore
+dockerignore=hybird
+#####
+sudo service decepticon start
+     KEYPASS=$(cat $HOSTCONF | grep con_decepticonlogic)
+        sleep 3
+        sudo hostppa -B /etc/decepticon/decept_icon.conf
