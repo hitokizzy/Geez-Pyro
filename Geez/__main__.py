@@ -25,11 +25,10 @@ MSG_BOT = (f"**Geez Pyro Assistant**\nis alive...")
 
 async def main():
     await app.start()
-    LOGGER("Geez").info("LOG: Memulai Geez Pyro..")
-    LOGGER("Geez").info("LOG: Loading Everything.")
+    LOGGER("Geez").info("Memulai Geez Pyro..")
+    LOGGER("Geez").info("Loading Everything.")
     for all_module in ALL_MODULES:
         importlib.import_module("Geez.modules" + all_module)
-        LOGGER("Geez").info("module initializing.")
     for bot in bots:
         try:
             await bot.start()
@@ -40,6 +39,7 @@ async def main():
                 await app.send_message(BOTLOG_CHATID, MSG_BOT)
             except BaseException as a:
                 LOGGER("Geez").warning(f"{a}")
+            LOGGER("Geez").info("Startup Completed")
             LOGGER("Geez").info(f"Started as {ex.first_name} | {ex.id} ")
             ids.append(ex.id)
         except Exception as e:

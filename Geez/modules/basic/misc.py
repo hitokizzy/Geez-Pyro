@@ -1,4 +1,4 @@
-# if you can read this, this meant you use code from Geez Ram Project
+# if you can read this, this meant you use code from Geez | Ram Project
 # this code is from somewhere else
 # please dont hestitate to steal it
 # because Geez and Ram doesn't care about credit
@@ -7,7 +7,7 @@
 #
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
-# ©2023 Geez & Ram Team
+# ©2023 Geez | Ram Team
 import asyncio
 import random
 from datetime import datetime
@@ -197,7 +197,7 @@ async def get_id(bot: Client, message: Message):
 
 
 add_command_help(
-    "start",
+    "misc",
     [
         [f"{cmds}alive", "Check if the bot is alive or not."],
         [f"{cmds}repo", "Display the repo of this userbot."],
@@ -207,8 +207,9 @@ add_command_help(
 )
 
 add_command_help(
-    "restart",
+    "system",
     [
         [f"{cmds}restart", "You are retarded if you do not know what this does."],
+        [f"{cmds}shutdown", "You are retarded if you do not know what this does."],
     ],
 )
