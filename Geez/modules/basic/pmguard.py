@@ -4,7 +4,7 @@ from pyrogram.types import Message
 from pyrogram.methods import messages
 from geezlibs import DEVS
 from geezlibs.geez.database.pmpermitdb import get_approved_users, pm_guard, allow_user
-import geezlibs.geez.database.pmpermitdb as TOD
+from geezlibs.geez.database import pmpermitdb as TOD
 from config import BOTLOG_CHATID, PM_LOGGER
 from Geez import cmds
 

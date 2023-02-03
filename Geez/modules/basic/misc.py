@@ -13,7 +13,7 @@ import random
 from datetime import datetime
 from platform import python_version
 from geezlibs import __version__ as gver
-from geezlibs import join
+from geezlibs import logging
 from geezlibs import BOT_VER
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from pyrogram import __version__, filters, Client
@@ -48,7 +48,7 @@ else:
 
 @Client.on_message(filters.command(["geez"], cmds) & filters.me)
 async def module_help(client: Client, message: Message):
-    await join(client)
+    await logging(client)
     cmd = message.command
     help_arg = ""
     bot_username = (await app.get_me()).username
@@ -71,7 +71,7 @@ async def module_help(client: Client, message: Message):
 )
 async def alive(client: Client, message: Message):
     xx = await message.reply_text("⚡️")
-    await join(client)
+    await logging(client)
     await asyncio.sleep(3)
     try:
        await message.delete()

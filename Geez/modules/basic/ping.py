@@ -13,14 +13,7 @@ import random
 import speedtest
 import asyncio
 from pyrogram import Client, filters
-from pyrogram.raw import functions
-from pyrogram.types import (
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    InlineQueryResultArticle,
-    InputTextMessageContent,
-    Message,
-)
+from pyrogram.types import Message
 from datetime import datetime
 from geezlibs.geez.helper import SpeedConvert
 from Geez import StartTime, SUDO_USER
@@ -113,7 +106,7 @@ async def cpingme(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.command(["pink"], cmds) & (filters.me | filters.user(SUDO_USER))
+    filters.command("pink", cmds) & (filters.me)
 )
 async def pingme(client: Client, message: Message):
     uptime = await get_readable_time((time.time() - StartTime))

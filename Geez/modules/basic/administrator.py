@@ -8,12 +8,8 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez & Ram Team 
-import os
-import sys
-from re import sub
-from time import time
 import asyncio
-
+from time import time
 from pyrogram import Client, filters, enums
 from pyrogram.errors import ChatAdminRequired
 from pyrogram.types import ChatPermissions, ChatPrivileges, Message

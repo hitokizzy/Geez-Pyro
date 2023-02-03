@@ -73,13 +73,12 @@ if (
 if API_ID:
    API_ID = API_ID
 else:
-   LOGGER(__name__).warning("WARNING: MEMULAI BOT TANPA API ID")
    API_ID = "6435225"
 
 if API_HASH:
    API_HASH = API_HASH
 else:
-   LOGGER(__name__).warning("WARNING: MEMULAI BOT TANPA API HASH")   
+   LOGGER(__name__).warning("WARNING: MEMULAI BOT TANPA API HASH dan API ID")  
    API_HASH = "4e984ea35f854762dcde906dce426c2d"
 
 if not BOT_TOKEN:

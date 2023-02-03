@@ -15,7 +15,7 @@ googlesearch-python==1.0.1
 gitpython
 httpx[http2]
 humanize
-geezlibs==1.3.7
+geezlibs==1.6.2
 gTTs
 httpx
 heroku3

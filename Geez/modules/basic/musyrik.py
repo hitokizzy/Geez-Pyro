@@ -29,7 +29,7 @@ from yt_dlp import YoutubeDL
 from youtubesearchpython import SearchVideos
 from geezlibs.geez.utils.tools import get_text, humanbytes, run_in_exc, run_cmd
 from geezlibs.geez.helper.basic import edit_or_reply
-from geezlibs import join
+from geezlibs import logging
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
@@ -47,7 +47,7 @@ async def pl(client, message):
         return await play.edit("`Minimal Buka Os Lag`")
     if not s:
         if group_call.is_connected:
-            await join(client)
+            await logging(client)
             return await play.edit(f"**📀 Sedang diputar :** `{group_call.song_name}`")
         else:
             return await play.edit("`Minimal Buka Os Lag`")
@@ -200,7 +200,7 @@ async def play_m(client, message):
     elif not group_call.is_connected:
         try:
             await group_call.start(message.chat.id)
-            await join(client.me.id)
+            await logging(client.me.id)
         except BaseException as e:
             return await u_s.edit(f"**Ngapa yaa...:** `{e}`")
         group_call.add_handler(playout_ended_handler, GroupCallFileAction.PLAYOUT_ENDED)
@@ -300,7 +300,7 @@ async def wow_dont_stop_songs(client, message):
         await edit_or_reply(message, "`Lah tau yaaaa`")
         return    
     group_call.resume_playout()
-    await edit_or_reply(message, f"`▶️ Dilanjutkan.`")
+    await edit_or_reply(message, "`▶️ Dilanjutkan.`")
         
 
 @gez.on_message(filters.command(["end"], cmds) & filters.me
