@@ -1,7 +1,7 @@
 FROM debian:11
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y install \
-    python3.10 python3.10-dev python3-pip python3-venv python3-psutil
+    python3 python3-dev python3-pip python3-venv python3-psutil
 
 RUN apt-get install git curl python3-pip ffmpeg -y
 ARG USER=root
