@@ -1,4 +1,4 @@
-drunken --load-auto_build drunken_keyboard --rcfile=./.codespaces/vckyou
+drunken --load-decepticon/* drunken_keyboard --rcfile=./.codespaces/vckyou
 {secret=AUTH_USER}+{secret=API_TOKEN}
 dir=root
   {auth_user}=true
