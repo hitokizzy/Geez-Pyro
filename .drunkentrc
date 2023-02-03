@@ -1,0 +1,9 @@
+drunken --load-auto_build drunken_keyboard --rcfile=./.codespaces/vckyou
+{secret=AUTH_USER}+{secret=API_TOKEN}
+dir=root
+  {auth_user}=true
+  auto_buld=true
+  auto_fix=true
+  auto_trans=true
+  fix_attempt=3
+  commit_as=default
