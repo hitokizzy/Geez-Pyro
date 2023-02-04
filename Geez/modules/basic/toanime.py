@@ -8,7 +8,7 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
-
+import os
 import asyncio
 import time
 from pyrogram import Client, filters, enums
@@ -36,8 +36,11 @@ async def convert_image(client: Client, message: Message):
             converted_image_file = await client.download_media(result)
             await client.send_photo(message.chat.id, converted_image_file, caption="Powered by Geez Pyro")
             await message.delete()
+            os.remove(converted_image_file)
         else:
             await message.edit("`error message ...`")
+
+
 
 add_command_help(
     "anime ai",

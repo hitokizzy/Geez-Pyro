@@ -27,6 +27,7 @@ pyrogram
 pymongo
 python-dotenv
 pymediainfo
+SpeechRecognition
 prettytable
 git+https://github.com/Itz-fork/py-trans.git
 reportlab
