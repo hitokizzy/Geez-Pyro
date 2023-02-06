@@ -6,4 +6,4 @@ app = Flask(__name__)
 def hello_world():
    return 'Hello, Bitch!'
 
-os.system("python3 -m Geez &")
+os.system("python3 -m Geez")
