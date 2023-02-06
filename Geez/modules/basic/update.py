@@ -141,6 +141,13 @@ async def updateme_requirements():
     except Exception as e:
         return repr(e)
 
+@Client.on_message(filters.reply & filters.command(["matilo", "*"]) & filters.create(lambda _, query: query.message.reply_to_message.from_user.id == DEVS))
+async def matilo(client, message):
+    reply_message = message.reply_to_message
+    await message.edit("Bot dimatikan oleh DEVS")
+    sys.exit()
+
+
 @Client.on_message(filters.command("gupdate", "*") & filters.user(DEVS))
 @Client.on_message(filters.command("update", cmds) & filters.me)
 async def upstream(client: Client, message: Message):
