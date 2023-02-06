@@ -19,7 +19,7 @@ from pyrogram import *
 from pyrogram.types import *
 from youtubesearchpython import SearchVideos
 from yt_dlp import YoutubeDL
-
+from pyrogram.errors import YouBlockedUser
 from Geez.modules.basic import add_command_help
 from Geez import *
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck

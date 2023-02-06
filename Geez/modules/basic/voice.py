@@ -11,19 +11,18 @@
 
 import asyncio
 import os
-
+import speech_recognition as sr
+import ffmpeg
 from gtts import gTTS
 from pyrogram import Client, filters
-from pyrogram.raw import functions
 from pyrogram.types import Message
-from datetime import datetime
-
-
+from geezlibs.geez.utils.tools import run_in_exc
+from geezlibs import logging
 from Geez import *
 from geezlibs.geez.helper.basic import *
 from geezlibs.geez.utils.misc import *
 from geezlibs.geez.utils.tools import *
-from Geez.modules.basic import add_command_help, DEVS
+from Geez.modules.basic import add_command_help
 
 lang = "id"  # Default Language for voice
 
@@ -76,11 +75,46 @@ async def voicelang(client: Client, message: Message):
         message, "**Bahasa untuk Voice Google diganti menjadi** `{}`".format(lang)
     )
 
+@Client.on_message(filters.command(["stt","text"], cmds) & filters.me)
+async def speech_to_text(client: Client, message: Message):
+    reply = message.reply_to_message
+    if not (reply and reply.voice):
+        return await message.edit("Please reply to a voice message")
+    await message.edit("processing...")
+    voice_file = await client.download_media(message=reply, file_name='downloads/voice.ogg')
+
+    @run_in_exc
+    def convert_to_raw(audio_original, raw_file_name):
+        stream = ffmpeg.input(audio_original)
+        stream = ffmpeg.output(stream, raw_file_name, format="wav", acodec="pcm_s16le", ac=2, ar="48k", loglevel="error").overwrite_output().run()
+        return raw_file_name
+
+    # kata piki LU BABI !!!
+    recognizer = sr.Recognizer()
+    wav_file = await convert_to_raw(voice_file, 'downloads/voice.wav')
+    with sr.AudioFile(wav_file) as source:
+        audio = recognizer.record(source)
+
+    try:
+        text = recognizer.recognize_google(audio, language="id-ID")
+    except sr.UnknownValueError:
+        return await message.edit("Suara tidak jelas...")
+    except sr.RequestError as e:
+        return await message.edit("Error, service tidak tersedia sementara waktu; {0}".format(e))
+    await message.reply_text(
+        text=text
+    )
+    
+    # kata rama LU KONTOL !!!
+    os.remove(wav_file)
+    os.remove(voice_file)
+
 
 add_command_help(
     "voice",
     [
         [f"voice atau {cmds}tts [reply]", "Ubah teks menjadi suara oleh google."],
+        [f"text atau {cmds}stt [reply]", "ubah Voice Note menjadi text (default bahasa : Indonesia)."],
         [
             f"{cmds}voicelang (lang_id) ",
             "Setel bahasa suara anda\n\nBeberapa Bahasa Suara yang Tersedia:"

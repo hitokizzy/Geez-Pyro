@@ -1,7 +1,5 @@
 from pyrogram import filters, Client
-import asyncio
-from pyrogram.types import Message 
-from pyrogram.methods import messages
+from pyrogram.types import Message
 from geezlibs import DEVS
 from geezlibs.geez.database.pmpermitdb import get_approved_users, pm_guard, allow_user
 from geezlibs.geez.database import pmpermitdb as TOD
