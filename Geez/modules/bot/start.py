@@ -9,18 +9,13 @@
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
 import random
-import asyncio
-from prettytable import PrettyTable
-from Geez import app, CMD_HELP, cmds
-from pyrogram import filters, Client,enums
-from geezlibs.geez.helper.PyroHelpers import ReplyCheck
-from geezlibs.geez.helper.utility import split_list
+from Geez import app
+from pyrogram import filters
 from pyrogram.types import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
 )
-from config import BOTLOG_CHATID, OWNER_ID
-from Geez.modules.basic.help import edit_or_reply
+from config import OWNER_ID
 
 @app.on_callback_query()
 def pmowner(client, callback_query):
@@ -50,52 +45,3 @@ async def start(app, message):
         ],
     ])
    await app.send_photo(chat_id, file_id, caption=caption, reply_markup=reply_markup)
-
-@app.on_message(filters.command("help") & filters.private)
-async def help(app, message):
-    cmd = message.command
-    help_arg = ""
-    if len(cmd) > 1:
-        help_arg = " ".join(cmd[1:])
-    elif not message.reply_to_message and len(cmd) == 1:
-        try:
-            nice = await app.get_inline_bot_results(query="helper")
-            await asyncio.gather(
-                message.delete(),
-                app.send_inline_bot_result(
-                    message.chat.id, nice.query_id, nice.results[0].id
-                ),
-            )
-        except BaseException as e:
-            print(f"{e}")
-            ac = PrettyTable()
-            ac.header = False
-            ac.title = "Geez Pyro Plugins"
-            ac.align = "l"
-            for x in split_list(sorted(CMD_HELP.keys()), 2):
-                ac.add_row([x[0], x[1] if len(x) >= 2 else None])
-            xx = await app.send_message(
-                message.chat.id,
-                f"```{str(ac)}```\n• @GeezRam >< @UserbotCh •",
-                reply_to_message_id=ReplyCheck(message),
-            )
-            await xx.reply(
-                f"**Usage:** `{cmds}help broadcast` **To View Module Information**"
-            )
-            return
-
-    if help_arg:
-        if help_arg in CMD_HELP:
-            commands: dict = CMD_HELP[help_arg]
-            this_command = f"**Help For {str(help_arg).upper()}**\n\n"
-            for x in commands:
-                this_command += f"**Command:** `{str(x)}`\n  ∟ **Function:** `{str(commands[x])}`\n\n"
-            this_command += "© @GeezRam >< @UserbotCh"
-            await edit_or_reply(
-                message, this_command, parse_mode=enums.ParseMode.MARKDOWN
-            )
-        else:
-            await edit_or_reply(
-                message,
-                f"`{help_arg}` **tidak ada dalam list modul.**",
-            )
