@@ -16,6 +16,7 @@ from pyrogram import filters, Client
 from pyrogram.types import Message
 from PIL import Image, ImageEnhance, ImageOps
 from Geez import cmds
+from Geez.modules.basic import add_command_help
 
 @Client.on_message(filters.command("deepfry", cmds) & filters.me)
 async def do_deepfry(c: Client, m: Message):
@@ -105,3 +106,10 @@ async def check_media(repl_msg):
         return data
     else:
         return False
+
+add_command_help(
+    "deepfry",
+    [
+        [f"{cmds}deepfry <balas ke stiker>", "coba aja.",],
+    ],
+)

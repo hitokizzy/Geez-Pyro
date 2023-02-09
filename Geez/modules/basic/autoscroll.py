@@ -13,15 +13,14 @@ from pyrogram.types import Message
 
 from Geez.modules.basic import add_command_help
 from Geez import cmds
-the_regex = r"^r\/([^\s\/])+"
 
 f = filters.chat([])
 
 if f:
-   @Client.on_message(f)
-   async def auto_read(bot: Client, message: Message):
-       await bot.read_history(message.chat.id)
-       message.continue_propagation()
+    @Client.on_message(f)
+    async def auto_read(bot: Client, message: Message):
+        await bot.read_history(message.chat.id)
+        message.continue_propagation()
 
 
 @Client.on_message(filters.command("autoscroll", cmds) & filters.me)
