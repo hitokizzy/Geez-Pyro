@@ -37,7 +37,7 @@ alive_logo = random.choice(geezlogo)
 async def start(app, message):
    chat_id = message.chat.id
    file_id = alive_logo
-   caption = "Yoo, saya geez Pyro Assistant, gada yang spesial dari saya/n tapi boong..."
+   caption = "Yoo, saya geez Pyro Assistant, gada yang spesial dari saya\n tapi boong..."
    reply_markup = InlineKeyboardMarkup([
         [
             InlineKeyboardButton("Support", url="https://t.me/GeezRam"),
