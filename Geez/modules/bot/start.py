@@ -43,5 +43,8 @@ async def start(app, message):
             InlineKeyboardButton("Support", url="https://t.me/GeezRam"),
             InlineKeyboardButton("Repo", url="https://github.com/hitokizzy/Geez/Pyro"),
         ],
+        [
+            InlineKeyboardButton("PM Owner", callback_data="pmowner"),
+        ],
     ])
    await app.send_photo(chat_id, file_id, caption=caption, reply_markup=reply_markup)
