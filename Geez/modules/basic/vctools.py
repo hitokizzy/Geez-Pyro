@@ -82,7 +82,7 @@ async def opengc(client: Client, message: Message):
 async def end_vc_(client: Client, message: Message):
     chat_id = message.chat.id
     if not (
-        group_call = (
+        group_call := (
             await get_group_call(client, message, err_msg=", group call already ended")
         )
     ):
