@@ -6,16 +6,6 @@
     "repository": "https://github.com/hitokizzy/Geez-Pyro",
     "stack": "container",
     "env": {
-        "API_ID": {
-            "description": "Get this value from my.telegram.org! Please do not steal",
-            "value": "",
-            "required": false
-        },
-        "API_HASH": {
-            "description": "Get this value from my.telegram.org! Please do not steal",
-            "value": "",
-            "required": false
-        },
         "STRING_SESSION1": {
             "description": "fill with the pyrogram V2 session string from @geezramstringrobot",
             "required": true
@@ -23,11 +13,6 @@
         "MONGO_URL": {
             "description": "Fill there an mongo database from mongodb.com",
             "required": true,
-            "value": ""
-        },
-        "SUDO_USERS": {
-            "description": "Sudo User",
-            "required": false,
             "value": ""
         },
         "OPENAI_API": {
@@ -49,11 +34,6 @@
             "description": "fill with your Publik LOG Group",
             "required": false,
             "value": ""
-        },
-        "CMD_HNDLR": {
-            "description": "Command Handlernya",
-            "required": true,
-            "value": "."
         },
         "HEROKU_API_KEY": {
             "description": "Heroku Api Key",
