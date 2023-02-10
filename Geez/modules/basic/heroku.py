@@ -51,7 +51,7 @@ XCB = [
 ]
 
 
-@Client.on_message(filters.command("logs", cmds) & filters.user(SUDO_USER))
+@Client.on_message(filters.command("logs", cmds) & filters.me)
 async def log_(client, message):
     if await is_heroku():
         if HEROKU_API_KEY == "" and HEROKU_APP_NAME == "":
@@ -82,7 +82,7 @@ async def log_(client, message):
         return await message.reply_text(data)
 
 
-@Client.on_message(filters.command("getvar", cmds) & filters.user(SUDO_USER))
+@Client.on_message(filters.command("getvar", cmds) & filters.me)
 async def varget_(client, message):
     usage = "**Usage:**\n/get_var [Var Name]"
     if len(message.command) != 2:
