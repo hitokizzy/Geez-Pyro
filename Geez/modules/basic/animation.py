@@ -182,27 +182,6 @@ async def hello_world(client: Client, message: Message):
     )
 
 
-@Client.on_message(
-    filters.me & (filters.command([f"{cmds}ahh"], cmds) | filters.regex("^ahh "))
-)
-async def ahh(client: Client, message: Message):
-    mg = await edit_or_reply(message, "ahh")
-    await asyncio.sleep(0.2)
-    await mg.edit("aahh")
-    await asyncio.sleep(0.2)
-    await mg.edit("aahhh")
-    await asyncio.sleep(0.2)
-    await mg.edit("aahhhh")
-    await asyncio.sleep(0.2)
-    await mg.edit("aahhhhh")
-    await asyncio.sleep(0.2)
-    await mg.edit("aahhhhhh")
-    await asyncio.sleep(0.2)
-    await mg.edit("aahhhhhhh")
-    await asyncio.sleep(0.2)
-    await mg.edit("aaahhhhhhhh")
-
-
 @Client.on_message(filters.command("brain", cmds) & filters.me)
 async def pijtau(client: Client, message: Message):
     if message.forward_from:
