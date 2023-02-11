@@ -25,6 +25,11 @@ from config import (
     STRING_SESSION3,
     STRING_SESSION4,
     STRING_SESSION5,
+    STRING_SESSION6,
+    STRING_SESSION7,
+    STRING_SESSION8,
+    STRING_SESSION9,
+    STRING_SESSION10,
     SUDO_USERS,
     BOT_TOKEN
 )
@@ -66,6 +71,11 @@ if (
     and not STRING_SESSION3
     and not STRING_SESSION4
     and not STRING_SESSION5
+    and not STRING_SESSION6
+    and not STRING_SESSION7
+    and not STRING_SESSION8
+    and not STRING_SESSION9
+    and not STRING_SESSION10
 ):
     LOGGER(__name__).warning("STRING SESSION TIDAK DITEMUKAN, SHUTDOWN BOT!")
     sys.exit()
@@ -181,7 +191,7 @@ bot6 = (
         name="bot6",
         api_id=API_ID,
         api_hash=API_HASH,
-        session_string=STRING_SESSION5,
+        session_string=STRING_SESSION6,
         plugins=dict(root="Geez/modules"),
     )
     if STRING_SESSION5
@@ -192,7 +202,7 @@ bot7 = (
         name="bot7",
         api_id=API_ID,
         api_hash=API_HASH,
-        session_string=STRING_SESSION5,
+        session_string=STRING_SESSION7,
         plugins=dict(root="Geez/modules"),
     )
     if STRING_SESSION5
@@ -203,7 +213,7 @@ bot8 = (
         name="bot8",
         api_id=API_ID,
         api_hash=API_HASH,
-        session_string=STRING_SESSION5,
+        session_string=STRING_SESSION8,
         plugins=dict(root="Geez/modules"),
     )
     if STRING_SESSION5
@@ -214,7 +224,7 @@ bot9 = (
         name="bot9",
         api_id=API_ID,
         api_hash=API_HASH,
-        session_string=STRING_SESSION5,
+        session_string=STRING_SESSION9,
         plugins=dict(root="Geez/modules"),
     )
     if STRING_SESSION5
@@ -225,7 +235,7 @@ bot10 = (
         name="bot10",
         api_id=API_ID,
         api_hash=API_HASH,
-        session_string=STRING_SESSION5,
+        session_string=STRING_SESSION10,
         plugins=dict(root="Geez/modules"),
     )
     if STRING_SESSION5
