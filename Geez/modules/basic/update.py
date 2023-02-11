@@ -138,6 +138,8 @@ async def upstream(client: Client, message: Message):
     status = await message.edit_text("`Checking for Updates, Wait a Moment...`")
     conf = get_arg(message)
     off_repo = UPSTREAM_REPO_URL
+    txt = None
+    repo = None
     try:
         txt = (
             "**Update Could Not Continue Due "
