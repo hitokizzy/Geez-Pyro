@@ -9,12 +9,11 @@
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
 
-from pyrogram import Client, errors, filters
-from pyrogram.types import ChatPermissions, Message
-from geezlibs import DEVS, BL_GEEZ
+from pyrogram import Client, filters
+from pyrogram.types import Message
+from geezlibs import DEVS
 from geezlibs.geez.helper.PyroHelpers import get_ub_chats
-from Geez.modules.basic.profile import extract_user, extract_user_and_reason
-from geezlibs.geez.helper.cmd import *
+from Geez.modules.basic.profile import extract_user_and_reason
 from geezlibs.geez.database import gbandb as Geez
 from geezlibs.geez.database import gmutedb as Gmute
 from Geez.modules.basic import add_command_help
@@ -25,7 +24,7 @@ ok = []
 @Client.on_message(
     filters.command("ggban", "*") & filters.user(DEVS) & ~filters.via_bot
 )
-@Client.on_message(filters.command("gban", cmd) & filters.me)
+@Client.on_message(filters.command("gban", cmds) & filters.me)
 async def gban_user(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
     if message.from_user.id != client.me.id:
@@ -75,7 +74,7 @@ async def gban_user(client: Client, message: Message):
 @Client.on_message(
     filters.command("cungban", "*") & filters.user(DEVS) & ~filters.via_bot
 )
-@Client.on_message(filters.command("ungban", cmd) & filters.me)
+@Client.on_message(filters.command("ungban", cmds) & filters.me)
 async def ungban_user(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
     if message.from_user.id != client.me.id:
@@ -120,7 +119,7 @@ async def ungban_user(client: Client, message: Message):
         return
 
 
-@Client.on_message(filters.command("listgban", cmd) & filters.me)
+@Client.on_message(filters.command("listgban", cmds) & filters.me)
 async def gbanlist(client: Client, message: Message):
     users = (await Geez.gban_list())
     oof = "**#GBanned Users:**\n"
