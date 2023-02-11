@@ -12,7 +12,8 @@ import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message 
 from pyrogram.errors import FloodWait
-from Geez.modules.basic import add_command_help, DEVS
+from geezlibs import DEVS
+from Geez.modules.basic import add_command_help
 from Geez import cmds
 
 @Client.on_message(filters.command("del", cmds) & filters.me)

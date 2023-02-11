@@ -20,9 +20,10 @@ from pyrogram.raw.functions.phone import CreateGroupCall, DiscardGroupCall
 from pyrogram.raw.types import InputGroupCall, InputPeerChannel, InputPeerChat
 from pyrogram.types import Message
 from pyrogram.types import Message
+from geezlibs import DEVS
 from geezlibs.geez.helper import edit_or_reply
 from geezlibs.geez.helper import get_arg
-from Geez.modules.basic import add_command_help, DEVS
+from Geez.modules.basic import add_command_help
 from Geez import SUDO_USER
 from Geez import cmds
 

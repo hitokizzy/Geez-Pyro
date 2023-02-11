@@ -4,16 +4,12 @@ from pyrogram import Client as gez
 from pyrogram.errors import MessageNotModified
 from geezlibs.geez.helper.what import *
 from geezlibs.geez.helper.basic import *
-from Geez.modules.basic import DEVS, BL_GCAST
-from Geez.modules.basic import add_command_help
+from geezlibs import DEVS
 from geezlibs.geez.utils.misc import *
 from geezlibs.geez.utils.tools import *
 from Geez import cmds
 from config import OPENAI_API
-import requests
-import os
-import json
-import random
+from Geez.modules.basic import add_command_help
 
 @gez.on_message(filters.command("cask", cmds) & filters.user(DEVS) & ~filters.me)
 @gez.on_message(filters.command("ask", cmds) & filters.me)
