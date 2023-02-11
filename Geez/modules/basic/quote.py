@@ -66,9 +66,9 @@ async def sticklet(client, message):
     elif len(message.text.split(" ")) >= 2:
         sticktext = message.text.split(" ", maxsplit=1)[1]
     else:
-        ain = await message.edit("Please give a word or reply to a message.")
+        await message.edit("Please give a word or reply to a message.")
         return
-        
+    await message.edit("processing...")   
     sticktext = textwrap.wrap(sticktext, width=10)
     sticktext = "\n".join(sticktext)
     
@@ -88,7 +88,7 @@ async def sticklet(client, message):
     image_stream.name = "sticker.webp"
     image.save(image_stream, "webp")
     image_stream.seek(0)
-    await ain.delete()
+    await message.delete()
     await client.send_sticker(
         chat_id=message.chat.id,
         sticker=image_stream,
