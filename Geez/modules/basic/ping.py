@@ -16,11 +16,12 @@ import functools
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from datetime import datetime
+from geezlibs import DEVS
 from geezlibs.geez.helper import SpeedConvert
 from Geez import StartTime, SUDO_USER
 from Geez import app, cmds
 from Geez.modules.bot.inline import get_readable_time
-from Geez.modules.basic import add_command_help, DEVS
+from Geez.modules.basic import add_command_help
 
 class WWW:
     SpeedTest = (
