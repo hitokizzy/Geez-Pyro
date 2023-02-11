@@ -5,7 +5,7 @@ from geezlibs.geez.database.pmpermitdb import get_approved_users, pm_guard, allo
 from geezlibs.geez.database import pmpermitdb as TOD
 from config import BOTLOG_CHATID, PM_LOGGER
 from Geez import cmds
-
+PM_LOGGER = BOTLOG_CHATID
 FLOOD_CTRL = 0
 ALLOWED = []
 USERS_AND_WARNS = {}
@@ -91,8 +91,8 @@ async def reply_pm(app: Client, message):
             allow_user(user.id)
             return await message.reply("Menerima Pesan dari Developer")
     user_warns = 0 if user not in USERS_AND_WARNS else USERS_AND_WARNS[user]
-    if PM_LOGGER:
-        await app.send_message(PM_LOGGER, f"{message.text}")
+    #if PM_LOGGER:
+    #    await app.send_message(PM_LOGGER, f"pesan dari {user}:\n{message.text}")
     if user_warns <= limit - 2:
         user_warns += 1
         USERS_AND_WARNS.update({user: user_warns})

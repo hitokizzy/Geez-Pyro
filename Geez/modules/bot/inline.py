@@ -129,6 +129,12 @@ async def help_function(answers):
     )
     return answers
 
+@app.on_callback_query()
+def pmowner(client, callback_query):
+    user_id = OWNER_ID
+    message = "saya ingin bertanya kak"
+    client.send_message(user_id, message)
+    client.answer_callback_query(callback_query.id, text="Message sent")
 
 @app.on_inline_query()
 @inline_wrapper

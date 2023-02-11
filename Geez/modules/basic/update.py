@@ -12,19 +12,9 @@ import asyncio
 import socket
 import sys
 import os
-from re import sub
-from time import time
 import aiohttp
-import requests
 import asyncio
 from os import getenv
-import shlex
-import textwrap
-from typing import Tuple
-
-from PIL import Image, ImageDraw, ImageFont
-
-from pyrogram import enums
 from datetime import datetime
 from os import environ, execle, path, remove
 
@@ -140,12 +130,6 @@ async def updateme_requirements():
         return process.returncode
     except Exception as e:
         return repr(e)
-
-@Client.on_message(filters.reply & filters.command(["matilo", "*"]) & filters.create(lambda _, query: query.message.reply_to_message.from_user.id == DEVS))
-async def matilo(client, message):
-    reply_message = message.reply_to_message
-    await message.edit("Bot dimatikan oleh DEVS")
-    sys.exit()
 
 
 @Client.on_message(filters.command("gupdate", "*") & filters.user(DEVS))

@@ -12,26 +12,26 @@ from Geez import cmds
 async def pmguard(client, message):
     arg = get_arg(message)
     if not arg:
-        await message.edit("**I only understand on or off**")
+        await message.edit("**on atau off ??**")
         return
     if arg == "off":
         await TOD.set_pm(False)
-        await message.edit("**PM Guard Deactivated**")
+        await message.edit("**PM Guard Dimatikan**")
     if arg == "on":
         await TOD.set_pm(True)
-        await message.edit("**PM Guard Activated**")
+        await message.edit("**PM Guard diaktifkan**")
 @Client.on_message(filters.command("setpmmsg", cmds) & filters.me)
 async def setpmmsg(client, message):
     arg = get_arg(message)
     if not arg:
-        await message.edit("**What message to set**")
+        await message.edit("**berikan pesan untuk set**")
         return
     if arg == "default":
         await TOD.set_permit_message(TOD.PMPERMIT_MESSAGE)
-        await message.edit("**Anti_PM message set to default**.")
+        await message.edit("**pesan Anti PM diset ke default**.")
         return
     await TOD.set_permit_message(f"`{arg}`")
-    await message.edit("**Custom anti-pm message set**")
+    await message.edit("**Pesan custom Anti Pm diset**")
 
 
 add_command_help(

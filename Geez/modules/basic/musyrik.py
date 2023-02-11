@@ -21,8 +21,6 @@ import logging
 import ffmpeg
 from Geez import app
 from pyrogram import Client, filters
-from pyrogram import Client as gez
-
 from pyrogram.errors import FloodWait, MessageNotModified
 from pytgcalls import GroupCallFactory, GroupCallFileAction
 from yt_dlp import YoutubeDL
@@ -36,21 +34,21 @@ from Geez import cmds
 s_dict = {}
 GPC = {}
 
-@gez.on_message(filters.command(["playlist"], cmds) & filters.me
+@Client.on_message(filters.command(["playlist"], cmds) & filters.me
 )
 async def pl(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
-    play = await edit_or_reply(message, "`Bentar Cuk!`")
+    play = await edit_or_reply(message, "`Processing!`")
     song = f"**📋 Daftar Menu {message.chat.title} :** \n"
     s = s_dict.get((message.chat.id, client.me.id))
     if not group_call:
-        return await play.edit("`Minimal Buka Os Lag`")
+        return await play.edit("`VCG tidak aktif`")
     if not s:
         if group_call.is_connected:
             await logging(client)
             return await play.edit(f"**📀 Sedang diputar :** `{group_call.song_name}`")
         else:
-            return await play.edit("`Minimal Buka Os Lag`")
+            return await play.edit("`VCG tidak aktif`")
     if group_call.is_connected:
         song += f"**📀 Sedang diputar :** `{group_call.song_name}` \n\n"
     for sno, i in enumerate(s, start=1):
@@ -76,7 +74,7 @@ async def playout_ended_handler(group_call, filename):
         os.remove(group_call.input_filename)
     if not s:
         await group_call.stop()
-        del GPC[(chat_, client.me.id)]
+        del GPC[(chat_, client_.me.id)]
         return
     name_ = s[0]['song_name']
     singer_ = s[0]['singer']
@@ -91,22 +89,22 @@ async def playout_ended_handler(group_call, filename):
         disable_web_page_preview=True,
     )
     s.pop(0)
-    logging.debug(song_info)
+    logging(song_info)
     group_call.song_name = name_
     group_call.input_filename = raw_file
 
-@gez.on_message(filters.command(["skip"], cmds) & filters.me
+@Client.on_message(filters.command(["skip"], cmds) & filters.me
 )
 async def ski_p(client, message):
-    m_ = await edit_or_reply(message, "`Bentar Cuk!`")
+    m_ = await edit_or_reply(message, "`Processing!`")
     no_t_s = get_text(message)
     group_call = GPC.get((message.chat.id, client.me.id))
     s = s_dict.get((message.chat.id, client.me.id))
     if not group_call:
-        await m_.edit("`Yang Bener Lah...`")
+        await m_.edit("`VCG tidak aktif...`")
         return 
     if not group_call.is_connected:
-        await m_.edit("`Yang Bener Lah...`")
+        await m_.edit("`Tidak berada di VCG...`")
         return 
     if not no_t_s:
         return await m_.edit("`Yang Bener Dikit Lah...`")
@@ -135,7 +133,7 @@ async def ski_p(client, message):
             return await m_.edit("`Buset dah luh.`")
         return await m_.edit(f"`Ganti Lagu : {s_} At Posisi #{no_t_s}`")
                                   
-@gez.on_message(filters.command(["play"], cmds) & filters.me
+@Client.on_message(filters.command(["play"], cmds) & filters.me
 )
 async def play_m(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
@@ -275,7 +273,7 @@ def yt_dl(url, client, message, start):
 RD_ = {}
 FFMPEG_PROCESSES = {}
  
-@gez.on_message(filters.command(["pause"], cmds) & filters.me
+@Client.on_message(filters.command(["pause"], cmds) & filters.me
 )
 async def no_song_play(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
@@ -289,7 +287,7 @@ async def no_song_play(client, message):
     group_call.pause_playout()
     
     
-@gez.on_message(filters.command(["resume"], cmds) & filters.me
+@Client.on_message(filters.command(["resume"], cmds) & filters.me
 )
 async def wow_dont_stop_songs(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
@@ -303,7 +301,7 @@ async def wow_dont_stop_songs(client, message):
     await edit_or_reply(message, "`▶️ Dilanjutkan.`")
         
 
-@gez.on_message(filters.command(["end"], cmds) & filters.me
+@Client.on_message(filters.command(["end"], cmds) & filters.me
 )
 async def leave_vc_test(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))

@@ -604,20 +604,18 @@ add_command_help(
 
 
 add_command_help(
-    "memify",
+    "sticker fun",
     [
         [f"{cmds}mmf Top Text ; Bottom Text",
             "balas ke stiker untuk membuat memify text stiker."],
+        [f"{cmds}tiny [reply ke photo/sticker]",
+            "To Change the Sticker to be Small."],
+        [f"{cmds}txtst <pesan> atau <balas ke pesan>",
+            "merubah text jadi sticker."],
+        [f"{cmds}twitt <balas ke pesan>",
+            "mebuat stiker status twitter."],
+        [f"{cmds}toanime <balas ke photo>",
+            "membuat foto menjadi anime menggunakan ai."],
     ],
 )
 
-
-add_command_help(
-    "tiny",
-    [
-        [
-            f"{cmds}tiny [reply ke photo/sticker]",
-            "To Change the Sticker to be Small.",
-        ],
-    ],
-)

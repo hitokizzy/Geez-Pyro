@@ -38,13 +38,5 @@ async def convert_image(client: Client, message: Message):
             await message.delete()
             os.remove(converted_image_file)
         else:
-            await message.edit("`error message ...`")
-
-
-
-add_command_help(
-    "anime ai",
-    [
-        [f"{cmds}toanime", "convert foto ke anime menggunakan ai bot"],
-    ],
-)
+            await message.edit("`error ...`")
+    await client.delete_messages(bot, 2)
