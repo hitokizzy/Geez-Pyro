@@ -11,7 +11,7 @@
 
 - PyroGram Session
 - Host (VPS atau HEROKU)
-- Python 3.8+ or 3.7
+- Python 3.9+ or 3.10
 - [Mongo Db](https://youtu.be/mnvjt_a5JYA)
 - OTAK
 
@@ -28,11 +28,8 @@
 ```console
  $ sudo apt-get update -y
  $ sudo apt-get upgrade
- $ sudo apt install python3-venv
  $ git clone https://github.com/hitokizzy/Geez-Pyro
  $ cd Geez-Pyro
- $ python3 -m venv venv
- $ source venv/bin/act*
  $ pip3 install -U -r req*
  $ cp sample.env .env
 ```
@@ -84,5 +81,5 @@ DAN SEMUA INI GRATIS !!!!!
 
 <p align="center">𝐒𝐮𝐩𝐩𝐨𝐫𝐭 / 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ----> </p>
 
-<p align="center"><a href="https://t.me/ramsupportt"><img src="https://img.shields.io/badge/ᴛᴇʟᴇɢʀᴀᴍ-𝐒𝐮𝐩𝐩𝐨𝐫𝐭-black?&style=for-the-badge&logo=telegram" width="220" height="38.45"></a></p>
-<p align="center"><a href="https://t.me/GeezSupport"><img src="https://img.shields.io/badge/ᴛᴇʟᴇɢʀᴀᴍ-𝐒𝐮𝐩𝐩𝐨𝐫𝐭-black?&style=for-the-badge&logo=telegram" width="220" height="38.45"></a></p>
+<p align="center"><a href="https://t.me/GeezRam"><img src="https://img.shields.io/badge/ᴛᴇʟᴇɢʀᴀᴍ-𝐒𝐮𝐩𝐩𝐨𝐫𝐭-black?&style=for-the-badge&logo=telegram" width="220" height="38.45"></a></p>
+<p align="center"><a href="https://t.me/UserbotCh"><img src="https://img.shields.io/badge/ᴛᴇʟᴇɢʀᴀᴍ-𝐒𝐮𝐩𝐩𝐨𝐫𝐭-black?&style=for-the-badge&logo=telegram" width="220" height="38.45"></a></p>
