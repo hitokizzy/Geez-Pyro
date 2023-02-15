@@ -26,12 +26,15 @@ from pyrogram.types import (
     InlineKeyboardMarkup,
     InlineQueryResultArticle,
     InputTextMessageContent,
+    InlineQueryResultPhoto,
     Message,
 )
 from geezlibs.geez.helper.data import Data
 from geezlibs.geez.helper.inline import inline_wrapper, paginate_help
 from geezlibs import BOT_VER, __version__ as gver
 from Geez import CMD_HELP, StartTime, app
+from config import OWNER_ID
+
 
 photo = "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png"
 
@@ -89,6 +92,7 @@ async def alive_function(message: Message, answers):
     )
     return answers
 
+
 async def ping_function(message: Message, answers):
     start = datetime.now()
     uptime = await get_readable_time((time.time() - StartTime))
@@ -116,18 +120,32 @@ async def ping_function(message: Message, answers):
 
 async def help_function(answers):
     bttn = paginate_help(0, CMD_HELP, "helpme")
+    photo_url = "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png"
     answers.append(
-        InlineQueryResultArticle(
-            title="Help Article!",
-            description="Check Command List & Help",
-            thumb_url="https://telegra.ph/file/c78bb1efdeed38ee16eb2.png",
-            input_message_content=InputTextMessageContent(
-                Data.text_help_menu.format(len(CMD_HELP))
-            ),
+        InlineQueryResultPhoto(
+            id="1",
+            photo_url=photo_url,
+            thumb_url=photo_url,
+            caption=Data.text_help_menu.format(len(CMD_HELP)),
             reply_markup=InlineKeyboardMarkup(bttn),
         )
     )
     return answers
+
+#async def help_function(answers):
+#    bttn = paginate_help(0, CMD_HELP, "helpme")
+#    answers.append(
+#        InlineQueryResultArticle(
+#            title="Help Article!",
+#            description="Check Command List & Help",
+#            thumb_url="https://telegra.ph/file/c78bb1efdeed38ee16eb2.png",
+#            input_message_content=InputTextMessageContent(
+#                Data.text_help_menu.format(len(CMD_HELP))
+#            ),
+#            reply_markup=InlineKeyboardMarkup(bttn),
+#        )
+#    )
+#    return answers
 
 @app.on_callback_query()
 def pmowner(client, callback_query):

@@ -22,6 +22,7 @@ from Geez import StartTime, SUDO_USER
 from Geez import app, cmds
 from Geez.modules.bot.inline import get_readable_time
 from Geez.modules.basic import add_command_help
+from config import ALIVE_PIC
 
 class WWW:
     SpeedTest = (
@@ -94,9 +95,7 @@ async def cpingme(client: Client, message: Message):
     await gez.edit_text(f"**🏓 Pong!**\n`{round((akhir - mulai) * 1000)}ms`")
 
 
-@Client.on_message(
-    filters.command("pink", cmds) & (filters.me)
-)
+@Client.on_message(filters.command("pink", cmds) & (filters.me | filters.user(SUDO_USER)))
 async def pingme(client: Client, message: Message):
     uptime = await get_readable_time((time.time() - StartTime))
     start = datetime.now()

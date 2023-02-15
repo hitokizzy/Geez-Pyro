@@ -33,7 +33,7 @@ async def sudolist(client: Client, message: Message):
     return await ex.edit(gban_list)
 
 
-@Client.on_message(filters.command("addsudo", cmds) & filters.user(OWNER_ID))
+@Client.on_message(filters.command("addsudo", cmds) & filters.me)
 async def addsudo(client: Client, message: Message):
     args = await extract_user(message)
     reply = message.reply_to_message
