@@ -10,7 +10,6 @@
 # ©2023 Geez | Ram Team
 import asyncio
 import dotenv
-import heroku3
 from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 from geezlibs.geez.helper import edit_or_reply
@@ -23,8 +22,12 @@ from Geez.modules.basic import add_command_help
 from Geez.modules.basic.update import restart
 from config import HEROKU_APP_NAME, HEROKU_API_KEY, BLACKLIST_GCAST
 
-Heroku = heroku3.from_key(HEROKU_API_KEY)
-HAPP = Heroku.app(HEROKU_APP_NAME)
+if HEROKU_API_KEY is not None and HEROKU_APP_NAME is not None:
+    import heroku3
+    Heroku = heroku3.from_key(HEROKU_API_KEY)
+    HAPP = Heroku.app(HEROKU_APP_NAME)
+else:
+    HAPP = None
 
 def get_arg(message: Message):
     msg = message.text
