@@ -10,6 +10,7 @@
 # ©2023 Geez | Ram Team
 import asyncio
 import dotenv
+import heroku3
 from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 from geezlibs.geez.helper import edit_or_reply
@@ -21,6 +22,9 @@ from Geez import cmds
 from Geez.modules.basic import add_command_help
 from Geez.modules.basic.update import restart
 from config import HEROKU_APP_NAME, HEROKU_API_KEY, BLACKLIST_GCAST
+
+Heroku = heroku3.from_key(HEROKU_API_KEY)
+HAPP = Heroku.app(HEROKU_APP_NAME)
 
 def get_arg(message: Message):
     msg = message.text
@@ -128,7 +132,7 @@ async def addblacklist(client: Client, message: Message):
         dotenv.set_key(path, "BLACKLIST_GCAST", blacklistgrup)
     restart()
 
-@Client.on_message(filters.command("delblacklist", ["?", "!", ".", "*", ",", "$"]) & filters.me)
+@Client.on_message(filters.command("delblacklist", cmds) & filters.me)
 async def delblacklist(client: Client, message: Message):
     xxnx = await edit_or_reply(message, "`Processing...`")
     if HAPP is None:
