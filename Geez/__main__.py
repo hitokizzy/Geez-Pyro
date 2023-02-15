@@ -4,6 +4,7 @@ from pyrogram import idle
 from uvloop import install
 from geezlibs import logging
 from geezlibs import BOT_VER, __version__ as gver
+from geezlibs.geez.autobot import heroku
 from Geez import BOTLOG_CHATID, LOGGER, LOOP, aiosession, bot1, bots, app, ids
 from config import CMD_HNDLR
 from Geez.modules import ALL_MODULES
@@ -51,4 +52,5 @@ async def main():
 if __name__ == "__main__":
     LOGGER("Geez").info("Starting Geez Pyro Userbot")
     install()
+    heroku()
     LOOP.run_until_complete(main())
