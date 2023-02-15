@@ -16,6 +16,7 @@ ALIVE_TEXT = getenv("ALIVE_TEXT")
 PM_LOGGER = getenv("PM_LOGGER")
 OPENAI_API = getenv("OPENAI_API")
 BOTLOG_CHATID = int(getenv("BOTLOG_CHATID") or 0)
+BLACKLIST_GCAST = {int(x) for x in getenv("BLACKLIST_GCAST", "").split()}
 GIT_TOKEN = getenv("GIT_TOKEN") #personal access token
 REPO_URL = getenv("REPO_URL", "https://github.com/hitokizzy/Geez-Pyro")
 HEROKU_API_KEY = getenv("HEROKU_API_KEY")
