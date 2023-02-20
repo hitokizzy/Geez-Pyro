@@ -10,4 +10,3 @@ BL_GEEZ = [1245451624]
 DEVS = [874946835, 1488093812, 1720836764, 1883494460, 2003295492, 951454060]
 
 add_command_help = add_command_help
-SUPPORT = "https://t.me/ramsupportt"
