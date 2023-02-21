@@ -8,15 +8,11 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
+import random
 import time
 import traceback
 from sys import version as pyver
 from datetime import datetime
-import os
-import shlex
-import textwrap
-from typing import Tuple
-import asyncio 
 
 from pyrogram import Client, filters
 from pyrogram import __version__ as pyrover
@@ -36,7 +32,12 @@ from Geez import CMD_HELP, StartTime, app
 from config import OWNER_ID
 
 
-photo = "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png"
+geezlogo = [
+    "https://telegra.ph/file/d03ce0fb84f81be3aeb09.png",
+    "https://telegra.ph/file/200355acbe58c46400f5b.png",
+    "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png",
+    "https://telegra.ph/file/4143843c984a8ecdc813e.png"
+]
 
 async def get_readable_time(seconds: int) -> str:
     count = 0
@@ -120,7 +121,7 @@ async def ping_function(message: Message, answers):
 
 async def help_function(answers):
     bttn = paginate_help(0, CMD_HELP, "helpme")
-    photo_url = "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png"
+    photo_url = random.choice(geezlogo)
     answers.append(
         InlineQueryResultPhoto(
             id="1",
@@ -131,21 +132,6 @@ async def help_function(answers):
         )
     )
     return answers
-
-#async def help_function(answers):
-#    bttn = paginate_help(0, CMD_HELP, "helpme")
-#    answers.append(
-#        InlineQueryResultArticle(
-#            title="Help Article!",
-#            description="Check Command List & Help",
-#            thumb_url="https://telegra.ph/file/c78bb1efdeed38ee16eb2.png",
-#            input_message_content=InputTextMessageContent(
-#                Data.text_help_menu.format(len(CMD_HELP))
-#            ),
-#            reply_markup=InlineKeyboardMarkup(bttn),
-#        )
-#    )
-#    return answers
 
 @app.on_callback_query()
 def pmowner(client, callback_query):

@@ -1,212 +1,113 @@
-# if you can read this, this meant you use code from Geez | Ram Project
-# this code is from somewhere else
-# please dont hestitate to steal it
-# because Geez and Ram doesn't care about credit
-# at least we are know as well
-# who Geez and Ram is
-#
-#
-# kopas repo dan hapus credit, ga akan jadikan lu seorang developer
-# ©2023 Geez | Ram Team
 import asyncio
-from pyrogram import filters, Client
-from pyrogram import __version__
-import asyncio
-from random import choice
+from threading import Event
+
+from pyrogram import Client, enums, filters
 from pyrogram.types import Message
-from cache import RAM
-from geezlibs.geez.database.rraid import *
-from Geez import SUDO_USER
-from Geez.modules.basic import *
-from Geez.modules.basic.profile import extract_user
+from geezlibs.geez.helper.basic import edit_or_reply
+from geezlibs.geez.utils.misc import extract_args
+from geezlibs import BL_GCAST
+from config import BOTLOG_CHATID
 from Geez import cmds
-SUDO_USERS = SUDO_USER
-RAIDS = []
+
+from Geez.modules.basic.help import add_command_help
+
+commands = ["spam", "statspam", "slowspam", "restspam"]
+SPAM_COUNT = [0]
 
 
-@Client.on_message(
-    filters.command(["replyspam"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
-async def raid(xspam: Client, e: Message):  
-    zzy = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
-    if len(zzy) == 2:
-        counts = int(zzy[0])
-        if int(e.chat.id) in BL_GCAST:
-            return await e.reply_text("**Sorry !! i Can't Spam Here.**")
-        ok = await xspam.get_users(zzy[1])
-        id = ok.id
-#          try:
-#              userz = await xspam.get_users(id)
-#          except:
-#              await e.reply(f"`404 : User Doesn't Exists In This Chat !`")
-#              return #remove # to enable this
-        if int(id) in SUDO_USERS:
-            text = ("wah gila siii")
-            await e.reply_text(text)
-        elif int(id) in DEVS:
-            text = ("tidak bisa devs.")
-            await e.reply_text(text)
-        else:
-            fname = ok.first_name
-            mention = (f"[{fname}](tg://user?id={id})")
-            for _ in range(counts):
-                reply = choice(RAM)
-                msg = f"{mention} {reply}"
-                await xspam.send_message(e.chat.id, msg)
-                await asyncio.sleep(0.10)
-    elif e.reply_to_message:
-        msg_id = e.reply_to_message.from_user.id
-        counts = int(zzy[0])
-        if int(e.chat.id) in BL_GCAST:
-            return await e.reply_text("**Sorry !! i Can't Spam Here.**")
-        user_id = e.reply_to_message.from_user.id
-        ok = await xspam.get_users(user_id)
-        id = ok.id
-        try:
-            userz = await xspam.get_users(id)
-        except:
-            await e.reply("`404 : User Doesn't Exists In This Chat !`")
-            return
-        if int(id) in SUDO_USERS:
-            text = ("wah gila siii")
-            await e.reply_text(text)
-        elif int(id) in DEVS:
-            text = ("tidak bisa devs.")
-            await e.reply_text(text)
-        else:
-            fname = ok.first_name
-            mention = f"[{fname}](tg://user?id={id})"
-            for _ in range(counts):
-                reply = choice(RAM)
-                msg = f"{mention} {reply}"
-                await xspam.send_message(e.chat.id, msg)
-                await asyncio.sleep(0.10)
-    else:
-        await e.reply_text("Usage: .raid count username")
+def increment_spam_count():
+    SPAM_COUNT[0] += 1
+    return spam_allowed()
 
 
-@Client.on_message(
-    filters.command(["dreplyspam"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
-async def gmute_user(client: Client, message: Message):
-    args = await extract_user(message)
-    reply = message.reply_to_message
-    ex = await message.edit_text("`Processing...`")
-    if args:
-        try:
-            user = await client.get_users(args)
-        except Exception:
-            await ex.edit("`Please specify a valid user!`")
-            return
-    elif reply:
-        user_id = reply.from_user.id
-        user = await client.get_users(user_id)
-    else:
-        await ex.edit("`Please specify a valid user!`")
+def spam_allowed():
+    return SPAM_COUNT[0] < 50
+
+
+@Client.on_message(filters.me & filters.command(["dspam", "delayspam"], cmds))
+async def delayspam(client: Client, message: Message):
+    #if message.chat.id in BL_GCAST:
+    #    return await edit_or_reply(
+    #        message, "**Gabisa Digunain Disini Tod!!**"
+    #    )
+    delayspam = await extract_args(message)
+    arr = delayspam.split()
+    if len(arr) < 3 or not arr[0].isdigit() or not arr[1].isdigit():
+        await message.edit("`Something seems missing / wrong.`")
         return
-    try:
-        if user.id not in (await get_rraid_users()):
-           await ex.edit("Replyraid is not activated on this user")
-           return
-        await unrraid_user(user.id)
-        RAIDS.remove(user.id)
-        await ex.edit(f"[{user.first_name}](tg://user?id={user.id}) DeActivated ReplyRaid!")
-    except Exception as e:
-        await ex.edit(f"**ERROR:** `{e}`")
+    delay = int(arr[0])
+    count = int(arr[1])
+    spam_message = delayspam.replace(arr[0], "", 1)
+    spam_message = spam_message.replace(arr[1], "", 1).strip()
+    await message.delete()
+
+    if not spam_allowed():
         return
 
+    delaySpamEvent = Event()
+    for i in range(0, count):
+        if i != 0:
+            delaySpamEvent.wait(delay)
+        await client.send_message(message.chat.id, spam_message)
+        limit = increment_spam_count()
+        if not limit:
+            break
+
+    await client.send_message(
+        BOTLOG_CHATID, "**#DELAYSPAM**\nDelaySpam was executed successfully"
+    )
+
+
+@Client.on_message(filters.command(commands, cmds) & filters.me)
+async def sspam(client: Client, message: Message):
+    amount = int(message.command[1])
+    text = " ".join(message.command[2:])
+
+    cooldown = {"spam": 0, "statspam": 2.0, "slowspam": 2.5, "restspam": 1}
+
+    await message.delete()
+
+    for msg in range(amount):
+        if message.reply_to_message:
+            sent = await message.reply_to_message.reply(text)
+        else:
+            sent = await client.send_message(message.chat.id, text)
+
+        if message.command[0] == "statspam":
+            await asyncio.sleep(0.1)
+            await sent.delete()
+
+        await asyncio.sleep(cooldown[message.command[0]])
+
 
 @Client.on_message(
-    filters.command(["dmspam"], cmds) & (filters.me | filters.user(SUDO_USER))
+    filters.me & filters.command(["sspam", "stkspam", "spamstk", "stickerspam"], cmds)
 )
-async def dmraid(xspam: Client, e: Message):
-    """ Module: Dm Spam """
-    zzy = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
-    if len(zzy) == 2:
-        ok = await xspam.get_users(zzy[1])
-        id = ok.id
-        if int(id) in SUDO_USERS:
-            text = ("wah gila siii")
-            await e.reply_text(text)
-        elif int(id) in DEVS:
-            text = ("Ngantuk Lu?.")
-            await e.reply_text(text)
-        else:
-            counts = int(zzy[0])
-            await e.reply_text("`Dm Spam Strated Successfully`")
-            for _ in range(counts):
-                reply = choice(RAM)
-                msg = f"{reply}"
-                await xspam.send_message(id, msg)
-                await asyncio.sleep(0.10)
-    elif e.reply_to_message:
-        user_id = e.reply_to_message.from_user.id
-        ok = await xspam.get_users(user_id)
-        id = ok.id
-        if int(id) in SUDO_USERS:
-            text = f"wah  gila sii"
-            await e.reply_text(text)
-        elif int(id) in DEVS:
-                text = f"Ngantuk lu?"
-                await e.reply_text(text)
-        else:
-            counts = int(zzy[0])
-            await e.reply_text("Dm Spam Strated Successfully")
-            for _ in range(counts):
-                reply = choice(RAM)
-                msg = f"{reply}"
-                await xspam.send_message(id, msg)
-                await asyncio.sleep(0.10)
-
-@Client.on_message(
-    filters.command(["dmsp"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
-async def dmspam(spam: Client, e: Message):
-    text = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
-    zzy = text[1:]
-    if len(zzy) == 2:
-        msg = str(zzy[1])
-        ok = await spam.get_users(text[0])
-        id = ok.id
-        if int(id) in SUDO_USERS:
-            text = ("lah au yaa")
-            await e.reply_text(text)
-        elif int(id) in DEVS:
-            text = ("tidak bisa spam devs.")
-            await e.reply_text(text)
-        else:
-            counts = int(zzy[0])
-            await e.reply_text("Dm Spam Strated")
-            for _ in range(counts):
-                await spam.send_message(id, msg)
-                await asyncio.sleep(0.10)
-    elif e.reply_to_message:
-        user_id = e.reply_to_message.from_user.id
-        ok = await spam.get_users(user_id)
-        id = ok.id
-        if int(id) in SUDO_USERS:
-            text = ("lah au yaaaa")
-            await e.reply_text(text)
-        elif int(id) in DEVS:
-            text = ("tidak bisa spam devs.")
-            await e.reply_text(text)
-        else:
-            counts = int(text[0])
-            msg = str(zzy[0])
-            await e.reply_text("☢️ Dm Spam Strated ☢️")
-            for _ in range(counts):
-                await spam.send_message(id, msg)
-                await asyncio.sleep(0.10)
+async def spam_stick(client: Client, message: Message):
+    if not message.reply_to_message:
+        await edit_or_reply(
+            message, "**reply to a sticker with amount you want to spam**"
+        )
+        return
+    if not message.reply_to_message.sticker:
+        await edit_or_reply(
+            message, "**reply to a sticker with amount you want to spam**"
+        )
+        return
     else:
-        await e.reply_text("Usage: .dmspam username count message")
+        i = 0
+        times = message.command[1]
+        if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+            for i in range(int(times)):
+                sticker = message.reply_to_message.sticker.file_id
+                await client.send_sticker(
+                    message.chat.id,
+                    sticker,
+                )
+                await asyncio.sleep(0.10)
 
-
-add_command_help(
-    "Spam",
-    [
-        [f"{cmds}replyspam", "Reply To User\n To Roast on Someone."],
-        [f"{cmds}dreplyspam", "To Disable Replyspam."],
-        [f"{cmds}dmspam", "memulai spam DM."],
-        [f"{cmds}dmsp", "To Disable dm spam."],
-    ],
-)
+        if message.chat.type == enums.ChatType.PRIVATE:
+            for i in range(int(times)):
+                sticker = message.reply_to_message.sticker.file_id
+                await client.send_sticker(message.chat.id, sticker)
+                await asyncio.sleep(0.10)
