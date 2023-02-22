@@ -106,7 +106,7 @@ async def load_sudoers():
 
 LOOP = asyncio.get_event_loop()
 LOOP.run_until_complete(load_sudoers())
-
+SUDO_USER = SUDOERS
 trl = Translator()
 aiosession = ClientSession()
 CMD_HELP = {}

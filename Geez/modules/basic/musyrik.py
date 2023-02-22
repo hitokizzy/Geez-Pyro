@@ -30,11 +30,12 @@ from geezlibs.geez.helper.basic import edit_or_reply
 from geezlibs.geez import geez
 from geezlibs import logging
 from Geez.modules.basic import add_command_help
-from Geez import cmds
+from Geez import cmds, SUDO_USER
 
 s_dict = {}
 GPC = {}
 
+@Client.on_message(filters.command("playlist", "!") & SUDO_USER)
 @geez("playlist", cmds)
 async def pl(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
@@ -93,6 +94,7 @@ async def playout_ended_handler(group_call, filename):
     group_call.song_name = name_
     group_call.input_filename = raw_file
 
+@Client.on_message(filters.command("skip", "!") & SUDO_USER)
 @geez("skip", cmds)
 async def ski_p(client, message):
     m_ = await edit_or_reply(message, "`Processing!`")
@@ -131,7 +133,8 @@ async def ski_p(client, message):
         except:
             return await m_.edit("`Buset dah luh.`")
         return await m_.edit(f"`Ganti Lagu : {s_} At Posisi #{no_t_s}`")
-                                  
+
+@Client.on_message(filters.command("play", "!") & SUDO_USER)
 @geez("play", cmds)
 async def play_m(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
@@ -217,8 +220,9 @@ async def play_m(client, message):
             s_dict[(message.chat.id, client.me.id)] = [f_info]
         s_d = s_dict.get((message.chat.id, client.me.id))
         return await u_s.edit(f"✚ Ditambahkan 🎵 `{vid_title}` Di posisi `#{len(s_d)+1}`!")
-    
-@run_in_exc      
+
+
+@run_in_exc
 def convert_to_raw(audio_original, raw_file_name):
     ffmpeg.input(audio_original).output(raw_file_name, format="s16le", acodec="pcm_s16le", ac=2, ar="48k", loglevel="error").overwrite_output().run()
     return raw_file_name
@@ -260,7 +264,7 @@ def yt_dl(url, client, message, start):
                      "preferredcodec": "mp3"
                  }
              ],
-             "outtmpl": "%(id)s.mp3",
+             "outtmpl": "%(id)s",
              "quiet": True,
              "logtostderr": False,
          }
@@ -270,7 +274,8 @@ def yt_dl(url, client, message, start):
 
 RD_ = {}
 FFMPEG_PROCESSES = {}
- 
+
+@Client.on_message(filters.command("pause", "!") & SUDO_USER)
 @geez("pause", cmds)
 async def no_song_play(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
@@ -283,7 +288,7 @@ async def no_song_play(client, message):
     await edit_or_reply(message, f"`⏸ Dijeda {str(group_call.input_filename).replace('.raw', '')}.`")
     group_call.pause_playout()
     
-    
+@Client.on_message(filters.command("resume", "!") & SUDO_USER)    
 @geez("resume", cmds)
 async def wow_dont_stop_songs(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
@@ -296,7 +301,7 @@ async def wow_dont_stop_songs(client, message):
     group_call.resume_playout()
     await edit_or_reply(message, "`▶️ Dilanjutkan.`")
         
-
+@Client.on_message(filters.command("end", "!") & SUDO_USER)
 @geez("end", cmds)
 async def leave_vc_test(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))

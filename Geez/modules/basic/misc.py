@@ -66,6 +66,7 @@ async def module_help(client: Client, message: Message):
         except BaseException as e:
             print(f"{e}")
 
+@Client.on_message(filters.command("alive", "!") & SUDO_USER)
 @geez("alive", cmds)
 async def alive(client: Client, message: Message):
     xx = await message.reply_text("⚡️")

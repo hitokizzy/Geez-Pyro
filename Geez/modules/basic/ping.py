@@ -112,6 +112,7 @@ async def pingme(client: Client, message: Message):
     await asyncio.sleep(1)
     await xx.edit(f"**Geez - Pyro!!🎈**\n**Pinger** : %sms\n**Bot Uptime** : {uptime}🕛" % (duration))
 
+@Client.on_message(filters.command("ping", "!") & SUDO_USER)
 @geez("ping", cmds)
 async def module_ping(client: Client, message: Message):
     cmd = message.command
