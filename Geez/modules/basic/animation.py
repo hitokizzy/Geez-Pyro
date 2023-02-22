@@ -24,7 +24,7 @@ from geezlibs.geez.helper.constants import MEMES
 from Geez import cmds
 from Geez.modules.basic.help import *
 
-DEFAULTUSER = "Man"
+DEFAULTUSER = "si anu"
 
 
 NOBLE = [

@@ -27,11 +27,11 @@ async def convert_image(client: Client, message: Message):
     reply_message = message.reply_to_message
     photo = reply_message.photo.file_id
     bot = "qq_neural_anime_bot"
-    geez = await client.send_photo(bot, photo=photo)
+    xxx = await client.send_photo(bot, photo=photo)
     await asyncio.sleep(18)
-    await geez.delete()
     await message.delete()
     async for result in client.search_messages(bot, filter=MessagesFilter.PHOTO):
         if result.photo:
             await client.send_photo(message.chat.id, result.photo.file_id, caption="**Powered by GeezProjects**")
             await result.delete()
+            await xxx.delete()
