@@ -8,11 +8,9 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
-import os
 import asyncio
-import time
-from pyrogram import Client, filters, enums
-from pyrogram.enums import MessageMediaType, MessagesFilter
+from pyrogram import Client
+from pyrogram.enums import MessagesFilter
 from pyrogram.types import Message
 from geezlibs import logging
 from geezlibs.geez import geez
