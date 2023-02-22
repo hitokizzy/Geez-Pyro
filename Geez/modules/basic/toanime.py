@@ -12,6 +12,7 @@ import os
 import asyncio
 import time
 from pyrogram import Client, filters, enums
+from pyrogram.enums import MessageMediaType, MessagesFilter
 from pyrogram.types import Message
 from geezlibs import logging
 from geezlibs.geez import geez
@@ -22,22 +23,17 @@ from Geez import cmds
 @geez("toanime", cmds)
 async def convert_image(client: Client, message: Message):
     if not message.reply_to_message:
-        return await message.edit("**Please Reply to photo**")
+        return await message.edit("**Mohon Balas Pesan Ini Ke Media**")
     if message.reply_to_message:
         await message.edit("`processing ...`")
-        await logging(client)
     reply_message = message.reply_to_message
     photo = reply_message.photo.file_id
-    bot = "qq_2d_ai_bot"
-    await client.send_photo(bot, photo=photo)
+    bot = "qq_neural_anime_bot"
+    geez = await client.send_photo(bot, photo=photo)
     await asyncio.sleep(18)
-    async for result in client.search_messages(bot, limit=1):
+    await geez.delete()
+    await message.delete()
+    async for result in client.search_messages(bot, filter=MessagesFilter.PHOTO):
         if result.photo:
-            await message.edit("uploading...")
-            converted_image_file = await client.download_media(result)
-            await client.send_photo(message.chat.id, converted_image_file, caption="Powered by Geez Pyro")
-            await message.delete()
-            os.remove(converted_image_file)
-        else:
-            await message.edit("`error ...`")
-    await client.delete_messages(bot, 2)
+            await client.send_photo(message.chat.id, result.photo.file_id, caption="**Powered by GeezProjects**")
+            await result.delete()
