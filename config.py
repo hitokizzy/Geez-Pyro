@@ -6,7 +6,7 @@ load_dotenv(".env")
 
 
 API_ID = int(getenv("API_ID", "6435225")) #optional
-API_HASH = getenv("API_HASH", "") #optional
+API_HASH = getenv("API_HASH", "4e984ea35f854762dcde906dce426c2d") #optional
 SUDO_USERS = list(map(int, getenv("SUDO_USERS", "").split()))
 OWNER_ID = getenv("OWNER_ID")
 MONGO_URL = getenv("MONGO_URL")
@@ -22,7 +22,7 @@ REPO_URL = getenv("REPO_URL", "https://github.com/hitokizzy/Geez-Pyro")
 HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME")
 BRANCH = getenv("BRANCH", "main") #don't change
-CMD_HNDLR = getenv("CMD_HNDLR", ".") 
+CMD_HNDLR = getenv("CMD_HNDLR", ".")
 STRING_SESSION1 = getenv("STRING_SESSION1", "")
 STRING_SESSION2 = getenv("STRING_SESSION2", "")
 STRING_SESSION3 = getenv("STRING_SESSION3", "")

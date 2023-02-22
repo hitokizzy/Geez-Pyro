@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 from googlesearch import search
 from pyrogram import Client, filters
 from pyrogram.types import Message
-
+from geezlibs.geez import geez
 from geezlibs.geez.helper.basic import edit_or_reply
 
 from Geez.modules.basic import *
@@ -40,7 +40,7 @@ def googlesearch(query):
     return returnquery
 
 
-@Client.on_message(filters.command(["gs", "google"], cmds) & filters.me)
+@geez("google", cmds)
 async def gs(client: Client, message: Message):
     Man = await edit_or_reply(message, "`Processing...`")
     msg_txt = message.text

@@ -18,7 +18,8 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from geezlibs.geez.utils.tools import run_in_exc
 from geezlibs import logging
-from Geez import *
+from Geez import cmds
+from geezlibs.geez import geez
 from geezlibs.geez.helper.basic import *
 from geezlibs.geez.utils.misc import *
 from geezlibs.geez.utils.tools import *
@@ -27,7 +28,7 @@ from Geez.modules.basic import add_command_help
 lang = "id"  # Default Language for voice
 
 
-@Client.on_message(filters.me & filters.command(["voice", "tts"], cmds))
+@geez(["voice", "tts"], cmds)
 async def voice(client: Client, message):
     global lang
     cmd = message.command
@@ -60,7 +61,7 @@ async def voice(client: Client, message):
     os.remove("voice.mp3")
 
 
-@Client.on_message(filters.me & filters.command(["voicelang"], cmds))
+@geez("voicelang", cmds)
 async def voicelang(client: Client, message: Message):
     global lang
     temp = lang
@@ -75,7 +76,7 @@ async def voicelang(client: Client, message: Message):
         message, "**Bahasa untuk Voice Google diganti menjadi** `{}`".format(lang)
     )
 
-@Client.on_message(filters.command(["stt","text"], cmds) & filters.me)
+@geez("stt", cmds)
 async def speech_to_text(client: Client, message: Message):
     reply = message.reply_to_message
     if not (reply and reply.voice):
@@ -113,8 +114,8 @@ async def speech_to_text(client: Client, message: Message):
 add_command_help(
     "voice",
     [
-        [f"voice atau {cmds}tts [reply]", "Ubah teks menjadi suara oleh google."],
-        [f"text atau {cmds}stt [reply]", "ubah Voice Note menjadi text (default bahasa : Indonesia)."],
+        [f"{cmds}tts [reply]", "Ubah teks menjadi suara oleh google."],
+        [f"{cmds}stt [reply]", "ubah Voice Note menjadi text (default bahasa : Indonesia)."],
         [
             f"{cmds}voicelang (lang_id) ",
             "Setel bahasa suara anda\n\nBeberapa Bahasa Suara yang Tersedia:"

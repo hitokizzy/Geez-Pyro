@@ -13,8 +13,8 @@ import random
 from datetime import datetime
 from platform import python_version
 from geezlibs import __version__ as gver
-from geezlibs import logging
-from geezlibs import BOT_VER
+from geezlibs import logging, BOT_VER
+from geezlibs.geez import geez
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from pyrogram import __version__, filters, Client
 from pyrogram.types import Message
@@ -46,7 +46,7 @@ else:
         f"©️2023 [Geez|RAM Support](t.me/GeezRam)\n"
     )
 
-@Client.on_message(filters.command(["geez"], cmds) & filters.me)
+@geez("geez", cmds)
 async def module_help(client: Client, message: Message):
     await logging(client)
     cmd = message.command
@@ -66,17 +66,15 @@ async def module_help(client: Client, message: Message):
         except BaseException as e:
             print(f"{e}")
 
-@Client.on_message(
-    filters.command(["alive", "awake"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("alive", cmds)
 async def alive(client: Client, message: Message):
     xx = await message.reply_text("⚡️")
     await logging(client)
     await asyncio.sleep(3)
     try:
-       await message.delete()
+        await message.delete()
     except:
-       pass
+        pass
     send = client.send_video if alive_logo.endswith(f"{cmds}mp4") else client.send_photo
     xd = (f"{txt}")
     try:
@@ -92,7 +90,7 @@ async def alive(client: Client, message: Message):
     except BaseException:
         await xx.edit(xd, disable_web_page_preview=True)
 
-@Client.on_message(filters.command("repo", cmds) & filters.me)
+@geez("repo", cmds)
 async def repo(bot: Client, message: Message):
     await asyncio.sleep(1)
     await message.edit("Mengambil informasi repo.....")
@@ -100,12 +98,12 @@ async def repo(bot: Client, message: Message):
     await message.edit("repo Geez-Pyro Official: \n\n\nhttps://github.com/hitokizzy/Geez-Pyro")
 
 
-@Client.on_message(filters.command("creator", cmds) & filters.me)
+@geez("creator", cmds)
 async def creator(bot: Client, message: Message):
     await message.edit("https://github.com/vckyou")
 
 
-@Client.on_message(filters.command("id", cmds) & filters.me)
+@geez("id", cmds)
 async def get_id(bot: Client, message: Message):
     file_id = None
     user_id = None

@@ -11,12 +11,9 @@
 import os
 from asyncio import sleep
 import os
-import sys
-from re import sub
-from time import time
-
+from geezlibs.geez import geez
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
-from pyrogram import Client, filters, enums
+from pyrogram import Client, filters
 from pyrogram.types import Message
 
 from Geez import SUDO_USER
@@ -93,9 +90,7 @@ async def extract_user(message):
     return (await extract_user_and_reason(message))[0]
 
 
-@Client.on_message(
-    filters.command(["unblock"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("unblock", cmds)
 async def unblock_user_func(client: Client, message: Message):
     user_id = await extract_user(message)
     tex = await message.reply_text("`Processing . . .`")
@@ -110,9 +105,7 @@ async def unblock_user_func(client: Client, message: Message):
     await message.edit(f"**berhasil membuka blokir** {umention}")
 
 
-@Client.on_message(
-    filters.command(["block"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("block", cmds)
 async def block_user_func(client: Client, message: Message):
     user_id = await extract_user(message)
     tex = await message.reply_text("`Processing . . .`")
@@ -127,9 +120,7 @@ async def block_user_func(client: Client, message: Message):
     await tex.edit_text(f"**Berhasil mem-blokir** {umention}")
 
 
-@Client.on_message(
-    filters.command(["setname"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("setname", cmds)
 async def setname(client: Client, message: Message):
     tex = await message.reply_text("`Processing . . .`")
     if len(message.command) == 1:
@@ -149,9 +140,7 @@ async def setname(client: Client, message: Message):
         )
 
 
-@Client.on_message(
-    filters.command(["setbio"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("setbio", cmds)
 async def set_bio(client: Client, message: Message):
     tex = await message.edit_text("`Processing . . .`")
     if len(message.command) == 1:
@@ -167,9 +156,7 @@ async def set_bio(client: Client, message: Message):
         return await tex.edit("berikan text untuk diatur sebagai bio.")
 
 
-@Client.on_message(
-    filters.command(["setpfp"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("setpp", cmds)
 async def set_pfp(client: Client, message: Message):
     replied = message.reply_to_message
     if (
@@ -193,9 +180,7 @@ async def set_pfp(client: Client, message: Message):
         await message.delete()
 
 
-@Client.on_message(
-    filters.command(["vpfp"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("setppv", cmds)
 async def view_pfp(client: Client, message: Message):
     user_id = await extract_user(message)
     if user_id:
@@ -221,7 +206,7 @@ add_command_help(
         [f"{cmds}unblock", "membuka blokir"],
         [f"{cmds}setname", "mengatur nama anda."],
         [f"{cmds}setbio", "mengatur bio anda."],
-        [f"{cmds}setpfp", "balas ke gambar untuk atur sebagai foto profil."],
-        [f"{cmds}vpfp", "balas ke video untuk atur sebagai foto profil."],
+        [f"{cmds}setpp", "balas ke gambar untuk atur sebagai foto profil."],
+        [f"{cmds}setppv", "balas ke video untuk atur sebagai foto profil."],
     ],
 )

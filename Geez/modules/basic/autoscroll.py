@@ -10,7 +10,7 @@
 # ©2023 Geez | Ram Team
 from pyrogram import filters, Client
 from pyrogram.types import Message
-
+from geezlibs.geez import geez, devs
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
@@ -23,7 +23,7 @@ if f:
         message.continue_propagation()
 
 
-@Client.on_message(filters.command("autoscroll", cmds) & filters.me)
+@geez("autoscroll", cmds)
 async def add_to_auto_read(bot: Client, message: Message):
     if message.chat.id in f:
         f.remove(message.chat.id)

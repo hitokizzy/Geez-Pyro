@@ -10,22 +10,14 @@
 # ©2023 Geez | Ram Team
 import asyncio
 import os
+import random
 from io import BytesIO
-import asyncio
-import math
-import os
-import shlex
-from typing import Tuple
-
 from PIL import Image
-from pymediainfo import MediaInfo
-import asyncio
-import os
+
 import shlex
 import textwrap
 import cv2
 import requests
-from typing import Tuple
 from PIL import Image, ImageDraw, ImageFont
 from bs4 import BeautifulSoup as bs
 from PIL import Image
@@ -35,11 +27,20 @@ from pyrogram.errors import StickersetInvalid, YouBlockedUser
 from pyrogram.raw.functions.messages import GetStickerSet
 from pyrogram.raw.types import InputStickerSetShortName
 from pyrogram.types import Message
-
+from geezlibs.geez import geez
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 
 from Geez.modules.basic import add_command_help
 from Geez import cmds
+
+babi= [
+    "cup, nemu stiker...",
+    "cakep nih, colong ah",
+    "simsalabim, abrakadabra",
+    "bagi, ga boleh pelit!",
+    "pinjem bentar...",
+]
+
 
 async def add_text_img(image_path, text):
     font_size = 12
@@ -180,11 +181,11 @@ def get_arg(message: Message):
         return ""
     return " ".join(split[1:])
 
-@Client.on_message(filters.command(["tikel", "kang", "steal"], cmds) & filters.me)
+@geez("kang", cmds)
 async def kang(client: Client, message: Message):
     user = client.me
     replied = message.reply_to_message
-    um = await message.edit_text("`cup..., nemu stiker...`")
+    um = await message.edit_text(random.choice(babi))
     media_ = None
     emoji_ = None
     is_anim = False
@@ -401,7 +402,7 @@ async def get_response(message, client):
     return [x async for x in client.get_chat_history("Stickers", limit=1)][0].text
 
 
-@Client.on_message(filters.command(["packinfo", "stickerinfo"], cmds) & filters.me)
+@geez(["packinfo", "stickerinfo"], cmds)
 async def packinfo(client: Client, message: Message):
     rep = await message.edit_text("`Processing...`")
     if not message.reply_to_message:
@@ -437,7 +438,7 @@ async def packinfo(client: Client, message: Message):
     await rep.edit(output)
 
 
-@Client.on_message(filters.command("stickers", cmds) & filters.me)
+@geez("stickers", cmds)
 async def cb_sticker(client: Client, message: Message):
     query = get_text(message)
     if not query:
@@ -457,7 +458,7 @@ async def cb_sticker(client: Client, message: Message):
     await xx.edit(reply)
 
 
-@Client.on_message(filters.command("tiny", cmds) & filters.me)
+@geez("tiny", cmds)
 async def tinying(client: Client, message: Message):
     reply = message.reply_to_message
     if not (reply and (reply.media)):
@@ -534,7 +535,7 @@ async def tinying(client: Client, message: Message):
     os.remove(ik)
 
 
-@Client.on_message(filters.command(["mmf", "memify"], cmds) & filters.me)
+@geez("mmf", cmds)
 async def memify(client: Client, message: Message):
     if not message.reply_to_message_id:
         await message.edit_text("**Plz reply to an sticker!**")
@@ -560,7 +561,7 @@ async def memify(client: Client, message: Message):
     os.remove(meme)
 
 
-@Client.on_message(filters.command(["getsticker", "mtoi"], cmds) & filters.me)
+@geez(["getsticker", "get", "mtoi"], cmds)
 async def stick2png(client: Client, message: Message):
     try:
         await message.edit("`Downloading . . .`")

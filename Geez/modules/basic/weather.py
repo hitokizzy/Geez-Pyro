@@ -13,11 +13,12 @@ import aiohttp
 from html import escape
 from pyrogram import filters, Client 
 from pyrogram.types import Message
+from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
 from pyrogram import enums
 from Geez import cmds
 
-@Client.on_message(filters.command(["weather", "w"], cmds) & filters.me)
+@geez("weather", cmds)
 async def get_weather(bot: Client, message: Message):
     if len(message.command) == 1:
         await message.edit("Usage: `.weather Maldives`")

@@ -13,12 +13,13 @@ from os import remove
 from pyrogram import Client, filters
 from pyrogram.enums import ChatType
 from pyrogram.types import Message
+from geezlibs.geez import geez
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from Geez.modules.basic.profile import extract_user
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(filters.command(["whois", "info"], cmds) & filters.me)
+@geez(["info", "whois"], cmds)
 async def who_is(client: Client, message: Message):
     user_id = await extract_user(message)
     ex = await message.edit_text("`Processing . . .`")
@@ -81,7 +82,7 @@ async def who_is(client: Client, message: Message):
         return await ex.edit(f"**INFO:** `{e}`")
 
 
-@Client.on_message(filters.command(["chatinfo", "cinfo", "ginfo"], cmds) & filters.me)
+@geez(["chatinfo"], cmds)
 async def chatinfo_handler(client: Client, message: Message):
     ex = await message.edit_text("`Processing...`")
     try:

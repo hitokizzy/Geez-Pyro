@@ -11,11 +11,12 @@
 import asyncio
 from pyrogram import Client, filters, raw
 from pyrogram.types import Message
+from geezlibs.geez import geez
 from geezlibs.geez.helper.basic import edit_or_reply
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(filters.command("limit", cmds) & filters.me)
+@geez("limit", cmds)
 async def spamban(client: Client, m: Message):
     await client.unblock_user("SpamBot")
     response = await client.send(

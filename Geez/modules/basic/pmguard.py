@@ -1,6 +1,7 @@
 from pyrogram import filters, Client
 from pyrogram.types import Message
 from geezlibs import DEVS
+from geezlibs.geez import geez, devs
 from geezlibs.geez.database.pmpermitdb import get_approved_users, pm_guard, allow_user
 from geezlibs.geez.database import pmpermitdb as TOD
 from config import BOTLOG_CHATID, PM_LOGGER
@@ -28,7 +29,7 @@ def get_arg(message):
     return " ".join(split[1:])
 
 
-@Client.on_message(filters.command("setlimit", cmds) & filters.me)
+@geez("setlimit", cmds)
 async def pmguard(client, message):
     arg = get_arg(message)
     if not arg:
@@ -39,7 +40,7 @@ async def pmguard(client, message):
 
 
 
-@Client.on_message(filters.command("setblockmsg", cmds) & filters.me)
+@geez("setblocking", cmds)
 async def setpmmsg(client, message):
     arg = get_arg(message)
     if not arg:

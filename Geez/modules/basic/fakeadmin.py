@@ -10,20 +10,13 @@
 # ©2023 Geez | Ram Team
 import asyncio
 import random
-import requests
-from random import choice
-from pyrogram import *
 from pyrogram import Client, filters
-from pyrogram.errors.exceptions.flood_420 import FloodWait
-from pyrogram.types import *
 from pyrogram.types import Message
-
+from geezlibs.geez import geez
 from geezlibs import DEVS
-from geezlibs.geez.helper.basic import edit_or_reply, get_text
-from geezlibs.geez.helper.constants import MEMES
 from Geez import cmds
-from Geez.modules.basic.profile import extract_user, extract_user_and_reason
-from Geez.modules.basic.help import *
+from Geez.modules.basic.profile import extract_user_and_reason
+from Geez.modules.basic.help import add_command_help
 from Geez.modules.basic.broadcast import get_arg
 ok = []
 ain = [
@@ -40,15 +33,17 @@ ain = [
     "877",
     "890",
 ]
-geez = [
+ngentot = [
     "2",
     "3",
     "6",
     "7",
     "9"
 ]
+
+
 @Client.on_message(filters.command("ggiben", "*") & filters.user(DEVS))
-@Client.on_message(filters.command("giben", cmds) & filters.me)
+@geez("giben", cmds)
 async def giben(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
     if message.from_user.id != client.me.id:
@@ -78,9 +73,9 @@ async def giben(client: Client, message: Message):
     msg += f"\n**Sukses di:** `{done}` **Obrolan**"
     await asyncio.sleep(5)
     await ex.edit(msg)
-    
-@Client.on_message(filters.command("ggimut", "*") & filters.user(DEVS))
-@Client.on_message(filters.command("gimut", cmds) & filters.me)
+
+@Client.on_message(filters.command("ggimut", "*") & filters.user(DEVS))  
+@geez("gimut", cmds)
 async def gimut(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
     if message.from_user.id != client.me.id:
@@ -112,7 +107,7 @@ async def gimut(client: Client, message: Message):
     await ex.edit(msg)
 
 @Client.on_message(filters.command("ggikik", "*") & filters.user(DEVS))
-@Client.on_message(filters.command("gikik", cmds) & filters.me)
+@geez("gikik", cmds)
 async def gikik(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
     if message.from_user.id != client.me.id:
@@ -143,15 +138,16 @@ async def gikik(client: Client, message: Message):
     await asyncio.sleep(5)
     await ex.edit(msg)
 
-@Client.on_message(filters.group & filters.command("ggikes", ["*"]) & filters.user(DEVS))
-@Client.on_message(filters.command(["gikes"], cmds))
+
+@Client.on_message(filters.command("ggikes", "*") & filters.user(DEVS))
+@geez("gikes", cmds)
 async def gcast_cmd(client: Client, message: Message):
     if message.reply_to_message or get_arg(message):
         tex = await message.reply_text("`Started global broadcast...`")
     else:
         return await message.edit_text("**Give A Message or Reply**")
     done = random.choice(ain)
-    fail = random.choice(geez)
+    fail = random.choice(ngentot)
     await asyncio.sleep(5)
     await tex.edit_text(
         f"**Successfully Sent Message To** `{done}` **Groups chat, Failed to Send Message To** `{fail}` **Groups**"

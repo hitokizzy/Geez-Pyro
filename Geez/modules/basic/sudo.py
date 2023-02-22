@@ -1,121 +1,81 @@
-import os
-from pyrogram import Client, filters
+# if you can read this, this meant you use code from Geez | Ram Project
+# this code is from somewhere else
+# please dont hestitate to steal it
+# because Geez and Ram doesn't care about credit
+# at least we are know as well
+# who Geez and Ram is
+#
+#
+# kopas repo dan hapus credit, ga akan jadikan lu seorang developer
+# ©2023 Geez | Ram Team
 
+from pyrogram import Client
+from pyrogram.types import Message
+from geezlibs.geez import geez
+from geezlibs.geez.database import add_sudo, get_sudoers, remove_sudo
+from Geez import cmds, SUDOERS
+from Geez.modules.basic.help import add_command_help
+from config import OWNER_ID
 
-from Geez import cmds
+@geez("addsudo", cmds)
+async def useradd(client: Client, message: Message):
+    if not message.reply_to_message:
+        return await message.edit("Reply to someone's message to add him to sudoers.",)
+    user_id = message.reply_to_message.from_user.id
+    umention = (await client.get_users(user_id)).mention
+    sudoers = await get_sudoers()
 
-client=Client
+    if user_id in sudoers:
+        return await message.edit(f"{umention} is already in sudoers.")
+    if user_id == OWNER_ID:
+        return await message.edit("You can't add your self in sudoers.")
 
-def get_sudo_users():
-    try:
-        app_name = os.environ.get("HEROKU_APP_NAME")
-        api_key = os.environ.get("HEROKU_API_KEY")
-        config_var = client.get_config()
-        sudo_users = config_var.get("SUDO_USERS", "").split(",")
-        return [int(user_id) for user_id in sudo_users if user_id]
-    except:
-        return []
-    
-@Client.on_message(filters.command("addsudo", cmds) & filters.me)
-async def add_sudo(client, message):
-    # Check if the user is the bot owner
-    if message.from_user.id == int(os.environ.get("OWNER_ID")):
-        # Check if a user ID is provided after the command
-        if len(message.command) == 2:
-            user_id = int(message.command[1])
-        # Otherwise, get the ID of the user who sent the message they're replying to
-        elif message.reply_to_message:
-            user_id = message.reply_to_message.from_user.id
-        else:
-            await message.reply("Please reply to a message or provide a user ID.")
-            return
-        # Get the existing sudo users from Heroku
+    await add_sudo(user_id)
+
+    if user_id not in SUDOERS:
+        SUDOERS.add(user_id)
+
+    await message.edit(f"Successfully added {umention} in sudoers.")
+
+@geez("rmsudo", cmds)
+async def rmsudo(client: Client, message: Message):
+    if not message.reply_to_message:
+        return await message.edit("Reply to someone's message to remove him to sudoers.")
+    user_id = message.reply_to_message.from_user.id
+    umention = (await client.get_users(user_id)).mention
+
+    if user_id not in await get_sudoers():
+        return await message.edit(f"{umention} is not in sudoers.")
+
+    await remove_sudo(user_id)
+
+    if user_id in SUDOERS:
+        SUDOERS.remove(user_id)
+
+    await message.edit(f"Successfully removed {umention} from sudoers.")
+
+@geez("listsudo", cmds)
+async def sudoers_list(client: Client, message: Message):
+    sudoers = await get_sudoers()
+    text = ""
+    j = 0
+    for user_id in sudoers:
         try:
-            app_name = os.environ.get("HEROKU_APP_NAME")
-            api_key = os.environ.get("HEROKU_API_KEY")
-            config_var = await client.get_config()
-            sudo_users = config_var.get("SUDO_USERS", "").split(",")
-        except:
-            app_name = None
-            api_key = None
-            await message.reply("Error: Failed to retrieve Heroku config vars.")
-            return
-        # Add the new user ID to the list of sudo users
-        if user_id not in sudo_users:
-            sudo_users.append(user_id)
-            sudo_users_str = ",".join(str(user) for user in sudo_users)
-            # Update the Heroku config vars if the app is found
-            if app_name and api_key:
-                config_var["SUDO_USERS"] = sudo_users_str
-                await client.update_config(config_var)
-                await message.reply(f"User {user_id} added as a sudo user.")
-            else:
-                message.reply("Error: Heroku app not found.")
-        else:
-            await message.reply(f"User {user_id} is already a sudo user.")
+            user = await client.get_users(user_id)
+            user = user.first_name if not user.mention else user.mention
+            j += 1
+        except Exception:
+            continue
+        text += f"{j}. {user}\n"
+    if text == "":
+        return await message.edit("No sudoers found.")
+    await message.reply(text)
 
-@Client.on_message(filters.command("addsudo", cmds) & filters.me)
-async def remove_sudo(client, message):
-    # Check if the user is the bot owner
-    if message.from_user.id == int(os.environ.get("OWNER_ID")):
-        # Check if a user ID is provided after the command
-        if len(message.command) == 2:
-            user_id = int(message.command[1])
-            # Get the existing sudo users from Heroku
-            try:
-                app_name = os.environ.get("HEROKU_APP_NAME")
-                api_key = os.environ.get("HEROKU_API_KEY")
-                config_var = await client.get_config()
-                sudo_users = config_var.get("SUDO_USERS", "").split(",")
-            except:
-                app_name = None
-                api_key = None
-                await message.reply("Error: Failed to retrieve Heroku config vars.")
-                return
-            # Remove the user ID from the list of sudo users
-            if str(user_id) in sudo_users:
-                sudo_users.remove(str(user_id))
-                sudo_users_str = ",".join(sudo_users)
-                # Update the Heroku config vars if the app is found
-                if app_name and api_key:
-                    config_var["SUDO_USERS"] = sudo_users_str
-                    await client.update_config(config_var)
-                    await message.reply(f"User {user_id} removed from sudo users.")
-                else:
-                    await message.reply("Error: Heroku app not found.")
-            else:
-                await message.reply(f"User {user_id} is not a sudo user.")
-        else:
-            await message.reply("Please provide a user ID to remove.")
-
-@Client.on_message(filters.command("listsudo", cmds) & filters.me)
-async def list_sudo(client, message):
-    # Check if the user is a sudo user
-    if message.from_user.id in get_sudo_users():
-        # Get the existing sudo users from Heroku
-        try:
-            app_name = os.environ.get("HEROKU_APP_NAME")
-            api_key = os.environ.get("HEROKU_API_KEY")
-            config_var = await client.get_config()
-            sudo_users = config_var.get("SUDO_USERS", "").split(",")
-        except:
-            app_name = None
-            api_key = None
-            await message.reply("Error: Failed to retrieve Heroku config vars.")
-            return
-        # Convert user IDs to usernames
-        usernames = []
-        for user_id in sudo_users:
-            try:
-                user = await client.get_users(int(user_id))
-                usernames.append(user.username or user.first_name)
-            except:
-                pass
-        # Send the list of sudo users as a message
-        if len(usernames) > 0:
-            message_text = "Sudo users:\n- " + "\n- ".join(usernames)
-            await message.reply(message_text)
-        else:
-            await message.reply("No sudo users found.")
-    else:
-        await message.reply("You are not authorized to use this command.")
+add_command_help(
+    "Sudo",
+    [
+        [f"{cmds}sudo <reply/berikan id>", "menambahkan sudo user."],
+        [f"{cmds}rmsudo", "menghapus sudo user."],
+        [f"{cmds}listsudo", "melihat daftar sudo user."],
+    ],
+)

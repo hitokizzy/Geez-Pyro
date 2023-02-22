@@ -10,11 +10,11 @@
 # ©2023 Geez | Ram Team
 from pyrogram import Client, filters
 from pyrogram.types import Message
-
+from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(filters.command("create", cmds) & filters.me)
+@geez("create", cmds)
 async def create(client: Client, message: Message):
     if len(message.command) < 3:
         return await message.edit_text(

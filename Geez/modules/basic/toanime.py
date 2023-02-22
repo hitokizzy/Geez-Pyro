@@ -14,11 +14,12 @@ import time
 from pyrogram import Client, filters, enums
 from pyrogram.types import Message
 from geezlibs import logging
+from geezlibs.geez import geez
 from geezlibs.geez.helper.basic import edit_or_reply
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(filters.command("toanime", cmds) & filters.me)
+@geez("toanime", cmds)
 async def convert_image(client: Client, message: Message):
     if not message.reply_to_message:
         return await message.edit("**Please Reply to photo**")

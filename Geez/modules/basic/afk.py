@@ -13,6 +13,7 @@ from datetime import datetime
 import humanize
 from pyrogram import filters, Client
 from pyrogram.types import Message
+from geezlibs.geez import geez, devs
 from geezlibs.geez.helper.PyroHelpers import GetChatID, ReplyCheck
 from Geez.modules.basic import add_command_help
 from Geez import cmds
@@ -81,7 +82,7 @@ async def collect_afk_messages(bot: Client, message: Message):
         CHAT_TYPE[GetChatID(message)] += 1
 
 
-@Client.on_message(filters.command("afk", cmds) & filters.me, group=3)
+@geez("afk", cmds)
 async def afk_set(bot: Client, message: Message):
     global AFK_REASON, AFK, AFK_TIME
 
@@ -100,7 +101,7 @@ async def afk_set(bot: Client, message: Message):
     await message.delete()
 
 
-@Client.on_message(filters.command("afk", "!") & filters.me, group=3)
+@geez("unafk", cmds)
 async def afk_unset(bot: Client, message: Message):
     global AFK, AFK_TIME, AFK_REASON, USERS, GROUPS
 

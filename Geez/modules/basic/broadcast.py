@@ -13,10 +13,9 @@ import dotenv
 from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 from geezlibs.geez.helper import edit_or_reply
+from geezlibs.geez import geez, devs
 from geezlibs.geez.autobot import HAPP, in_heroku
 from geezlibs import BL_GCAST, DEVS
-
-from Geez import SUDO_USER
 from Geez import cmds
 from Geez.modules.basic import add_command_help
 from Geez.modules.basic.update import restart
@@ -36,14 +35,9 @@ def get_arg(message: Message):
     if " ".join(split[1:]).strip() == "":
         return ""
     return " ".join(split[1:])
-
-
-@Client.on_message(
-    filters.group & filters.command("ggcast", ["*"]) & filters.user(DEVS) & ~filters.me
-)
-@Client.on_message(
-    filters.command(["gcast"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+    
+@Client.on_message(filters.command("ggcast", "*") & filters.user(DEVS))
+@geez("gcast", cmds)
 async def gcast_cmd(client: Client, message: Message):
     if message.reply_to_message or get_arg(message):
         tex = await message.reply_text("`Memulai Gcast...`")
@@ -73,12 +67,7 @@ async def gcast_cmd(client: Client, message: Message):
         f"**Berhasil mengirim ke** `{done}` **Groups chat, Gagal mengirim ke** `{error}` **Groups**"
     )
 
-@Client.on_message(
-    filters.group & filters.command("ggucast", ["*"]) & filters.user(DEVS) & ~filters.me
-)
-@Client.on_message(
-    filters.command(["gucast"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("gucast", cmds)
 async def gucast(client: Client, message: Message):
     if message.reply_to_message or get_arg(message):
         text = await message.reply_text("`Started global broadcast...`")
@@ -108,7 +97,19 @@ async def gucast(client: Client, message: Message):
         f"**Successfully Sent Message To** `{done}` **chat, Failed to Send Message To** `{error}` **chat**"
     )
 
-@Client.on_message(filters.command("addblacklist", cmds) & filters.me)
+@geez("blchat", cmds)
+async def blchatgcast(client: Client, message: Message):
+    blacklistgc = "True" if BLACKLIST_GCAST else "False"
+    list = BLACKLIST_GCAST.replace(" ", "\n» ")
+    if blacklistgc == "True":
+        await edit_or_reply(
+            message,
+            f"🔮 **Blacklist GCAST:** `Enabled`\n\n📚 **Blacklist Group:**\n» {list}\n\nKetik `{cmds}addblacklist` di grup yang ingin anda tambahkan ke daftar blacklist gcast.",
+        )
+    else:
+        await edit_or_reply(message, "🔮 **Blacklist GCAST:** `Disabled`")
+
+@geez("addblacklist", cmds)
 async def addblacklist(client: Client, message: Message):
     xxnx = await edit_or_reply(message, "`Processing...`")
     if HAPP is None:
@@ -135,7 +136,7 @@ async def addblacklist(client: Client, message: Message):
         dotenv.set_key(path, "BLACKLIST_GCAST", blacklistgrup)
     restart()
 
-@Client.on_message(filters.command("delblacklist", cmds) & filters.me)
+@geez("delblacklist", cmds)
 async def delblacklist(client: Client, message: Message):
     xxnx = await edit_or_reply(message, "`Processing...`")
     if HAPP is None:

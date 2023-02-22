@@ -12,14 +12,12 @@ import asyncio
 
 from pyrogram import filters, Client
 from pyrogram.types import Message
-
+from geezlibs.geez import geez
 from Geez import SUDO_USER
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(
-    filters.command(["lyrics"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("lirik", cmds)
 async def send_lyrics(bot: Client, message: Message):
     try:
         cmd = message.command

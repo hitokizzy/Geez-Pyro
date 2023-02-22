@@ -5,21 +5,18 @@ import time
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 from typing import Any, Dict
-import motor.motor_asyncio
-#from .config_var import Config
-
 from aiohttp import ClientSession
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from gpytranslate import Translator
-from pyrogram import Client
+from pyrogram import Client, filters
 from pytgcalls import GroupCallFactory
-
+from geezlibs.geez.database import db_x
+from geezlibs.geez import sayur_asem
 from config import (
     API_HASH,
     API_ID,
     BOTLOG_CHATID,
     CMD_HNDLR,
-    MONGO_URL,
     STRING_SESSION1,
     STRING_SESSION2,
     STRING_SESSION3,
@@ -34,12 +31,12 @@ from config import (
     BOT_TOKEN
 )
 cmds = CMD_HNDLR
-DB_URL = MONGO_URL
 CMD_HELP = {}
-SUDO_USER = SUDO_USERS
 clients = []
 ids = []
 LOG_FILE_NAME = "logs.txt"
+SUDOERS = filters.user()
+SUDO_USER = SUDOERS
 
 logging.basicConfig(
     level=logging.INFO,
@@ -58,8 +55,6 @@ logging.getLogger("pyrogram.session.auth").setLevel(logging.CRITICAL)
 logging.getLogger("pyrogram.session.session").setLevel(logging.CRITICAL)
 
 LOGS = logging.getLogger(__name__)
-
-mongo_client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URL)
 
 def LOGGER(name: str) -> logging.Logger:
     return logging.getLogger(name)
@@ -80,40 +75,45 @@ if (
     LOGGER(__name__).warning("STRING SESSION TIDAK DITEMUKAN, SHUTDOWN BOT!")
     sys.exit()
 
-if API_ID:
-   API_ID = API_ID
-else:
-   API_ID = "6435225"
-
-if API_HASH:
-   API_HASH = API_HASH
-else:
-   LOGGER(__name__).warning("WARNING: MEMULAI BOT TANPA API HASH dan API ID")  
-   API_HASH = "4e984ea35f854762dcde906dce426c2d"
-
 if not BOT_TOKEN:
    LOGGER(__name__).error("WARNING: BOT TOKEN TIDAK DITEMUKAN, SHUTDOWN BOT")
-   sys.exit
+   sys.exit()
 
 if BOTLOG_CHATID:
    BOTLOG_CHATID = BOTLOG_CHATID
 else:
-   BOTLOG_CHATID = "me"
+   sayur_asem()
+
+db = db_x
+
+async def load_sudoers():
+    global SUDOERS
+    LOGGER("Geez").info("Loading sudoers")
+    sudoersdb = db.sudoers
+    sudoers = await sudoersdb.find_one({"sudo": "sudo"})
+    sudoers = [] if not sudoers else sudoers["sudoers"]
+    for user_id in SUDO_USERS:
+        SUDOERS.add(user_id)
+        if user_id not in sudoers:
+            sudoers.append(user_id)
+            await sudoersdb.update_one(
+                {"sudo": "sudo"},
+                {"$set": {"sudoers": sudoers}},
+                upsert=True,
+            )
+    if sudoers:
+        for user_id in sudoers:
+            SUDOERS.add(user_id)
 
 LOOP = asyncio.get_event_loop()
+LOOP.run_until_complete(load_sudoers())
 
 trl = Translator()
-
 aiosession = ClientSession()
-
 CMD_HELP = {}
-
 scheduler = AsyncIOScheduler()
-
 StartTime = time.time()
-
 START_TIME = datetime.now()
-
 TEMP_SETTINGS: Dict[Any, Any] = {}
 TEMP_SETTINGS["PM_COUNT"] = {}
 TEMP_SETTINGS["PM_LAST_MSG"] = {}

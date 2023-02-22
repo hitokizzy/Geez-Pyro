@@ -18,6 +18,7 @@ from pyrogram import __version__
 from pyrogram.types import Message
 from Geez.modules.basic.help import add_command_help
 from geezlibs import __version__ as gver
+from geezlibs.geez import geez
 from Geez import cmds
 
 async def get_readable_time(seconds: int) -> str: 
@@ -53,7 +54,7 @@ def get_size(bytes, suffix="B"):
             return f"{bytes:.2f}{unit}{suffix}"
         bytes /= factor
 
-@Client.on_message(filters.group & filters.command(["spc"], cmds) & filters.me)
+@geez("spc", cmds)
 async def psu(client: Client, message: Message):
     uname = platform.uname()
     softw = "**Informasi Sistem**\n"
@@ -100,7 +101,8 @@ async def psu(client: Client, message: Message):
     help_string += "**Informasi Mesin**\n"
     help_string += f"`Python {sys.version}`\n"
     help_string += f"`Pyrogram {__version__}`\n"
-    help_string += f"`Geez Library - {gver}`\n"
+    help_string += f"`Geez Library - {gver}`\n\n"
+    help_string += "`**Powered by GeezRam**`\n"
     await message.reply(help_string)
 
 add_command_help(

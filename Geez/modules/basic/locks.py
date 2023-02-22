@@ -14,7 +14,7 @@ from pyrogram.errors.exceptions.bad_request_400 import (
     ChatNotModified,
 )
 from pyrogram.types import ChatPermissions, Message
-
+from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
@@ -92,7 +92,7 @@ async def tg_lock(
     )
 
 
-@Client.on_message(filters.command(["lock", "unlock"], cmds) & filters.me)
+@geez(["lock", "unlock"], cmds)
 async def locks_func(client: Client, message: Message):
     if len(message.command) != 2:
         return await message.edit_text(incorrect_parameters)
@@ -145,7 +145,7 @@ async def locks_func(client: Client, message: Message):
         )
 
 
-@Client.on_message(filters.command("locks", cmds) & filters.me)
+@geez("lockall", cmds)
 async def locktypes(client: Client, message: Message):
     permissions = await current_chat_permissions(client, message.chat.id)
 

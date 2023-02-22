@@ -13,11 +13,9 @@ from io import BytesIO
 
 from pyrogram import Client, filters
 from pyrogram.types import Message
-
+from geezlibs.geez import geez
 from Geez import aiosession
-
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
-
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
@@ -29,7 +27,7 @@ async def make_carbon(code):
     return image
 
 
-@Client.on_message(filters.command("carbon", cmds) & filters.me)
+@geez("carbon", cmds)
 async def carbon_func(client: Client, message: Message):
     text = (
         message.text.split(None, 1)[1]

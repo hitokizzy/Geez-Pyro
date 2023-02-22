@@ -7,18 +7,20 @@
 #
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
-# ©2023 Geez | Ram Team 
+# ©2023 Geez | Ram Team
+
 import asyncio
 from time import time
 from pyrogram import Client, filters, enums
 from pyrogram.errors import ChatAdminRequired
 from pyrogram.types import ChatPermissions, ChatPrivileges, Message
 from geezlibs import DEVS
+from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
 from Geez.modules.basic.profile import extract_user, extract_userid
 from Geez import cmds
-admins_in_chat = {}
 
+admins_in_chat = {}
 
 async def extract_user_and_reason(message, sender_chat=False):
     args = message.text.strip().split()
@@ -87,9 +89,7 @@ unmute_permissions = ChatPermissions(
 )
 
 
-@Client.on_message(
-    filters.group & filters.command(["setchatphoto", "setgpic"], cmds) & filters.me
-)
+@geez("setgpic", cmds)
 async def set_chat_photo(client: Client, message: Message):
     zuzu = (await client.get_chat_member(message.chat.id, client.me.id)).privileges
     can_change_admin = zuzu.can_change_info
@@ -107,7 +107,7 @@ async def set_chat_photo(client: Client, message: Message):
 
 
 
-@Client.on_message(filters.group & filters.command("ban", cmds) & filters.me)
+@geez("ban", cmds)
 async def member_ban(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
     rd = await message.edit_text("`Processing...`")
@@ -143,7 +143,7 @@ async def member_ban(client: Client, message: Message):
 
 
 
-@Client.on_message(filters.group & filters.command("unban", cmds) & filters.me)
+@geez("unban", cmds)
 async def member_unban(client: Client, message: Message):
     reply = message.reply_to_message
     rd = await message.edit_text("`Processing...`")
@@ -167,7 +167,7 @@ async def member_unban(client: Client, message: Message):
 
 
 
-@Client.on_message(filters.command(["pin", "unpin"], cmds) & filters.me)
+@geez(["pin", "unpin"], cmds)
 async def pin_message(client: Client, message):
     if not message.reply_to_message:
         return await message.edit_text("balas ke pesan untuk pin/unpin .")
@@ -189,7 +189,7 @@ async def pin_message(client: Client, message):
     )
 
 
-@Client.on_message(filters.command("mute", cmds) & filters.me)
+@geez("mute", cmds)
 async def mute(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message)
     rd = await message.edit_text("`Processing...`")
@@ -216,7 +216,7 @@ async def mute(client: Client, message: Message):
 
 
 
-@Client.on_message(filters.group & filters.command("unmute", cmds) & filters.me)
+@geez("unmute", cmds)
 async def unmute(client: Client, message: Message):
     user_id = await extract_user(message)
     rd = await message.edit_text("`Processing...`")
@@ -230,7 +230,7 @@ async def unmute(client: Client, message: Message):
     await rd.edit(f"Unmuted! {umention}")
 
 
-@Client.on_message(filters.command(["kick", "dkick"], cmds) & filters.me)
+@geez("kick", cmds)
 async def kick_user(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message)
     rd = await message.edit_text("`Processing...`")
@@ -262,9 +262,7 @@ async def kick_user(client: Client, message: Message):
         return await rd.edit("**Maaf Anda Bukan admin**")
 
 
-@Client.on_message(
-    filters.group & filters.command(["promote", "fullpromote"], cmds) & filters.me
-)
+@geez("promote", cmds)
 async def promotte(client: Client, message: Message):
     user_id = await extract_user(message)
     umention = (await client.get_users(user_id)).mention
@@ -306,7 +304,7 @@ async def promotte(client: Client, message: Message):
     await rd.edit(f"Promoted! {umention}")
 
 
-@Client.on_message(filters.group & filters.command("demote", cmds) & filters.me)
+@geez("demote", cmds)
 async def demote(client: Client, message: Message):
     user_id = await extract_user(message)
     rd = await message.edit_text("`Processing...`")

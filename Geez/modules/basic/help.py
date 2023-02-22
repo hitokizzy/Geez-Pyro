@@ -13,6 +13,7 @@ import asyncio
 from prettytable import PrettyTable
 from pyrogram import Client, enums, filters
 from pyrogram.types import Message
+from geezlibs.geez import geez
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from geezlibs.geez.helper.utility import split_list
 from Geez import app, CMD_HELP
@@ -26,7 +27,7 @@ async def edit_or_reply(message: Message, *args, **kwargs) -> Message:
     )
     return await xyz(*args, **kwargs)
 
-@Client.on_message(filters.command(["help", "helpme"], cmds) & filters.me)
+@geez(["help", "helpme"], cmds)
 async def module_help(client: Client, message: Message):
     cmd = message.command
     help_arg = ""
@@ -77,7 +78,7 @@ async def module_help(client: Client, message: Message):
             )
 
 
-@Client.on_message(filters.command(["plugins", "modules"], cmds) & filters.me)
+@geez(["plugin, modules"], cmds)
 async def module_helper(client: Client, message: Message):
     cmd = message.command
     help_arg = ""

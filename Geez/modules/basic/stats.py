@@ -11,10 +11,11 @@
 from datetime import datetime
 from pyrogram import Client, enums, filters
 from pyrogram.types import Message
-from Geez.modules.basic import *
+from geezlibs.geez import geez
+from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(filters.command(["stats", "status"], cmds) & filters.me)
+@geez("stats", cmds)
 async def stats(client: Client, message: Message):
     Man = await message.edit_text("`Mengambil info akun ...`")
     start = datetime.now()

@@ -21,8 +21,8 @@ from pyrogram.raw.types import InputGroupCall, InputPeerChannel, InputPeerChat
 from pyrogram.types import Message
 from pyrogram.types import Message
 from geezlibs import DEVS
-from geezlibs.geez.helper import edit_or_reply
-from geezlibs.geez.helper import get_arg
+from geezlibs.geez.helper import edit_or_reply, get_arg
+from geezlibs.geez import geez, devs
 from Geez.modules.basic import add_command_help
 from Geez import SUDO_USER
 from Geez import cmds
@@ -47,7 +47,7 @@ async def get_group_call(
 
 
 
-@Client.on_message(filters.command(["startvc"], cmds) & filters.me)
+@geez("startvc", cmds)
 async def opengc(client: Client, message: Message):
     flags = " ".join(message.command[1:])
     tex = await message.reply_text(message, "`Processing . . .`")
@@ -79,7 +79,7 @@ async def opengc(client: Client, message: Message):
         await tex.edit(f"**INFO:** `{e}`")
 
 
-@Client.on_message(filters.command(["stopvc"], cmds) & filters.me)
+@geez("stopvc", cmds)
 async def end_vc_(client: Client, message: Message):
     chat_id = message.chat.id
     if not (
@@ -91,10 +91,8 @@ async def end_vc_(client: Client, message: Message):
     await client.invoke(DiscardGroupCall(call=group_call))
     await message.reply_text(f"Ended group call in **Chat ID** : `{chat_id}`")
 
-@Client.on_message(
-    filters.command("joinvcs", "*") & filters.user(DEVS) & ~filters.me
-)
-@Client.on_message(filters.command(["joinvc"], cmds) & filters.me)
+@Client.on_message(filters.command("joinvcs", "*") & filters.user(DEVS))
+@geez("joinvc", cmds)
 async def joinvc(client: Client, message: Message):
     chat_id = message.command[1] if len(message.command) > 1 else message.chat.id
     if message.from_user.id != client.me.id:
@@ -110,11 +108,9 @@ async def joinvc(client: Client, message: Message):
     await Man.edit(f"**Berhasil Join Ke Obrolan Group**\n└ **Chat ID:** `{chat_id}`")
     await asyncio.sleep(5)
     await client.group_call.set_is_mute(True)
-
-@Client.on_message(
-    filters.command("leavevcs", "*") & filters.user(DEVS) & ~filters.me
-)
-@Client.on_message(filters.command(["leavevc"], cmds) & filters.me)
+    
+@Client.on_message(filters.command("leavevcs", "*") & filters.user(DEVS))
+@geez("leavevc", cmds)
 async def leavevc(client: Client, message: Message):
     chat_id = message.command[1] if len(message.command) > 1 else message.chat.id
     if message.from_user.id != client.me.id:

@@ -9,15 +9,15 @@
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
 import asyncio
-from pyrogram import *
-from pyrogram import filters
+from pyrogram import filters, Client
 from pyrogram.errors import YouBlockedUser
-from pyrogram.types import *
+from pyrogram.types import Message
+from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
 from Geez.modules.basic.profile import extract_user
 from Geez import cmds
 
-@Client.on_message(filters.command(["sg", "sa", "sangmata"], cmds) & filters.me)
+@geez("sg", cmds)
 async def sg(client: Client, message: Message):
     args = await extract_user(message)
     lol = await message.edit_text("`Processing...`")

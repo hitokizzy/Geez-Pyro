@@ -12,18 +12,19 @@
 import asyncio
 import os
 import time
-from datetime import datetime
-
 import wget
-from pyrogram import *
-from pyrogram.types import *
+from datetime import datetime
+from geezlibs.geez.helper.PyroHelpers import ReplyCheck
+from geezlibs.geez.utils.tools import get_arg
+from geezlibs.geez import geez
+from pyrogram import Client
+from pyrogram.types import Message
 from youtubesearchpython import SearchVideos
 from yt_dlp import YoutubeDL
 from pyrogram.errors import YouBlockedUser
 from Geez.modules.basic import add_command_help
-from Geez import *
-from geezlibs.geez.helper.PyroHelpers import ReplyCheck
-from geezlibs.geez.utils.tools import get_arg
+from Geez import cmds
+
 
 
 def get_text(message: Message) -> [None, str]:
@@ -40,9 +41,7 @@ def get_text(message: Message) -> [None, str]:
         return None
 
 
-@Client.on_message(
-    filters.command(["vid", "video"], cmds) & filters.me
-)
+@geez("vid", cmds)
 async def yt_vid(client: Client, message: Message):
     input_st = message.text
     input_str = input_st.split(" ", 1)[1]
@@ -99,7 +98,7 @@ async def yt_vid(client: Client, message: Message):
             os.remove(files)
 
 
-@Client.on_message(filters.command("song", cmds) & filters.me)
+@geez("song", cmds)
 async def song(client: Client, message: Message):
     input_str = get_text(message)
     rep = await message.reply("`Processing...`")
@@ -161,7 +160,7 @@ async def song(client: Client, message: Message):
             os.remove(files)
             
             
-@Client.on_message(filters.command(["tt", "tiktok", "ig", "sosmed"], cmds) & filters.me)
+@geez("sosmed", cmds)
 async def sosmed(client: Client, message: Message):
     prik = await message.edit("`Processing . . .`")
     link = get_arg(message)

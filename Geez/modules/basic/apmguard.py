@@ -3,12 +3,13 @@ import asyncio
 from pyrogram.methods import messages
 from pyrogram import filters, Client
 from geezlibs.geez.database import pmpermitdb as TOD
+from geezlibs.geez import geez, devs
 from Geez import SUDO_USER
 from Geez.modules.basic.help import *
 from .pmguard import get_arg, denied_users
 from Geez import cmds
 
-@Client.on_message(filters.command("pmguard", cmds) & filters.me)
+@geez("pmguard", cmds)
 async def pmguard(client, message):
     arg = get_arg(message)
     if not arg:
@@ -20,7 +21,8 @@ async def pmguard(client, message):
     if arg == "on":
         await TOD.set_pm(True)
         await message.edit("**PM Guard diaktifkan**")
-@Client.on_message(filters.command("setpmmsg", cmds) & filters.me)
+        
+@geez("setpmmsg", cmds)
 async def setpmmsg(client, message):
     arg = get_arg(message)
     if not arg:

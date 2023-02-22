@@ -17,6 +17,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from datetime import datetime
 from geezlibs import DEVS
+from geezlibs.geez import geez, devs
 from geezlibs.geez.helper import SpeedConvert
 from Geez import StartTime, SUDO_USER
 from Geez import app, cmds
@@ -35,9 +36,7 @@ class WWW:
 
     NearestDC = "Country: `{}`\n" "Nearest Datacenter: `{}`\n" "This Datacenter: `{}`"
 
-@Client.on_message(
-    filters.command(["speedtest"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("speedtest", cmds)
 async def speed_test(client: Client, message: Message):
     new_msg = await message.reply_text("`Running speed test . . .`")
     try:
@@ -81,7 +80,7 @@ kopi = [
     "**Hadir kak maap telat** 🥺",
 ]
 
-@Client.on_message(filters.command("absen", ["*"]) & filters.user(DEVS))
+@devs("absen")
 async def absen(client: Client, message: Message):
     await message.reply_text(random.choice(kopi))
 
@@ -95,7 +94,7 @@ async def cpingme(client: Client, message: Message):
     await gez.edit_text(f"**🏓 Pong!**\n`{round((akhir - mulai) * 1000)}ms`")
 
 
-@Client.on_message(filters.command("pink", cmds) & (filters.me | filters.user(SUDO_USER)))
+@geez("pink", cmds)
 async def pingme(client: Client, message: Message):
     uptime = await get_readable_time((time.time() - StartTime))
     start = datetime.now()
@@ -112,13 +111,10 @@ async def pingme(client: Client, message: Message):
     await xx.edit("**Pinging....**")
     await asyncio.sleep(1)
     await xx.edit(f"**Geez - Pyro!!🎈**\n**Pinger** : %sms\n**Bot Uptime** : {uptime}🕛" % (duration))
-    
-@Client.on_message(
-    filters.command("ping", cmds) & (filters.me)
-)
+
+@geez("ping", cmds)
 async def module_ping(client: Client, message: Message):
     cmd = message.command
-    help_arg = ""
     bot_username = (await app.get_me()).username
     if len(cmd) > 1:
         help_arg = " ".join(cmd[1:])
@@ -134,9 +130,7 @@ async def module_ping(client: Client, message: Message):
         except BaseException as e:
             print(f"{e}")
 
-@Client.on_message(
-    filters.command(["pping"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("ppink", cmds)
 async def ppingme(client: Client, message: Message):
     uptime = await get_readable_time((time.time() - StartTime))
     start = datetime.now()

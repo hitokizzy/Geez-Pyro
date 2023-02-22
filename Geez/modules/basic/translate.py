@@ -14,10 +14,11 @@ from pyrogram import filters, Client
 from pyrogram.types import Message
 from py_trans import Async_PyTranslator
 from geezlibs.geez.helper.utility import get_arg
-from Geez.modules.basic import *
+from geezlibs.geez import geez
+from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(filters.command(["tr", "translate"], cmds) & filters.me)
+@geez("tr", cmds)
 async def pytrans_tr(_, message: Message):
   tr_msg = await message.edit("`Processing...`")
   r_msg = message.reply_to_message

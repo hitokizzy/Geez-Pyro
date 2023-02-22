@@ -12,10 +12,11 @@
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message
+from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(filters.command(["directmessage", "dm"], cmds) & filters.me)
+@geez("dm", cmds)
 async def dm(coli: Client, memek: Message):
     geez = await memek.reply_text("⚡ Proccessing.....")
     quantity = 1

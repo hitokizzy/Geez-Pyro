@@ -18,6 +18,7 @@ from pyrogram.errors import YouBlockedUser
 from emoji import get_emoji_regexp
 from PIL import Image, ImageDraw, ImageFont
 from geezlibs.geez.helper.utility import get_arg
+from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from Geez import cmds
@@ -26,7 +27,7 @@ def deEmojify(inputString: str) -> str:
     """Remove emojis and other non-safe characters from string"""
     return get_emoji_regexp().sub("", inputString)
 
-@Client.on_message(filters.me & filters.command(["q", "quotly"], cmds))
+@geez(["q", "quotly"], cmds)
 async def quotly(client: Client, message: Message):
     args = get_arg(message)
     if not message.reply_to_message and not args:
@@ -55,7 +56,7 @@ async def quotly(client: Client, message: Message):
                 return await message.edit("**Failed to Create Quotly Sticker**")
     await client.delete_messages(bot, 2)
 
-@Client.on_message(filters.me & filters.command(["txtst", "textsticker"], cmds))
+@geez(["txtst", "text"], cmds)
 async def sticklet(client, message):
     R = random.randint(0, 256)
     G = random.randint(0, 256)
@@ -95,7 +96,7 @@ async def sticklet(client, message):
         reply_to_message_id=ReplyCheck(message)
     )
 
-@Client.on_message(filters.command(["twitt"], cmds) & filters.me)
+@geez("twitt", cmds)
 async def twitt(client: Client, message: Message):
     if not message.reply_to_message:
         return await message.edit("**Please Reply to Message**")

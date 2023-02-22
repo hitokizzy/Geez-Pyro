@@ -20,13 +20,13 @@ from pyrogram import filters, Client
 from pyrogram.types import Message
 from reportlab.graphics import renderPM
 from svglib.svglib import svg2rlg
-
+from geezlibs.geez import geez
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from geezlibs.geez.helper.aiohttp_helper import AioHttp
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(filters.command(["ggraph", "commitgraph"], cmds) & filters.me)
+@geez("ggraph", cmds)
 async def commit_graph(bot: Client, message: Message):
     if len(message.command) < 2:
         await message.edit(

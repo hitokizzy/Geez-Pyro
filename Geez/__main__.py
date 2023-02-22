@@ -18,10 +18,6 @@ MSG_ON = """
 ╼┅━━━━━━━━━━╍━━━━━━━━━━┅╾
 ©️2023 Geez|RAM Projects
 """
-MSG_BOT = (f"**Geez Pyro Assistant**\nis alive...")
-
-
-
 
 async def main():
     await app.start()
@@ -36,7 +32,6 @@ async def main():
             await logging(bot)
             try:
                 await bot.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, gver, CMD_HNDLR))
-                await app.send_message(BOTLOG_CHATID, MSG_BOT)
             except BaseException as a:
                 LOGGER("Geez").warning(f"{a}")
             LOGGER("Geez").info("Startup Completed")

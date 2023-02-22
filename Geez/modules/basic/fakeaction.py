@@ -14,6 +14,7 @@ from asyncio import sleep
 from pyrogram import Client, enums, filters
 from pyrogram.raw import functions
 from pyrogram.types import Message
+from geezlibs.geez import geez
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from Geez import cmds
 from Geez.modules.basic import add_command_help
@@ -34,8 +35,7 @@ commands = {
     "fscreen": "screenshot",
 }
 
-
-@Client.on_message(filters.command(list(commands), cmds) & filters.me)
+@geez(list(commands), cmds)
 async def fakeactions_handler(client: Client, message: Message):
     cmd = message.command[0]
     try:

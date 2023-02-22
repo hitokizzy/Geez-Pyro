@@ -12,15 +12,14 @@ import asyncio
 from pyrogram import Client, filters
 from pyrogram.enums import ChatType, UserStatus
 from pyrogram.types import Message
+from geezlibs.geez import geez
 from Geez import SUDO_USER
 from pyrogram.errors.exceptions.flood_420 import FloodWait
 
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(
-    filters.command(["invite"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("invite", cmds)
 async def inviteee(client: Client, message: Message):
     mg = await message.reply_text("`Adding Users!`")
     user_s_to_add = message.text.split(" ", 1)[1]
@@ -35,9 +34,7 @@ async def inviteee(client: Client, message: Message):
         return
     await mg.edit(f"`Sucessfully Added {len(user_list)} To This Group / Channel!`")
 
-@Client.on_message(
-    filters.command(["inviteall"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("inviteall", cmds)
 async def inv(client: Client, message: Message):
     ex = await message.reply_text("`Processing . . .`")
     text = message.text.split(" ", 1)
@@ -61,7 +58,7 @@ async def inv(client: Client, message: Message):
             except Exception as e:
                 pass
 
-@Client.on_message(filters.command("invitelink", cmds) & filters.me)
+@geez("invitelink", cmds)
 async def invite_link(client: Client, message: Message):
     um = await message.edit_text("`Processing...`")
     if message.chat.type in [ChatType.GROUP, ChatType.SUPERGROUP]:

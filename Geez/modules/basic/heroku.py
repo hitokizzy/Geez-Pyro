@@ -18,15 +18,10 @@ import dotenv
 import heroku3
 import requests
 import urllib3
-from datetime import datetime
-from time import strftime, time
-from geezlibs.geez.utils.misc import is_heroku, user_input, paste_queue
-from git import Repo
-from git.exc import GitCommandError, InvalidGitRepositoryError
+from geezlibs.geez.utils.misc import is_heroku, paste_queue
 from pyrogram import Client, filters
-from pyrogram.types import Message
-
-from config import BOTLOG_CHATID, HEROKU_API_KEY, HEROKU_APP_NAME, BRANCH, REPO_URL
+from geezlibs.geez import geez
+from config import HEROKU_API_KEY, HEROKU_APP_NAME, BRANCH
 from config import CMD_HNDLR as cmds
 from Geez import SUDO_USER, Client
 from Geez.modules.basic import add_command_help
@@ -51,7 +46,7 @@ XCB = [
 ]
 
 
-@Client.on_message(filters.command("logs", cmds) & filters.me)
+@geez("logs", cmds)
 async def log_(client, message):
     if await is_heroku():
         if HEROKU_API_KEY == "" and HEROKU_APP_NAME == "":
@@ -82,7 +77,7 @@ async def log_(client, message):
         return await message.reply_text(data)
 
 
-@Client.on_message(filters.command("getvar", cmds) & filters.me)
+@geez("getvar", cmds)
 async def varget_(client, message):
     usage = "**Usage:**\n/get_var [Var Name]"
     if len(message.command) != 2:
@@ -124,7 +119,7 @@ async def varget_(client, message):
             )
 
 
-@Client.on_message(filters.command("delvar", cmds) & filters.me)
+@geez("delvar", cmds)
 async def vardel_(client, message):
     usage = "**Usage:**\n/delvar [nama var]"
     if len(message.command) != 2:
@@ -167,7 +162,7 @@ async def vardel_(client, message):
             )
 
 
-@Client.on_message(filters.command("setvar", cmds) & filters.me)
+@geez("setvar", cmds)
 async def setvar(client, message):
     usage = "**Usage:**\n/setvar [nama var] [isi var]"
     if len(message.command) < 3:
@@ -215,9 +210,7 @@ async def setvar(client, message):
             )
 
 
-@Client.on_message(
-    filters.command(["usage"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@geez("usage", cmds)
 async def usage_dynos(client, message):
     if await is_heroku():
         if HEROKU_API_KEY == "" and HEROKU_APP_NAME == "":

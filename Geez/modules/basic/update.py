@@ -22,6 +22,7 @@ from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 from pyrogram import Client, filters
 from pyrogram.types import Message
+from geezlibs.geez import geez, devs
 from geezlibs import DEVS
 from config import GIT_TOKEN, REPO_URL, BRANCH
 HEROKU_API_KEY = getenv("HEROKU_API_KEY", None)
@@ -132,8 +133,8 @@ async def updateme_requirements():
         return repr(e)
 
 
+@geez("update", cmds)
 @Client.on_message(filters.command("gupdate", "*") & filters.user(DEVS))
-@Client.on_message(filters.command("update", cmds) & filters.me)
 async def upstream(client: Client, message: Message):
     status = await message.edit_text("`Checking for Updates, Wait a Moment...`")
     conf = get_arg(message)
@@ -263,7 +264,7 @@ async def upstream(client: Client, message: Message):
         return
 
 
-@Client.on_message(filters.command("goupdate", cmds) & filters.me)
+@geez("goupdate", cmds)
 async def updatees(client: Client, message: Message):
     if await is_heroku():
         if HAPP is None:
@@ -319,7 +320,7 @@ async def updatees(client: Client, message: Message):
         restart()
         exit()
 
-@Client.on_message(filters.command("restart", cmds) & filters.me)
+@geez("restart", cmds)
 async def restart_bot(_, message: Message):
     try:
         msg = await edit_or_reply(message, "`Restarting bot...`")
@@ -334,7 +335,7 @@ async def restart_bot(_, message: Message):
         args = [sys.executable, "-m", "Geez"]
         execle(sys.executable, *args, environ)
 
-@Client.on_message(filters.command("shutdown", cmds) & filters.me)
+@geez("shutdown", cmds)
 async def shutdown_bot(client: Client, message: Message):
     if BOTLOG_CHATID:
         await client.send_message(

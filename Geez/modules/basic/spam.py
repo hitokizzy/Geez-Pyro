@@ -5,15 +5,14 @@ from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 from geezlibs.geez.helper.basic import edit_or_reply
 from geezlibs.geez.utils.misc import extract_args
+from geezlibs.geez import geez
 from geezlibs import BL_GCAST
 from config import BOTLOG_CHATID
 from Geez import cmds
 
 from Geez.modules.basic.help import add_command_help
-
-commands = ["spam", "statspam", "slowspam", "restspam"]
 SPAM_COUNT = [0]
-
+commands = ["spam", "statspam", "slowspam", "restspam"]
 
 def increment_spam_count():
     SPAM_COUNT[0] += 1
@@ -24,7 +23,7 @@ def spam_allowed():
     return SPAM_COUNT[0] < 50
 
 
-@Client.on_message(filters.me & filters.command(["dspam", "delayspam"], cmds))
+@geez("dspam", cmds)
 async def delayspam(client: Client, message: Message):
     #if message.chat.id in BL_GCAST:
     #    return await edit_or_reply(
@@ -58,7 +57,7 @@ async def delayspam(client: Client, message: Message):
     )
 
 
-@Client.on_message(filters.command(commands, cmds) & filters.me)
+@geez(commands, cmds)
 async def sspam(client: Client, message: Message):
     amount = int(message.command[1])
     text = " ".join(message.command[2:])
@@ -80,9 +79,7 @@ async def sspam(client: Client, message: Message):
         await asyncio.sleep(cooldown[message.command[0]])
 
 
-@Client.on_message(
-    filters.me & filters.command(["sspam", "stkspam", "spamstk", "stickerspam"], cmds)
-)
+@geez("sspam", cmds)
 async def spam_stick(client: Client, message: Message):
     if not message.reply_to_message:
         await edit_or_reply(
@@ -111,3 +108,11 @@ async def spam_stick(client: Client, message: Message):
                 sticker = message.reply_to_message.sticker.file_id
                 await client.send_sticker(message.chat.id, sticker)
                 await asyncio.sleep(0.10)
+
+add_command_help(
+    "spam",
+    [
+        [f"{cmds}dspam [jumlah] [waktu delay] [kata kata]","delay spam.",],
+        [f"{cmds}sspam [balas ke stiker] [jumlah spam]","spam stiker.",],
+    ],
+)

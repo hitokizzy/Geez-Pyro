@@ -11,7 +11,7 @@
 import asyncio
 from collections import deque
 from random import randint
-
+from geezlibs.geez import geez
 from pyrogram import filters, Client
 from pyrogram.types import Message
 from Geez import cmds
@@ -28,7 +28,7 @@ emojis = {
 emoji_commands = [x for x in emojis]
 
 
-@Client.on_message(filters.command(emoji_commands, cmds) & filters.me)
+@geez(emoji_commands, cmds)
 async def emoji_cycle(bot: Client, message: Message):
     deq = deque(emojis[message.command[0]])
     try:
@@ -49,7 +49,7 @@ special_emojis_dict = {
 special_emoji_commands = [x for x in special_emojis_dict]
 
 
-@Client.on_message(filters.command(special_emoji_commands, cmds) & filters.me)
+@geez(special_emoji_commands, cmds)
 async def special_emojis(bot: Client, message: Message):
     emoji = special_emojis_dict[message.command[0]]
     await message.delete()

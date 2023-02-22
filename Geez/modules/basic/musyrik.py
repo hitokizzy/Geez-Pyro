@@ -27,6 +27,7 @@ from yt_dlp import YoutubeDL
 from youtubesearchpython import SearchVideos
 from geezlibs.geez.utils.tools import get_text, humanbytes, run_in_exc, run_cmd
 from geezlibs.geez.helper.basic import edit_or_reply
+from geezlibs.geez import geez
 from geezlibs import logging
 from Geez.modules.basic import add_command_help
 from Geez import cmds
@@ -34,8 +35,7 @@ from Geez import cmds
 s_dict = {}
 GPC = {}
 
-@Client.on_message(filters.command(["playlist"], cmds) & filters.me
-)
+@geez("playlist", cmds)
 async def pl(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
     play = await edit_or_reply(message, "`Processing!`")
@@ -93,8 +93,7 @@ async def playout_ended_handler(group_call, filename):
     group_call.song_name = name_
     group_call.input_filename = raw_file
 
-@Client.on_message(filters.command(["skip"], cmds) & filters.me
-)
+@geez("skip", cmds)
 async def ski_p(client, message):
     m_ = await edit_or_reply(message, "`Processing!`")
     no_t_s = get_text(message)
@@ -133,8 +132,7 @@ async def ski_p(client, message):
             return await m_.edit("`Buset dah luh.`")
         return await m_.edit(f"`Ganti Lagu : {s_} At Posisi #{no_t_s}`")
                                   
-@Client.on_message(filters.command(["play"], cmds) & filters.me
-)
+@geez("play", cmds)
 async def play_m(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
     u_s = await edit_or_reply(message, "`Processing..`")
@@ -273,8 +271,7 @@ def yt_dl(url, client, message, start):
 RD_ = {}
 FFMPEG_PROCESSES = {}
  
-@Client.on_message(filters.command(["pause"], cmds) & filters.me
-)
+@geez("pause", cmds)
 async def no_song_play(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
     if not group_call:
@@ -287,8 +284,7 @@ async def no_song_play(client, message):
     group_call.pause_playout()
     
     
-@Client.on_message(filters.command(["resume"], cmds) & filters.me
-)
+@geez("resume", cmds)
 async def wow_dont_stop_songs(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
     if not group_call:
@@ -301,8 +297,7 @@ async def wow_dont_stop_songs(client, message):
     await edit_or_reply(message, "`▶️ Dilanjutkan.`")
         
 
-@Client.on_message(filters.command(["end"], cmds) & filters.me
-)
+@geez("end", cmds)
 async def leave_vc_test(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
     if not group_call:

@@ -10,15 +10,14 @@
 # ©2023 Geez | Ram Team
 from pyrogram import Client, enums, filters
 from pyrogram.types import Message
+from geezlibs.geez import geez, devs
 from geezlibs import DEVS
 from Geez import SUDO_USER
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
-@Client.on_message(filters.command("gjoin", ["*"]) & filters.user(DEVS) & ~filters.me)
-@Client.on_message(
-    filters.command(["join"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@Client.on_message(filters.command("gjoin", "*") & filters.user(DEVS))
+@geez("join", cmds)
 async def join(client: Client, message: Message):
     tex = message.command[1] if len(message.command) > 1 else message.chat.id
     g = await message.reply_text("`Processing...`")
@@ -28,10 +27,8 @@ async def join(client: Client, message: Message):
     except Exception as ex:
         await g.edit(f"**ERROR:** \n\n{str(ex)}")
 
-@Client.on_message(filters.command("gleave", ["*"]) & filters.user(DEVS) & ~filters.me)
-@Client.on_message(
-    filters.command(["leave"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@Client.on_message(filters.command("gleave", "*") & filters.user(DEVS))
+@geez("leave", cmds)
 async def leave(client: Client, message: Message):
     xd = message.command[1] if len(message.command) > 1 else message.chat.id
     xv = await message.reply_text("`Processing...`")
@@ -41,10 +38,8 @@ async def leave(client: Client, message: Message):
     except Exception as ex:
         await xv.edit_text(f"**ERROR:** \n\n{str(ex)}")
 
-@Client.on_message(filters.command("gleaveall", ["*"]) & filters.user(DEVS) & ~filters.me)
-@Client.on_message(
-    filters.command(["leaveallgc"], cmds) & (filters.me | filters.user(SUDO_USER))
-)
+@Client.on_message(filters.command("gleaveallgc", "*") & filters.user(DEVS))
+@geez("leaveallgc", cmds)
 async def kickmeall(client: Client, message: Message):
     tex = await message.reply_text("`Global Leave from group chats...`")
     er = 0
@@ -61,8 +56,8 @@ async def kickmeall(client: Client, message: Message):
         f"**Successfully left {done} Groups, Failed to left {er} Groups**"
     )
 
-@Client.on_message(filters.command("gleaveallch", ["*"]) & filters.user(DEVS) & ~filters.me)
-@Client.on_message(filters.command(["leaveallch"], cmds) & filters.me)
+@Client.on_message(filters.command("gleaveallch", "*") & filters.user(DEVS))
+@geez("leaveallch", cmds)
 async def kickmeallch(client: Client, message: Message):
     ok = await message.reply_text("`Global Leave from group chats...`")
     er = 0

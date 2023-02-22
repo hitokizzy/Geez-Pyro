@@ -15,10 +15,11 @@ from random import randint, uniform
 from pyrogram import filters, Client
 from pyrogram.types import Message
 from PIL import Image, ImageEnhance, ImageOps
+from geezlibs.geez import geez
 from Geez import cmds
 from Geez.modules.basic import add_command_help
 
-@Client.on_message(filters.command("deepfry", cmds) & filters.me)
+@geez("deepfry", cmds)
 async def do_deepfry(c: Client, m: Message):
     try:
         frycount = int(m.text.split(None, 1)[1])
