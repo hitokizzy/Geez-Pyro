@@ -16,7 +16,7 @@ from pyrogram.types import Message
 from geezlibs.geez import geez
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from geezlibs.geez.helper.utility import split_list
-from Geez import app, CMD_HELP
+from Geez import app, CMD_HELP, SUDO_USER
 from Geez import cmds
 
 async def edit_or_reply(message: Message, *args, **kwargs) -> Message:
