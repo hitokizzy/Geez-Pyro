@@ -11,7 +11,6 @@ from gpytranslate import Translator
 from pyrogram import Client, filters
 from pytgcalls import GroupCallFactory
 from geezlibs.geez.database import db_x
-from geezlibs.geez import sayur_asem
 from config import (
     API_HASH,
     API_ID,
@@ -82,7 +81,7 @@ if not BOT_TOKEN:
 if BOTLOG_CHATID:
    BOTLOG_CHATID = BOTLOG_CHATID
 else:
-   sayur_asem()
+   BOTLOG_CHATID = "me"
 
 db = db_x
 
