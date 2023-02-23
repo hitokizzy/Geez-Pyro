@@ -27,7 +27,7 @@ async def edit_or_reply(message: Message, *args, **kwargs) -> Message:
     )
     return await xyz(*args, **kwargs)
 
-@Client.on_message(filters.command("play", "!") & SUDO_USER)
+@Client.on_message(filters.command("help", "!") & SUDO_USER)
 @geez(["help", "helpme"], cmds)
 async def module_help(client: Client, message: Message):
     cmd = message.command
