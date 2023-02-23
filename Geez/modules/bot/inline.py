@@ -123,11 +123,12 @@ async def help_function(answers):
     bttn = paginate_help(0, CMD_HELP, "helpme")
     photo_url = random.choice(geezlogo)
     answers.append(
-        InlineQueryResultPhoto(
-            id="1",
-            photo_url=photo_url,
+        InlineQueryResultArticle(
+            title="Help Article!",
             thumb_url=photo_url,
-            caption=Data.text_help_menu.format(len(CMD_HELP)),
+            input_message_content=InputTextMessageContent(
+                Data.text_help_menu.format(len(CMD_HELP))
+            ),
             reply_markup=InlineKeyboardMarkup(bttn),
         )
     )
