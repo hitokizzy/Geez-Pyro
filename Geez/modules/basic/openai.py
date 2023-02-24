@@ -13,6 +13,7 @@ from pyrogram import *
 from pyrogram.types import *
 from pyrogram import Client as gez 
 from pyrogram.errors import MessageNotModified
+from geezlibs.geez import geez
 from geezlibs.geez.helper.what import *
 from geezlibs.geez.helper.basic import *
 from geezlibs import DEVS
@@ -23,7 +24,7 @@ from config import OPENAI_API
 from Geez.modules.basic import add_command_help
 
 @gez.on_message(filters.command("cask", cmds) & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command("ask", cmds) & filters.me)
+@geez("ask", cmds)
 async def openai(c, m):
     if len(m.command) == 1:
         return await m.reply(f"Ketik <code>{cmds}{m.command[0]} [question]</code> Pertanya untuk menggunakan OpenAI")
