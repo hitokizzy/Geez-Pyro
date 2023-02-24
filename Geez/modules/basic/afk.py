@@ -13,7 +13,7 @@ from pyrogram import filters, Client
 from pyrogram.types import Message
 from geezlibs.geez.database import check_afk, go_afk, no_afk
 from geezlibs.geez import geez
-from geezlibs.geez.helper.basic import edit_or_reply
+from Geez.modules.basic import add_command_help
 from Geez import cmds
 from config import BOTLOG_CHATID
 
@@ -118,3 +118,11 @@ async def no_afke(client, message: Message):
     await kk.delete()
     await no_afk()
     await client.send_message(BOTLOG_CHATID, onlinestr.format(total_afk_time))
+
+add_command_help(
+    "afk",
+    [
+        [f"{cmds}afk","Mengaktifkan mode afk.",
+        ],
+    ],
+)
