@@ -12,7 +12,7 @@ aiohttp
 aiofiles
 bs4
 emoji==1.6.0
-googlesearch-python==1.0.1
+googlesearch-python
 gitpython
 httpx[http2]
 humanize

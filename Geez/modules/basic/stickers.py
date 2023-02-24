@@ -548,7 +548,7 @@ async def memify(client: Client, message: Message):
     mm = await message.edit_text("`Processing . . .`")
     text = get_arg(message)
     if len(text) < 1:
-        return await mm.edit(f"`Please Type `.mmf text")
+        return await mm.edit("`Please Type `.mmf text")
     meme = await add_text_img(file, text)
     await asyncio.gather(
         mm.delete(),
@@ -611,7 +611,7 @@ add_command_help(
             "balas ke stiker untuk membuat memify text stiker."],
         [f"{cmds}tiny [reply ke photo/sticker]",
             "To Change the Sticker to be Small."],
-        [f"{cmds}txtst <pesan> atau <balas ke pesan>",
+        [f"{cmds}txtst <warna>/<r/g/b/w> <pesan> atau <balas ke pesan>",
             "merubah text jadi sticker."],
         [f"{cmds}twitt <balas ke pesan>",
             "mebuat stiker status twitter."],

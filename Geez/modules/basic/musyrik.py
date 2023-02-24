@@ -19,7 +19,6 @@ import threading
 
 import logging
 import ffmpeg
-from Geez import app
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, MessageNotModified
 from pytgcalls import GroupCallFactory, GroupCallFileAction
@@ -28,7 +27,6 @@ from youtubesearchpython import SearchVideos
 from geezlibs.geez.utils.tools import get_text, humanbytes, run_in_exc, run_cmd
 from geezlibs.geez.helper.basic import edit_or_reply
 from geezlibs.geez import geez
-from geezlibs import logging
 from Geez.modules.basic import add_command_help
 from Geez import cmds, SUDO_USER
 
@@ -46,7 +44,6 @@ async def pl(client, message):
         return await play.edit("`VCG tidak aktif`")
     if not s:
         if group_call.is_connected:
-            await logging(client)
             return await play.edit(f"**📀 Sedang diputar :** `{group_call.song_name}`")
         else:
             return await play.edit("`VCG tidak aktif`")
@@ -199,7 +196,6 @@ async def play_m(client, message):
     elif not group_call.is_connected:
         try:
             await group_call.start(message.chat.id)
-            await logging(client.me.id)
         except BaseException as e:
             return await u_s.edit(f"**Ngapa yaa...:** `{e}`")
         group_call.add_handler(playout_ended_handler, GroupCallFileAction.PLAYOUT_ENDED)
@@ -318,7 +314,7 @@ async def leave_vc_test(client, message):
     del GPC[(message.chat.id, client.me.id)]
     
 add_command_help(
-    "Musik",
+    "music",
     [
         [f"{cmds}play",
             f"{cmds}Play Musik & Video Dengan Judul Lagu."],

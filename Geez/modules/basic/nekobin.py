@@ -8,12 +8,9 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
-from pyrogram import filters, Client
 from pyrogram.types import Message
-
 import os
 import re
-
 from pyrogram.types import Message
 from httpx import AsyncClient
 from geezlibs.geez import geez

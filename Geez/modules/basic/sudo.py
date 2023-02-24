@@ -72,7 +72,7 @@ async def sudoers_list(client: Client, message: Message):
     await message.reply(text)
 
 add_command_help(
-    "Sudo",
+    "sudo",
     [
         [f"{cmds}addsudo <reply/berikan id>", "menambahkan sudo user."],
         [f"{cmds}rmsudo", "menghapus sudo user."],

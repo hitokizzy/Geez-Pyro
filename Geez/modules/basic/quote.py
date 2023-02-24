@@ -58,21 +58,34 @@ async def quotly(client: Client, message: Message):
 
 @geez(["txtst", "text"], cmds)
 async def sticklet(client, message):
-    R = random.randint(0, 256)
-    G = random.randint(0, 256)
-    B = random.randint(0, 256)
     reply_message = message.reply_to_message
-    if reply_message:
-        sticktext = reply_message.text
-    elif len(message.text.split(" ")) >= 2:
-        sticktext = message.text.split(" ", maxsplit=1)[1]
-    else:
+    if not reply_message and len(message.text.split()) == 1:
         await message.edit("Please give a word or reply to a message.")
         return
-    await message.edit("processing...")   
+
+    sticktext = reply_message.text if reply_message else message.text.split(" ", maxsplit=1)[1]
+    if " " in sticktext:
+        sticktext = sticktext.split(" ", maxsplit=1)[1]
     sticktext = textwrap.wrap(sticktext, width=10)
     sticktext = "\n".join(sticktext)
-    
+
+    color = "random"
+    if len(message.text.split()) > 1 and message.text.split()[1].lower() in ["w", "r", "b", "g"]:
+        color = message.text.split()[1].lower()
+
+    if color == "w":
+        R, G, B = 255, 255, 255
+    elif color == "r":
+        R, G, B = 255, 0, 0
+    elif color == "b":
+        R, G, B = 0, 0, 255
+    elif color == "g":
+        R, G, B = 0, 255, 0
+    else:
+        R = random.randint(0, 256)
+        G = random.randint(0, 256)
+        B = random.randint(0, 256)
+        
     image = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
     draw = ImageDraw.Draw(image)
     fontsize = 200
@@ -93,7 +106,7 @@ async def sticklet(client, message):
     await client.send_sticker(
         chat_id=message.chat.id,
         sticker=image_stream,
-        reply_to_message_id=ReplyCheck(message)
+        reply_to_message_id=message.message_id if reply_message else None
     )
 
 @geez("twitt", cmds)

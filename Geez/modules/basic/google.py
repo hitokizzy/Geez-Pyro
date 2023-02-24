@@ -22,7 +22,7 @@ from Geez import cmds
 def googlesearch(query):
     co = 1
     returnquery = {}
-    for j in search(query, tld="co.in", num=10, stop=10, pause=2):
+    for j in search(query, num_results=10):
         url = str(j)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
@@ -57,10 +57,6 @@ async def gs(client: Client, message: Message):
         presenttitle = presentquery["title"]
         presentmeta = presentquery["metadata"]
         presenturl = presentquery["url"]
-        print(presentquery)
-        print(presenttitle)
-        print(presentmeta)
-        print(presenturl)
         if not presentmeta:
             presentmeta = ""
         else:

@@ -276,7 +276,7 @@ Dyno tersisa:
     return await dyno.edit(text)
 
 add_command_help(
-    "Heroku",
+    "heroku",
     [
         [f"{cmds}getvar", "Check vars."],
         [f"{cmds}setvar", "Set Var."],

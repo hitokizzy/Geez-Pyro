@@ -13,19 +13,16 @@ import asyncio
 import os
 import time
 import wget
-from datetime import datetime
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from geezlibs.geez.utils.tools import get_arg
 from geezlibs.geez import geez
-from pyrogram import Client
+from pyrogram import Client, enums
 from pyrogram.types import Message
 from youtubesearchpython import SearchVideos
 from yt_dlp import YoutubeDL
 from pyrogram.errors import YouBlockedUser
 from Geez.modules.basic import add_command_help
 from Geez import cmds
-
-
 
 def get_text(message: Message) -> [None, str]:
     """Extract Text From Commands"""
@@ -173,7 +170,7 @@ async def sosmed(client: Client, message: Message):
         except YouBlockedUser:
             await client.unblock_user(bot)
             tuyul = await client.send_message(bot, link)
-            await asyncio.sleep(5)
+            await asyncio.sleep(10)
             await tuyul.delete()
     async for sosmed in client.search_messages(
         bot, filter=enums.MessagesFilter.VIDEO, limit=1
@@ -191,18 +188,18 @@ async def sosmed(client: Client, message: Message):
 
 
 add_command_help(
-    "Youtube",
+    "youtube",
     [
-        ["song <title>", "Download Audio From YouTube."],
-        ["video <title>", "Download Video from YouTube."],
+        [f"{cmds}song <title>", "Download Audio From YouTube."],
+        [f"{cmds}video <title>", "Download Video from YouTube."],
     ],
 )
 
 add_command_help(
-    "Sosmed",
+    "sosmed",
     [
         [
-            f"sosmed <link>",
+            f"{cmds}sosmed <link>",
             "Untuk Mendownload Media Dari Facebook / Tiktok / Instagram / Twitter / YouTube.",
         ],
     ],
