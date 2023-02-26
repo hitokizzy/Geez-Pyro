@@ -1,4 +1,4 @@
-G# if you can read this, this meant you use code from Geez | Ram Project
+# if you can read this, this meant you use code from Geez | Ram Project
 # this code is from somewhere else
 # please dont hestitate to steal it
 # because Geez and Ram doesn't care about credit
