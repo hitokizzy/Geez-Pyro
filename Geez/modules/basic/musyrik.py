@@ -95,18 +95,37 @@ async def playout_ended_handler(group_call, filename):
 @geez("skip", cmds)
 async def skip_m(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
-    if not group_call:
-        return await message.reply_text("`Lagi nggak diputar apa-apa, skip apaan sih`")
-    if not group_call.is_connected:
-        return await message.reply_text("`Lagi nggak diputar apa-apa, skip apaan sih`")
     s_d = s_dict.get((message.chat.id, client.me.id))
+    if not group_call:
+        return await message.edit_text("`Tidak sedang memutar apa-apa!`")
     if not s_d:
-        return await message.reply_text("`Antrian lagu sudah kosong`")
-    if len(s_d) == 1:
-        return await message.reply_text("`Antrian lagu sudah habis, tunggu diputar lagi aja ya`")
-    await message.reply_text("`Melompati lagu ini dan memainkan lagu selanjutnya...`")
-    group_call.stop_playout()
-    return
+        return await message.edit_text("`Antrian kosong!`")
+    next_song = s_d.pop(0)
+    raw_file_name = next_song["raw"]
+    vid_title = next_song["song_name"]
+    uploade_r = next_song["singer"]
+    dur = next_song["dur"]
+    url = next_song["url"]
+    if os.path.exists(raw_file_name):
+        group_call.input_filename = raw_file_name
+        group_call.song_name = vid_title
+        return await message.edit_text(f"📀 Memutar selanjutnya `{vid_title}` oleh `{uploade_r}`!")
+    else:
+        start = time.time()
+        try:
+            audio_original = await yt_dl(url, client, message, start)
+        except BaseException as e:
+            return await message.edit_text(f"**Lah bujet gagal** \n**Error :** `{str(e)}`")
+        try:
+            raw_file_name = await convert_to_raw(audio_original, raw_file_name)
+        except BaseException as e:
+            return await message.edit_text(f"`Lah tau ngapa ini...` \n**Error :** `{e}`")
+        if os.path.exists(audio_original):
+            os.remove(audio_original)
+        group_call.input_filename = raw_file_name
+        group_call.song_name = vid_title
+        return await message.edit_text(f"📀 Memutar selanjutnya `{vid_title}` oleh `{uploade_r}`!")
+
 
 @Client.on_message(filters.command("play", "!") & SUDO_USER)
 @geez("play", cmds)
