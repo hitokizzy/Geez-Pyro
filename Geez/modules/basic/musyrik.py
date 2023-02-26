@@ -96,22 +96,17 @@ async def playout_ended_handler(group_call, filename):
 async def skip_m(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
     if not group_call:
-        return await message.reply_text("Tidak ada lagu yang diputar saat ini.")
+        return await message.reply_text("`Lagi nggak diputar apa-apa, skip apaan sih`")
     if not group_call.is_connected:
-        return await message.reply_text("Bot tidak terhubung ke voice chat saat ini.")
+        return await message.reply_text("`Lagi nggak diputar apa-apa, skip apaan sih`")
     s_d = s_dict.get((message.chat.id, client.me.id))
     if not s_d:
-        return await message.reply_text("Tidak ada lagu di daftar putar saat ini.")
-    current_song = s_d[0]
-    await group_call.stop()
-    await message.reply_text(f"🎶 Lagu {current_song['song_name']} telah dilewati.")
-    s_dict[(message.chat.id, client.me.id)] = s_d[1:]
-    if s_dict[(message.chat.id, client.me.id)]:
-        next_song = s_dict[(message.chat.id, client.me.id)][0]
-        group_call.input_filename = next_song["raw"]
-        group_call.song_name = next_song["song_name"]
-        await group_call.start()
-        await message.reply_text(f"🎵 Memutar {next_song['song_name']}.")
+        return await message.reply_text("`Antrian lagu sudah kosong`")
+    if len(s_d) == 1:
+        return await message.reply_text("`Antrian lagu sudah habis, tunggu diputar lagi aja ya`")
+    await message.reply_text("`Melompati lagu ini dan memainkan lagu selanjutnya...`")
+    group_call.stop_playout()
+    return
 
 @Client.on_message(filters.command("play", "!") & SUDO_USER)
 @geez("play", cmds)
