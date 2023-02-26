@@ -28,7 +28,7 @@ from geezlibs.geez.utils.tools import get_text, humanbytes, run_in_exc, run_cmd
 from geezlibs.geez.helper.basic import edit_or_reply
 from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
-from Geez import cmds, SUDO_USERS
+from Geez import cmds, SUDO_USER
 
 s_dict = {}
 GPC = {}
@@ -91,7 +91,7 @@ async def playout_ended_handler(group_call, filename):
     group_call.song_name = name_
     group_call.input_filename = raw_file
 
-@Client.on_message(filters.command("skip", "!") & SUDO_USERS)
+@Client.on_message(filters.command("skip", "!") & SUDO_USER)
 @geez("skip", cmds)
 async def skip_m(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
