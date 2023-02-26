@@ -1,4 +1,4 @@
-# if you can read this, this meant you use code from Geez | Ram Project
+G# if you can read this, this meant you use code from Geez | Ram Project
 # this code is from somewhere else
 # please dont hestitate to steal it
 # because Geez and Ram doesn't care about credit
@@ -28,7 +28,7 @@ from geezlibs.geez.utils.tools import get_text, humanbytes, run_in_exc, run_cmd
 from geezlibs.geez.helper.basic import edit_or_reply
 from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
-from Geez import cmds, SUDO_USER
+from Geez import cmds, SUDO_USERS
 
 s_dict = {}
 GPC = {}
@@ -91,45 +91,27 @@ async def playout_ended_handler(group_call, filename):
     group_call.song_name = name_
     group_call.input_filename = raw_file
 
-@Client.on_message(filters.command("skip", "!") & SUDO_USER)
+@Client.on_message(filters.command("skip", "!") & SUDO_USERS)
 @geez("skip", cmds)
-async def ski_p(client, message):
-    m_ = await edit_or_reply(message, "`Processing!`")
-    no_t_s = get_text(message)
+async def skip_m(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
-    s = s_dict.get((message.chat.id, client.me.id))
     if not group_call:
-        await m_.edit("`VCG tidak aktif...`")
-        return 
+        return await message.reply_text("Tidak ada lagu yang diputar saat ini.")
     if not group_call.is_connected:
-        await m_.edit("`Tidak berada di VCG...`")
-        return 
-    if not no_t_s:
-        return await m_.edit("`Yang Bener Dikit Lah...`")
-    if no_t_s == "current":
-        if not s:
-            return await m_.edit("`Lah tau yaaa`")
-        next_s = s[0]['raw']
-        name = str(s[0]['song_name'])
-        s.pop(0)
-        prev = group_call.song_name
-        group_call.input_filename = next_s
-        return await m_.edit(f"`Ganti Lagu {prev}📀 Sedang dimainkan {name}!`")       
-    else:
-        if not s:
-            return await m_.edit("`Laah kaga tau bujet !`")
-        if not no_t_s.isdigit():
-            return await m_.edit("`Kasih angka anjay...`")
-        no_t_s = int(no_t_s)
-        if int(no_t_s) == 0:
-            return await m_.edit("`0? Lah tau yaaaa?`")
-        no_t_s = int(no_t_s - 1)
-        try:
-            s_ = s[no_t_s]['song_name']
-            s.pop(no_t_s)
-        except:
-            return await m_.edit("`Buset dah luh.`")
-        return await m_.edit(f"`Ganti Lagu : {s_} At Posisi #{no_t_s}`")
+        return await message.reply_text("Bot tidak terhubung ke voice chat saat ini.")
+    s_d = s_dict.get((message.chat.id, client.me.id))
+    if not s_d:
+        return await message.reply_text("Tidak ada lagu di daftar putar saat ini.")
+    current_song = s_d[0]
+    await group_call.stop()
+    await message.reply_text(f"🎶 Lagu {current_song['song_name']} telah dilewati.")
+    s_dict[(message.chat.id, client.me.id)] = s_d[1:]
+    if s_dict[(message.chat.id, client.me.id)]:
+        next_song = s_dict[(message.chat.id, client.me.id)][0]
+        group_call.input_filename = next_song["raw"]
+        group_call.song_name = next_song["song_name"]
+        await group_call.start()
+        await message.reply_text(f"🎵 Memutar {next_song['song_name']}.")
 
 @Client.on_message(filters.command("play", "!") & SUDO_USER)
 @geez("play", cmds)
