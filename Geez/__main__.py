@@ -2,7 +2,6 @@ import importlib
 import time
 from pyrogram import idle
 from uvloop import install
-from geezlibs.geez import sayur_asem
 from geezlibs import logging, BOT_VER, __version__ as gver
 from Geez import BOTLOG_CHATID, LOGGER, LOOP, aiosession, bot1, bots, app, ids
 from config import CMD_HNDLR
@@ -39,8 +38,6 @@ async def main():
             ids.append(ex.id)
         except Exception as e:
             LOGGER("Geez").info(f"{e}")
-    if not str(BOTLOG_CHATID).startswith("-100"):
-        await sayur_asem()
     await idle()
     await aiosession.close()
 

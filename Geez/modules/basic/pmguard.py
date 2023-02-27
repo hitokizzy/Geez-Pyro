@@ -2,8 +2,8 @@ from pyrogram import filters, Client
 from pyrogram.types import Message
 from geezlibs import DEVS
 from geezlibs.geez import geez, devs
-from geezlibs.geez.database.pmpermitdb import get_approved_users, pm_guard, allow_user
-from geezlibs.geez.database import pmpermitdb as TOD
+from geezlibs.geez.database.pmpermit import get_approved_users, pm_guard, allow_user
+from geezlibs.geez.database import pmpermit as TOD
 from config import BOTLOG_CHATID, PM_LOGGER
 from Geez import cmds
 PM_LOGGER = BOTLOG_CHATID
@@ -87,10 +87,6 @@ async def reply_pm(app: Client, message):
     global FLOOD_CTRL
     pmpermit, pm_message, limit, block_message = await TOD.get_pm_settings()
     user = message.from_user.id
-    if user in DEVS:
-        if not allow_user(user.id):
-            allow_user(user.id)
-            return await message.reply("Menerima Pesan dari Developer")
     user_warns = 0 if user not in USERS_AND_WARNS else USERS_AND_WARNS[user]
     #if PM_LOGGER:
     #    await app.send_message(PM_LOGGER, f"pesan dari {user}:\n{message.text}")

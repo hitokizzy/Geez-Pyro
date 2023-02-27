@@ -2,7 +2,7 @@
 import asyncio
 from pyrogram.methods import messages
 from pyrogram import filters, Client
-from geezlibs.geez.database import pmpermitdb as TOD
+from geezlibs.geez.database import pmpermit as TOD
 from geezlibs.geez import geez, devs
 from Geez import SUDO_USER
 from Geez.modules.basic.help import *
