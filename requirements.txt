@@ -4,7 +4,6 @@ gpytranslate
 pytgcalls==3.0.0.dev24
 uvloop
 ffmpeg-python
-yt-dlp
 youtube-search
 youtube-search-python
 APScheduler==3.7.0
