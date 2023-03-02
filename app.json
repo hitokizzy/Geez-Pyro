@@ -30,11 +30,6 @@
             "required": true,
             "value": ""
         },
-        "BOTLOG_CHATID": {
-            "description": "fill with your Publik LOG Group",
-            "required": false,
-            "value": ""
-        },
         "HEROKU_API_KEY": {
             "description": "Heroku Api Key",
             "required": true,

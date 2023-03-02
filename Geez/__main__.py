@@ -6,6 +6,7 @@ from geezlibs import logging, BOT_VER, __version__ as gver
 from Geez import BOTLOG_CHATID, LOGGER, LOOP, aiosession, bot1, bots, app, ids
 from config import CMD_HNDLR
 from Geez.modules import ALL_MODULES
+from Geez.modules.basic.heroku import geez_log
 
 
 MSG_ON = """
@@ -29,6 +30,7 @@ async def main():
             await bot.start()
             ex = await bot.get_me()
             await logging(bot)
+            await geez_log()
             try:
                 await bot.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, gver, CMD_HNDLR))
             except BaseException as a:

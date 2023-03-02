@@ -11,20 +11,17 @@
 import asyncio
 import math
 import os
-import random
-import shutil
-import sys
 import dotenv
 import heroku3
 import requests
 import urllib3
 from geezlibs.geez.utils.misc import is_heroku, paste_queue
-from pyrogram import Client, filters
 from geezlibs.geez import geez
-from config import HEROKU_API_KEY, HEROKU_APP_NAME, BRANCH
+from config import HEROKU_API_KEY, HEROKU_APP_NAME
 from config import CMD_HNDLR as cmds
-from Geez import SUDO_USER, Client
+from Geez import bot1
 from Geez.modules.basic import add_command_help
+from Geez.modules.basic.update import restart
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -274,6 +271,30 @@ Dyno terpakai:
 Dyno tersisa:
   ┗ Tersisa: `{hours}`**h**  `{minutes}`**m**  [`{percentage}`**%**]"""
     return await dyno.edit(text)
+
+async def geez_log():
+    botlog_chat_id = os.environ.get('BOTLOG_CHATID')
+    if botlog_chat_id:
+        return
+   
+    group_name = 'GeezPyro Bot Log'
+    group_description = 'This group is used to log my bot activities'
+    group = await bot1.create_supergroup(group_name, group_description)
+
+    if await is_heroku():
+        try:
+            Heroku = heroku3.from_key(os.environ.get('HEROKU_API_KEY'))
+            happ = Heroku.app(os.environ.get('HEROKU_APP_NAME'))
+            happ.config()['BOTLOG_CHATID'] = str(group.id)
+        except:
+            pass
+    else:
+        with open('.env', 'a') as env_file:
+            env_file.write(f'\nBOTLOG_CHATID={group.id}')
+
+    message_text = 'Grouplog berhasil diaktifkan,\nmohon masukkan bot anda ke group ini, dan aktifkan mode inline.\nRestarting Geez Pyro...!'
+    await bot1.send_message(group.id, message_text)
+    restart()
 
 add_command_help(
     "heroku",
