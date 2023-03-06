@@ -12,18 +12,17 @@ import asyncio
 from asyncio import gather
 from random import choice
 from pyrogram import Client, filters, enums
-from pyrogram.types import ChatPermissions, ChatPrivileges, Message
-from pyrogram import Client as gez 
-from geezlibs.geez.helper import edit_or_reply, get_text, ReplyCheck
+from pyrogram.types import Message
+from geezlibs.geez.helper import edit_or_reply, ReplyCheck
 from geezlibs import DEVS, BL_GCAST
+from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
 from config import *
 from Geez import cmds
 
 caption = f"**UPLOADED BY** Geez | RAM"
 
-@gez.on_message(filters.command("gasupan", "*") & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command("asupan", cmds) & filters.me)
+@geez("asupan", cmds)
 async def asupan(client: Client, message: Message):
     if message.chat.id in BL_GCAST:
         return await edit_or_reply(message, "**Tidak bisa di gunakan di Group Support**")
@@ -44,10 +43,8 @@ async def asupan(client: Client, message: Message):
         ),
     )
 
-# WARNING PORNO VIDEO THIS !!!
 
-@gez.on_message(filters.command("gbokep", "*") & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command(["bokep"], cmds) & filters.me)
+@geez("bokep", cmds)
 async def asupin(client: Client, message: Message):
     if message.chat.id in BL_GCAST:
         return await edit_or_reply(message, "**Tidak bisa di gunakan di Group Support**")
@@ -68,9 +65,7 @@ async def asupin(client: Client, message: Message):
         ),
     )
 
-
-@gez.on_message(filters.command("gayang", "*") & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command("ayang", [".", "-", "^", "!", "?"]) & filters.me)
+@geez("ayang", cmds)
 async def ayang(client, message):
     yanto = await message.reply("🔎 `Search Ayang...`")
     pop = message.from_user.first_name
@@ -90,9 +85,7 @@ async def ayang(client, message):
 
     await yanto.delete()
 
-
-@gez.on_message(filters.command("gppcp", "*") & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command("ppcp", [".", "-", "^", "!", "?"]) & filters.me)
+@geez("ppcp", cmds)
 async def ppcp(client, message):
     yanto = await message.reply("🔎 `Search PP Couple...`")
     message.from_user.first_name
@@ -112,9 +105,7 @@ async def ppcp(client, message):
 
     await yanto.delete()
 
-
-@gez.on_message(filters.command("gppanime", "*") & filters.user(DEVS) & ~filters.me)
-@gez.on_message(filters.command("ppanime", [".", "-", "^", "!", "?"]) & filters.me)
+@geez("ppanime", cmds)
 async def ppanime(client, message):
     yanto = await message.reply("🔎 `Search PP Anime...`")
     message.from_user.first_name
