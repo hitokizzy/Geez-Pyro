@@ -191,7 +191,7 @@ add_command_help(
     "youtube",
     [
         [f"{cmds}song <title>", "Download Audio From YouTube."],
-        [f"{cmds}video <title>", "Download Video from YouTube."],
+        [f"{cmds}vid <title>", "Download Video from YouTube."],
     ],
 )
 
