@@ -4,6 +4,7 @@ gpytranslate
 pytgcalls==3.0.0.dev24
 uvloop
 ffmpeg-python
+yt-dlp
 youtube-search
 youtube-search-python
 APScheduler==3.7.0
@@ -12,6 +13,7 @@ aiofiles
 bs4
 emoji==1.6.0
 googlesearch-python
+gunicorn
 gitpython
 httpx[http2]
 humanize
@@ -19,11 +21,11 @@ geezlibs==1.6.45
 gTTs
 httpx
 heroku3
-requests
+requests==2.28.2
 motor==3.0.0
 opencv-python-headless
 psutil
-pyrogram
+pyrogram==2.0.38
 pymongo
 python-dotenv
 pymediainfo

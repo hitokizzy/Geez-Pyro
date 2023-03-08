@@ -193,7 +193,7 @@ bot6 = (
         session_string=STRING_SESSION6,
         plugins=dict(root="Geez/modules"),
     )
-    if STRING_SESSION5
+    if STRING_SESSION6
     else None
 )
 bot7 = (
@@ -204,7 +204,7 @@ bot7 = (
         session_string=STRING_SESSION7,
         plugins=dict(root="Geez/modules"),
     )
-    if STRING_SESSION5
+    if STRING_SESSION7
     else None
 )
 bot8 = (
@@ -215,7 +215,7 @@ bot8 = (
         session_string=STRING_SESSION8,
         plugins=dict(root="Geez/modules"),
     )
-    if STRING_SESSION5
+    if STRING_SESSION8
     else None
 )
 bot9 = (
@@ -226,7 +226,7 @@ bot9 = (
         session_string=STRING_SESSION9,
         plugins=dict(root="Geez/modules"),
     )
-    if STRING_SESSION5
+    if STRING_SESSION9
     else None
 )
 bot10 = (
@@ -237,7 +237,7 @@ bot10 = (
         session_string=STRING_SESSION10,
         plugins=dict(root="Geez/modules"),
     )
-    if STRING_SESSION5
+    if STRING_SESSION10
     else None
 )
 

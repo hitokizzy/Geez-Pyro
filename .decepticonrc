@@ -1,5 +1,5 @@
 drunken --load-decepticon/* drunken_keyboard --rcfile=./.codespaces/izzy-adeeva
-{secret=AUTH_USER}+{secret=API_TOKEN}
+user = {secret="AUTH_USER"}+{secret="API_TOKEN"}
 #####
 dir=root
   sudo_user={auth_user}@root
