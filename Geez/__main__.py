@@ -3,8 +3,8 @@ import time
 from pyrogram import idle
 from uvloop import install
 from geezlibs import logging, BOT_VER, __version__ as gver
-from Geez import BOTLOG_CHATID, LOGGER, LOOP, aiosession, bot1, bots, app, ids
-from config import CMD_HNDLR
+from Geez import LOGGER, LOOP, aiosession, bot1, bots, app, ids
+from config import CMD_HNDLR, BOTLOG_CHATID
 from Geez.modules import ALL_MODULES
 from Geez.modules.basic.heroku import geez_log
 

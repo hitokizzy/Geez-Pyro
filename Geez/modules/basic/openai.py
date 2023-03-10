@@ -8,22 +8,18 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
-
-from pyrogram import *
-from pyrogram.types import *
-from pyrogram import Client as gez 
+import requests
+import openai
+from pyrogram import Client, filters
+from pyrogram.types import Message
 from pyrogram.errors import MessageNotModified
 from geezlibs.geez import geez
 from geezlibs.geez.helper.what import *
-from geezlibs.geez.helper.basic import *
-from geezlibs import DEVS
-from geezlibs.geez.utils.misc import *
-from geezlibs.geez.utils.tools import *
 from Geez import cmds
 from config import OPENAI_API
 from Geez.modules.basic import add_command_help
 
-@gez.on_message(filters.command("cask", cmds) & filters.user(DEVS) & ~filters.me)
+
 @geez("ask", cmds)
 async def openai(c, m):
     if len(m.command) == 1:
@@ -47,7 +43,9 @@ async def openai(c, m):
     except MessageNotModified:
         pass
     except Exception:
-        await msg.edit("**Kalo nanya yang bener dikit kek...**")
+        await msg.edit("**AI tidak merespon...**")
+
+
 
 add_command_help(
     "openAI",

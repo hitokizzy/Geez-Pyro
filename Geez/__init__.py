@@ -2,6 +2,7 @@ import asyncio
 import logging
 import sys
 import time
+from os import getenv
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 from typing import Any, Dict
@@ -14,7 +15,6 @@ from geezlibs.geez.database import db_x
 from config import (
     API_HASH,
     API_ID,
-    BOTLOG_CHATID,
     CMD_HNDLR,
     STRING_SESSION1,
     STRING_SESSION2,
@@ -35,7 +35,6 @@ clients = []
 ids = []
 LOG_FILE_NAME = "logs.txt"
 SUDOERS = filters.user()
-SUDO_USER = SUDOERS
 
 logging.basicConfig(
     level=logging.INFO,
@@ -58,7 +57,7 @@ LOGS = logging.getLogger(__name__)
 def LOGGER(name: str) -> logging.Logger:
     return logging.getLogger(name)
 
-
+BOTLOG_CHATID = int(getenv("BOTLOG_CHATID") or 0)
 if (
     not STRING_SESSION1
     and not STRING_SESSION2
@@ -77,11 +76,6 @@ if (
 if not BOT_TOKEN:
    LOGGER(__name__).error("WARNING: BOT TOKEN TIDAK DITEMUKAN, SHUTDOWN BOT")
    sys.exit()
-
-if BOTLOG_CHATID:
-   BOTLOG_CHATID = BOTLOG_CHATID
-else:
-   BOTLOG_CHATID = "me"
 
 db = db_x
 
