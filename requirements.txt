@@ -11,6 +11,7 @@ APScheduler==3.7.0
 aiohttp
 aiofiles
 bs4
+openai
 pykeyboard
 emoji==1.6.0
 googlesearch-python
