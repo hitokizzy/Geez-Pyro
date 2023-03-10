@@ -17,7 +17,7 @@ gunicorn
 gitpython
 httpx[http2]
 humanize
-geezlibs==1.6.45
+geezlibs==1.6.47
 gTTs
 httpx
 heroku3
