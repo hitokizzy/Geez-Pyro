@@ -123,8 +123,8 @@ async def filters_re(_, message):
 add_command_help(
     "filter",
     [
-        [f"{cmds}savefilters <balas ke pesan atau sticker> <triger/nama filer>", "save filters."],
-        [f"{cmds}stopfilter <triger/nama filter>", "menghapus filter."],
+        [f"{cmds}savefilter <balas ke pesan atau sticker> <triger/nama filer>", "save filters."],
+        [f"{cmds}stopfilte <triger/nama filter>", "menghapus filter."],
         [f"{cmds}filters", "melihat list filter."],
     ],
 )
