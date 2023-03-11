@@ -1,16 +1,25 @@
+# if you can read this, this meant you use code from Geez | Ram Project
+# this code is from somewhere else
+# please dont hestitate to steal it
+# because Geez and Ram doesn't care about credit
+# at least we are know as well
+# who Geez and Ram is
+#
+#
+# kopas repo dan hapus credit, ga akan jadikan lu seorang developer
+# ©2023 Geez | Ram Team
+
 import re
-from re import findall
-from re import sub as re_sub
 from pyrogram import filters, Client
-from pykeyboard import InlineKeyboard
 from pyrogram.types import InlineKeyboardButton as Ikb
 from geezlibs import BL_GCAST
 from geezlibs.geez import geez
 from geezlibs.geez.database import delete_filter, get_filter, get_filters_names, save_filter
 from geezlibs.geez.filter import *
+from Geez.modules.basic.help import add_command_help
 from Geez import cmds
 
-@geez("savefilter", cmds)
+@geez("savefilter", cmds) #lu gay
 async def save_filters(_, message):
     if len(message.command) < 2 or not message.reply_to_message:
         return await message.reply_text(
@@ -42,7 +51,7 @@ async def save_filters(_, message):
     await save_filter(chat_id, name, _filter)
     await message.reply_text(f"__**filter {name} disimpan!.**__")
 
-@geez("filters", cmds)
+@geez("filters", cmds) #lu gay
 async def get_filterss(_, message):
     _filters = await get_filters_names(message.chat.id)
     if not _filters:
@@ -53,7 +62,7 @@ async def get_filterss(_, message):
         msg += f"**-** `{_filter}`\n"
     await message.reply_text(msg)
 
-@geez("stopfilter", cmds)
+@geez("stopfilter", cmds) #lu gay
 async def del_filter(_, message):
     if len(message.command) < 2:
         return await message.reply_text(f"**Penggunaan:**\n__{cmds}stopfilter [nama filternya]__")
@@ -110,3 +119,12 @@ async def filters_re(_, message):
                     await message.delete()
                 return
             return await message.reply_sticker(data)
+        
+add_command_help(
+    "fakeadmin",
+    [
+        [f"{cmds}savefilters <balas ke pesan atau sticker> <triger/nama filer>", "save filters."],
+        [f"{cmds}stopfilter <triger/nama filter>", "menghapus filter."],
+        [f"{cmds}filters", "melihat list filter."],
+    ],
+)
