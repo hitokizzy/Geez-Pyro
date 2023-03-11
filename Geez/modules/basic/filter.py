@@ -121,7 +121,7 @@ async def filters_re(_, message):
             return await message.reply_sticker(data)
         
 add_command_help(
-    "fakeadmin",
+    "filter",
     [
         [f"{cmds}savefilters <balas ke pesan atau sticker> <triger/nama filer>", "save filters."],
         [f"{cmds}stopfilter <triger/nama filter>", "menghapus filter."],
