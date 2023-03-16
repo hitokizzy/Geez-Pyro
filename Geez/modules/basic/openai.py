@@ -51,6 +51,5 @@ add_command_help(
     "openAI",
     [
         [f"{cmds}ask [question]", "to ask questions using the API."],
-        [f"{cmds}ai [kata kata]", "generate gambar menggunakan Open Ai"]
     ],
 )
