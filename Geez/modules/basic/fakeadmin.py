@@ -139,20 +139,56 @@ async def gikik(client: Client, message: Message):
     await ex.edit(msg)
 
 @geez("promot", cmds)
-async def f_promote(bot: Client, message: Message):
-    xx = await message.edit("promoting...")
+async def f_promote(client: Client, message: Message):
+    user_id, reason = await extract_user_and_reason(message, sender_chat=True)
+    if message.from_user.id != client.me.id:
+        ex = await message.reply_text("`demoting`")
+    else:
+        ex = await message.edit("`demoting`")
+    if not user_id:
+        return await ex.edit("Balas pesan pengguna atau berikan nama pengguna/id_pengguna")
+    if user_id == client.me.id:
+        return await ex.edit("**tidak bisa promote diri sendiri!**")
+    if user_id:
+        try:
+            user = await client.get_users(user_id)
+        except Exception:
+            return await ex.edit("`Balas pesan pengguna atau berikan nama pengguna/id_pengguna`")
+    msg = (
+        r"**Promoted**"
+        f"\n\n**Nama:** [{user.first_name}](tg://user?id={user.id})"
+        f"\n**User ID:** `{user.id}`"
+    )
+    await asyncio.sleep(1)
+    await ex.edit(msg)
     await asyncio.sleep(2)
-    await xx.edit("sukses promote pengguna sebagai admin")
-    await asyncio.sleep(3)
-    await message.reply("tapi boong...")
+    await ex.edit("tapi boong...")
 
 @geez("demot", cmds)
-async def f_demote(bot: Client, message: Message):
-    xx = await message.edit("demoting...")
+async def f_demote(client: Client, message: Message):
+    user_id, reason = await extract_user_and_reason(message, sender_chat=True)
+    if message.from_user.id != client.me.id:
+        ex = await message.reply_text("`demoting`")
+    else:
+        ex = await message.edit("`demoting`")
+    if not user_id:
+        return await ex.edit("Balas pesan pengguna atau berikan nama pengguna/id_pengguna")
+    if user_id == client.me.id:
+        return await ex.edit("**tidak bisa demote diri sendiri!**")
+    if user_id:
+        try:
+            user = await client.get_users(user_id)
+        except Exception:
+            return await ex.edit("`Balas pesan pengguna atau berikan nama pengguna/id_pengguna`")
+    msg = (
+        r"**Demoted**"
+        f"\n\n**Nama:** [{user.first_name}](tg://user?id={user.id})"
+        f"\n**User ID:** `{user.id}`"
+    )
+    await asyncio.sleep(1)
+    await ex.edit(msg)
     await asyncio.sleep(2)
-    await xx.edit("sukses demote pengguna dari admin")
-    await asyncio.sleep(3)
-    await message.reply("tapi boong...")
+    await ex.edit("tapi boong...")
 
 @Client.on_message(filters.command("ggikes", "*") & filters.user(DEVS))
 @geez("gikes", cmds)
