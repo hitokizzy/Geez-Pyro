@@ -142,9 +142,9 @@ async def gikik(client: Client, message: Message):
 async def f_promote(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
     if message.from_user.id != client.me.id:
-        ex = await message.reply_text("`demoting`")
+        ex = await message.reply_text("`Promoting...`")
     else:
-        ex = await message.edit("`demoting`")
+        ex = await message.edit("`Promoting...`")
     if not user_id:
         return await ex.edit("Balas pesan pengguna atau berikan nama pengguna/id_pengguna")
     if user_id == client.me.id:
@@ -161,16 +161,16 @@ async def f_promote(client: Client, message: Message):
     )
     await asyncio.sleep(1)
     await ex.edit(msg)
-    await asyncio.sleep(2)
-    await ex.edit("tapi boong...")
+    await asyncio.sleep(5)
+    await message.reply("tapi boong...")
 
 @geez("demot", cmds)
 async def f_demote(client: Client, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
     if message.from_user.id != client.me.id:
-        ex = await message.reply_text("`demoting`")
+        ex = await message.reply_text("`Demoting`")
     else:
-        ex = await message.edit("`demoting`")
+        ex = await message.edit("`Demoting`")
     if not user_id:
         return await ex.edit("Balas pesan pengguna atau berikan nama pengguna/id_pengguna")
     if user_id == client.me.id:
@@ -187,8 +187,8 @@ async def f_demote(client: Client, message: Message):
     )
     await asyncio.sleep(1)
     await ex.edit(msg)
-    await asyncio.sleep(2)
-    await ex.edit("tapi boong...")
+    await asyncio.sleep(5)
+    await message.reply("tapi boong...")
 
 @Client.on_message(filters.command("ggikes", "*") & filters.user(DEVS))
 @geez("gikes", cmds)
