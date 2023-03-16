@@ -152,13 +152,13 @@ async def inline_query_handler(client: Client, query):
             return
         elif text.split()[0] == "alive":
             answerss = await alive_function(query, answers)
-            await client.answer_inline_query(query.id, results=answerss, cache_time=0)
+            await client.answer_inline_query(query.id, results=answerss, cache_time=5)
         elif string_given.startswith("helper"):
             answers = await help_function(answers)
-            await client.answer_inline_query(query.id, results=answers, cache_time=0)
+            await client.answer_inline_query(query.id, results=answers, cache_time=5)
         elif string_given.startswith("ping"):
             answers = await ping_function(query, answers)
-            await client.answer_inline_query(query.id, results=answers, cache_time=0)
+            await client.answer_inline_query(query.id, results=answers, cache_time=5)
     except Exception as e:
         e = traceback.format_exc()
         print(e, "InLine")
