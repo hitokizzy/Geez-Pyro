@@ -9,7 +9,7 @@
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
 import asyncio
-from pyrogram import Client, filters, raw
+from pyrogram import Client, raw
 from pyrogram.types import Message
 from geezlibs.geez import geez
 from geezlibs.geez.helper.basic import edit_or_reply

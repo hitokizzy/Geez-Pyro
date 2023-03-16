@@ -11,7 +11,7 @@
 import asyncio
 from io import BytesIO
 
-from pyrogram import Client, filters
+from pyrogram import Client
 from pyrogram.types import Message
 from geezlibs.geez import geez
 from Geez import aiosession

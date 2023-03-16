@@ -12,7 +12,6 @@ import time
 import random
 import speedtest
 import asyncio
-import functools
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from datetime import datetime

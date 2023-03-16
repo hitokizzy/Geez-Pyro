@@ -12,9 +12,8 @@ import asyncio
 import io
 import random
 import textwrap
-from pyrogram import Client, filters, enums
+from pyrogram import Client
 from pyrogram.types import Message
-from pyrogram.errors import YouBlockedUser
 from emoji import get_emoji_regexp
 from PIL import Image, ImageDraw, ImageFont
 from geezlibs.geez.helper.utility import get_arg

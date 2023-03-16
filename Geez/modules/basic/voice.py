@@ -14,15 +14,12 @@ import os
 import speech_recognition as sr
 import ffmpeg
 from gtts import gTTS
-from pyrogram import Client, filters
+from pyrogram import Client, enums
 from pyrogram.types import Message
 from geezlibs.geez.utils.tools import run_in_exc
-from geezlibs import logging
+from geezlibs.geez.helper.basic import edit_or_reply
 from Geez import cmds
 from geezlibs.geez import geez
-from geezlibs.geez.helper.basic import *
-from geezlibs.geez.utils.misc import *
-from geezlibs.geez.utils.tools import *
 from Geez.modules.basic import add_command_help
 
 lang = "id"  # Default Language for voice

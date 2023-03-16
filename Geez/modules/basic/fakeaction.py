@@ -11,14 +11,13 @@
 
 from asyncio import sleep
 
-from pyrogram import Client, enums, filters
+from pyrogram import Client, enums
 from pyrogram.raw import functions
 from pyrogram.types import Message
 from geezlibs.geez import geez
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
 from Geez import cmds
 from Geez.modules.basic import add_command_help
-from .help import add_command_help
 
 commands = {
     "ftyp": enums.ChatAction.TYPING,

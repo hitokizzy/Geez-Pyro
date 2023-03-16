@@ -13,7 +13,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message 
 from pyrogram.errors import FloodWait
 from geezlibs import DEVS
-from geezlibs.geez import geez, devs
+from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 

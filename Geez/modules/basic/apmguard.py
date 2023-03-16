@@ -1,12 +1,19 @@
+# if you can read this, this meant you use code from Geez | Ram Project
+# this code is from somewhere else
+# please dont hestitate to steal it
+# because Geez and Ram doesn't care about credit
+# at least we are know as well
+# who Geez and Ram is
+#
+#
+# kopas repo dan hapus credit, ga akan jadikan lu seorang developer
+# ©2023 Geez | Ram Team
 
-import asyncio
-from pyrogram.methods import messages
-from pyrogram import filters, Client
 from geezlibs.geez.database import pmpermit as TOD
-from geezlibs.geez import geez, devs
+from geezlibs.geez import geez
 from Geez import SUDO_USER
-from Geez.modules.basic.help import *
-from .pmguard import get_arg, denied_users
+from Geez.modules.basic import add_command_help
+from .pmguard import get_arg
 from Geez import cmds
 
 @geez("pmguard", cmds)

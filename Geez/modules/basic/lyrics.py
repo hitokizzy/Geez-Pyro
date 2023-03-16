@@ -10,7 +10,7 @@
 # ©2023 Geez | Ram Team
 import asyncio
 
-from pyrogram import filters, Client
+from pyrogram import Client
 from pyrogram.types import Message
 from geezlibs.geez import geez
 from Geez import SUDO_USER
@@ -67,4 +67,4 @@ async def send_lyrics(bot: Client, message: Message):
         await message.delete()
 
 
-add_command_help("lyrics", [[f"{cmds}lyrics", "Search lyrics and send."]])
+add_command_help("lyrics", [[f"{cmds}lirik <judul lagu>", "Search lyrics and send."]])

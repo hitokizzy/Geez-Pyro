@@ -11,7 +11,7 @@
 import asyncio
 import aiohttp
 from html import escape
-from pyrogram import filters, Client 
+from pyrogram import Client 
 from pyrogram.types import Message
 from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help

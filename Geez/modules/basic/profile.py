@@ -13,7 +13,7 @@ from asyncio import sleep
 import os
 from geezlibs.geez import geez
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
-from pyrogram import Client, filters
+from pyrogram import Client
 from pyrogram.types import Message
 
 from Geez import SUDO_USER

@@ -8,10 +8,10 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
-from pyrogram import Client, filters
+import os
+from pyrogram import Client
 from pyrogram.types import Message
 from telegraph import Telegraph, exceptions, upload_file
-import os
 from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
 from Geez import cmds

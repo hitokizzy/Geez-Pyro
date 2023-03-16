@@ -10,7 +10,7 @@
 # ©2023 Geez | Ram Team
 from asyncio import gather
 from os import remove
-from pyrogram import Client, filters
+from pyrogram import Client
 from pyrogram.enums import ChatType
 from pyrogram.types import Message
 from geezlibs.geez import geez

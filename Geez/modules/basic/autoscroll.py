@@ -10,7 +10,7 @@
 # ©2023 Geez | Ram Team
 from pyrogram import filters, Client
 from pyrogram.types import Message
-from geezlibs.geez import geez, devs
+from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 

@@ -11,7 +11,7 @@
 
 import asyncio
 from time import time
-from pyrogram import Client, filters, enums
+from pyrogram import Client, enums
 from pyrogram.errors import ChatAdminRequired
 from pyrogram.types import ChatPermissions, ChatPrivileges, Message
 from geezlibs import DEVS

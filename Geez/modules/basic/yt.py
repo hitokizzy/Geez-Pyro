@@ -13,7 +13,7 @@ import asyncio
 import os
 import time
 import wget
-from geezlibs.geez.helper.PyroHelpers import ReplyCheck
+from geezlibs.geez.helper import ReplyCheck
 from geezlibs.geez.utils.tools import get_arg
 from geezlibs.geez import geez
 from pyrogram import Client, enums
@@ -198,9 +198,8 @@ add_command_help(
 add_command_help(
     "sosmed",
     [
-        [
-            f"{cmds}sosmed <link>",
-            "Untuk Mendownload Media Dari Facebook / Tiktok / Instagram / Twitter / YouTube.",
-        ],
+        [f"{cmds}sosmed <link>",
+            "Untuk Mendownload Media Dari Facebook / Tiktok / Instagram / Twitter / YouTube."],
+        [f"{cmds}copy <link telegram>", "Download media dari channel atau group"],
     ],
 )

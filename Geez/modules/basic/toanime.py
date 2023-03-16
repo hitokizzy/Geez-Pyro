@@ -12,10 +12,7 @@ import asyncio
 from pyrogram import Client
 from pyrogram.enums import MessagesFilter
 from pyrogram.types import Message
-from geezlibs import logging
 from geezlibs.geez import geez
-from geezlibs.geez.helper.basic import edit_or_reply
-from Geez.modules.basic import add_command_help
 from Geez import cmds
 
 @geez("toanime", cmds)

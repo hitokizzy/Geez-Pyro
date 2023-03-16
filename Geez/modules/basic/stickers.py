@@ -25,11 +25,11 @@ from pyrogram import Client, emoji, filters
 from pyrogram.enums import ParseMode
 from pyrogram.errors import StickersetInvalid, YouBlockedUser
 from pyrogram.raw.functions.messages import GetStickerSet
-from pyrogram.raw.types import InputStickerSetShortName
+from pyrogram.raw.types import InputStickerSetShortName, InputMediaPhoto
 from pyrogram.types import Message
 from geezlibs.geez import geez
 from geezlibs.geez.helper.PyroHelpers import ReplyCheck
-
+from geezlibs.geez.helper import run_cmd
 from Geez.modules.basic import add_command_help
 from Geez import cmds
 
@@ -56,7 +56,7 @@ async def add_text_img(image_path, text):
     img_info = img.info
     image_width, image_height = img.size
     font = ImageFont.truetype(
-        font="cache/default.ttf",
+        font="cache/geezram.ttf",
         size=int(image_height * font_size) // 100,
     )
     draw = ImageDraw.Draw(img)
@@ -281,7 +281,7 @@ async def kang(client: Client, message: Message):
             limit = 50 if (is_video or is_anim) else 120
             if exist.set.count >= limit:
                 pack += 1
-                packname = f"a{user.id}_by_userge_{pack}"
+                packname = f"a{user.id}_by_geezram_{pack}"
                 packnick = f"{custom_packnick} Vol.{pack}"
                 if is_anim:
                     packname += f"_anim{pack}"

@@ -22,7 +22,7 @@ from pyrogram.types import Message
 from pyrogram.types import Message
 from geezlibs import DEVS
 from geezlibs.geez.helper import edit_or_reply, get_arg
-from geezlibs.geez import geez, devs
+from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
 from Geez import SUDO_USER
 from Geez import cmds

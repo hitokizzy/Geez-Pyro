@@ -14,6 +14,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
+from Geez.modules.basic.broadcast import get_arg
 from Geez import cmds
 
 @geez("dm", cmds)
@@ -38,6 +39,29 @@ async def dm(coli: Client, memek: Message):
         await coli.send_message(user.id, spam_text)
         await geez.edit("Message Sended Successfully 😘")
         await asyncio.sleep(0.15)
+
+
+
+@geez("copy", cmds)
+async def copy_msg(client: Client, message: Message):
+    lugay = await message.reply("`Processing...`")
+    link = get_arg(message)
+    if not link:
+        return await lugay.edit(f"<b><code>{message.text}</code> [link_konten_telegram]</b>")
+    if link.startswith(("https", "t.me")):
+        msg_id = int(link.split("/")[-1])
+        if "t.me/c/" in link:
+            chat = int("-100" + str(link.split("/")[-2]))
+        else:
+            chat = str(link.split("/")[-2])
+        try:
+            get = await client.get_messages(chat, msg_id)
+        except Exception as error:
+            await lugay.edit(error)
+        await get.copy(message.chat.id)
+        return await lugay.delete()
+    else:
+        await lugay.edit("`harap berikan link telegram dengan benar.`")
 
 
 add_command_help(

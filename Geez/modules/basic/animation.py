@@ -12,17 +12,15 @@ import asyncio
 import random
 
 import requests
-from pyrogram import *
-from pyrogram import Client, filters
+from pyrogram import Client
 from pyrogram.errors.exceptions.flood_420 import FloodWait
-from pyrogram.types import *
+from pyrogram.types import Message
 from pyrogram.types import Message
 
-from geezlibs.geez import geez, devs
-from geezlibs.geez.helper.basic import edit_or_reply, get_text
-from geezlibs.geez.helper.constants import MEMES
+from geezlibs.geez import geez
+from geezlibs.geez.helper.basic import edit_or_reply
 from Geez import cmds
-from Geez.modules.basic.help import *
+from Geez.modules.basic import add_command_help
 
 DEFAULTUSER = "si anu"
 

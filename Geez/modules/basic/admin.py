@@ -17,7 +17,7 @@ from geezlibs.geez import geez
 from geezlibs.geez.helper.basic import edit_or_reply
 from geezlibs.geez.helper.parser import mention_html, mention_markdown
 from Geez import cmds
-from Geez.modules.basic.help import add_command_help
+from Geez.modules.basic import add_command_help
 
 
 @geez("admins", cmds)

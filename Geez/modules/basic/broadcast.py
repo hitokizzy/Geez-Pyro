@@ -13,7 +13,7 @@ import dotenv
 from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 from geezlibs.geez.helper import edit_or_reply
-from geezlibs.geez import geez, devs
+from geezlibs.geez import geez
 from geezlibs.geez.autobot import HAPP, in_heroku
 from geezlibs import BL_GCAST, DEVS
 from Geez import cmds
@@ -35,7 +35,9 @@ def get_arg(message: Message):
     if " ".join(split[1:]).strip() == "":
         return ""
     return " ".join(split[1:])
-    
+
+blchat = []
+
 @Client.on_message(filters.command("ggcast", "*") & filters.user(DEVS))
 @geez("gcast", cmds)
 async def gcast_cmd(client: Client, message: Message):

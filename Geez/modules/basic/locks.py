@@ -8,7 +8,7 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
-from pyrogram import Client, filters
+from pyrogram import Client
 from pyrogram.errors.exceptions.bad_request_400 import (
     ChatAdminRequired,
     ChatNotModified,

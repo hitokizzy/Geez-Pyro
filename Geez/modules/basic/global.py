@@ -14,7 +14,7 @@ from pyrogram.types import Message
 from geezlibs import DEVS
 from geezlibs.geez.helper.PyroHelpers import get_ub_chats
 from Geez.modules.basic.profile import extract_user_and_reason
-from geezlibs.geez import geez, devs
+from geezlibs.geez import geez
 from geezlibs.geez.database import gbandb as Geez
 from geezlibs.geez.database import gmutedb as Gmute
 from Geez.modules.basic import add_command_help

@@ -22,7 +22,7 @@ from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from geezlibs.geez import geez, devs
+from geezlibs.geez import geez
 from geezlibs import DEVS
 from config import GIT_TOKEN, REPO_URL, BRANCH
 HEROKU_API_KEY = getenv("HEROKU_API_KEY", None)
@@ -132,9 +132,8 @@ async def updateme_requirements():
     except Exception as e:
         return repr(e)
 
-
-@geez("update", cmds)
 @Client.on_message(filters.command("gupdate", "*") & filters.user(DEVS))
+@geez("update", cmds)
 async def upstream(client: Client, message: Message):
     status = await message.edit_text("`Checking for Updates, Wait a Moment...`")
     conf = get_arg(message)

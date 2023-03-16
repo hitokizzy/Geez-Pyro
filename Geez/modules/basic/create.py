@@ -8,7 +8,7 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
-from pyrogram import Client, filters
+from pyrogram import Client
 from pyrogram.types import Message
 from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help

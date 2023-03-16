@@ -11,12 +11,12 @@
 import requests
 from bs4 import BeautifulSoup
 from googlesearch import search
-from pyrogram import Client, filters
+from pyrogram import Client
 from pyrogram.types import Message
 from geezlibs.geez import geez
 from geezlibs.geez.helper.basic import edit_or_reply
 
-from Geez.modules.basic import *
+from Geez.modules.basic import add_command_help
 from Geez import cmds
 
 def googlesearch(query):

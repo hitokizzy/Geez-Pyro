@@ -10,7 +10,6 @@
 # ©2023 Geez | Ram Team
 
 import os
-from pyrogram import filters, Client
 from pyrogram.types import Message
 from py_trans import Async_PyTranslator
 from geezlibs.geez.helper.utility import get_arg

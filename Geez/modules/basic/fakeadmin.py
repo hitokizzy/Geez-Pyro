@@ -138,6 +138,21 @@ async def gikik(client: Client, message: Message):
     await asyncio.sleep(5)
     await ex.edit(msg)
 
+@geez("promot", cmds)
+async def f_promote(bot: Client, message: Message):
+    xx = await message.edit("promoting...")
+    await asyncio.sleep(2)
+    await xx.edit("sukses promote pengguna sebagai admin")
+    await asyncio.sleep(3)
+    await message.reply("tapi boong...")
+
+@geez("demot", cmds)
+async def f_demote(bot: Client, message: Message):
+    xx = await message.edit("demoting...")
+    await asyncio.sleep(2)
+    await xx.edit("sukses demote pengguna dari admin")
+    await asyncio.sleep(3)
+    await message.reply("tapi boong...")
 
 @Client.on_message(filters.command("ggikes", "*") & filters.user(DEVS))
 @geez("gikes", cmds)
@@ -160,5 +175,7 @@ add_command_help(
         [f"{cmds}gimut <reply/username/userid>", "Fake Global Mute."],
         [f"{cmds}gikik <reply/username/userid>", "Fake Global Kick."],
         [f"{cmds}gikes <reply/username/userid>", "Fake Global broadcast."],
+        [f"{cmds}promot <reply/username/userid>", "Fake Promote."],
+        [f"{cmds}demot <reply/username/userid>", "Fake Demote."],
     ],
 )

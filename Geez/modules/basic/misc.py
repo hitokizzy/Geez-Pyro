@@ -21,7 +21,6 @@ from pyrogram.types import Message
 from config import ALIVE_PIC, ALIVE_TEXT
 from Geez import START_TIME, SUDO_USER, app
 from Geez.modules.basic import add_command_help
-from Geez.modules.bot.inline import get_readable_time
 from Geez import cmds
 
 geezlogo = [
@@ -76,7 +75,7 @@ async def alive(client: Client, message: Message):
         await message.delete()
     except:
         pass
-    send = client.send_video if alive_logo.endswith(f"{cmds}mp4") else client.send_photo
+    send = client.send_video if alive_logo.endswith(f".mp4") else client.send_photo
     xd = (f"{txt}")
     try:
         await asyncio.gather(

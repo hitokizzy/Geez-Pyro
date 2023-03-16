@@ -13,7 +13,7 @@ import sys
 from datetime import datetime
 import psutil
 from asyncio import create_subprocess_exec as asyncrunapp
-from pyrogram import filters, Client
+from pyrogram import Client
 from pyrogram import __version__
 from pyrogram.types import Message
 from Geez.modules.basic.help import add_command_help

@@ -11,13 +11,12 @@
 import asyncio
 from asyncio import gather
 from random import choice
-from pyrogram import Client, filters, enums
+from pyrogram import Client, enums
 from pyrogram.types import Message
 from geezlibs.geez.helper import edit_or_reply, ReplyCheck
 from geezlibs import DEVS, BL_GCAST
 from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
-from config import *
 from Geez import cmds
 
 caption = f"**UPLOADED BY** Geez | RAM"
