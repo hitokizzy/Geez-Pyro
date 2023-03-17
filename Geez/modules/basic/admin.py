@@ -204,6 +204,6 @@ add_command_help(
         [f"{cmds}admins", "Get chats Admins list."],
         [f"{cmds}zombies", "To Kick deleted Accounts."],
         [f"{cmds}tagall","to mention Everyone "],
-        [f"{cmds}botlist","To get Chats Bots list"],
+        [f"{cmds}bots","To get Chats Bots list"],
     ],
 )
