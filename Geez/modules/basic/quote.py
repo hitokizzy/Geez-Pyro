@@ -10,16 +10,20 @@
 # ©2023 Geez | Ram Team
 import asyncio
 import io
+import os
 import random
 import textwrap
-from pyrogram import Client
+import requests
+from io import BytesIO
+from base64 import b64decode
+from pyrogram import Client, errors
 from pyrogram.types import Message
 from emoji import get_emoji_regexp
 from PIL import Image, ImageDraw, ImageFont
 from geezlibs.geez.helper.utility import get_arg
 from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
-from geezlibs.geez.helper.PyroHelpers import ReplyCheck
+from geezlibs.geez.utils import malu_lah, copas_teros
 from Geez import cmds
 
 def deEmojify(inputString: str) -> str:
@@ -131,6 +135,76 @@ async def twitt(client: Client, message: Message):
                 return await message.edit("**Failed to Create twitter status**")
                 
     await client.delete_messages(bot, 2)
+
+LAST_MESSAGE_ID = None
+
+@geez("fq", cmds)
+async def fake_quote_cmd(client: Client, message: Message):
+    send_for_me = "!me" in message.command or "!ls" in message.command
+
+    if len(message.command) < 3:
+        return await message.edit(f"format yang diberikan salah,\ngunakan {cmds}fq <username> <pesan>")
+
+    target_user = message.command[1]
+    if not target_user.startswith("@"):
+        return await message.edit("format username salah")
+    target_user = target_user[1:]
+
+    try:
+        user = await client.get_users(target_user)
+    except errors.exceptions.bad_request_400.UsernameNotOccupied:
+        return await message.edit("username tidak ditemukan")
+    except IndexError:
+        return await message.edit("jangan gunakan username CH/GROUP")
+
+    fake_quote_text = " ".join(message.command[2:])
+
+    if not fake_quote_text:
+        return await message.edit("Pesan kosong")
+
+    q_message = await client.get_messages(message.chat.id, message.id)
+    q_message.text = fake_quote_text
+    q_message.entities = None
+
+    q_message.from_user.id = user.id
+    q_message.from_user.first_name = user.first_name
+    q_message.from_user.last_name = user.last_name
+    q_message.from_user.username = user.username
+    q_message.from_user.photo = user.photo
+
+    if send_for_me:
+        await message.delete()
+        message = await client.send_message("me", "Memproses...")
+    else:
+        await message.edit("memproses")
+
+    url = "https://quotes.fl1yd.su/generate"
+    user_auth_1 = b64decode("Y2llIG1hbyBueW9sb25nIGNpaWUuLi4uLCBjb2xvbmcgYWphIGJhbmcgamFkaWluIHByZW0gdHJ1cyBqdWFsLCBrYWxpIGFqYSBiZXJrYWggaWR1cCBsdS4uLi4=")
+    params = {
+        "messages": [await copas_teros(client, q_message)],
+        "quote_color": "#162330",
+        "text_color": "#fff",
+    }
+
+    response = requests.post(url, json=params)
+    if not response.ok:
+        return await message.edit(
+            f"<b>GAGAL!</b>\n" f"<code>{response.text}</code>"
+        )
+
+    resized = malu_lah(
+        BytesIO(response.content), img_type="webp"
+    )
+    await message.edit("mengirim sticker...")
+
+    try:
+        func = client.send_sticker
+        chat_id = "me" if send_for_me else message.chat.id
+        await func(chat_id, resized)
+    except errors.RPCError as e:
+        await message.edit(e)
+    else:
+        await message.delete()
 
 add_command_help(
     "quotly",
