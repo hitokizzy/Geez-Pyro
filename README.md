@@ -26,24 +26,12 @@
 
 ## Deploy Geez-Pyro on VPS
 ```console
- $ sudo apt-get update -y
- $ sudo apt-get upgrade
  $ git clone https://github.com/hitokizzy/Geez-Pyro
  $ cd Geez-Pyro
- $ pip3 install -U -r req*
- $ cp sample.env .env
+ $ bash setup (isi vars yg diminta)
+ $ bash start (bakar roko, nyeduh kopi, nyender...)
 ```
 
-<h3 align="center">
-   Edit <b>.env</b> ISI VARS YANG DIMINTA
-</h3>
-
-```console
- $ screen -S Geez
- $ bash start
-
-## ENJOY MOMENT 😎
-```
 
 ## Deploy Geez-Pyro on Heroku
 <h3 align="center">Click The Button</h3>
