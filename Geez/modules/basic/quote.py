@@ -213,5 +213,7 @@ add_command_help(
             "membuat gambar quote."],
         [f"{cmds}q <warna> or {cmds}quotly <warna>",
             "Membuat gambar quote dengan warna background." ],
+        [f"{cmds}fq <username> <pesan>",
+            "Membuat fake quote." ],
     ],
 )
