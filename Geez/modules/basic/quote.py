@@ -209,11 +209,10 @@ async def fake_quote_cmd(client: Client, message: Message):
 add_command_help(
     "quotly",
     [
-        [f"{cmds}q or {cmds}quotly",
+        [f"{cmds}q or {cmds}quotly balas ke pesan",
             "membuat gambar quote."],
-        [f"{cmds}q <warna> or {cmds}quotly <warna>",
+        [f"{cmds}q warna or {cmds}quotly warna balas kepesan",
             "Membuat gambar quote dengan warna background." ],
-        [f"{cmds}fq <username> <pesan>",
-            "Membuat fake quote." ],
+        [f"{cmds}fq username pesan", "Membuat fake quote." ],
     ],
 )
