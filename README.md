@@ -35,7 +35,7 @@
 
 ## Deploy Geez-Pyro on Heroku
 <h3 align="center">Click The Button</h3>
-<a href="https://heroku.com/deploy?template=https://github.com/hitokizzy/Geez-Pyro"><img src="https://www.herokucdn.com/deploy/button.svg"></a>
+<a href="https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fhitokizzy%2FGeez-Pyro&template=https%3A%2F%2Fgithub.com%2Fhitokizzy%2FGeez-Pyro"><img src="https://www.herokucdn.com/deploy/button.svg"></a>
 </div>
 
 ## Disclaimer 
