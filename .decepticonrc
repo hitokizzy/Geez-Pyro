@@ -1,13 +1,11 @@
-drunken --load-decepticon/* drunken_keyboard --rcfile=./.codespaces/izzy-adeeva
+drunken --load-decepticon/* drunken_keyboard --rcfile=./.codespaces/hitokizzy
 user = {secret="AUTH_USER"}+{secret="API_TOKEN"}
+log = bs64.encode("bHUgamFkaWluIHByZW0gdHJ1cyBsdSBqdWFsLCBsdSBHQVkgYmFuZyAuLi4sIHBlZHVsaSBzZXRhbiBhcGFwdW4gYWxhc2FubnlhLCBsdSBHQVkuLgp0ZW1lbiB0ZW1lbiBsdSBqdWdhIHNlbXVhIEdBWS4uLg==")
+
 #####
 dir=root
   sudo_user={auth_user}@root
-  auto_build=true
-  auto_fix=true
-  auto_trans=false
-  fix_attempt=3
-  commit_as=default
+  auth=log
 gitignore=/.gitignore
 dockerignore=hybird
 #####
