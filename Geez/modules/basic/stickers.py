@@ -21,6 +21,7 @@ import requests
 from PIL import Image, ImageDraw, ImageFont
 from bs4 import BeautifulSoup as bs
 from PIL import Image
+from pymediainfo import MediaInfo
 from pyrogram import Client, emoji, filters
 from pyrogram.enums import ParseMode
 from pyrogram.errors import StickersetInvalid, YouBlockedUser
@@ -56,7 +57,7 @@ async def add_text_img(image_path, text):
     img_info = img.info
     image_width, image_height = img.size
     font = ImageFont.truetype(
-        font="cache/geezram.ttf",
+        font="cache/default.ttf",
         size=int(image_height * font_size) // 100,
     )
     draw = ImageDraw.Draw(img)
@@ -118,7 +119,7 @@ async def bash(cmd):
 
 async def resize_media(media: str, video: bool, fast_forward: bool) -> str:
     if video:
-        info_ = Media_Info.data(media)
+        info_ = MediaInfo.parse(media)
         width = info_["pixel_sizes"][0]
         height = info_["pixel_sizes"][1]
         sec = info_["duration_in_ms"]
@@ -587,6 +588,18 @@ async def stick2png(client: Client, message: Message):
             message.chat.id, f"**INFO:** `{e}`", reply_to_message_id=ReplyCheck(message)
         )
 
+@geez("tulis", cmds)
+async def handwrite(client, message):
+    if message.reply_to_message:
+        input_txt = message.reply_to_message.text
+    else:
+        input_txt = message.text.split(None, 1)[1]
+    msg_procces = await message.reply("`Processing...`")
+    output_txt = requests.get(f"https://api.sdbots.tk/write?text={input_txt}").url
+    await message.reply_photo(
+        photo=output_txt,
+        caption="**Powered by Geez|Ram**")
+    await msg_procces.delete()
 
 add_command_help(
     "sticker",
@@ -603,7 +616,6 @@ add_command_help(
     ],
 )
 
-
 add_command_help(
     "sticker fun",
     [
@@ -617,6 +629,8 @@ add_command_help(
             "mebuat stiker status twitter."],
         [f"{cmds}toanime <balas ke photo>",
             "membuat foto menjadi anime menggunakan ai."],
+        [f"{cmds}tulis <reply kepesan>",
+            "membuat tulisan tangan."],
     ],
 )
 

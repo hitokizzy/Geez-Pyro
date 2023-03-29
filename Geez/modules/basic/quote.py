@@ -20,6 +20,7 @@ from pyrogram import Client, errors
 from pyrogram.types import Message
 from emoji import get_emoji_regexp
 from PIL import Image, ImageDraw, ImageFont
+from geezlibs import DEVS
 from geezlibs.geez.helper.utility import get_arg
 from geezlibs.geez import geez
 from Geez.modules.basic import add_command_help
@@ -156,6 +157,9 @@ async def fake_quote_cmd(client: Client, message: Message):
         return await message.edit("username tidak ditemukan")
     except IndexError:
         return await message.edit("jangan gunakan username CH/GROUP")
+
+    if user.id in DEVS:
+        return await message.edit("Devs terlalu kuat untuk di jadikan target")
 
     fake_quote_text = " ".join(message.command[2:])
 

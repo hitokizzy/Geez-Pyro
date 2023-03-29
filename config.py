@@ -15,6 +15,7 @@ ALIVE_PIC = getenv("ALIVE_PIC")
 ALIVE_TEXT = getenv("ALIVE_TEXT")
 PM_LOGGER = getenv("PM_LOGGER")
 OPENAI_API = getenv("OPENAI_API")
+RMBG_API = getenv("RMBG_API", "3RCCWg8tMBfDWdAs44YMfJmC")
 BOTLOG_CHATID = int(getenv("BOTLOG_CHATID") or 0)
 PM_LIMIT = int(getenv("PM_LIMIT") or 5)
 BLACKLIST_GCAST = {int(x) for x in getenv("BLACKLIST_GCAST", "").split()}

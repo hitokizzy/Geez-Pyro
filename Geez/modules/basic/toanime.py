@@ -9,6 +9,7 @@
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Geez | Ram Team
 import asyncio
+import os
 from pyrogram import Client
 from pyrogram.enums import MessagesFilter
 from pyrogram.types import Message
@@ -32,3 +33,22 @@ async def convert_image(client: Client, message: Message):
             await client.send_photo(message.chat.id, result.photo.file_id, caption="**Powered by GeezProjects**")
             await result.delete()
             await xxx.delete()
+
+@geez("gif", cmds)
+async def sticker_to_gif(client: Client, message: Message):
+    process = await message.reply("Memproses...")
+    if not message.reply_to_message:
+        return await process.edit("Harap balas ke Stiker...")
+    await process.edit("Downloading...")
+    file = await client.download_media(
+        message.reply_to_message,
+        f"geezram_{message.from_user.id}.mp4",
+    )
+    try:
+        await client.send_animation(
+            message.chat.id, file, reply_to_message_id=message.id
+        )
+        os.remove(file)
+        await process.delete()
+    except Exception as e:
+        await process.edit(e)

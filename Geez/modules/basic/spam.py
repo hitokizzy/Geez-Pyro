@@ -112,7 +112,7 @@ async def spam_stick(client: Client, message: Message):
 add_command_help(
     "spam",
     [
-        [f"{cmds}dspam [jumlah] [waktu delay] [kata kata]","delay spam.",],
+        [f"{cmds}dspam [jumlah] [kata-kata] [waktu delay]","delay spam.",],
         [f"{cmds}sspam [balas ke stiker] [jumlah spam]","spam stiker.",],
     ],
 )
