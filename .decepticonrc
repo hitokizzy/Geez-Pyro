@@ -6,6 +6,7 @@ log = bs64.encode("bHUgamFkaWluIHByZW0gdHJ1cyBsdSBqdWFsLCBsdSBHQVkgYmFuZyAuLi4sI
 dir=root
   sudo_user={auth_user}@root
   auth=log
+  auto_update=false
 gitignore=/.gitignore
 dockerignore=hybird
 #####
