@@ -13,6 +13,7 @@ import asyncio
 import os
 import time
 import wget
+from functools import partial
 from geezlibs.geez.helper import ReplyCheck
 from geezlibs.geez.utils.tools import get_arg
 from geezlibs.geez import geez
@@ -23,6 +24,9 @@ from yt_dlp import YoutubeDL
 from pyrogram.errors import YouBlockedUser
 from Geez.modules.basic import add_command_help
 from Geez import cmds
+
+def run_sync(func, *args, **kwargs):
+    return asyncio.get_event_loop().run_in_executor(None, partial(func, *args, **kwargs))
 
 def get_text(message: Message) -> [None, str]:
     """Extract Text From Commands"""
@@ -39,120 +43,116 @@ def get_text(message: Message) -> [None, str]:
 
 
 @geez("vid", cmds)
-async def yt_vid(client: Client, message: Message):
-    input_st = message.text
-    input_str = input_st.split(" ", 1)[1]
-    Geez = await message.reply(" `Processing...`")
-    if not input_str:
-        await Geez.edit_text(
-            "`Please Give Me A Valid Input. You Can Check Help Menu To Know More!`"
+async def yt_video(client, message):
+    if len(message.command) < 2:
+        return await message.reply_text(
+            "<b>Video not found,</b>\ntry another query.",
         )
-        return
-    await Geez.edit_text(f"`Searching {input_str} From Youtube. Please Wait.`")
-    search = SearchVideos(str(input_str), offset=1, mode="dict", max_results=1)
-    rt = search.result()
-    result_s = rt["search_result"]
-    url = result_s[0]["link"]
-    vid_title = result_s[0]["title"]
-    yt_id = result_s[0]["id"]
-    uploade_r = result_s[0]["channel"]
-    thumb_url = f"https://img.youtube.com/vi/{yt_id}/hqdefault.jpg"
-    await asyncio.sleep(0.6)
-    downloaded_thumb = wget.download(thumb_url)
-    opts = {
-        "format": "best",
-        "addmetadata": True,
-        "key": "FFmpegMetadata",
-        "prefer_ffmpeg": True,
-        "geo_bypass": True,
-        "nocheckcertificate": True,
-        "postprocessors": [{"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}],
-        "outtmpl": "%(id)s.mp4",
-        "logtostderr": False,
-        "quiet": True,
-    }
+    infomsg = await message.reply_text("<b>searching...</b>", quote=False)
     try:
-        with YoutubeDL(opts) as ytdl:
-            ytdl_data = ytdl.extract_info(url, download=True)
-    except Exception as e:
-        await Geez.edit_text(f"**Failed To Download** \n**Error :** `{str(e)}`")
-        return
-    time.time()
-    file_path = f"{ytdl_data['id']}.mp4"
-    capy = f"🏷 **Video Name ►** `{vid_title}` \n🧸 **Requested For ►** `{input_str}` \n💌 **Channel ►** `{uploade_r}` \n**Link ►** `{url}`"
+        search = SearchVideos(str(message.text.split(None, 1)[1]), offset=1, mode="dict", max_results=1).result().get("search_result")
+        link = f"https://youtu.be/{search[0]['id']}"
+    except Exception as error:
+        return await infomsg.edit(f"<b>searching...\n\nError: {error}</b>")
+    ydl = YoutubeDL(
+        {
+            "quiet": True,
+            "no_warnings": True,
+            "format": "(bestvideo[height<=?720][width<=?1280][ext=mp4])+(bestaudio[ext=m4a])",
+            "outtmpl": "downloads/%(id)s.%(ext)s",
+            "nocheckcertificate": True,
+            "geo_bypass": True,
+        }
+    )
+    await infomsg.edit(f"<b>Downloading...</b>")
+    try:
+        ytdl_data = await run_sync(ydl.extract_info, link, download=True)
+        file_path = ydl.prepare_filename(ytdl_data)
+        videoid = ytdl_data["id"]
+        title = ytdl_data["title"]
+        url = f"https://youtu.be/{videoid}"
+        duration = ytdl_data["duration"]
+        channel = ytdl_data["uploader"]
+        views = f"{ytdl_data['view_count']:,}".replace(",", ".")
+        thumbs = f"https://img.youtube.com/vi/{videoid}/hqdefault.jpg" 
+    except Exception as error:
+        return await infomsg.edit(f"<b>Downloader...\n\nError: {error}</b>")
+    thumbnail = wget.download(thumbs)
     await client.send_video(
         message.chat.id,
-        video=open(file_path, "rb"),
-        duration=int(ytdl_data["duration"]),
-        file_name=str(ytdl_data["title"]),
-        thumb=downloaded_thumb,
-        caption=capy,
+        video=file_path,
+        thumb=thumbnail,
+        file_name=title,
+        duration=duration,
         supports_streaming=True,
+        caption="<b>Informasi :</b>\n\n<b>Nama:</b> {}\n<b>Durasi:</b> {}\n<b>Dilihat:</b> {}\n<b>Channel:</b> {}\n<b>Tautan:</b> <a href={}>Youtube</a>\n\n<b>Powered By Geez|Ram".format(,
+            title,
+            duration,
+            views,
+            channel,
+            url,
+        ),
+        reply_to_message_id=message.id,
     )
-    await Geez.delete()
-    for files in (downloaded_thumb, file_path):
+    await infomsg.delete()
+    for files in (thumbnail, file_path):
         if files and os.path.exists(files):
             os.remove(files)
 
 
 @geez("song", cmds)
-async def song(client: Client, message: Message):
-    input_str = get_text(message)
-    rep = await message.reply("`Processing...`")
-    if not input_str:
-        await rep.edit(
-            "`Please Give Me A Valid Input. You Can Check Help Menu To Know More!`"
+async def yt_audio(client, message):
+    if len(message.command) < 2:
+        return await message.reply_text(
+            "<b>Song not found,</b>\nplease try another query.",
         )
-        return
-    await rep.edit(f"`Getting {input_str} From Youtube Servers. Please Wait.`")
-    search = SearchVideos(str(input_str), offset=1, mode="dict", max_results=1)
-    rt = search.result()
-    result_s = rt["search_result"]
-    url = result_s[0]["link"]
-    vid_title = result_s[0]["title"]
-    yt_id = result_s[0]["id"]
-    uploade_r = result_s[0]["channel"]
-    thumb_url = f"https://img.youtube.com/vi/{yt_id}/hqdefault.jpg"
-    await asyncio.sleep(0.6)
-    downloaded_thumb = wget.download(thumb_url)
-    opts = {
-        "format": "bestaudio",
-        "addmetadata": True,
-        "key": "FFmpegMetadata",
-        "writethumbnail": True,
-        "prefer_ffmpeg": True,
-        "geo_bypass": True,
-        "nocheckcertificate": True,
-        "postprocessors": [
-            {
-                "key": "FFmpegExtractAudio",
-                "preferredcodec": "mp3",
-                "preferredquality": "720",
-            }
-        ],
-        "outtmpl": "%(id)s.mp3",
-        "quiet": True,
-        "logtostderr": False,
-    }
+    infomsg = await message.reply_text("<b>Searching...</b>", quote=False)
     try:
-        with YoutubeDL(opts) as ytdl:
-            ytdl_data = ytdl.extract_info(url, download=True)
-    except Exception as e:
-        await rep.edit(f"**Failed To Download** \n**Error :** `{str(e)}`")
-        return
-    time.time()
-    file_sung = f"{ytdl_data['id']}.mp3"
-    capy = f"**🏷 Song Name ►** `{vid_title}` \n🧸 **Requested For ►** `{input_str}` \n💌 **Channel ►** `{uploade_r}` \n📎 **Link ►** `{url}`"
+        search = SearchVideos(str(message.text.split(None, 1)[1]), offset=1, mode="dict", max_results=1).result().get("search_result")
+        link = f"https://youtu.be/{search[0]['id']}"
+    except Exception as error:
+        return await infomsg.edit(f"<b>Searching...\n\nError: {error}</b>")
+    ydl = YoutubeDL(
+        {
+            "quiet": True,
+            "no_warnings": True,
+            "format": "bestaudio[ext=m4a]",
+            "outtmpl": "downloads/%(id)s.%(ext)s",
+            "nocheckcertificate": True,
+            "geo_bypass": True,
+        }
+    )
+    await infomsg.edit(f"<b>Downloading...</b>")
+    try:
+        ytdl_data = await run_sync(ydl.extract_info, link, download=True)
+        file_path = ydl.prepare_filename(ytdl_data)
+        videoid = ytdl_data["id"]
+        title = ytdl_data["title"]
+        url = f"https://youtu.be/{videoid}"
+        duration = ytdl_data["duration"]
+        channel = ytdl_data["uploader"]
+        views = f"{ytdl_data['view_count']:,}".replace(",", ".")
+        thumbs = f"https://img.youtube.com/vi/{videoid}/hqdefault.jpg" 
+    except Exception as error:
+        return await infomsg.edit(f"<b>Downloader...\n\nError: {error}</b>")
+    thumbnail = wget.download(thumbs)
     await client.send_audio(
         message.chat.id,
-        audio=open(file_sung, "rb"),
-        title=str(ytdl_data["title"]),
-        performer=str(ytdl_data["uploader"]),
-        thumb=downloaded_thumb,
-        caption=capy,
+        audio=file_path,
+        thumb=thumbnail,
+        file_name=title,
+        duration=duration,
+        caption="<b>Informasi :</b>\n\n<b>Nama:</b> {}\n<b>Durasi:</b> {}\n<b>Dilihat:</b> {}\n<b>Channel:</b> {}\n<b>Tautan:</b> <a href={}>Youtube</a>\n\n<b>Powered By Geez|Ram".format(
+            title,
+            duration,
+            views,
+            channel,
+            url,
+        ),
+        reply_to_message_id=message.id,
     )
-    await rep.delete()
-    for files in (downloaded_thumb, file_sung):
+    await infomsg.delete()
+    for files in (thumbnail, file_path):
         if files and os.path.exists(files):
             os.remove(files)
             
