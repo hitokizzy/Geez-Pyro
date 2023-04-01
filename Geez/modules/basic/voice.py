@@ -13,6 +13,7 @@ import asyncio
 import os
 import speech_recognition as sr
 import ffmpeg
+from builtins import open
 from gtts import gTTS
 from pyrogram import Client, enums
 from pyrogram.types import Message
@@ -26,7 +27,7 @@ lang = "id"  # Default Language for voice
 
 
 @geez(["voice", "tts"], cmds)
-async def voice(client: Client, message):
+async def voice(client: Client, message: Message):
     global lang
     cmd = message.command
     if len(cmd) > 1:
@@ -34,26 +35,27 @@ async def voice(client: Client, message):
     elif message.reply_to_message and len(cmd) == 1:
         v_text = message.reply_to_message.text
     elif not message.reply_to_message and len(cmd) == 1:
-        await edit_or_reply(
-            message,
-            "**Balas ke pesan atau kirim argumen teks untuk mengonversi ke suara**",
-        )
+        await message.reply_text("**Reply to a message or send text argument to convert to voice**")
         return
     await client.send_chat_action(message.chat.id, enums.ChatAction.RECORD_AUDIO)
-    # noinspection PyUnboundLocalVariable
     tts = gTTS(v_text, lang=lang)
     tts.save("voice.mp3")
     if message.reply_to_message:
-        await asyncio.gather(
-            message.delete(),
-            client.send_voice(
-                message.chat.id,
-                voice="voice.mp3",
-                reply_to_message_id=message.reply_to_message.id,
-            ),
-        )
+        with open("voice.mp3", "rb") as voice:
+            await asyncio.gather(
+                message.delete(),
+                client.reply_voice(
+                    message.chat.id,
+                    voice=voice,
+                    reply_to_message_id=message.reply_to_message.message_id,
+                ),
+            )
     else:
-        await client.send_voice(message.chat.id, enums.ChatAction.RECORD_AUDIO)
+        with open("voice.mp3", "rb") as voice:
+            await client.send_voice(
+                message.chat.id,
+                voice=voice,
+            )
     await client.send_chat_action(message.chat.id, enums.ChatAction.CANCEL)
     os.remove("voice.mp3")
 
@@ -99,7 +101,7 @@ async def speech_to_text(client: Client, message: Message):
         return await message.edit("Suara tidak jelas...")
     except sr.RequestError as e:
         return await message.edit("Error, service tidak tersedia sementara waktu; {0}".format(e))
-    await message.reply_text(
+    await message.edit(
         text=text
     )
     
