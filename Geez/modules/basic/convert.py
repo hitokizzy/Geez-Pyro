@@ -1,13 +1,17 @@
-# if you can read this, this meant you use code from Geez | Ram Project
-# this code is from somewhere else
-# please dont hestitate to steal it
-# because Geez and Ram doesn't care about credit
-# at least we are know as well
-# who Geez and Ram is
-#
-#
-# kopas repo dan hapus credit, ga akan jadikan lu seorang developer
-# ©2023 Geez | Ram Team
+"""
+if you can read this, this meant you use code from Geez | Ram Project
+this code is from somewhere else
+please dont hestitate to steal it
+because Geez and Ram doesn't care about credit
+at least we are know as well
+who Geez and Ram is
+
+
+kopas repo dan hapus credit, ga akan jadikan lu seorang developer
+
+YANG NYOLONG REPO INI TRUS DIJUAL JADI PREM, LU GAY...
+©2023 Geez | Ram Team
+"""
 
 import os
 import shutil
@@ -24,15 +28,17 @@ from Geez.modules.basic import add_command_help
 async def extract_aud(client: Client, message: Message):
     replied_msg = message.reply_to_message
     pcs_msg = await message.reply("`Mendownload Media ...`")
-    ext_out_path = os.getcwd() + "/" + "downloads/py_extract/audios"
+    ext_out_path = os.getcwd() + "/" + "downloads/"
     if not replied_msg:
         await pcs_msg.edit("**Mohon Balas Ke Video**")
         return
     if not replied_msg.video:
         await pcs_msg.edit("**Mohon Balas Ke Video**")
         return
-    if os.path.exists(ext_out_path):
+    if not os.path.exists(ext_out_path):
         await pcs_msg.edit("Processing.....")
+    else:
+        await pcs_msg.edit("Extraction in progress. Please wait.")
         return
     replied_video = replied_msg.video
     try:
@@ -48,6 +54,7 @@ async def extract_aud(client: Client, message: Message):
             await message.reply_audio(audio=geez_aud, caption=f"`Extracted by` {(await client.get_me()).mention}")
         await pcs_msg.edit("`Extracting Finished!`")
         shutil.rmtree(ext_out_path)
+        print(f"Deleted directory: {ext_out_path}")
     except Exception as e:
         await pcs_msg.edit(f"**Error:** `{e}`")
 
