@@ -85,7 +85,7 @@ async def yt_video(client, message):
         file_name=title,
         duration=duration,
         supports_streaming=True,
-        caption="<b>Informasi :</b>\n\n<b>Nama:</b> {}\n<b>Durasi:</b> {}\n<b>Dilihat:</b> {}\n<b>Channel:</b> {}\n<b>Tautan:</b> <a href={}>Youtube</a>\n\n<b>Powered By Geez|Ram".format(,
+        caption="<b>Informasi :</b>\n\n<b>Nama:</b> {}\n<b>Durasi:</b> {}\n<b>Dilihat:</b> {}\n<b>Channel:</b> {}\n<b>Tautan:</b> <a href={}>Youtube</a>\n\n<b>Powered By Geez|Ram".format(
             title,
             duration,
             views,

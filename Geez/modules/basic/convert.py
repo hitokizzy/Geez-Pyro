@@ -38,6 +38,9 @@ async def extract_aud(client: Client, message: Message):
     try:
         await pcs_msg.edit("`Downloading...`")
         ext_video = await client.download_media(message=replied_video)
+        if not os.path.isfile(ext_video):
+            await pcs_msg.edit("`Error: Invalid file path`")
+            return
         await pcs_msg.edit("`Extracting Audio...`")
         exted_aud = Video_tools.extract_all_audio(input_file=ext_video, output_path=ext_out_path)
         await pcs_msg.edit("`Uploading...`")
