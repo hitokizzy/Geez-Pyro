@@ -4,7 +4,7 @@ APScheduler==3.7.0
 bs4
 emoji==1.6.0
 ffmpeg-python
-geezlibs==1.7.0
+geezlibs==1.7.1
 git+https://github.com/Itz-fork/py-trans.git
 gitpython
 googlesearch-python
