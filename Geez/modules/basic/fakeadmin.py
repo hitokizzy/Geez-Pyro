@@ -159,7 +159,7 @@ async def f_promote(client: Client, message: Message):
         except Exception:
             return await ex.edit("`Balas pesan pengguna atau berikan nama pengguna/id_pengguna`")
     msg = (
-        r"**Promoted**"
+        r"**Promoted as CO-Admin**"
         f"\n\n**Nama:** [{user.first_name}](tg://user?id={user.id})"
         f"\n**User ID:** `{user.id}`"
     )
@@ -185,7 +185,7 @@ async def f_demote(client: Client, message: Message):
         except Exception:
             return await ex.edit("`Balas pesan pengguna atau berikan nama pengguna/id_pengguna`")
     msg = (
-        r"**Demoted**"
+        r"**Demoted from Admin**"
         f"\n\n**Nama:** [{user.first_name}](tg://user?id={user.id})"
         f"\n**User ID:** `{user.id}`"
     )

