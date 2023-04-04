@@ -109,10 +109,52 @@ async def spam_stick(client: Client, message: Message):
                 await client.send_sticker(message.chat.id, sticker)
                 await asyncio.sleep(0.10)
 
+emojis = [
+    "👍",
+    "👎",
+    "❤️",
+    "🔥",
+    "🥰",
+    "👏",
+    "😁",
+    "🤔",
+    "🤯",
+    "😱",
+    "🤬",
+    "😢",
+    "🎉",
+    "🤩",
+    "🤮",
+    "💩",
+]
+
+
+@geez(["reactspam", "rspam"], cmds)
+async def reactspam(client: Client, message: Message):
+    amount = int(message.command[1])
+    reaction = " ".join(message.command[2:])
+    await message.edit("Please wait...")
+    if not message.text.split(None, 1)[1].strip():
+        return await message.edit(f" gunakan: {cmds}rspam [jumlah] [emoji]")
+    for i in range(amount):
+        if reaction in emojis:
+            try:
+                await client.send_reaction(
+                    message.chat.id, message.message.id - i, reaction
+                )
+            except Exception as e:
+                return await message.edit(e)
+        else:
+            return await message.edit("emoji yg dipilih tidak didukung")
+    await message.edit("Done!")
+
+
+
 add_command_help(
     "spam",
     [
         [f"{cmds}dspam [jumlah] [kata-kata] [waktu delay]","delay spam.",],
         [f"{cmds}sspam [balas ke stiker] [jumlah spam]","spam stiker.",],
+        [f"{cmds}rspam [jumlah] [emoji]","spam reactions.",],
     ],
 )

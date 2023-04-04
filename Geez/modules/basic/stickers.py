@@ -608,14 +608,14 @@ async def handwrite(client, message):
 add_command_help(
     "sticker",
     [
-        [f"{cmds}kang `Balas` Gambar",
+        [f"{cmds}kang Balas Gambar atau sticker",
             f"Balas {cmds}kang menambahkan gambar/stiker ke pack stiker anda."],
-        [f"{cmds}kang [emoji] `atau` double [emoji]",
-            "menambahkan stiker dengan spesifik emoji.`"],
-        [f"{cmds}packinfo `or` {cmds}stickerinfo",
+        [f"{cmds}kang [emoji] atau double [emoji]",
+            "menambahkan stiker dengan spesifik emoji."],
+        [f"{cmds}packinfo or {cmds}stickerinfo",
             "mengambil info stiker atau pack striker."],
         [ f"{cmds}mtoi atau {cmds}getsticker balas ke sticker",
-            "balas ke stiker untuk mengubahnya jadi image/gambar." ],
+            "balas ke stiker untuk mengubahnya jadi image/gambar."],
         [f"{cmds}stickers <nama sticker>", "untuk mencari pack stikernya."],
     ],
 )
