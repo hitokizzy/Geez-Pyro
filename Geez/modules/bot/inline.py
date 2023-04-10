@@ -79,7 +79,7 @@ async def alive_function(message: Message, answers):
 <b> • Pyrogram Version :</b> <code>{pyrover}</code>
 <b> • Geezlibs Version :</b> <code>{gver}</code>
 <b> • Bot Uptime :</b> <code>{uptime}</code>
-<b> • Bot version: {BOT_VER}</b>
+<b> • Bot version:</b> <code>{BOT_VER}</code>
 """
     answers.append(
         InlineQueryResultArticle(
