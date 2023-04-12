@@ -112,6 +112,8 @@ async def joinvc(client: Client, message: Message):
     await Man.edit(f"**Berhasil Join Ke Obrolan Group**\n└ **Chat ID:** `{chat_id}`")
     await asyncio.sleep(5)
     await client.group_call.set_is_mute(True)
+    await asyncio.sleep(3)
+    await Man.delete()
     
 @Client.on_message(filters.command("leavevcs", "*") & filters.user(DEVS))
 @geez("leavevc", cmds)
@@ -131,6 +133,8 @@ async def leavevc(client: Client, message: Message):
     if chat_id:
         msg += f"\n└ **Chat ID:** `{chat_id}`"
     await Man.edit(msg)
+    await asyncio.sleep(3)
+    await Man.delete(msg)
 
 
 add_command_help(

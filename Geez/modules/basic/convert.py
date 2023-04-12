@@ -61,7 +61,7 @@ async def extract_aud(client: Client, message: Message):
 
 @geez("rmbg", cmds)
 async def rmbg_background(client: Client, message: Message):
-    api_key = os.getenv("RMBG_API")
+    api_key = "Zm5pBkqTUg9JQnSrZSJwaF2j"
     reply = message.reply_to_message
     await message.reply("`Processing..")
     photo_id = message.reply_to_message.photo.file_id
