@@ -1,6 +1,6 @@
 import asyncio
 from threading import Event
-
+from telegram.error import BadRequest
 from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 from geezlibs.geez.helper.basic import edit_or_reply
@@ -142,8 +142,11 @@ async def reactspam(client: Client, message: Message):
                 await client.send_reaction(
                     message.chat.id, message.id - i, reaction
                 )
-            except Exception as e:
-                return await message.edit(str(e))
+            except BadRequest as e:
+                if e.message.startswith("MESSAGE_ID_INVALID"):
+                    # The message has been deleted or is not accessible
+                    # We can't react to it, so we just continue to the next iteration
+                    pass
         else:
             return await message.edit("emoji yg dipilih tidak didukung")
     await message.edit("Done!")
