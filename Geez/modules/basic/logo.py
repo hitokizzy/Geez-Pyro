@@ -17,6 +17,7 @@ import os
 import random
 import glob
 from phlogo import generate
+from blackpink import blackpink
 from PIL import Image, ImageDraw, ImageFont
 from pyrogram import Client, enums
 from pyrogram.types import Message
@@ -31,12 +32,27 @@ async def make_logog(client: Client, message: Message):
         match = message.text.split(maxsplit=1)[1]
     except IndexError:
         return await msg.edit("`Provide a name to make logo...`")
-    first, last = "", ""
     if len(match.split()) >= 2:
         first, last = match.split()[:2]
     else:
         last = match
-    logo = generate(first, last)
+    logo = blackpink(match)
+    name = "geezram.png"
+    logo.save(name)
+    await message.delete(msg)
+    await client.send_photo(
+        message.chat.id, photo=name, reply_to_message_id=message.reply_to_message.message_id if message.reply_to_message else None
+    )
+    os.remove(name)
+
+@geez("blink", cmds)
+async def make_blink(client: Client, message: Message):
+    msg = await message.edit("`processing...`")
+    try:
+        match = message.text.split(maxsplit=1)[1]
+    except IndexError:
+        return await msg.edit("`Provide a name to make logo...`")
+    logo = blackpink(match)
     name = "geezram.png"
     logo.save(name)
     await message.delete(msg)
@@ -132,5 +148,6 @@ add_command_help(
     [
         [f"{cmds}logo <nama>", "membuat logo dengan background random."],
         [f"{cmds}phlogo <nama>", "membuat logo dengan tema PornHub."],
+        [f"{cmds}blink <nama>", "membuat logo dengan tema Blackpink."],
     ],
 )

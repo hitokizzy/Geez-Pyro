@@ -1,6 +1,7 @@
 aiofiles
 aiohttp
 APScheduler==3.7.0
+blackpink
 bs4
 emoji==1.6.0
 ffmpeg-python
