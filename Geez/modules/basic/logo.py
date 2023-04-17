@@ -1,3 +1,18 @@
+"""
+if you can read this, this meant you use code from Geez | Ram Project
+this code is from somewhere else
+please dont hestitate to steal it
+because Geez and Ram doesn't care about credit
+at least we are know as well
+who Geez and Ram is
+
+
+kopas repo dan hapus credit, ga akan jadikan lu seorang developer
+
+YANG NYOLONG REPO INI TRUS DIJUAL JADI PREM, LU GAY...
+©2023 Geez | Ram Team
+"""
+
 import os
 import random
 import glob
@@ -7,7 +22,7 @@ from pyrogram import Client, enums
 from pyrogram.types import Message
 from geezlibs.geez import geez
 from Geez import cmds
-
+from Geez.modules.basic import add_command_help
 
 @geez("phlogo", cmds)
 async def make_logog(client: Client, message: Message):
@@ -111,3 +126,11 @@ async def logo_gen(client, message):
     if os.path.exists(font_):
         if not font_.startswith("cache/default.ttf"):
             os.remove(font_)
+
+add_command_help(
+    "logo",
+    [
+        [f"{cmds}logo <nama>", "membuat logo dengan background random."],
+        [f"{cmds}phlogo <nama>", "membuat logo dengan tema PornHub."],
+    ],
+)
