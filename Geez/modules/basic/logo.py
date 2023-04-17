@@ -36,7 +36,7 @@ async def make_logog(client: Client, message: Message):
         first, last = match.split()[:2]
     else:
         last = match
-    logo = blackpink(match)
+    logo = generate(first, last)
     name = "geezram.png"
     logo.save(name)
     await message.delete(msg)
