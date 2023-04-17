@@ -18,6 +18,7 @@ httpx[http2]
 motor==3.0.0
 opencv-python-headless
 openai
+phlogo
 prettytable
 psutil
 PyGithub

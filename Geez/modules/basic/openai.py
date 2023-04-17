@@ -80,6 +80,7 @@ async def open_ai_img(client, message):
     except Exception as error:
         await message.reply(error)
         return await p_message.delete()
+    os.remove(response)
 
 add_command_help(
     "openAI",
