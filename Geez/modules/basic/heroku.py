@@ -80,7 +80,7 @@ async def log_(client, message):
 
 @geez("getvar", cmds)
 async def varget_(client, message):
-    usage = "**Usage:**\n/get_var [Var Name]"
+    usage = f"**Usage:**\n{cmds}get_var [Var Name]"
     if len(message.command) != 2:
         return await message.reply_text(usage)
     check_var = message.text.split(None, 2)[1]
@@ -122,7 +122,7 @@ async def varget_(client, message):
 
 @geez("delvar", cmds)
 async def vardel_(client, message):
-    usage = "**Usage:**\n/delvar [nama var]"
+    usage = f"**Usage:**\n{cmds}delvar [nama var]"
     if len(message.command) != 2:
         return await message.reply_text(usage)
     check_var = message.text.split(None, 2)[1]
@@ -165,7 +165,7 @@ async def vardel_(client, message):
 
 @geez("setvar", cmds)
 async def setvar(client, message):
-    usage = "**Usage:**\n/setvar [nama var] [isi var]"
+    usage = f"**Usage:**\n{cmds}setvar [nama var] [isi var]"
     if len(message.command) < 3:
         return await message.reply_text(usage)
     to_set = message.text.split(None, 2)[1].strip()
