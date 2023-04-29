@@ -24,7 +24,7 @@ from Geez.modules.basic import add_command_help
 from Geez import cmds
 
 async def make_carbon(code):
-    url = "https://carbonara.solopov.dev/api/cook"
+    url = "https://carbonara.vercel.app/api/cook"
     async with aiosession.post(url, json={"code": code}) as resp:
         image = BytesIO(await resp.read())
     image.name = "carbon.png"
@@ -45,18 +45,17 @@ async def carbon_func(client: Client, message: Message):
         text = message.reply_to_message.text or message.reply_to_message.caption
     if not text:
         return await message.delete()
-    ex = await message.edit_text("`Preparing Carbon . . .`")
+    ex = await message.edit_text("`Preparing Carbon ...`")
     carbon = await make_carbon(text)
-    await ex.edit("`Uploading . . .`")
-    await asyncio.gather(
-        ex.delete(),
-        client.send_photo(
+    await ex.edit("`Uploading ...`")
+    await client.send_photo(
             message.chat.id,
             carbon,
             caption=f"**Carbonised by** {client.me.mention}",
             reply_to_message_id=ReplyCheck(message),
         ),
     )
+    await message.delete(ex)
     carbon.close()
 
 
