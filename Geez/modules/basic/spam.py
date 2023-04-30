@@ -1,7 +1,7 @@
 import asyncio
 from threading import Event
 from telegram.error import BadRequest
-from pyrogram import Client, enums, filters
+from pyrogram import Client, enums
 from pyrogram.types import Message
 from geezlibs.geez.helper.basic import edit_or_reply
 from geezlibs.geez.utils.misc import extract_args
@@ -156,8 +156,8 @@ async def reactspam(client: Client, message: Message):
 add_command_help(
     "spam",
     [
-        [f"{cmds}dspam [waktu delay] [jumlah] [kata-kata] "],
-        [f"{cmds}sspam [balas ke stiker] [jumlah spam]"],
+        [f"{cmds}dspam [waktu delay] [jumlah] [kata-kata]","delay spam"],
+        [f"{cmds}sspam [balas ke stiker] [jumlah spam]", "spam stiker"],
         [f"{cmds}rspam [jumlah] [emoji]","spam reactions."],
     ],
 )
