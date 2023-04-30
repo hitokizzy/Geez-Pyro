@@ -32,7 +32,7 @@ async def delayspam(client: Client, message: Message):
     delayspam = await extract_args(message)
     arr = delayspam.split()
     if len(arr) < 3 or not arr[0].isdigit() or not arr[1].isdigit():
-        await message.edit(f"`Format salah,\ngunakan {cmds}dspam <waktu> <jumlah spam> <kata kata>.`")
+        await message.edit(f"`Format salah,\ngunakan {cmds}dspam [waktu] [jumlahspam] [kata-kata]`")
         return
     delay = int(arr[0])
     count = int(arr[1])
@@ -156,8 +156,8 @@ async def reactspam(client: Client, message: Message):
 add_command_help(
     "spam",
     [
-        [f"{cmds}dspam [jumlah] [kata-kata] [waktu delay]","delay spam.",],
-        [f"{cmds}sspam [balas ke stiker] [jumlah spam]","spam stiker.",],
-        [f"{cmds}rspam [jumlah] [emoji]","spam reactions.",],
+        [f"{cmds}dspam [waktu delay] [jumlah] [kata-kata] "],
+        [f"{cmds}sspam [balas ke stiker] [jumlah spam]"],
+        [f"{cmds}rspam [jumlah] [emoji]","spam reactions."],
     ],
 )
