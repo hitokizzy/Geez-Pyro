@@ -16,11 +16,16 @@ YANG NYOLONG REPO INI TRUS DIJUAL JADI PREM, LU GAY...
 import os
 import shutil
 import requests
+import shlex
+import asyncio
+from typing import Tuple
 from pyrogram import Client
 from py_extract import Video_tools
 from pyrogram.types import Message
+from pyrogram.enums import MessageMediaType
 from geezlibs.geez import geez
 from geezlibs.geez.utils import shell_exec
+from geezlibs.geez.helper import ReplyCheck
 from Geez import cmds
 from Geez.modules.basic import add_command_help
 
@@ -28,7 +33,7 @@ from Geez.modules.basic import add_command_help
 async def extract_aud(client: Client, message: Message):
     replied_msg = message.reply_to_message
     pcs_msg = await message.reply("`Mendownload Media ...`")
-    ext_out_path = os.getcwd() + "/" + "downloads/"
+    ext_out_path = os.getcwd() + "downloads/"
     if not replied_msg:
         await pcs_msg.edit("**Mohon Balas Ke Video**")
         return
@@ -90,6 +95,21 @@ async def rmbg_background(client: Client, message: Message):
         os.remove(clear_file2)
     except BaseException:
         pass
+
+
+async def run_cmd(cmd: str) -> Tuple[str, str, int, int]:
+    """Run Commands"""
+    args = shlex.split(cmd)
+    process = await asyncio.create_subprocess_exec(
+        *args, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+    )
+    stdout, stderr = await process.communicate()
+    return (
+        stdout.decode("utf-8", "replace").strip(),
+        stderr.decode("utf-8", "replace").strip(),
+        process.returncode,
+        process.pid,
+    )
 
 add_command_help(
     "convert",
