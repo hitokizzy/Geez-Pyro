@@ -57,7 +57,7 @@ packages(){
 	fi
 
 	# Check ffmpeg version and warn user if necessary.
-	fv=$(grep -Po 'version (3.*?) ' <<< $(ffmpeg -version) &&
+	fv=$(grep -Po 'version (3.*?) ' <<< $(ffmpeg -version)) &&
 	pprint "Music player tidak bisa berjalan di versi $fv, diperlukan ffmpeg versi 4+.\n" "cblue"
 }
 
