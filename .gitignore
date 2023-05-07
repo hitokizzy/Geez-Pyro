@@ -36,6 +36,7 @@ MANIFEST
 *.mp3
 logs.txt
 .env
+pypilog.txt
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt

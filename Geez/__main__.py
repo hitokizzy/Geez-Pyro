@@ -21,7 +21,6 @@ MSG_ON = """
 
 async def main():
     await app.start()
-    LOGGER("Geez").info("Memulai Geez Pyro..")
     LOGGER("Geez").info("Loading Everything.")
     for all_module in ALL_MODULES:
         importlib.import_module("Geez.modules" + all_module)
