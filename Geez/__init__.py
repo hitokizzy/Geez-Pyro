@@ -250,7 +250,7 @@ bot11 = (
         api_id=API_ID,
         api_hash=API_HASH,
         session_string=STRING_SESSION11,
-        plugins=dict(root="Ubot/modules"),
+        plugins=dict(root="Geez/modules"),
     )
     if STRING_SESSION11
     else None
@@ -262,7 +262,7 @@ bot12 = (
         api_id=API_ID,
         api_hash=API_HASH,
         session_string=STRING_SESSION12,
-        plugins=dict(root="Ubot/modules"),
+        plugins=dict(root="Geez/modules"),
     )
     if STRING_SESSION12
     else None
@@ -274,7 +274,7 @@ bot13 = (
         api_id=API_ID,
         api_hash=API_HASH,
         session_string=STRING_SESSION13,
-        plugins=dict(root="Ubot/modules"),
+        plugins=dict(root="Geez/modules"),
     )
     if STRING_SESSION13
     else None
@@ -286,7 +286,7 @@ bot14 = (
         api_id=API_ID,
         api_hash=API_HASH,
         session_string=STRING_SESSION14,
-        plugins=dict(root="Ubot/modules"),
+        plugins=dict(root="Geez/modules"),
     )
     if STRING_SESSION4
     else None
@@ -298,7 +298,7 @@ bot15 = (
         api_id=API_ID,
         api_hash=API_HASH,
         session_string=STRING_SESSION15,
-        plugins=dict(root="Ubot/modules"),
+        plugins=dict(root="Geez/modules"),
     )
     if STRING_SESSION15
     else None
