@@ -80,8 +80,7 @@ repo(){
 
 installation(){
 	pprint "\n\nUpgrading pip and installing dependency packages.. "
-	pip3 install -U pip &>>pypilog.txt &&
-	pip3 install --no-cache-dir -U -r requirements.txt &>>pypilog.txt &&
+	pip install -U -r requirements.txt &>>pypilog.txt &&
 	pprint "Berhasil menginstall requirements.\n" "cgreen" && return
 	pprint "Gagal menginstall requirements.\n" "cred"
 	exit 1
