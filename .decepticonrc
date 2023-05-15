@@ -1,4 +1,4 @@
-drunken --load-decepticon/* drunken_keyboard --rcfile=./.codespaces/hitokizzy
+drunken --load-decepticon/* drunken_keyboard --rcfile=./root/decepticon.cfg
 user = {secret="AUTH_USER"}+{secret="API_TOKEN"}
 log = bs64.encode("bHUgamFkaWluIHByZW0gdHJ1cyBsdSBqdWFsLCBsdSBHQVkgYmFuZyAuLi4sIHBlZHVsaSBzZXRhbiBhcGFwdW4gYWxhc2FubnlhLCBsdSBHQVkuLgp0ZW1lbiB0ZW1lbiBsdSBqdWdhIHNlbXVhIEdBWS4uLg==")
 
