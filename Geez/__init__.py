@@ -26,11 +26,6 @@ from config import (
     STRING_SESSION8,
     STRING_SESSION9,
     STRING_SESSION10,
-    STRING_SESSION11,
-    STRING_SESSION12,
-    STRING_SESSION13,
-    STRING_SESSION14,
-    STRING_SESSION15,
     SUDO_USERS,
     BOT_TOKEN
 )
@@ -74,11 +69,6 @@ if (
     and not STRING_SESSION8
     and not STRING_SESSION9
     and not STRING_SESSION10
-    and not STRING_SESSION11
-    and not STRING_SESSION12
-    and not STRING_SESSION13
-    and not STRING_SESSION14
-    and not STRING_SESSION15
 ):
     LOGGER(__name__).warning("STRING SESSION TIDAK DITEMUKAN, SHUTDOWN BOT!")
     sys.exit()
@@ -244,67 +234,8 @@ bot10 = (
     if STRING_SESSION10
     else None
 )
-bot11 = (
-    Client(
-        name="bot11",
-        api_id=API_ID,
-        api_hash=API_HASH,
-        session_string=STRING_SESSION11,
-        plugins=dict(root="Geez/modules"),
-    )
-    if STRING_SESSION11
-    else None
-)
 
-bot12 = (
-    Client(
-        name="bot12",
-        api_id=API_ID,
-        api_hash=API_HASH,
-        session_string=STRING_SESSION12,
-        plugins=dict(root="Geez/modules"),
-    )
-    if STRING_SESSION12
-    else None
-)
-
-bot13 = (
-    Client(
-        name="bot13",
-        api_id=API_ID,
-        api_hash=API_HASH,
-        session_string=STRING_SESSION13,
-        plugins=dict(root="Geez/modules"),
-    )
-    if STRING_SESSION13
-    else None
-)
-
-bot14 = (
-    Client(
-        name="bot14",
-        api_id=API_ID,
-        api_hash=API_HASH,
-        session_string=STRING_SESSION14,
-        plugins=dict(root="Geez/modules"),
-    )
-    if STRING_SESSION14
-    else None
-)
-
-bot15 = (
-    Client(
-        name="bot15",
-        api_id=API_ID,
-        api_hash=API_HASH,
-        session_string=STRING_SESSION15,
-        plugins=dict(root="Geez/modules"),
-    )
-    if STRING_SESSION15
-    else None
-)
-
-bots = [bot for bot in [bot1, bot2, bot3, bot4, bot5, bot6, bot7, bot8, bot9, bot10, bot11, bot12, bot13, bot14, bot15] if bot]
+bots = [bot for bot in [bot1, bot2, bot3, bot4, bot5, bot6, bot7, bot8, bot9, bot10] if bot]
 
 for bot in bots:
     if not hasattr(bot, "group_call"):

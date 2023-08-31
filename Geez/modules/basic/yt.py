@@ -11,7 +11,7 @@
 
 import asyncio
 import os
-import time
+import requests
 import wget
 from functools import partial
 from geezlibs.geez.helper import ReplyCheck
@@ -24,6 +24,16 @@ from yt_dlp import YoutubeDL
 from pyrogram.errors import YouBlockedUser
 from Geez.modules.basic import add_command_help
 from Geez import cmds
+
+async def tiktok_downloader(tiktok):
+        url = "https://tiktok-downloader-download-tiktok-videos-without-watermark.p.rapidapi.com/vid/index"
+        querystring = {"url":tiktok}
+        headers = {
+        "X-RapidAPI-Key": "3c7ace35d5mshd5223e5fc185146p1e2d15jsn3f9f0a73128c",
+        "X-RapidAPI-Host": "tiktok-downloader-download-tiktok-videos-without-watermark.p.rapidapi.com/vid/index"
+        }
+        response = requests.get(url, headers=headers, params=querystring).json()["video"][0]
+        return response
 
 def run_sync(func, *args, **kwargs):
     return asyncio.get_event_loop().run_in_executor(None, partial(func, *args, **kwargs))
@@ -186,6 +196,34 @@ async def sosmed(client: Client, message: Message):
         )
         await client.delete_messages(bot, 2)
 
+@geez("tt", cmds)
+async def tiktok_dl(client: Client, message: Message):
+    try:
+        mess = await message.reply("Processing...")
+        split_result = message.text.split(" ", 1)
+        
+        if len(split_result) < 2:
+            await message.reply("Berikan link TikTok")
+            return True
+
+        tiktok = split_result[1].strip()
+        if not tiktok:
+            return await mess.edit("Berikan link TikTok untuk download!")
+
+        tiktoker = await tiktok_downloader(tiktok)
+        try:
+            await client.send_video(
+                chat_id=message.chat.id,
+                video=tiktoker,
+                caption=f"Powered by {client.me.mention}",
+                reply_to_message_id=message.id
+            )
+            await mess.delete()
+        except Exception as e:
+            await mess.edit("Error: " + str(e))
+    except Exception as e:
+        await message.reply("An error occurred: " + str(e))
+
 
 add_command_help(
     "youtube",
@@ -201,5 +239,6 @@ add_command_help(
         [f"{cmds}sosmed <link>",
             "Untuk Mendownload Media Dari Facebook / Tiktok / Instagram / Twitter / YouTube."],
         [f"{cmds}copy <link telegram>", "Download media dari channel atau group"],
+        [f"{cmds}tt <link tiktok>", "Mendowload media dari tiktok"]
     ],
 )

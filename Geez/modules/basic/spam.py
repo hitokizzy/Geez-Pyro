@@ -151,6 +151,49 @@ async def reactspam(client: Client, message: Message):
             return await message.edit("emoji yg dipilih tidak didukung")
     await message.edit("Done!")
 
+@geez("spam", cmds)
+async def spam(client: Client, message: Message):
+    if len(message.command) < 3:
+        await edit_or_reply(
+            message, "**Please use the command in the format:** `.spam (amount of sending) (message)`"
+        )
+        return
+
+    try:
+        times = int(message.command[1])
+    except ValueError:
+        await edit_or_reply(
+            message, "**Please provide a valid number for the amount of sending.**"
+        )
+        return
+
+    if times <= 0:
+        await edit_or_reply(
+            message, "**Please provide a positive number greater than zero for the amount of sending.**"
+        )
+        return
+
+    spam_message = " ".join(message.command[2:])
+
+    if not spam_message:
+        await edit_or_reply(
+            message, "**Please provide a message to spam with.**"
+        )
+        return
+
+    if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+        for i in range(times):
+            await client.send_message(
+                message.chat.id,
+                spam_message,
+            )
+            await asyncio.sleep(0.10)
+
+    elif message.chat.type == enums.ChatType.PRIVATE:
+        for i in range(times):
+            await client.send_message(message.chat.id, spam_message)
+            await asyncio.sleep(0.10)
+
 
 
 add_command_help(
@@ -159,5 +202,6 @@ add_command_help(
         [f"{cmds}dspam [waktu delay] [jumlah] [kata-kata]","delay spam"],
         [f"{cmds}sspam [balas ke stiker] [jumlah spam]", "spam stiker"],
         [f"{cmds}rspam [jumlah] [emoji]","spam reactions."],
+        [f"{cmds}spam [jumlah] [kata-kata]","spam (do it with your own risk)."],
     ],
 )

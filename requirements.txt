@@ -5,7 +5,7 @@ blackpink
 bs4
 emoji==1.6.0
 ffmpeg-python
-geezlibs==1.7.3
+geezlibs==1.7.5
 git+https://github.com/Itz-fork/py-trans.git
 gitpython
 googlesearch-python
