@@ -55,7 +55,8 @@ DAN SEMUA INI GRATIS !!!!!
 - [Zaid](https://github.com/ITZ-ZAID)
 - [Geez](https://t.me/GeezSupport)
 - [RAM](https://t.me/ramsupportt)
-- [OnlyMeriz](https://github.com/Onlymeriz)
+- [Melvan](https://t.me/MelvanChat)
+- [FakeDEVS](htpps://github.com/hitokizzy)
 
 ## Credit 💖
 - Zaid Userbot
@@ -63,8 +64,8 @@ DAN SEMUA INI GRATIS !!!!!
 - RamPyro-Bot
 - Geez Projects
 - TOD Ubot
-- Ayra X Userbot
-
+- Ayiin XD
+- FakeDEVS
 ## Support / Channel
 
 <p align="center">𝐒𝐮𝐩𝐩𝐨𝐫𝐭 / 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ----> </p>
