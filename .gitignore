@@ -37,6 +37,7 @@ MANIFEST
 logs.txt
 .env
 pypilog.txt
+unknown_errors.txt
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt

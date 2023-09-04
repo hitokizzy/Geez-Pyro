@@ -59,7 +59,7 @@ async def purge(client: Client, message: Message):
             await ex.edit(f"**ERROR:** `{e}`")
             return
 
-    done = await ex.edit(
+    done = await client.send_message(
         f"**Fast Purge Completed!**\n**Successfully Delete** `{str(count)}` **Message.**"
     )
     await asyncio.sleep(2)
