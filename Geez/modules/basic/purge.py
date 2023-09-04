@@ -38,7 +38,7 @@ async def del_msg(client: Client, message: Message):
 
 @geez("purge", cmds)
 async def purge(client: Client, message: Message):
-    ex = await message.edit_text("`Starting To Purge Messages!`")
+    ex = await client.send_message("`Starting To Purge Messages!`")
     msg = message.reply_to_message
     if msg:
         itermsg = list(range(msg.id, message.id))
@@ -59,7 +59,7 @@ async def purge(client: Client, message: Message):
             await ex.edit(f"**ERROR:** `{e}`")
             return
 
-    done = await client.send_message(
+    done = await ex.edit(
         f"**Fast Purge Completed!**\n**Successfully Delete** `{str(count)}` **Message.**"
     )
     await asyncio.sleep(2)
