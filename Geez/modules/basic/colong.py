@@ -59,6 +59,6 @@ add_command_help(
     "colong",
     [
         [f"{cmds}colong[ch/gc] [photo/video] [jumlah]", "ayo tebak ini apa..."],
-        [f"{cmds}curi [ch/gc]", "ayo tebak ini apa..."],
+        [f"{cmds}copy [ch/gc]", "ayo tebak ini apa..."],
     ],
 )
