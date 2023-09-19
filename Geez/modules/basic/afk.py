@@ -12,6 +12,7 @@ kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 YANG NYOLONG REPO INI TRUS DIJUAL JADI PREM, LU GAY...
 ©2023 Geez | Ram Team
 """
+import asyncio
 from datetime import datetime
 from pyrogram import filters, Client
 from pyrogram.types import Message
@@ -119,6 +120,7 @@ async def no_afke(client, message: Message):
     afk_end = back_alivee.replace(microsecond=0)
     total_afk_time = str((afk_end - afk_start))
     kk = await message.reply(f"Iam Online, no longer AFK\nAFK selama{total_afk_time}")
+    await asyncio.sleep(3)
     await kk.delete()
     await no_afk()
     await client.send_message(BOTLOG_CHATID, onlinestr.format(total_afk_time))

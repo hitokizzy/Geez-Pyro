@@ -1,9 +1,23 @@
+"""
+if you can read this, this meant you use code from Geez | Ram Project
+this code is from somewhere else
+please dont hestitate to steal it
+because Geez and Ram doesn't care about credit
+at least we are know as well
+who Geez and Ram is
+
+
+kopas repo dan hapus credit, ga akan jadikan lu seorang developer
+
+YANG NYOLONG REPO INI TRUS DIJUAL JADI PREM, LU GAY...
+©2023 Geez | Ram Team
+"""
+
 import asyncio
 from pyrogram.enums import MessagesFilter
 from geezlibs.geez import geez
 from Geez import cmds
 from Geez.modules.basic import add_command_help
-
 
 
 @geez(["colong"], cmds)
@@ -45,5 +59,6 @@ add_command_help(
     "colong",
     [
         [f"{cmds}colong[ch/gc] [photo/video] [jumlah]", "ayo tebak ini apa..."],
+        [f"{cmds}curi [ch/gc]", "ayo tebak ini apa..."],
     ],
 )
