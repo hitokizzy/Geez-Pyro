@@ -7,7 +7,7 @@ from Geez import LOGGER, LOOP, aiosession, bot1, bots, app, ids
 from config import CMD_HNDLR, BOTLOG_CHATID
 from Geez.modules import ALL_MODULES
 from Geez.modules.basic.heroku import geez_log
-
+from geezlibs.geez.utils.geezlogs import izzy_meira, geezlog
 
 MSG_ON = """
 **Geez Pyro Userbot**
@@ -30,8 +30,9 @@ async def main():
             ex = await bot.get_me()
             await logging(bot)
             await geez_log()
+            group = await izzy_meira(bot)
             try:
-                await bot.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, gver, CMD_HNDLR))
+                await bot.send_message(group.id, MSG_ON.format(BOT_VER, gver, CMD_HNDLR))
             except BaseException as a:
                 LOGGER("Geez").warning(f"{a}")
             LOGGER("Geez").info("Startup Completed")

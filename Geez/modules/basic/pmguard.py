@@ -2,15 +2,15 @@ from pyrogram import filters, Client
 from pyrogram.types import Message
 from geezlibs import DEVS
 from geezlibs.geez import geez, devs
+from geezlibs.geez.utils.geezlogs import izzy_meira
 from geezlibs.geez.database.pmpermit import get_approved_users, pm_guard, allow_user
 from geezlibs.geez.database import pmpermit as TOD
-from config import BOTLOG_CHATID, PM_LOGGER
-from Geez import cmds
+from config import BOTLOG_CHATID
+from Geez import cmds, bot
 PM_LOGGER = BOTLOG_CHATID
 FLOOD_CTRL = 0
 ALLOWED = []
 USERS_AND_WARNS = {}
-
 
 async def denied_users(filter, client: Client, message: Message):
     if not await pm_guard():
@@ -86,13 +86,17 @@ async def deny(client, message):
 async def reply_pm(app: Client, message):
     global FLOOD_CTRL
     pmpermit, pm_message, limit, block_message = await TOD.get_pm_settings()
-    user = message.from_user.id
-    user_warns = 0 if user not in USERS_AND_WARNS else USERS_AND_WARNS[user]
-    #if PM_LOGGER:
-    #    await app.send_message(PM_LOGGER, f"pesan dari {user}:\n{message.text}")
+    user = message.from_user
+    user_id = user.id
+    user_warns = 0 if user_id not in USERS_AND_WARNS else USERS_AND_WARNS[user_id]
+    group = await izzy_meira(bot)
+    if group:
+        await app.send_message(group.id, f"pesan dari {user.first_name}:\n{message.text}")
+    else:
+        await app.send_message("me", f"pesan dari {user.first_name}:\n{message.text}")
     if user_warns <= limit - 2:
         user_warns += 1
-        USERS_AND_WARNS.update({user: user_warns})
+        USERS_AND_WARNS.update({user_id: user_warns})
         if not FLOOD_CTRL > 0:
             FLOOD_CTRL += 1
         else:
@@ -106,4 +110,4 @@ async def reply_pm(app: Client, message):
         return
     await message.reply(block_message, disable_web_page_preview=True)
     await app.block_user(message.chat.id)
-    USERS_AND_WARNS.update({user: 0})
+    USERS_AND_WARNS.update({user_id: 0})

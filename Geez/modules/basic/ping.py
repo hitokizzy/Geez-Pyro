@@ -18,15 +18,34 @@ import speedtest
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message
+from pyrogram.raw.functions import Ping
 from datetime import datetime
 from geezlibs import DEVS
 from geezlibs.geez import geez, devs
 from geezlibs.geez.helper import SpeedConvert
 from Geez import StartTime, SUDO_USER
-from Geez import app, cmds
+from Geez import app, cmds, START_TIME
 from Geez.modules.bot.inline import get_readable_time
 from Geez.modules.basic import add_command_help
 from config import ALIVE_PIC
+
+TIME_DURATION_UNITS = (
+    ("w", 60 * 60 * 24 * 7),
+    ("d", 60 * 60 * 24),
+    ("h", 60 * 60),
+    ("m", 60),
+    ("s", 1),
+)
+
+async def _human_time_duration(seconds):
+    if seconds == 0:
+        return "inf"
+    parts = []
+    for unit, div in TIME_DURATION_UNITS:
+        amount, seconds = divmod(int(seconds), div)
+        if amount > 0:
+            parts.append(f'{amount}{unit}{"" if amount == 1 else ""}')
+    return ":".join(parts)
 
 class WWW:
     SpeedTest = (
@@ -117,22 +136,19 @@ async def pingme(client: Client, message: Message):
 
 @Client.on_message(filters.command("ping", "!") & SUDO_USER)
 @geez("ping", cmds)
-async def module_ping(client: Client, message: Message):
-    cmd = message.command
-    bot_username = (await app.get_me()).username
-    if len(cmd) > 1:
-        help_arg = " ".join(cmd[1:])
-    elif not message.reply_to_message and len(cmd) == 1:
-        try:
-            nice = await client.get_inline_bot_results(bot=bot_username, query="ping")
-            await asyncio.gather(
-                message.delete(),
-                client.send_inline_bot_result(
-                    message.chat.id, nice.query_id, nice.results[0].id
-                ),
-            )
-        except BaseException as e:
-            print(f"{e}")
+async def pings(client, message):
+    start = time.time()
+    current_time = datetime.now()
+    await client.invoke(Ping(ping_id=random.randint(0, 2147483647)))
+    delta_ping = round((time.time() - start) * 1000, 3)
+    uptime_sec = (current_time - START_TIME).total_seconds()
+    uptime = await _human_time_duration(int(uptime_sec))
+    _ping = f"""
+    <b>Geez - Pyro!!🎈</b>
+    <i> Ping:</i> `{delta_ping} ms`
+    <i> Uptime:</i> `{uptime}`
+    """
+    await message.reply(_ping)
 
 @geez("ppink", cmds)
 async def ppingme(client: Client, message: Message):
